@@ -1,0 +1,46 @@
+@mixin flex($flex-flow: row nowrap, $align-items: initial, $justify-content: initial) {
+  display: flex;
+  flex-flow: $flex-flow;
+  align-items: $align-items;
+  justify-content: $justify-content;
+}
+
+.menu {
+  @include flex(column nowrap, center, center);
+  width: 20rem;
+  height: 100vh;
+  background-color: var(--primary-color);
+  position: fixed;
+  top: 0;
+  right: -20rem;
+  z-index: 2;
+  transition: all 1s ease;
+
+  &.active {
+    right: 0;
+  }
+
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: 1.8rem;
+    font-weight: 300;
+    color: var(--white-color);
+    width: 60%;
+
+    li {
+      margin-bottom: 1.5rem;
+
+      a {
+        font-size: inherit;
+        color: inherit;
+        text-decoration: none;
+      }
+
+      &:hover {
+        font-weight: 500;
+      }
+    }
+  }
+}

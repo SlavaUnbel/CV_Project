@@ -5,15 +5,15 @@ import HeaderItem from './headerItem/HeaderItem';
 
 interface Props {
   menuOpen: boolean;
-  setMenuOpen: (menuOpen: boolean) => void;
+  onClick: (menuOpen: boolean) => void;
 }
 
-const Header: FC<Props> = ({ menuOpen, setMenuOpen }) => {
+const Header: FC<Props> = ({ menuOpen, onClick }) => {
   return (
     <div className={'header ' + (menuOpen && 'active')}>
       <div className="wrapper">
         <div className="left">
-          <a href="#intro" className="logo">
+          <a href="#home" className="logo">
             creative.
           </a>
 
@@ -29,10 +29,7 @@ const Header: FC<Props> = ({ menuOpen, setMenuOpen }) => {
         </div>
 
         <div className="right">
-          <div
-            className="collapsing-menu"
-            onClick={() => setMenuOpen(!menuOpen)}
-          >
+          <div className="collapsing-menu" onClick={() => onClick(!menuOpen)}>
             <span className="line1"></span>
             <span className="line2"></span>
             <span className="line3"></span>
