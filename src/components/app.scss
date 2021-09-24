@@ -1,0 +1,16 @@
+.app {
+  height: 100vh;
+
+  .sections {
+    width: 100%;
+    height: calc(100vh - 4.5rem);
+    background: lightsalmon;
+    position: relative;
+    top: 4.5rem;
+
+    > * {
+      width: 100vw;
+      height: calc(100vh - 4.5rem);
+    }
+  }
+}
