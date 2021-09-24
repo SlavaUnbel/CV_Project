@@ -1,8 +1,46 @@
+import { Mail, Person } from '@material-ui/icons';
 import React, { FC } from 'react';
 import './header.scss';
+import HeaderItem from './headerItem/HeaderItem';
 
-const Header: FC = () => {
-  return <div className="header"></div>;
+interface Props {
+  menuOpen: boolean;
+  setMenuOpen: (menuOpen: boolean) => void;
+}
+
+const Header: FC<Props> = ({ menuOpen, setMenuOpen }) => {
+  return (
+    <div className={'header ' + (menuOpen && 'active')}>
+      <div className="wrapper">
+        <div className="left">
+          <a href="#intro" className="logo">
+            creative.
+          </a>
+
+          <HeaderItem
+            icon={<Person className="icon" />}
+            title="+375 29 333-98-06"
+          />
+
+          <HeaderItem
+            icon={<Mail className="icon" />}
+            title="slavlen1999@gmail.com"
+          />
+        </div>
+
+        <div className="right">
+          <div
+            className="collapsing-menu"
+            onClick={() => setMenuOpen(!menuOpen)}
+          >
+            <span className="line1"></span>
+            <span className="line2"></span>
+            <span className="line3"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default Header;
