@@ -19,7 +19,7 @@ const Header: FC<Props> = ({ menuOpen, onClick }) => {
 
           <HeaderItem
             icon={<Person className="icon" />}
-            title="+375 29 333-98-06"
+            title="+375 (29) 333-98-06"
           />
 
           <HeaderItem
