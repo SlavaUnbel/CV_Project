@@ -74,6 +74,14 @@
   &.active {
     background-color: var(--primary-color);
     color: var(--white-color);
+  
+    .left {
+      .item-container {
+        a {
+          color: inherit;
+        }
+      }
+    }
 
     .collapsing-menu {
       span {
