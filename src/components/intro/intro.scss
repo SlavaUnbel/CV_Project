@@ -15,7 +15,7 @@
     
     .img-container {
       @include flex(row nowrap, center, center);
-      background-color: var(--intro-color);
+      background-color: var(--red-color);
       border-radius: 50%;
       width: 50rem;
       height: 50rem;
@@ -51,7 +51,7 @@
 
         span {
           font-size: inherit;
-          color: var(--intro-color);
+          color: var(--red-color);
         }
 
         .ityped-cursor {
