@@ -1,0 +1,27 @@
+.loader-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--white-color);
+  width: 100vw;
+  height: 100vh;
+
+  .loader {
+    border: 1rem solid var(--lightgrey-color);
+    border-top: 1rem solid var(--primary-color);
+    border-radius: 50%;
+    width: 7rem;
+    height: 7rem;
+    animation: spin 0.7s ease infinite;
+  }
+
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+}
