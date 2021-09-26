@@ -25,6 +25,7 @@
     "@types/redux-saga": "^0.10.5",
     "axios": "^0.21.4",
     "classnames": "^2.3.1",
+    "ityped": "^1.0.3",
     "lodash": "^4.17.21",
     "node-sass": "^6.0.1",
     "react": "^17.0.2",
@@ -89,6 +90,7 @@
   },
   "devDependencies": {
     "@types/classnames": "^2.3.1",
+    "@types/ityped": "^1.0.1",
     "@types/lodash": "^4.14.173",
     "husky": "^7.0.2",
     "prettier": "^2.4.1"
