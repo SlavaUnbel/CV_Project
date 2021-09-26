@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+import { getMenuOptions } from '../../services/mock/databaseMethods';
 import './menu.scss';
 import MenuItem from './menuItem/MenuItem';
 
@@ -8,18 +9,14 @@ interface Props {
 }
 
 const Menu: FC<Props> = ({ menuOpen, onClick }) => {
+  const data = getMenuOptions();
+
   return (
     <div className={'menu ' + (menuOpen && 'active')}>
       <ul>
-        <MenuItem title="Home" onClick={onClick} />
-
-        <MenuItem title="Portfolio" onClick={onClick} />
-
-        <MenuItem title="Works" onClick={onClick} />
-
-        <MenuItem title="Testimonials" onClick={onClick} />
-
-        <MenuItem title="Contact" onClick={onClick} />
+        {data.map((item, idx) => (
+          <MenuItem key={idx} title={item} onClick={onClick} />
+        ))}
       </ul>
     </div>
   );

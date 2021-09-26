@@ -5,7 +5,6 @@ import Header from './header/Header';
 import Intro from './intro/Intro';
 import Menu from './menu/Menu';
 import Portfolio from './portfolio/Portfolio';
-import Testimonials from './testimonials/Testimonials';
 import Works from './works/Works';
 
 function App() {
@@ -25,8 +24,6 @@ function App() {
         <Portfolio />
 
         <Works />
-
-        <Testimonials />
 
         <Contact />
       </div>

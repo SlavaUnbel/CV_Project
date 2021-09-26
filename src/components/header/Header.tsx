@@ -1,4 +1,4 @@
-import { Mail, Person } from '@material-ui/icons';
+import { LinkedIn, Mail, Phone } from '@material-ui/icons';
 import React, { FC } from 'react';
 import './header.scss';
 import HeaderItem from './headerItem/HeaderItem';
@@ -18,21 +18,26 @@ const Header: FC<Props> = ({ menuOpen, onClick }) => {
           </a>
 
           <HeaderItem
-            icon={<Person className="icon" />}
-            title="+375 (29) 333-98-06"
+            icon={<Phone className="icon" />}
+            title="+375 (44) 576-64-29"
           />
 
           <HeaderItem
             icon={<Mail className="icon" />}
             title="slavlen1999@gmail.com"
           />
+
+          <HeaderItem
+            icon={<LinkedIn className="icon" />}
+            title="Slava Levkovich  "
+          />
         </div>
 
         <div className="right">
           <div className="collapsing-menu" onClick={() => onClick(!menuOpen)}>
-            <span className="line1"></span>
-            <span className="line2"></span>
-            <span className="line3"></span>
+            {new Array(3).fill(1).map((_, idx) => (
+              <span key={idx} className={`line${idx + 1}`} />
+            ))}
           </div>
         </div>
       </div>
