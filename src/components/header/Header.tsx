@@ -1,5 +1,7 @@
 import { LinkedIn, Mail, Phone } from '@material-ui/icons';
 import React, { FC } from 'react';
+import { getMenuIconSpans } from '../../services/mock/databaseMethods';
+import { email, linkedIn, phoneNumber } from '../../utils/constants';
 import './header.scss';
 import HeaderItem from './headerItem/HeaderItem';
 
@@ -9,6 +11,8 @@ interface Props {
 }
 
 const Header: FC<Props> = ({ menuOpen, onClick }) => {
+  const spans = getMenuIconSpans();
+
   return (
     <div className={'header ' + (menuOpen && 'active')}>
       <div className="wrapper">
@@ -19,24 +23,27 @@ const Header: FC<Props> = ({ menuOpen, onClick }) => {
 
           <HeaderItem
             icon={<Phone className="icon" />}
-            title="+375 (44) 576-64-29"
+            title={phoneNumber}
+            href={`tel:${phoneNumber}`}
           />
 
           <HeaderItem
             icon={<Mail className="icon" />}
-            title="slavlen1999@gmail.com"
+            title={email}
+            href={`mailto:${email}`}
           />
 
           <HeaderItem
             icon={<LinkedIn className="icon" />}
-            title="Slava Levkovich  "
+            title="Slava Levkovich"
+            href={linkedIn}
           />
         </div>
 
         <div className="right">
           <div className="collapsing-menu" onClick={() => onClick(!menuOpen)}>
-            {new Array(3).fill(1).map((_, idx) => (
-              <span key={idx} className={`line${idx + 1}`} />
+            {spans.map((span) => (
+              <span key={span} className={`line${span}`} />
             ))}
           </div>
         </div>

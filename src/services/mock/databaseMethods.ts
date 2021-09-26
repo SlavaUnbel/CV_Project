@@ -14,6 +14,8 @@ export const getMenuOptions = (): string[] => {
   return new Array(options.length).fill(1).map((_, index) => options[index]);
 };
 
+export const getMenuIconSpans = (): number[] => new Array(3).fill(1).map((_, index) => index + 1);
+
 export const generatePortfolioData = (
   amount: number,
   id: number

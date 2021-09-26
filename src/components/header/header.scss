@@ -30,18 +30,26 @@
       }
 
       .item-container {
-        @include flex(row nowrap, center);
-        margin-left: 2rem;
+        margin-left: 1rem;
+        cursor: pointer;
+        
+        a {
+          @include flex(row nowrap, center);
+          margin-left: 1rem;
+          text-decoration: none;
+          color: var(--primary-color);
 
-        .icon {
-          font-size: 1.5rem;
-          margin-right: 0.3rem;
+          .icon {
+            font-size: 1.5rem;
+          }
+  
+          span {
+            margin-left: 0.3rem;
+            font-size: 1rem;
+            font-weight: 500;
+          }
         }
 
-        span {
-          font-size: 1rem;
-          font-weight: 500;
-        }
       }
     }
 
