@@ -8,3 +8,7 @@ export const arrowSrc = 'http://localhost:5000/images/arrow.png'
 export const firstIconSrc = 'http://localhost:5000/images/globe.png'
 export const secondIconSrc = 'http://localhost:5000/images/mobile.png'
 export const thirdIconSrc = 'http://localhost:5000/images/writing.png'
+
+export const phoneNumber = '+375 (44) 576-64-29'
+export const email = 'slavlen1999@gmail.com'
+export const linkedIn = 'https://linkedin.com/in/slava-levkovich'
