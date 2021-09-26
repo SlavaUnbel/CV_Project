@@ -1,3 +1,74 @@
+@mixin flex($flex-flow: row nowrap, $align-items: initial, $justify-content: initial) {
+  display: flex;
+  flex-flow: $flex-flow;
+  align-items: $align-items;
+  justify-content: $justify-content;
+}
+
 .portfolio {
-  background-color: lightskyblue;
+  @include flex(column nowrap, center);
+  background-color: var(--white-color);
+
+  h1 {
+    font-size: 3rem;
+  }
+
+  ul {
+    @include flex();
+    margin: 0.5rem;
+    padding: 0;
+    list-style: none;
+
+    li {
+      font-size: 1rem;
+      margin-right: 5rem;
+      padding: 0.5rem;
+      border-radius: 10px;
+      cursor: pointer;
+
+      &.active {
+        background-color: var(--primary-color);
+        color: var(--white-color);
+      }
+    }
+  }
+
+  .container {
+    @include flex(row wrap, center, center);   
+    width: 70vw;
+
+    .item {
+      @include flex(row nowrap, center, center);   
+      width: 20rem;
+      height: 14rem;
+      border-radius: 20px;
+      border: 1px solid var(--lightgrey-color);
+      margin: 0.5rem 1.5rem;
+      color: var(--white-color);
+      position: relative;
+      transition: all 0.5s ease;
+
+      h3 {
+        position: absolute;
+        font-size: 1.25rem;
+      }
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: 1;
+      }
+
+      &:hover {
+        background-color: var(--primary-color);
+        cursor: pointer;
+
+        img {
+          opacity: 0.2;
+          z-index: 0;
+        }
+      }
+    }
+  }
 }
