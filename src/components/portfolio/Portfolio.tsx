@@ -30,29 +30,29 @@ const Portfolio: FC = () => {
 
   return (
     <div className="portfolio" id="portfolio">
+      <h1>Portfolio</h1>
+
+      <ul>
+        {new Array(pagesCount).fill(1).map((_, idx) => (
+          <PortfolioPage
+            key={idx}
+            idx={idx}
+            active={selected === idx}
+            setActive={setSelected}
+          />
+        ))}
+      </ul>
+
       {!loading ? (
-        <>
-          <h1>Portfolio</h1>
-          <ul>
-            {new Array(pagesCount).fill(1).map((_, idx) => (
-              <PortfolioPage
-                key={idx}
-                idx={idx}
-                active={selected === idx}
-                setActive={setSelected}
-              />
-            ))}
-          </ul>
-          <div className="container">
-            {data.map((item) => (
-              <PortfolioItem
-                key={item.id}
-                imgSrc={item.imgSrc}
-                title={item.title}
-              />
-            ))}
-          </div>
-        </>
+        <div className="container">
+          {data.map((item) => (
+            <PortfolioItem
+              key={item.id}
+              imgSrc={item.imgSrc}
+              title={item.title}
+            />
+          ))}
+        </div>
       ) : (
         <Loader />
       )}

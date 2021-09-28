@@ -28,31 +28,29 @@ const Works: FC = () => {
   return (
     <div className="works" id="works">
       {!loading ? (
-        <>
-          <div
-            className="slider"
-            style={{ transform: `translateX(-${current * 100}vw)` }}
-          >
-            {data.map((item) => (
-              <WorkCard key={item.id} item={item} />
-            ))}
-          </div>
-
-          <Arrow
-            direction="left"
-            disabled={current === 0}
-            onClick={changeCurrent}
-          />
-
-          <Arrow
-            direction="right"
-            disabled={current === data.length - 1}
-            onClick={changeCurrent}
-          />
-        </>
+        <div
+          className="slider"
+          style={{ transform: `translateX(-${current * 100}vw)` }}
+        >
+          {data.map((item) => (
+            <WorkCard key={item.id} item={item} />
+          ))}
+        </div>
       ) : (
         <Loader />
       )}
+
+      <Arrow
+        direction="left"
+        disabled={current === 0}
+        onClick={changeCurrent}
+      />
+
+      <Arrow
+        direction="right"
+        disabled={current === data.length - 1}
+        onClick={changeCurrent}
+      />
     </div>
   );
 };

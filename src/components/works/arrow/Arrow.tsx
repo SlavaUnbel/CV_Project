@@ -9,7 +9,7 @@ interface Props {
 
 const Arrow: FC<Props> = ({ direction, disabled, onClick }) => (
   <img
-    src={arrowSrc}
+    src={arrowSrc.replace('arrow', `${direction}-arrow`)}
     className={`arrow ${direction} ${disabled ? 'disabled' : ''}`}
     alt=""
     onClick={() => {
