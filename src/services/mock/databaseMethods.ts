@@ -14,7 +14,8 @@ export const getMenuOptions = (): string[] => {
   return new Array(options.length).fill(1).map((_, index) => options[index]);
 };
 
-export const getMenuIconSpans = (): number[] => new Array(3).fill(1).map((_, index) => index + 1);
+export const getMenuIconSpans = (): number[] =>
+  new Array(3).fill(1).map((_, index) => index + 1);
 
 export const generatePortfolioData = (
   amount: number,
@@ -45,6 +46,17 @@ export const generateWorksData = (amount: number, id: number): IWorks[] => {
       description:
         'Lorem ipsum dolor sit amet, consectetur adipisicing elit.Ratione, possimus. Lorem ipsum dolor sit amet, elit. Ratione, possimus.',
       imgSrc: images[id - 1],
+    };
+  });
+};
+
+export const getInitialMessagesForContactInputFields = (): IMessage[] => {
+  const names = ['Name', 'Email', 'Subject', 'Message'];
+
+  return new Array(4).fill(1).map((_, idx) => {
+    return {
+      message: `Please, fill in the "${names[idx]}" field`,
+      type: 'error',
     };
   });
 };

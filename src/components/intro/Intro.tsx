@@ -25,7 +25,7 @@ const Intro: FC = () => {
     <div className="intro" id="home">
       <div className="left">
         <div className="img-container">
-          <img src={avatarSrc} alt="Avatar" />
+          <img src={avatarSrc} alt="" />
         </div>
       </div>
 

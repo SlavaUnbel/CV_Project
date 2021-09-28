@@ -16,4 +16,18 @@ interface IWorks {
   imgSrc: string;
 }
 
-type SliderDirection = 'left' | 'right'
+type SliderDirection = 'left' | 'right';
+
+
+interface IFormInput {
+  name: string;
+  pattern: string;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+}
+
+interface IMessage {
+  message: string | null;
+  type: MessageType;
+}
+
+type MessageType = 'success' | 'error' | 'warning'
