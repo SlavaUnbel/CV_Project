@@ -10,13 +10,12 @@ import './contact.scss';
 import InputField from './inputField/InputField';
 
 const Contact: FC = () => {
-  const { inputFields, nameMessage, emailMessage, subjectMessage, reset } =
-    useContactInputFields();
-  const messages = [nameMessage, emailMessage, subjectMessage];
+  const { inputFields, messages, reset } = useContactInputFields();
 
   const { validated, validate, setValidated } =
     useContactPageValidation(messages);
-  const validationState = { validated, validate, setValidated, reset };
+
+  const validationState = { validated, setValidated, reset };
 
   const sendEmail = useSendEmail(validationState);
 
@@ -43,7 +42,7 @@ const Contact: FC = () => {
 
           <textarea placeholder="Your message" name="message" />
 
-          <button type="submit" onClick={sendEmail}>
+          <button type="submit" onClick={validate}>
             Send Message
           </button>
         </form>

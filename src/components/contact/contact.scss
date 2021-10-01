@@ -92,10 +92,10 @@
 
         &:focus {
           outline: none;
-          border-bottom: 2px solid var(--primary-color);
+          border-bottom: 2px solid var(--yellow-color);
 
           @include mobile {
-            border-bottom: 1px solid var(--primary-color);
+            border-bottom: 1px solid var(--yellow-color);
           }
       
           &.valid {
