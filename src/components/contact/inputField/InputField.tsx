@@ -1,4 +1,5 @@
 import React, { ChangeEvent, FC } from 'react';
+import '../contact.scss';
 
 interface Props {
   name: string;

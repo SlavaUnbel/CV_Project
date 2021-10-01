@@ -22,10 +22,11 @@ export const useContactInputFields = () => {
 
   const names = ['Name', 'Email', 'Subject'];
   const patterns = [
-    '[A-Za-z]{4,}',
+    '[A-Za-z]{3,}',
     '[A-Za-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$',
-    '.{4,}',
+    '.{2,}',
   ];
+  const messages = [nameMessage, emailMessage, subjectMessage];
 
   const [namePattern, emailPattern, subjectPattern] = patterns.map(
     (pattern) => new RegExp(pattern)
@@ -38,7 +39,7 @@ export const useContactInputFields = () => {
         ? setNameMessage(getError('Please, fill in the "Name" field'))
         : setNameMessage(
           getWarning(
-            'Please, provide 4 or more letter characters to "Name" field'
+            'Please, provide 3 or more letter characters to "Name" field'
           )
         );
 
@@ -59,7 +60,7 @@ export const useContactInputFields = () => {
       : e.currentTarget.value === ''
         ? setSubjectMessage(getError('Please, fill in the "Subject" field'))
         : setSubjectMessage(
-          getWarning('Please, provide 4 or more characters to "Subject" field')
+          getWarning('Please, provide 2 or more characters to "Subject" field')
         );
 
   const changeHandlers = [onNameChange, onEmailChange, onSubjectChange];
@@ -90,9 +91,7 @@ export const useContactInputFields = () => {
 
   return {
     inputFields,
-    nameMessage,
-    emailMessage,
-    subjectMessage,
+    messages,
     reset,
   };
 };
@@ -100,36 +99,29 @@ export const useContactInputFields = () => {
 export const useContactPageValidation = (messages: IMessage[]) => {
   const [validated, setValidated] = useState(false);
 
-  const validate = () => {
-    if (messages.every((msg) => msg.type === 'success')) {
-      setValidated(true);
-    } else {
-      messages
+  const validate = () =>
+    messages.every((msg) => msg.type === 'success')
+      ? setValidated(true)
+      : messages
         .filter((msg) => msg.type !== 'success')
         .map((msg) => toast(msg.message, { type: msg.type }));
-    }
-  };
 
   return { validated, validate, setValidated };
 };
 
 interface SendEmailProps {
   validated: boolean;
-  validate: () => void;
   setValidated: (validated: boolean) => void;
   reset: () => void;
 }
 
 export const useSendEmail = ({
   validated,
-  validate,
   setValidated,
   reset,
 }: SendEmailProps) => {
   const sendEmail = (e: any) => {
     e.preventDefault();
-
-    validate();
 
     if (validated) {
       emailjs
