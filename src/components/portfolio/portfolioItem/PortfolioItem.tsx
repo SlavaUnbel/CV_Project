@@ -7,7 +7,9 @@ interface Props {
 
 const PortfolioItem: FC<Props> = ({ imgSrc, title }) => (
   <div className="item">
-    <img src={imgSrc} alt="" />
+    <div className="img-wrapper">
+      <img src={imgSrc} alt="" />
+    </div>
 
     <h3>{title}</h3>
   </div>

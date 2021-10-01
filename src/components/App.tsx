@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import 'react-toastify/dist/ReactToastify.css';
 import './app.scss';
 import Contact from './contact/Contact';
 import Header from './header/Header';

@@ -51,9 +51,9 @@ export const generateWorksData = (amount: number, id: number): IWorks[] => {
 };
 
 export const getInitialMessagesForContactInputFields = (): IMessage[] => {
-  const names = ['Name', 'Email', 'Subject', 'Message'];
+  const names = ['Name', 'Email', 'Subject'];
 
-  return new Array(4).fill(1).map((_, idx) => {
+  return new Array(3).fill(1).map((_, idx) => {
     return {
       message: `Please, fill in the "${names[idx]}" field`,
       type: 'error',

@@ -12,7 +12,6 @@ export const useContactInputFields = () => {
   const [subjectMessage, setSubjectMessage] = useState<IMessage>(
     initialMessages[2]
   );
-  const [bodyMessage, setBodyMessage] = useState<IMessage>(initialMessages[3]);
 
   const getSuccess = (): IMessage => ({ message: null, type: 'success' });
   const getError = (message: string): IMessage => ({ message, type: 'error' });
@@ -63,11 +62,6 @@ export const useContactInputFields = () => {
           getWarning('Please, provide 4 or more characters to "Subject" field')
         );
 
-  const onBodyMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) =>
-    e.currentTarget.value === ''
-      ? setBodyMessage(getError('Please, fill in the "Message" field'))
-      : setBodyMessage(getSuccess());
-
   const changeHandlers = [onNameChange, onEmailChange, onSubjectChange];
 
   const inputFields: IFormInput[] = [
@@ -92,7 +86,6 @@ export const useContactInputFields = () => {
     setNameMessage(initialMessages[0]);
     setEmailMessage(initialMessages[1]);
     setSubjectMessage(initialMessages[2]);
-    setBodyMessage(initialMessages[3]);
   };
 
   return {
@@ -100,8 +93,6 @@ export const useContactInputFields = () => {
     nameMessage,
     emailMessage,
     subjectMessage,
-    bodyMessage,
-    onBodyMessageChange,
     reset,
   };
 };

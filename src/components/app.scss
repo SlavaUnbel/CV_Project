@@ -1,10 +1,11 @@
+@import '../index.scss'; 
+
 .app {
   height: 100vh;
 
   .sections {
     width: 100%;
     height: calc(100vh - 4.5rem);
-    background: lightsalmon;
     position: relative;
     top: 4.5rem;
     scroll-behavior: smooth;
@@ -14,10 +15,28 @@
       display: none;
     };
 
+    @include screen-1000px {
+      height: calc(100vh - 3.8rem);
+      top: 3.8rem;
+    }
+
+    @include mobile {
+      height: calc(100vh - 3rem);
+      top: 3rem;
+    }
+
     > * {
       width: 100vw;
       height: calc(100vh - 4.5rem);
       scroll-snap-align: start;
+
+      @include screen-1000px {
+        height: calc(100vh - 3.8rem);
+      }
+
+      @include mobile {
+        height: calc(100vh - 3rem);
+      }
     }
   }
 }

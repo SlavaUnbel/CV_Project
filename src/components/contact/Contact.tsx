@@ -1,34 +1,24 @@
 import React, { FC } from 'react';
-import { ToastContainer } from 'react-toastify';
 import { shakeSrc } from '../../utils/constants';
 import {
   useContactInputFields,
   useContactPageValidation,
   useSendEmail,
 } from '../../utils/hooks';
+import ToastContainer from '../utils/toastContainer/ToastContainer';
 import './contact.scss';
 import InputField from './inputField/InputField';
-import MessageField from './messageField/MessageField';
 
 const Contact: FC = () => {
-  const {
-    inputFields,
-    nameMessage,
-    emailMessage,
-    subjectMessage,
-    bodyMessage,
-    onBodyMessageChange,
-    reset,
-  } = useContactInputFields();
-  const messages = [nameMessage, emailMessage, subjectMessage, bodyMessage];
+  const { inputFields, nameMessage, emailMessage, subjectMessage, reset } =
+    useContactInputFields();
+  const messages = [nameMessage, emailMessage, subjectMessage];
 
   const { validated, validate, setValidated } =
     useContactPageValidation(messages);
   const validationState = { validated, validate, setValidated, reset };
 
   const sendEmail = useSendEmail(validationState);
-
-  console.log(bodyMessage);
 
   return (
     <div className="contact" id="contact">
@@ -51,7 +41,7 @@ const Contact: FC = () => {
             />
           ))}
 
-          <MessageField message={bodyMessage} onChange={onBodyMessageChange} />
+          <textarea placeholder="Your message" name="message" />
 
           <button type="submit" onClick={sendEmail}>
             Send Message
@@ -59,7 +49,7 @@ const Contact: FC = () => {
         </form>
       </div>
 
-      <ToastContainer closeButton={false} />
+      <ToastContainer />
     </div>
   );
 };
