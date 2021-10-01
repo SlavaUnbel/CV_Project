@@ -1,14 +1,19 @@
-import React, { FC } from 'react';
+import React, { FC, HTMLAttributeAnchorTarget } from 'react';
 
 interface Props {
-  title: string;
   icon: JSX.Element;
+  title: string;
   href: string;
+  target?: HTMLAttributeAnchorTarget;
 }
 
-const HeaderItem: FC<Props> = ({ title, icon, href }) => (
+const HeaderItem: FC<Props> = ({ icon, title, href, target }) => (
   <div className="item-container">
-    <a href={href} target="_blank" rel="noreferrer">
+    <a
+      href={href}
+      target={target}
+      rel={target === '_blank' ? 'noreferrer' : undefined}
+    >
       {icon}
 
       <span>{title}</span>

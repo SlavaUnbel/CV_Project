@@ -2,6 +2,7 @@ import { LinkedIn, Mail, Phone } from '@material-ui/icons';
 import React, { FC } from 'react';
 import { getMenuIconSpans } from '../../services/mock/databaseMethods';
 import { email, linkedIn, phoneNumber } from '../../utils/constants';
+import { contactPath, homePath } from '../../utils/route';
 import './header.scss';
 import HeaderItem from './headerItem/HeaderItem';
 
@@ -17,7 +18,7 @@ const Header: FC<Props> = ({ menuOpen, onClick }) => {
     <div className={'header' + (menuOpen ? ' active' : '')}>
       <div className="wrapper">
         <div className="left">
-          <a href="#home" className="logo">
+          <a href={homePath} className="logo">
             creative.
           </a>
 
@@ -25,18 +26,20 @@ const Header: FC<Props> = ({ menuOpen, onClick }) => {
             icon={<Phone className="icon" />}
             title={phoneNumber}
             href={`tel:${phoneNumber}`}
+            target="_blank"
           />
 
           <HeaderItem
             icon={<Mail className="icon" />}
             title={email}
-            href={`mailto:${email}`}
+            href={contactPath}
           />
 
           <HeaderItem
             icon={<LinkedIn className="icon" />}
             title="Slava Levkovich"
             href={linkedIn}
+            target="_blank"
           />
         </div>
 

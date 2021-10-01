@@ -1,11 +1,12 @@
 @import '../../index.scss';
 
 .contact {
-  @include flex();
+  @include container;
+  @include flex(row nowrap, initial, initial);
   background-color: var(--white-color);
 
   @include mobile {
-    @include flex(column nowrap);
+    @include flex(column nowrap, center, center);
   }
 
   .left {

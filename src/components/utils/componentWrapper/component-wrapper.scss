@@ -1,0 +1,18 @@
+@import '../../../index.scss';
+
+.component-wrapper {
+  width: 100%;
+  height: calc(100vh - 4.5rem);
+  position: relative;
+  top: 4.5rem;
+
+  @include screen-1000px {
+    height: calc(100vh - 3.8rem);
+    top: 3.8rem;
+  }
+
+  @include mobile {
+    height: calc(100vh - 3rem);
+    top: 3rem;
+  }
+}

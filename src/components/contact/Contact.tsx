@@ -5,7 +5,7 @@ import {
   useContactPageValidation,
   useSendEmail,
 } from '../../utils/hooks';
-import ToastContainer from '../utils/toastContainer/ToastContainer';
+import ComponentWrapper from '../utils/componentWrapper/ComponentWrapper';
 import './contact.scss';
 import InputField from './inputField/InputField';
 
@@ -20,36 +20,36 @@ const Contact: FC = () => {
   const sendEmail = useSendEmail(validationState);
 
   return (
-    <div className="contact" id="contact">
-      <div className="left">
-        <img src={shakeSrc} alt="" />
+    <ComponentWrapper>
+      <div className="contact">
+        <div className="left">
+          <img src={shakeSrc} alt="" />
+        </div>
+
+        <div className="right">
+          <h2>Contact</h2>
+
+          <form onSubmit={sendEmail} autoComplete="off">
+            {inputFields.map((field, idx) => (
+              <InputField
+                key={idx}
+                name={field.name}
+                pattern={field.pattern}
+                valid={messages[idx].type === 'success'}
+                invalid={messages[idx].type === 'error'}
+                onChange={field.onChange}
+              />
+            ))}
+
+            <textarea placeholder="Your message" name="message" />
+
+            <button type="submit" onClick={validate}>
+              Send Message
+            </button>
+          </form>
+        </div>
       </div>
-
-      <div className="right">
-        <h2>Contact</h2>
-
-        <form onSubmit={sendEmail} autoComplete="off">
-          {inputFields.map((field, idx) => (
-            <InputField
-              key={idx}
-              name={field.name}
-              pattern={field.pattern}
-              valid={messages[idx].type === 'success'}
-              invalid={messages[idx].type === 'error'}
-              onChange={field.onChange}
-            />
-          ))}
-
-          <textarea placeholder="Your message" name="message" />
-
-          <button type="submit" onClick={validate}>
-            Send Message
-          </button>
-        </form>
-      </div>
-
-      <ToastContainer />
-    </div>
+    </ComponentWrapper>
   );
 };
 

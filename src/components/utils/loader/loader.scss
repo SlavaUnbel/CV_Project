@@ -1,11 +1,10 @@
 @import '../../../index.scss';
 
 .loader-wrapper {
+  @include container;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100vw;
-  height: 60vh;
 
   .loader {
     border: 1rem solid var(--lightgrey-color);

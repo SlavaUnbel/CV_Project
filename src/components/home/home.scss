@@ -1,6 +1,7 @@
 @import '../../index.scss';
 
-.intro {
+.home {
+  @include container;
   @include flex(row nowrap, center);
   background-color: var(--white-color);
 
