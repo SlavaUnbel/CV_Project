@@ -1,9 +1,4 @@
-@mixin flex($flex-flow: row nowrap, $align-items: initial, $justify-content: initial) {
-  display: flex;
-  flex-flow: $flex-flow;
-  align-items: $align-items;
-  justify-content: $justify-content;
-}
+@import '../../index.scss';
 
 .menu {
   @include flex(column nowrap, center, center);
@@ -15,6 +10,14 @@
   right: -20rem;
   z-index: 2;
   transition: all 1s ease;
+
+  @include screen-1500px {
+    width: 15rem;
+  }
+
+  @include mobile {
+    width: 12.5rem;
+  }
 
   &.active {
     right: 0;

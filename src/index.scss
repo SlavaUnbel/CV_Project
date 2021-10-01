@@ -1,4 +1,4 @@
-@import './assets/Roboto/roboto.scss';
+@import './assets/roboto.scss';
 
 :root {
   --white-color: #fff;
@@ -6,7 +6,7 @@
   --red-color: #dc143c;
   --lightgrey-color: #d3d3d3;
   --pink-color: #f5b39b;
-  --green-color: #2ed129;
+  --green-color: #07bc0c;
 }
 
 @mixin scrollbar($bg-color) {
@@ -14,6 +14,61 @@
   box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
   border-radius: 10px;
   background-color: $bg-color;
+}
+
+@mixin flex($flex-flow: row nowrap, $align-items: initial, $justify-content: initial) {
+  display: flex;
+  flex-flow: $flex-flow;
+  align-items: $align-items;
+  justify-content: $justify-content;
+}
+
+@mixin screen-1600px {
+  @media screen and (max-width: 1600px) {
+    @content
+  }
+};
+
+@mixin screen-1500px {
+  @media screen and (max-width: 1500px) {
+    @content
+  }
+};
+
+@mixin screen-1400px {
+  @media screen and (max-width: 1400px) {
+    @content
+  }
+};
+
+@mixin screen-1300px {
+  @media screen and (max-width: 1300px) {
+    @content
+  }
+};
+
+@mixin screen-1200px {
+  @media screen and (max-width: 1200px) {
+    @content
+  }
+};
+
+@mixin screen-1000px {
+  @media screen and (max-width: 1000px) {
+    @content
+  }
+};
+
+@mixin mobile {
+  @media (max-width: 50rem) {
+    @content
+  }
+};
+
+@mixin tablet {
+  @media (max-width: 1200px) and (min-height: 1000px) {
+    @content
+  }
 }
 
 * {

@@ -1,30 +1,75 @@
-@mixin flex($flex-flow: row nowrap, $align-items: initial, $justify-content: initial) {
-  display: flex;
-  flex-flow: $flex-flow;
-  align-items: $align-items;
-  justify-content: $justify-content;
+@import '../../index.scss';
+
+@mixin opacity ($opacity) {
+  opacity: $opacity;
+  transition: opacity 1s ease;
 }
 
 .portfolio {
   @include flex(column nowrap, center);
   background-color: var(--white-color);
-
+  
   h1 {
     font-size: 3rem;
+    overflow: hidden;
+
+    @include screen-1300px {
+      font-size: 2.5rem;
+    };
+
+    @include screen-1000px {
+      font-size: 2rem;
+    };
+
+    @include mobile {
+      font-size: 1.5rem;
+    }
+
+    @include tablet {
+      font-size: 3rem;
+    }
   }
 
   ul {
-    @include flex();
+    @include flex(row nowrap, center, space-between);
     margin: 0.5rem;
     padding: 0;
     list-style: none;
+    overflow: hidden;
+
+    @include mobile {
+      margin: 0.25rem;
+      @include flex(row wrap, center, center);
+    }
+
+    @include tablet {
+      @include flex(row nowrap, center, space-between);
+      margin: 0.5rem;
+    }
 
     li {
       font-size: 1rem;
-      margin-right: 5rem;
+      margin: 0 1.5rem;
       padding: 0.5rem;
       border-radius: 10px;
       cursor: pointer;
+      overflow: hidden;
+
+      @include screen-1000px {
+        font-size: 0.9rem;
+        margin: 0 1rem;
+      }
+
+      @include mobile {
+        font-size: 0.8rem;
+        padding: 0.4rem;
+        margin: 0 0.75rem;
+      }
+
+      @include tablet {
+        font-size: 1rem;
+        margin: 0 1.5rem;
+      }
 
       &.active {
         background-color: var(--primary-color);
@@ -37,40 +82,99 @@
     @include flex(row wrap, center, center);   
     width: 70vw;
 
+    @include screen-1000px {
+      width: 85vw;
+    }
+
+    @include mobile {
+      width: 100vw;
+    }
+
     .item {
-      @include flex(row nowrap, center, center);   
-      width: 20rem;
-      height: 14rem;
-      border-radius: 20px;
-      border: 1px solid var(--lightgrey-color);
-      margin: 0.5rem 1.5rem;
-      color: var(--white-color);
-      position: relative;
-      transition: all 0.5s ease;
+      @include flex(column nowrap, center, center);   
+      margin: 1rem 1.5rem;
 
-      h3 {
-        position: absolute;
-        font-size: 1.25rem;
+      @include screen-1000px {
+        margin: 0.7rem 1rem;
       }
 
-      img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        z-index: 1;
+      @include mobile {
+        margin: 0.3rem 0.5rem;
       }
 
-      &:hover {
-        background-color: var(--primary-color);
+      @include tablet {
+        margin: 1rem 1.5rem;
+      }
+
+      .img-wrapper {
+        width: 18rem;
+        height: 14rem;
+        border-radius: 20px;
+        border: 1px solid var(--lightgrey-color);
+        margin-bottom: 1rem;
+        overflow: hidden;
         cursor: pointer;
 
+        @include screen-1500px {
+          width: 15rem;
+          height: 12rem;
+          margin-bottom: 0.9rem;
+        }
+
+        @include screen-1300px {
+          width: 14rem;
+          height: 10rem;
+          margin-bottom: 0.8rem;
+        }
+
+        @include screen-1000px {
+          width: 13rem;
+          height: 10rem;
+          margin-bottom: 0.6rem;
+        }
+
+        @include mobile {
+          width: 8rem;
+          height: 6rem;
+          margin-bottom: 0.3rem;
+        }
+
+        @include tablet {
+          width: 14rem;
+          height: 10rem;
+          margin-bottom: 1rem;
+        }
+
         img {
-          opacity: 0.2;
-          z-index: 0;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+
+      h3 {
+        @include opacity(0);
+        font-size: 1.25rem;
+
+        @include screen-1000px {
+          font-size: 1.1rem;
+        }
+
+        @include mobile {
+          @include opacity(1);
+          font-size: 0.95rem;
+        }
+
+        @include tablet {
+          font-size: 1.25rem;
+        }
+      }
+      
+      &:hover {
+        h3 {
+          @include opacity(1);
         }
       }
     }
   }
-
-  
 }

@@ -27,6 +27,8 @@ const Works: FC = () => {
 
   return (
     <div className="works" id="works">
+      <h1>Works</h1>
+
       {!loading ? (
         <div
           className="slider"

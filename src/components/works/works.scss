@@ -1,15 +1,35 @@
-@mixin flex($align-items: initial, $justify-content: initial, $flex-flow: row nowrap) {
-  display: flex;
-  align-items: $align-items;
-  justify-content: $justify-content;
-  flex-flow: $flex-flow;
-}
+@import '../../index.scss';
 
 .works {
-  @include flex(center, center);
+  @include flex(row nowrap, center, center);
   background-color: var(--red-color);
   position: relative;
   overflow: hidden;
+
+  h1 {
+    position: absolute;
+    margin: auto;
+    top: 10%;
+    font-size: 3rem;
+
+    @include screen-1300px {
+      font-size: 2.5rem;
+    };
+
+    @include screen-1000px {
+      font-size: 2rem;
+    };
+
+    @include mobile {
+      top: 1rem;
+      font-size: 1.5rem;
+    }
+
+    @include tablet {
+      top: 10%;
+      font-size: 3rem;
+    }
+  }
   
   .slider {
     @include flex();
@@ -17,13 +37,33 @@
     position: absolute;
     left: 0;
     transition: all 1s ease-in-out;
+
+    @include screen-1300px {
+      height: 22.5rem;
+    }
+
+    @include screen-1300px {
+      height: 20rem;
+    }
+
+    @include mobile {
+      @include flex(column nowrap, center, center);
+      margin-top: 2rem;
+      height: 80vh;
+    }
+
+    @include tablet {
+      @include flex();
+      height: 25rem;
+    }
     
     .container {
-      @include flex(center, center);
+      @include flex(row nowrap, center, center);
       width: 100vw;
+      overflow: hidden;
 
       .item {
-        @include flex(center, center);
+        @include flex(row nowrap, center, center);
         width: 45rem;
         height: 90%;
         background-color: var(--white-color);
@@ -31,58 +71,206 @@
         cursor: pointer;
         transition: all 1s ease;
 
+        @include screen-1300px {
+          width: 40rem;
+        }
+
+        @include screen-1000px {
+          width: 35rem;
+        }
+
+        @include mobile {
+          width: 90%;
+          height: 10rem;
+          margin: 0.5rem;
+        }
+
+        @include tablet {
+          width: 35rem;
+          height: 80%;
+          margin: none;
+        }
+
         &:hover {
           transform: scale(1.1);
+
+          @include screen-1300px {
+            transform: scale(1.05);
+          }
+
+          @include mobile {
+            transform: none;
+          }
         }
 
         .left {
-          @include flex(center, center);
+          @include flex(row nowrap, center, center);
           flex: 4;
           height: 80%;
 
+          @include mobile {
+            flex: 5;
+          }
+
+          @include tablet {
+            flex: 4;
+          }
+
           .left-container {
-            @include flex(initial, space-between, column nowrap);
+            @include flex(column nowrap, initial, space-between);
             width: 90%;
-            height: 70%;
+            height: 90%;
+
+            @include mobile {
+              height: 100%;
+            }
+
+            @include tablet {
+              height: 90%;
+            }
 
             .img-container {
-              @include flex(center, center);
+              @include flex(row nowrap, center, center);
               background-color: var(--pink-color);
               width: 2.5rem;
               height: 2.5rem;
               border-radius: 50%;
 
+              @include screen-1300px {
+                width: 2.25rem;
+                height: 2.25rem;
+              }
+
+              @include screen-1000px {
+                width: 2rem;
+                height: 2rem;
+              }
+
+              @include mobile {
+                display: none;
+              }
+
+              @include tablet {
+                @include flex(row nowrap, center, center);
+                width: 2.5rem;
+                height: 2.5rem;
+              }
+
               img {
                 width: 1.5rem;
+
+                @include screen-1300px {
+                  width: 1.3rem;
+                }
+
+                @include screen-1000px {
+                  width: 1.1rem;
+                }
+
+                @include tablet {
+                  width: 1.5rem
+                }
               }
             }
 
             h2 {
               font-size: 1.4rem;
+
+              @include screen-1300px {
+                font-size: 1.25rem;
+              }
+
+              @include screen-1000px {
+                font-size: 1.1rem;
+              }
+
+              @include mobile {
+                font-size: 1rem;
+              }
+
+              @include tablet {
+                font-size: 1.4rem;
+              }
             }
 
             p {
               font-size: 1rem;
+
+              @include screen-1300px {
+                font-size: 0.9rem;
+              }
+
+              @include screen-1000px {
+                font-size: 0.8rem;
+              }
+
+              @include mobile {
+                font-size: 0.7rem;
+              }
+
+              @include tablet {
+                font-size: 1rem;
+              }
             }
 
             span {
-              font-size: 0.8rem;
-              font-weight: 600;
+              font-size: 0.9rem;
+              font-weight: 500;
               text-decoration: underline;
               cursor: pointer;
+              
+              @include screen-1300px {
+                font-size: 0.8rem;
+              }
+
+              @include screen-1000px {
+                font-size: 0.7rem;
+              }
+
+              @include mobile {
+                font-size: 0.6rem;
+              }
+
+              @include tablet {
+                font-size: 0.9rem;
+              }
             }
           }
         }
 
         .right {
-          @include flex(center, center);
+          @include flex(row nowrap, center, center);
           flex: 8;
           height: 100%;
           overflow: hidden;
 
+          @include mobile {
+            flex: 7;
+          }
+
+          @include tablet {
+            flex: 8;
+          }
+
           img {
             width: 25rem;
             transform: rotate(-10deg);
+
+            @include screen-1300px {
+              width: 22.5rem;
+            }
+
+            @include screen-1000px {
+              width: 20rem;
+            }
+
+            @include mobile {
+              width: 17.5rem;
+            }
+
+            @include tablet {
+              width: 25rem;
+            }
           }
         }
       }
@@ -93,13 +281,54 @@
     height: 5rem;
     position: absolute;
     cursor: pointer;
+
+    @include screen-1300px {
+      height: 4.5rem;
+    }
+
+    @include screen-1000px {
+      height: 3rem;
+    }
+
+    @include mobile {
+      display: none;
+    }
+
+    @include tablet {
+      display: unset;
+      height: 3rem;
+    }
   
     &.left {
       left: 5rem;
+
+      @include screen-1300px {
+        left: 4.5rem;
+      }
+
+      @include screen-1000px {
+        left: 2.5rem;
+      }
+
+      @include tablet {
+        left: 1rem;
+      }
     }
   
     &.right {
       right: 5rem;
+
+      @include screen-1300px {
+        right: 4.5rem;
+      }
+
+      @include screen-1000px {
+        right: 2.5rem;
+      }
+
+      @include tablet {
+        right: 1rem;
+      }
     }
   
     &.disabled {
@@ -109,6 +338,10 @@
 
     &:active {
       transform: scale(0.9);
+
+      @include screen-1000px {
+        transform: scale(0.95);
+      }
     }
   }
 }

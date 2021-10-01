@@ -1,9 +1,11 @@
+@import '../../../index.scss';
+
 .loader-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 70vw;
-  height: 50vh;
+  width: 100vw;
+  height: 60vh;
 
   .loader {
     border: 1rem solid var(--lightgrey-color);
@@ -12,6 +14,13 @@
     width: 7rem;
     height: 7rem;
     animation: spin 0.7s ease infinite;
+
+    @include mobile {
+      border: 0.7rem solid var(--lightgrey-color);
+      border-top: 0.7rem solid var(--primary-color);
+      width: 5rem;
+      height: 5rem;
+    }
   }
 
   @keyframes spin {

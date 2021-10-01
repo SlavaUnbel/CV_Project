@@ -14,7 +14,7 @@ const Header: FC<Props> = ({ menuOpen, onClick }) => {
   const spans = getMenuIconSpans();
 
   return (
-    <div className={'header ' + (menuOpen && 'active')}>
+    <div className={'header' + (menuOpen ? ' active' : '')}>
       <div className="wrapper">
         <div className="left">
           <a href="#home" className="logo">
