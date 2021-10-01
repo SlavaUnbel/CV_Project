@@ -24,7 +24,7 @@ export const useContactInputFields = () => {
   const patterns = [
     '[A-Za-z]{3,}',
     '[A-Za-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$',
-    '.{2,}',
+    '.{1,}',
   ];
   const messages = [nameMessage, emailMessage, subjectMessage];
 
@@ -57,11 +57,7 @@ export const useContactInputFields = () => {
   const onSubjectChange = (e: ChangeEvent<HTMLInputElement>) =>
     subjectPattern.test(e.currentTarget.value)
       ? setSubjectMessage(getSuccess())
-      : e.currentTarget.value === ''
-        ? setSubjectMessage(getError('Please, fill in the "Subject" field'))
-        : setSubjectMessage(
-          getWarning('Please, provide 2 or more characters to "Subject" field')
-        );
+      : setSubjectMessage(getError('Please, fill in the "Subject" field'));
 
   const changeHandlers = [onNameChange, onEmailChange, onSubjectChange];
 

@@ -1,5 +1,7 @@
 import React, { FC, useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 import { services } from '../../services/services';
+import ComponentWrapper from '../utils/componentWrapper/ComponentWrapper';
 import Loader from '../utils/loader/Loader';
 import Arrow from './arrow/Arrow';
 import WorkCard from './workCard/WorkCard';
@@ -21,39 +23,41 @@ const Works: FC = () => {
     services.worksService
       .getWorksData()
       .then(setData)
-      .catch((e) => console.error(e))
+      .catch((e) => toast(e, { type: 'error' }))
       .finally(() => setLoading(false));
   }, []);
 
   return (
-    <div className="works" id="works">
-      <h1>Works</h1>
+    <ComponentWrapper>
+      <div className="works">
+        <h1>Works</h1>
 
-      {!loading ? (
-        <div
-          className="slider"
-          style={{ transform: `translateX(-${current * 100}vw)` }}
-        >
-          {data.map((item) => (
-            <WorkCard key={item.id} item={item} />
-          ))}
-        </div>
-      ) : (
-        <Loader />
-      )}
+        {!loading ? (
+          <div
+            className="slider"
+            style={{ transform: `translateX(-${current * 100}vw)` }}
+          >
+            {data.map((item) => (
+              <WorkCard key={item.id} item={item} />
+            ))}
+          </div>
+        ) : (
+          <Loader />
+        )}
 
-      <Arrow
-        direction="left"
-        disabled={current === 0}
-        onClick={changeCurrent}
-      />
+        <Arrow
+          direction="left"
+          disabled={current === 0}
+          onClick={changeCurrent}
+        />
 
-      <Arrow
-        direction="right"
-        disabled={current === data.length - 1}
-        onClick={changeCurrent}
-      />
-    </div>
+        <Arrow
+          direction="right"
+          disabled={current === data.length - 1}
+          onClick={changeCurrent}
+        />
+      </div>
+    </ComponentWrapper>
   );
 };
 

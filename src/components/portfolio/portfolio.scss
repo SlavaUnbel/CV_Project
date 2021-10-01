@@ -6,6 +6,7 @@
 }
 
 .portfolio {
+  @include container;
   @include flex(column nowrap, center);
   background-color: var(--white-color);
   

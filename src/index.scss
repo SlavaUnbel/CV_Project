@@ -70,6 +70,19 @@
   @media (max-width: 1200px) and (min-height: 1000px) {
     @content
   }
+};
+
+@mixin container {
+  width: 100vw;
+  height: calc(100vh - 4.5rem);
+
+  @include screen-1000px {
+    height: calc(100vh - 3.8rem);
+  }
+
+  @include mobile {
+    height: calc(100vh - 3rem);
+  }
 }
 
 * {

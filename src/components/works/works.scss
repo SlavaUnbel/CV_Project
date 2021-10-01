@@ -1,6 +1,7 @@
 @import '../../index.scss';
 
 .works {
+  @include container;
   @include flex(row nowrap, center, center);
   background-color: var(--red-color);
   position: relative;
