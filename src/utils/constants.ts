@@ -13,3 +13,5 @@ export const shakeSrc = `${process.env.PUBLIC_URL + '/images/shake.svg'}`
 export const phoneNumber = '+375 (44) 555-55-55'
 export const email = 'slavlen1999@gmail.com'
 export const linkedIn = 'https://linkedin.com/in/slava-levkovich'
+
+export const portfolioAmountPerPage = 6;

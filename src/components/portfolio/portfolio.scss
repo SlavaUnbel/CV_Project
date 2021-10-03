@@ -108,14 +108,20 @@
       }
 
       .img-wrapper {
-        width: 18rem;
-        height: 14rem;
+        width: 20rem;
+        height: 15rem;
         border-radius: 20px;
         border: 1px solid var(--lightgrey-color);
         margin-bottom: 1rem;
         overflow: hidden;
         cursor: pointer;
 
+        @include screen-1600px {
+          width: 18rem;
+          height: 14rem;
+          margin-bottom: 0.9rem;
+        }
+        
         @include screen-1500px {
           width: 15rem;
           height: 12rem;

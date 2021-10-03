@@ -1,52 +1,53 @@
-import React, { FC, useEffect, useState } from 'react';
-import { toast } from 'react-toastify';
-import { services } from '../../services/services';
+import React, { FC } from 'react';
+import { useFetchPortfolioData } from '../../utils/hooks';
 import ComponentWrapper from '../utils/componentWrapper/ComponentWrapper';
 import Loader from '../utils/loader/Loader';
 import './portfolio.scss';
 import PortfolioItem from './portfolioItem/PortfolioItem';
 import PortfolioPage from './portfolioPages/PortfolioPage';
 
-const Portfolio: FC = () => {
-  const [loading, setLoading] = useState(false);
-  const [selected, setSelected] = useState(0);
-  const [data, setData] = useState<IPortfolio[]>([]);
-  const [pagesCount, setPagesCount] = useState(1);
+interface Props {
+  loading: boolean;
+  setLoading: (loading: boolean) => void;
 
-  useEffect(() => {
-    const amountPerPage = 6;
-    const startIdx = selected * amountPerPage;
-    const endIdx = startIdx + amountPerPage;
+  active: number;
+  setActivePage: (active: number) => void;
 
-    setLoading(true);
+  pushError: (text: string) => void;
+}
 
-    services.portfolioService
-      .getPortfolioList()
-      .then((data) => {
-        setData(data.slice(startIdx, endIdx));
-        setPagesCount(Math.floor(data.length / amountPerPage));
-      })
-      .catch((e) => toast(e, { type: 'error' }))
-      .finally(() => setLoading(false));
-  }, [selected]);
+const Portfolio: FC<Props> = ({
+  loading,
+  setLoading,
+
+  active,
+  setActivePage,
+
+  pushError,
+}) => {
+  const { data, pagesCount } = useFetchPortfolioData({
+    active,
+    setLoading,
+    pushError,
+  });
 
   return (
     <ComponentWrapper>
-      {!loading ? (
-        <div className="portfolio">
-          <h1>Portfolio</h1>
+      <div className="portfolio">
+        <h1>Portfolio</h1>
 
-          <ul>
-            {new Array(pagesCount).fill(1).map((_, idx) => (
-              <PortfolioPage
-                key={idx}
-                idx={idx}
-                active={selected === idx}
-                setActive={setSelected}
-              />
-            ))}
-          </ul>
+        <ul>
+          {new Array(pagesCount).fill(1).map((_, idx) => (
+            <PortfolioPage
+              key={idx}
+              idx={idx}
+              active={active === idx}
+              setActive={setActivePage}
+            />
+          ))}
+        </ul>
 
+        {!loading ? (
           <div className="container">
             {data.map((item) => (
               <PortfolioItem
@@ -56,10 +57,10 @@ const Portfolio: FC = () => {
               />
             ))}
           </div>
-        </div>
-      ) : (
-        <Loader />
-      )}
+        ) : (
+          <Loader />
+        )}
+      </div>
     </ComponentWrapper>
   );
 };

@@ -9,15 +9,70 @@ import ComponentWrapper from '../utils/componentWrapper/ComponentWrapper';
 import './contact.scss';
 import InputField from './inputField/InputField';
 
-const Contact: FC = () => {
-  const { inputFields, messages, reset } = useContactInputFields();
+interface Props extends IWithError, IWithWarning, IWithSuccess {
+  nameMessage: IMessage;
+  setNameMessage: (message: IMessage) => void;
+  resetNameMessage: () => void;
 
-  const { validated, validate, setValidated } =
-    useContactPageValidation(messages);
+  emailMessage: IMessage;
+  setEmailMessage: (message: IMessage) => void;
+  resetEmailMessage: () => void;
 
-  const validationState = { validated, setValidated, reset };
+  subjectMessage: IMessage;
+  setSubjectMessage: (message: IMessage) => void;
+  resetSubjectMessage: () => void;
 
-  const sendEmail = useSendEmail(validationState);
+  validated: boolean;
+  setValidated: (validated: boolean) => void;
+}
+
+const Contact: FC<Props> = ({
+  nameMessage,
+  setNameMessage,
+  resetNameMessage,
+
+  emailMessage,
+  setEmailMessage,
+  resetEmailMessage,
+
+  subjectMessage,
+  setSubjectMessage,
+  resetSubjectMessage,
+
+  validated,
+  setValidated,
+
+  pushError,
+  pushWarning,
+  pushSuccess,
+}) => {
+  const { inputFields, messages, reset } = useContactInputFields({
+    nameMessage,
+    setNameMessage,
+    resetNameMessage,
+
+    emailMessage,
+    setEmailMessage,
+    resetEmailMessage,
+
+    subjectMessage,
+    setSubjectMessage,
+    resetSubjectMessage,
+  });
+
+  const validate = useContactPageValidation({
+    messages,
+    setValidated,
+    pushError,
+    pushWarning,
+  });
+
+  const sendEmail = useSendEmail({
+    validated,
+    setValidated,
+    reset,
+    pushSuccess,
+  });
 
   return (
     <ComponentWrapper>
@@ -35,8 +90,9 @@ const Contact: FC = () => {
                 key={idx}
                 name={field.name}
                 pattern={field.pattern}
-                valid={messages[idx].type === 'success'}
-                invalid={messages[idx].type === 'error'}
+                valid={field.valid}
+                invalid={field.invalid}
+                incorrect={field.incorrect}
                 onChange={field.onChange}
               />
             ))}

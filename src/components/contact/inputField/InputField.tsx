@@ -6,15 +6,25 @@ interface Props {
   pattern: string;
   valid: boolean;
   invalid: boolean;
+  incorrect: boolean;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
-const InputField: FC<Props> = ({ name, pattern, valid, invalid, onChange }) => (
+const InputField: FC<Props> = ({
+  name,
+  pattern,
+  valid,
+  invalid,
+  incorrect,
+  onChange,
+}) => (
   <input
     placeholder={name}
     name={name.toLowerCase()}
     pattern={pattern}
-    className={`${valid ? 'valid' : invalid ? 'invalid' : ''}`}
+    className={`${
+      valid ? 'valid' : invalid ? 'invalid' : incorrect ? 'incorrect' : ''
+    }`}
     onChange={(e) => onChange(e)}
   />
 );

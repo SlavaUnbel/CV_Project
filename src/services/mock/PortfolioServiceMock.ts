@@ -5,7 +5,7 @@ import { database } from './database';
 
 export default class PortfolioServiceMock extends PortfolioService {
   public async getPortfolioList(): Promise<IPortfolio[]> {
-    await delay(SECOND);
+    await delay(SECOND / 3);
 
     return database.portfolioData;
   }
