@@ -70,7 +70,7 @@ export const useFetchPortfolioData = ({
       .getPortfolioList()
       .then((data) => {
         setPortfolioData(data.slice(startIdx, endIdx));
-        setPagesCount(Math.floor(data.length / portfolioAmountPerPage));
+        setPagesCount(Math.ceil(data.length / portfolioAmountPerPage));
         data.length === 0 && pushWarning('No data found');
       })
       .catch((e) => pushError(e))
@@ -84,6 +84,14 @@ export const useFetchPortfolioData = ({
     pushWarning,
   ]);
 };
+
+export const useRedirectToItem = (link: string) => {
+  const history = useHistory();
+
+  const redirect = () => history.push(link);
+
+  return redirect;
+}
 
 //Works Hooks
 interface WorksProps extends IWithError, IWithWarning {

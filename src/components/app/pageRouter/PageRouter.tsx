@@ -7,6 +7,7 @@ import {
   contactPath,
   homePath,
   portfolioPath,
+  portfolioPaths,
   worksPath,
 } from '../../../utils/route';
 import Home from '../../home/Home';
@@ -14,12 +15,15 @@ import Home from '../../home/Home';
 const PageRouter: FC = () => (
   <Switch>
     <Route exact path={homePath} component={Home} />
-
     <Route exact path={portfolioPath} component={PortfolioContainer} />
-
     <Route exact path={worksPath} component={WorksContainer} />
-
     <Route exact path={contactPath} component={ContactContainer} />
+
+    <Route
+      exact
+      path={portfolioPaths.expandingCards}
+      component={ContactContainer}
+    />
   </Switch>
 );
 

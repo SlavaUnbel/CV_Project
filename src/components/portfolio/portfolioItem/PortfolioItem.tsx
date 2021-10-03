@@ -1,18 +1,24 @@
 import React, { FC } from 'react';
+import { useRedirectToItem } from '../../../utils/hooks';
 
 interface Props {
   imgSrc: string;
   title: string;
+  link: string;
 }
 
-const PortfolioItem: FC<Props> = ({ imgSrc, title }) => (
-  <div className="item">
-    <div className="img-wrapper">
-      <img src={imgSrc} alt="" />
-    </div>
+const PortfolioItem: FC<Props> = ({ imgSrc, title, link }) => {
+  const redirect = useRedirectToItem(link);
 
-    <h3>{title}</h3>
-  </div>
-);
+  return (
+    <div className="item">
+      <div className="img-wrapper" onClick={redirect}>
+        <img src={imgSrc} alt="" />
+      </div>
+
+      <h3>{title}</h3>
+    </div>
+  );
+};
 
 export default PortfolioItem;

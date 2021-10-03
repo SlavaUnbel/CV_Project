@@ -22,6 +22,7 @@ interface IPortfolio {
   id: number;
   title: string;
   imgSrc: string;
+  link: string;
   // link: string; TODO
 }
 
