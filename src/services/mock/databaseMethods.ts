@@ -39,7 +39,7 @@ export const generatePortfolioData = (
 
 export const generateWorksData = (amount: number, id: number): IWorks[] => {
   const icons = [firstIconSrc, secondIconSrc, thirdIconSrc];
-  const titles = ['Web Design', 'Mobile App', 'Branding'];
+  const titles = ['Web Design', 'Mobile Oak Alley', 'Branding'];
   const images = [firstWorkSrc, secondWorkSrc, thirdWorkSrc];
 
   return new Array(amount).fill(1).map((_, index) => {
@@ -73,4 +73,17 @@ export const getInitialMessagesForContactInputFields = (): IMessages => {
       type: 'error',
     },
   };
+};
+
+export const generateExpandingCardsData = (amount: number, id: number): IExpandingCards[] => {
+  const titles = ['Viñales', 'Oak Alley', 'Austria', 'Big Sur', 'Deutschland'];
+
+  return new Array(amount).fill(1).map((_, index) => {
+    if (index) id++;
+
+    return {
+      id,
+      title: titles[id - 1],
+    };
+  });
 };

@@ -12,6 +12,11 @@ interface IWithSuccess {
   pushSuccess: (text: string | null) => void;
 }
 
+interface IWithLoading {
+  loading?: boolean;
+  setLoading: (loading: boolean) => void;
+}
+
 interface IHome {
   name: string;
   capabilities: string[];
@@ -23,7 +28,6 @@ interface IPortfolio {
   title: string;
   imgSrc: string;
   link: string;
-  // link: string; TODO
 }
 
 interface IWorks {
@@ -58,3 +62,8 @@ interface IMessage {
 }
 
 type MessageType = 'success' | 'error' | 'warning'
+
+interface IExpandingCards {
+  id: Id;
+  title: string;
+}

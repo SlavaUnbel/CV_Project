@@ -277,3 +277,49 @@ export const useSendEmail = ({
 
   return sendEmail;
 };
+
+// Expanding Cards Hooks
+interface ExpandingCardsProps extends IWithLoading, IWithError, IWithWarning {
+  setExpandingCardsData: (data: IExpandingCards[]) => void;
+}
+
+export const useFetchExpandingCardsData = ({
+  setExpandingCardsData,
+  setLoading,
+  pushError,
+  pushWarning,
+}: ExpandingCardsProps) => {
+  useEffect(() => {
+    setLoading(true);
+
+    services.portfolioItemsService
+      .getExpandingCardsData()
+      .then((data) => {
+        setExpandingCardsData(data);
+        data.length === 0 && pushWarning('No data found');
+      })
+      .catch((e) => pushError(e))
+      .finally(() => setLoading(false));
+  }, [
+    setExpandingCardsData,
+    setLoading,
+    pushError,
+    pushWarning,
+  ]);
+};
+
+export const useExpandingCardRef = () => {
+  const ref: LegacyRef<HTMLDivElement> = createRef();
+
+  const handleClick = () => {
+    removeActiveClasses();
+    ref.current?.classList.add('active');
+  }
+
+  const removeActiveClasses = () => {
+    const parent = ref.current?.parentNode?.childNodes as NodeListOf<HTMLDivElement>
+    parent.forEach((node) => node.classList.remove('active'))
+  }
+
+  return { ref, handleClick }
+}
