@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import { useFetchPortfolioData, useWindowTitle } from '../../utils/hooks';
+import { portfolioPath } from '../../utils/route';
 import ComponentWrapper from '../utils/componentWrapper/ComponentWrapper';
 import Loader from '../utils/loader/Loader';
 import './portfolio.scss';
@@ -70,6 +71,7 @@ const Portfolio: FC<Props> = ({
                 key={item.id}
                 imgSrc={item.imgSrc}
                 title={item.title}
+                link={`${portfolioPath}/${item.link}`}
               />
             ))}
           </div>

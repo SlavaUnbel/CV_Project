@@ -8,6 +8,8 @@ import {
   thirdWorkSrc
 } from '../../utils/constants';
 
+const portfolioItems = ['Expanding Cards'];
+
 export const getMenuOptions = (): string[] => {
   const options = ['Home', 'Portfolio', 'Works', 'Contact'];
 
@@ -21,13 +23,17 @@ export const generatePortfolioData = (
   amount: number,
   id: number
 ): IPortfolio[] =>
-  new Array(amount).fill(1).map((_, index) => {
+  new Array(portfolioItems.length).fill(1).map((_, index) => {
     if (index) id++;
+    const paths = portfolioItems.map((item) =>
+      item.replace(' ', '-').toLowerCase()
+    );
 
     return {
       id,
       imgSrc: avatarSrc,
-      title: `Project ${id}`,
+      title: portfolioItems[index],
+      link: paths[index],
     };
   });
 
@@ -66,6 +72,5 @@ export const getInitialMessagesForContactInputFields = (): IMessages => {
       message: `Please, fill in the "${names[2]}" field`,
       type: 'error',
     },
-  }
-
+  };
 };
