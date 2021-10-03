@@ -1,5 +1,23 @@
 /// <reference types="react-scripts" />
 
+interface IWithError {
+  pushError: (text: string | null) => void;
+}
+
+interface IWithWarning {
+  pushWarning: (text: string | null) => void;
+}
+
+interface IWithSuccess {
+  pushSuccess: (text: string | null) => void;
+}
+
+interface IHome {
+  name: string;
+  capabilities: string[];
+  avatar: string;
+}
+
 interface IPortfolio {
   id: number;
   title: string;
@@ -18,10 +36,12 @@ interface IWorks {
 
 type SliderDirection = 'left' | 'right';
 
-
 interface IFormInput {
   name: string;
   pattern: string;
+  valid: boolean;
+  invalid: boolean;
+  incorrect: boolean;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 

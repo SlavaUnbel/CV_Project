@@ -1,21 +1,152 @@
 import emailjs from 'emailjs-com';
-import { ChangeEvent, useState } from 'react';
+import { init } from 'ityped';
+import { ChangeEvent, createRef, LegacyRef, useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { getInitialMessagesForContactInputFields } from '../services/mock/databaseMethods';
+import { services } from '../services/services';
+import { portfolioAmountPerPage } from './constants';
+import { SECOND } from './date';
 
-export const useContactInputFields = () => {
-  const initialMessages = getInitialMessagesForContactInputFields();
-  const [nameMessage, setNameMessage] = useState<IMessage>(initialMessages[0]);
-  const [emailMessage, setEmailMessage] = useState<IMessage>(
-    initialMessages[1]
-  );
-  const [subjectMessage, setSubjectMessage] = useState<IMessage>(
-    initialMessages[2]
-  );
+//Menu Hooks
+export const useMenuRouter = (title: string) => {
+  const history = useHistory();
 
+  const redirect = () =>
+    history.push(title !== 'Home' ? title.toLowerCase() : '');
+
+  return redirect;
+};
+
+// Home Hooks
+export const useITypedLib = () => {
+  const textRef: LegacyRef<HTMLSpanElement> = createRef();
+
+  useEffect(() => {
+    textRef.current &&
+      init(textRef.current, {
+        showCursor: true,
+        backDelay: SECOND * 2,
+        strings: [
+          'Front-End Developer',
+          'React SPA Creator',
+          'Inspired Programmer',
+        ],
+      });
+    //eslint-disable-next-line
+  }, []);
+
+  return textRef;
+};
+
+//Portfolio Hooks
+interface PortfolioProps {
+  active: number;
+  setLoading: (loading: boolean) => void;
+  pushError: (text: string) => void;
+}
+
+export const useFetchPortfolioData = ({
+  active,
+  setLoading,
+  pushError,
+}: PortfolioProps) => {
+  const [data, setData] = useState<IPortfolio[]>([]);
+  const [pagesCount, setPagesCount] = useState(1);
+
+  useEffect(() => {
+    const startIdx = active * portfolioAmountPerPage;
+    const endIdx = startIdx + portfolioAmountPerPage;
+
+    setLoading(true);
+
+    services.portfolioService
+      .getPortfolioList()
+      .then((data) => {
+        setData(data.slice(startIdx, endIdx));
+        setPagesCount(Math.floor(data.length / portfolioAmountPerPage));
+      })
+      .catch((e) => pushError(e))
+      .finally(() => setLoading(false));
+  }, [active, setLoading, pushError]);
+
+  return { data, pagesCount };
+};
+
+//Works Hooks
+interface WorksProps {
+  setLoading: (loading: boolean) => void;
+  pushError: (text: string) => void;
+}
+
+export const useFetchWorksData = ({ setLoading, pushError }: WorksProps) => {
+  const [data, setData] = useState<IWorks[]>([]);
+
+  useEffect(() => {
+    setLoading(true);
+
+    services.worksService
+      .getWorksData()
+      .then(setData)
+      .catch((e) => pushError(e))
+      .finally(() => setLoading(false));
+  }, [setLoading, pushError]);
+
+  return data;
+};
+
+interface WorksChangeCurrentProps {
+  data: IWorks[];
+  current: number;
+  setCurrent: (current: number) => void;
+}
+
+export const useChangeCurrentWork = ({
+  data,
+  current,
+  setCurrent,
+}: WorksChangeCurrentProps) => {
+  const changeCurrent = (direction: SliderDirection) =>
+    direction === 'left'
+      ? setCurrent(current > 0 ? current - 1 : data.length - 1)
+      : setCurrent(current < data.length - 1 ? current + 1 : 0);
+
+  return changeCurrent;
+};
+
+//Contact Hooks
+interface ContactInputFieldsProps {
+  nameMessage: IMessage;
+  setNameMessage: (message: IMessage) => void;
+  resetNameMessage: () => void;
+
+  emailMessage: IMessage;
+  setEmailMessage: (message: IMessage) => void;
+  resetEmailMessage: () => void;
+
+  subjectMessage: IMessage;
+  setSubjectMessage: (message: IMessage) => void;
+  resetSubjectMessage: () => void;
+}
+
+export const useContactInputFields = ({
+  nameMessage,
+  setNameMessage,
+  resetNameMessage,
+
+  emailMessage,
+  setEmailMessage,
+  resetEmailMessage,
+
+  subjectMessage,
+  setSubjectMessage,
+  resetSubjectMessage,
+}: ContactInputFieldsProps) => {
   const getSuccess = (): IMessage => ({ message: null, type: 'success' });
-  const getError = (message: string): IMessage => ({ message, type: 'error' });
-  const getWarning = (message: string): IMessage => ({
+  const getError = (message: string | null): IMessage => ({
+    message,
+    type: 'error',
+  });
+  const getWarning = (message: string | null): IMessage => ({
     message,
     type: 'warning',
   });
@@ -34,7 +165,7 @@ export const useContactInputFields = () => {
 
   const onNameChange = (e: ChangeEvent<HTMLInputElement>) =>
     namePattern.test(e.currentTarget.value)
-      ? setNameMessage(getSuccess())
+      ? setNameMessage({ message: null, type: 'success' })
       : e.currentTarget.value === ''
         ? setNameMessage(getError('Please, fill in the "Name" field'))
         : setNameMessage(
@@ -65,24 +196,33 @@ export const useContactInputFields = () => {
     {
       name: names[0],
       pattern: patterns[0],
+      valid: nameMessage.type === 'success',
+      invalid: nameMessage.type === 'error',
+      incorrect: nameMessage.type === 'warning',
       onChange: changeHandlers[0],
     },
     {
       name: names[1],
       pattern: patterns[1],
+      valid: emailMessage.type === 'success',
+      invalid: emailMessage.type === 'error',
+      incorrect: emailMessage.type === 'warning',
       onChange: changeHandlers[1],
     },
     {
       name: names[2],
       pattern: patterns[2],
+      valid: subjectMessage.type === 'success',
+      invalid: subjectMessage.type === 'error',
+      incorrect: subjectMessage.type === 'warning',
       onChange: changeHandlers[2],
     },
   ];
 
   const reset = () => {
-    setNameMessage(initialMessages[0]);
-    setEmailMessage(initialMessages[1]);
-    setSubjectMessage(initialMessages[2]);
+    resetNameMessage();
+    resetEmailMessage();
+    resetSubjectMessage();
   };
 
   return {
@@ -92,20 +232,32 @@ export const useContactInputFields = () => {
   };
 };
 
-export const useContactPageValidation = (messages: IMessage[]) => {
-  const [validated, setValidated] = useState(false);
+interface ContactValidationProps extends IWithError, IWithWarning {
+  messages: IMessage[];
+  setValidated: (validated: boolean) => void;
+}
 
+export const useContactPageValidation = ({
+  messages,
+  setValidated,
+  pushError,
+  pushWarning,
+}: ContactValidationProps) => {
   const validate = () =>
     messages.every((msg) => msg.type === 'success')
       ? setValidated(true)
       : messages
         .filter((msg) => msg.type !== 'success')
-        .map((msg) => toast(msg.message, { type: msg.type }));
+        .map((msg) =>
+          msg.type === 'error'
+            ? pushError(msg.message)
+            : pushWarning(msg.message)
+        );
 
-  return { validated, validate, setValidated };
+  return validate;
 };
 
-interface SendEmailProps {
+interface SendEmailProps extends IWithSuccess {
   validated: boolean;
   setValidated: (validated: boolean) => void;
   reset: () => void;
@@ -115,6 +267,7 @@ export const useSendEmail = ({
   validated,
   setValidated,
   reset,
+  pushSuccess,
 }: SendEmailProps) => {
   const sendEmail = (e: any) => {
     e.preventDefault();
@@ -130,7 +283,7 @@ export const useSendEmail = ({
         .then(() =>
           toast('Your message was successfully sent', { type: 'success' })
         )
-        .catch((e) => toast(e, { type: 'error' }))
+        .catch((e) => pushSuccess(e))
         .finally(() => {
           setValidated(false);
           reset();

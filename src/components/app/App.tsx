@@ -1,22 +1,16 @@
-import React, { useState } from 'react';
-import { Route } from 'react-router-dom';
-import Header from '../header/Header';
-import Menu from '../menu/Menu';
+import { CssBaseline } from '@material-ui/core';
+import React, { FC } from 'react';
+import HeadRouter from './headRouter/HeadRouter';
 import PageRouter from './pageRouter/PageRouter';
 
-function App() {
-  const [menuOpen, setMenuOpen] = useState(false);
+const App: FC = () => (
+  <div className="app">
+    <CssBaseline />
 
-  const openCloseMenu = (menuOpen: boolean) => setMenuOpen(menuOpen);
+    <HeadRouter />
 
-  return (
-    <div style={{ height: '100vh' }}>
-      <Route component={Header} />
-      <Route component={Menu} />
-
-      <PageRouter />
-    </div>
-  );
-}
+    <PageRouter />
+  </div>
+);
 
 export default App;

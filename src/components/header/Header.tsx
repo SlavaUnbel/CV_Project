@@ -8,14 +8,14 @@ import HeaderItem from './headerItem/HeaderItem';
 
 interface Props {
   menuOpen: boolean;
-  onClick: (menuOpen: boolean) => void;
+  openCloseMenu: (menuOpen: boolean) => void;
 }
 
-const Header: FC<Props> = ({ menuOpen, onClick }) => {
+const Header: FC<Props> = ({ menuOpen, openCloseMenu }) => {
   const spans = getMenuIconSpans();
 
   return (
-    <div className={'header' + (menuOpen ? ' active' : '')}>
+    <div className={`header${menuOpen ? ' active' : ''}`}>
       <div className="wrapper">
         <div className="left">
           <a href={homePath} className="logo">
@@ -44,7 +44,10 @@ const Header: FC<Props> = ({ menuOpen, onClick }) => {
         </div>
 
         <div className="right">
-          <div className="collapsing-menu" onClick={() => onClick(!menuOpen)}>
+          <div
+            className="collapsing-menu"
+            onClick={() => openCloseMenu(!menuOpen)}
+          >
             {spans.map((span) => (
               <span key={span} className={`line${span}`} />
             ))}

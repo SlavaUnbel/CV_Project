@@ -91,21 +91,24 @@
           height: 1.8rem;
         }
 
-        &:focus {
-          outline: none;
+        &.incorrect {
           border-bottom: 2px solid var(--yellow-color);
 
           @include mobile {
             border-bottom: 1px solid var(--yellow-color);
           }
-      
-          &.valid {
-            border-bottom: 2px solid var(--green-color);
+        }
 
-            @include mobile {
-              border-bottom: 1px solid var(--green-color);
-            }
+        &.valid {
+          border-bottom: 2px solid var(--green-color);
+
+          @include mobile {
+            border-bottom: 1px solid var(--green-color);
           }
+        }
+
+        &:focus {
+          outline: none;
       
           &.invalid {
             border-bottom: 2px solid var(--red-color);

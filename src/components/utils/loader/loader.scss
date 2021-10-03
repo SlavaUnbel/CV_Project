@@ -1,10 +1,11 @@
 @import '../../../index.scss';
 
 .loader-wrapper {
-  @include container;
+  height: 70vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 4;
 
   .loader {
     border: 1rem solid var(--lightgrey-color);
@@ -12,7 +13,7 @@
     border-radius: 50%;
     width: 7rem;
     height: 7rem;
-    animation: spin 0.7s ease infinite;
+    animation: spin 0.5s ease infinite;
 
     @include mobile {
       border: 0.7rem solid var(--lightgrey-color);

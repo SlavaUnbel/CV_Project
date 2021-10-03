@@ -1,14 +1,14 @@
 import React, { FC } from 'react';
+import { useMenuRouter } from '../../../utils/hooks';
 
 interface Props {
   title: string;
-  onClick: (menuOpen: boolean) => void;
 }
 
-const MenuItem: FC<Props> = ({ title, onClick }) => (
-  <li onClick={() => onClick(false)}>
-    <a href={`#${title.toLowerCase()}`}>{title}</a>
-  </li>
-);
+const MenuItem: FC<Props> = ({ title }) => {
+  const redirect = useMenuRouter(title);
+
+  return <li onClick={redirect}>{title}</li>;
+};
 
 export default MenuItem;

@@ -5,17 +5,16 @@ import MenuItem from './menuItem/MenuItem';
 
 interface Props {
   menuOpen: boolean;
-  onClick: (menuOpen: boolean) => void;
 }
 
-const Menu: FC<Props> = ({ menuOpen, onClick }) => {
+const Menu: FC<Props> = ({ menuOpen }) => {
   const data = getMenuOptions();
 
   return (
-    <div className={'menu ' + (menuOpen && 'active')}>
+    <div className={`menu${menuOpen ? ' active' : ''}`}>
       <ul>
         {data.map((item, idx) => (
-          <MenuItem key={idx} title={item} onClick={onClick} />
+          <MenuItem key={idx} title={item} />
         ))}
       </ul>
     </div>

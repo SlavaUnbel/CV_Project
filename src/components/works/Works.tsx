@@ -1,31 +1,33 @@
-import React, { FC, useEffect, useState } from 'react';
-import { toast } from 'react-toastify';
-import { services } from '../../services/services';
+import React, { FC } from 'react';
+import { useChangeCurrentWork, useFetchWorksData } from '../../utils/hooks';
 import ComponentWrapper from '../utils/componentWrapper/ComponentWrapper';
 import Loader from '../utils/loader/Loader';
 import Arrow from './arrow/Arrow';
 import WorkCard from './workCard/WorkCard';
 import './works.scss';
 
-const Works: FC = () => {
-  const [loading, setLoading] = useState(false);
-  const [data, setData] = useState<IWorks[]>([]);
-  const [current, setCurrent] = useState(0);
+interface Props {
+  loading: boolean;
+  setLoading: (loading: boolean) => void;
 
-  const changeCurrent = (direction: SliderDirection) =>
-    direction === 'left'
-      ? setCurrent(current > 0 ? current - 1 : data.length - 1)
-      : setCurrent(current < data.length - 1 ? current + 1 : 0);
+  current: number;
+  setCurrent: (current: number) => void;
 
-  useEffect(() => {
-    setLoading(true);
+  pushError: (text: string) => void;
+}
 
-    services.worksService
-      .getWorksData()
-      .then(setData)
-      .catch((e) => toast(e, { type: 'error' }))
-      .finally(() => setLoading(false));
-  }, []);
+const Works: FC<Props> = ({
+  loading,
+  setLoading,
+
+  current,
+  setCurrent,
+
+  pushError,
+}) => {
+  const data = useFetchWorksData({ setLoading, pushError });
+
+  const changeCurrent = useChangeCurrentWork({ data, current, setCurrent });
 
   return (
     <ComponentWrapper>
