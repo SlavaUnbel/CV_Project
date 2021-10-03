@@ -1,5 +1,13 @@
 @import '../../index.scss';
 
+@mixin border-bottom($color) {
+  border-bottom: 2px solid $color;
+
+  @include mobile {
+    border-bottom: 1px solid $color;
+  }
+}
+
 .contact {
   @include container;
   @include flex(row nowrap, initial, initial);
@@ -92,30 +100,18 @@
         }
 
         &.incorrect {
-          border-bottom: 2px solid var(--yellow-color);
-
-          @include mobile {
-            border-bottom: 1px solid var(--yellow-color);
-          }
+          @include border-bottom(var(--yellow-color));
         }
 
         &.valid {
-          border-bottom: 2px solid var(--green-color);
-
-          @include mobile {
-            border-bottom: 1px solid var(--green-color);
-          }
+          @include border-bottom(var(--green-color));
         }
 
         &:focus {
           outline: none;
       
           &.invalid {
-            border-bottom: 2px solid var(--red-color);
-
-            @include mobile {
-              border-bottom: 1px solid var(--red-color);
-            }
+            @include border-bottom(var(--red-color));
           }
         }
       }

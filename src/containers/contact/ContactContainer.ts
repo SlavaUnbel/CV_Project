@@ -6,18 +6,16 @@ import { messageActions } from '../../reducers/messageReducer';
 import { IState } from '../../reducers/rootReducer';
 
 const mapStateToProps = (state: IState) => ({
-  nameMessage: state.contact.nameMessage,
-  emailMessage: state.contact.emailMessage,
-  subjectMessage: state.contact.subjectMessage,
+  messages: state.contact.messages,
+  validated: state.contact.validated,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  setNameMessage: bindActionCreators(contactActions.nameMessage.set, dispatch),
-  resetNameMessage: bindActionCreators(contactActions.nameMessage.reset, dispatch),
-  setEmailMessage: bindActionCreators(contactActions.emailMessage.set, dispatch),
-  resetEmailMessage: bindActionCreators(contactActions.emailMessage.reset, dispatch),
-  setSubjectMessage: bindActionCreators(contactActions.subjectMessage.set, dispatch),
-  resetSubjectMessage: bindActionCreators(contactActions.subjectMessage.reset, dispatch),
+  setNameMessage: bindActionCreators(contactActions.messages.setName, dispatch),
+  setEmailMessage: bindActionCreators(contactActions.messages.setEmail, dispatch),
+  setSubjectMessage: bindActionCreators(contactActions.messages.setSubject, dispatch),
+  reset: bindActionCreators(contactActions.messages.reset, dispatch),
+  setValidated: bindActionCreators(contactActions.validated.set, dispatch),
   pushError: bindActionCreators(messageActions.message.error, dispatch),
   pushWarning: bindActionCreators(messageActions.message.warning, dispatch),
   pushSuccess: bindActionCreators(messageActions.message.success, dispatch),

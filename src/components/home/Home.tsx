@@ -1,11 +1,13 @@
 import React, { FC } from 'react';
 import { avatarSrc, downSrc } from '../../utils/constants';
-import { useITypedLib } from '../../utils/hooks';
+import { useITypedLib, useWindowTitle } from '../../utils/hooks';
 import { portfolioPath } from '../../utils/route';
 import ComponentWrapper from '../utils/componentWrapper/ComponentWrapper';
 import './home.scss';
 
 const Home: FC = () => {
+  useWindowTitle();
+
   const textRef = useITypedLib();
 
   return (

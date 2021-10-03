@@ -1,11 +1,17 @@
 import emailjs from 'emailjs-com';
 import { init } from 'ityped';
-import { ChangeEvent, createRef, LegacyRef, useEffect, useState } from 'react';
+import { ChangeEvent, createRef, LegacyRef, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import { toast } from 'react-toastify';
 import { services } from '../services/services';
 import { portfolioAmountPerPage } from './constants';
 import { SECOND } from './date';
+
+// General Hooks
+export const useWindowTitle = (title?: string) => {
+  useEffect(() => {
+    document.title = title ? title : 'CV Homepage';
+  }, [title]);
+};
 
 //Menu Hooks
 export const useMenuRouter = (title: string) => {
@@ -39,20 +45,21 @@ export const useITypedLib = () => {
 };
 
 //Portfolio Hooks
-interface PortfolioProps {
+interface PortfolioProps extends IWithError, IWithWarning {
   active: number;
+  setPortfolioData: (portfolioData: IPortfolio[]) => void;
+  setPagesCount: (pagesCount: number) => void;
   setLoading: (loading: boolean) => void;
-  pushError: (text: string) => void;
 }
 
 export const useFetchPortfolioData = ({
   active,
+  setPortfolioData,
+  setPagesCount,
   setLoading,
   pushError,
+  pushWarning,
 }: PortfolioProps) => {
-  const [data, setData] = useState<IPortfolio[]>([]);
-  const [pagesCount, setPagesCount] = useState(1);
-
   useEffect(() => {
     const startIdx = active * portfolioAmountPerPage;
     const endIdx = startIdx + portfolioAmountPerPage;
@@ -62,85 +69,67 @@ export const useFetchPortfolioData = ({
     services.portfolioService
       .getPortfolioList()
       .then((data) => {
-        setData(data.slice(startIdx, endIdx));
+        setPortfolioData(data.slice(startIdx, endIdx));
         setPagesCount(Math.floor(data.length / portfolioAmountPerPage));
+        data.length === 0 && pushWarning('No data found');
       })
       .catch((e) => pushError(e))
       .finally(() => setLoading(false));
-  }, [active, setLoading, pushError]);
-
-  return { data, pagesCount };
+  }, [
+    active,
+    setPortfolioData,
+    setPagesCount,
+    setLoading,
+    pushError,
+    pushWarning,
+  ]);
 };
 
 //Works Hooks
-interface WorksProps {
+interface WorksProps extends IWithError, IWithWarning {
+  setWorksData: (worksData: IWorks[]) => void;
   setLoading: (loading: boolean) => void;
-  pushError: (text: string) => void;
 }
 
-export const useFetchWorksData = ({ setLoading, pushError }: WorksProps) => {
-  const [data, setData] = useState<IWorks[]>([]);
-
+export const useFetchWorksData = ({ setWorksData, setLoading, pushError, pushWarning }: WorksProps) => {
   useEffect(() => {
     setLoading(true);
 
     services.worksService
       .getWorksData()
-      .then(setData)
+      .then((data) => { setWorksData(data); data.length === 0 && pushWarning('No data found') })
       .catch((e) => pushError(e))
       .finally(() => setLoading(false));
-  }, [setLoading, pushError]);
-
-  return data;
-};
-
-interface WorksChangeCurrentProps {
-  data: IWorks[];
-  current: number;
-  setCurrent: (current: number) => void;
-}
-
-export const useChangeCurrentWork = ({
-  data,
-  current,
-  setCurrent,
-}: WorksChangeCurrentProps) => {
-  const changeCurrent = (direction: SliderDirection) =>
-    direction === 'left'
-      ? setCurrent(current > 0 ? current - 1 : data.length - 1)
-      : setCurrent(current < data.length - 1 ? current + 1 : 0);
-
-  return changeCurrent;
+  }, [setWorksData, setLoading, pushError, pushWarning]);
 };
 
 //Contact Hooks
 interface ContactInputFieldsProps {
-  nameMessage: IMessage;
-  setNameMessage: (message: IMessage) => void;
-  resetNameMessage: () => void;
-
-  emailMessage: IMessage;
-  setEmailMessage: (message: IMessage) => void;
-  resetEmailMessage: () => void;
-
-  subjectMessage: IMessage;
-  setSubjectMessage: (message: IMessage) => void;
-  resetSubjectMessage: () => void;
+  messages: IMessages;
+  setNameMessage: (messages: IMessages, nameMessage: IMessage) => void;
+  setEmailMessage: (messages: IMessages, emailMessage: IMessage) => void;
+  setSubjectMessage: (messages: IMessages, subjectMessage: IMessage) => void;
 }
 
 export const useContactInputFields = ({
-  nameMessage,
+  messages,
   setNameMessage,
-  resetNameMessage,
-
-  emailMessage,
   setEmailMessage,
-  resetEmailMessage,
-
-  subjectMessage,
   setSubjectMessage,
-  resetSubjectMessage,
 }: ContactInputFieldsProps) => {
+  //every input options
+  const names = ['Name', 'Email', 'Subject'];
+  const patterns = [
+    '[A-Za-z]{3,}',
+    '[A-Za-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$',
+    '.{1,}',
+  ];
+  const [namePattern, emailPattern, subjectPattern] = patterns.map(
+    (pattern) => new RegExp(pattern)
+  );
+  const { nameMessage, emailMessage, subjectMessage } = messages;
+
+  //functions to change inputs' states
   const getSuccess = (): IMessage => ({ message: null, type: 'success' });
   const getError = (message: string | null): IMessage => ({
     message,
@@ -150,25 +139,20 @@ export const useContactInputFields = ({
     message,
     type: 'warning',
   });
+  const setName = (nameMessage: IMessage) =>
+    setNameMessage(messages, nameMessage);
+  const setEmail = (emailMessage: IMessage) =>
+    setEmailMessage(messages, emailMessage);
+  const setSubject = (subjectMessage: IMessage) =>
+    setSubjectMessage(messages, subjectMessage);
 
-  const names = ['Name', 'Email', 'Subject'];
-  const patterns = [
-    '[A-Za-z]{3,}',
-    '[A-Za-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$',
-    '.{1,}',
-  ];
-  const messages = [nameMessage, emailMessage, subjectMessage];
-
-  const [namePattern, emailPattern, subjectPattern] = patterns.map(
-    (pattern) => new RegExp(pattern)
-  );
-
+  //inputs' values change handlers
   const onNameChange = (e: ChangeEvent<HTMLInputElement>) =>
     namePattern.test(e.currentTarget.value)
-      ? setNameMessage({ message: null, type: 'success' })
+      ? setName(getSuccess())
       : e.currentTarget.value === ''
-        ? setNameMessage(getError('Please, fill in the "Name" field'))
-        : setNameMessage(
+        ? setName(getError('Please, fill in the "Name" field'))
+        : setName(
           getWarning(
             'Please, provide 3 or more letter characters to "Name" field'
           )
@@ -176,22 +160,23 @@ export const useContactInputFields = ({
 
   const onEmailChange = (e: ChangeEvent<HTMLInputElement>) =>
     emailPattern.test(e.currentTarget.value)
-      ? setEmailMessage(getSuccess())
+      ? setEmail(getSuccess())
       : e.currentTarget.value === ''
-        ? setEmailMessage(getError('Please, fill in the "Email" field'))
-        : setEmailMessage(
+        ? setEmail(getError('Please, fill in the "Email" field'))
+        : setEmail(
           getWarning(
-            'Please, provide at least one @ and . symbols each to "Email" field'
+            'Please, provide the "Email" field with value as shown below: \n smth@domain.com'
           )
         );
 
   const onSubjectChange = (e: ChangeEvent<HTMLInputElement>) =>
     subjectPattern.test(e.currentTarget.value)
-      ? setSubjectMessage(getSuccess())
-      : setSubjectMessage(getError('Please, fill in the "Subject" field'));
+      ? setSubject(getSuccess())
+      : setSubject(getError('Please, fill in the "Subject" field'));
 
   const changeHandlers = [onNameChange, onEmailChange, onSubjectChange];
 
+  //resulting array of inputs to render
   const inputFields: IFormInput[] = [
     {
       name: names[0],
@@ -219,21 +204,11 @@ export const useContactInputFields = ({
     },
   ];
 
-  const reset = () => {
-    resetNameMessage();
-    resetEmailMessage();
-    resetSubjectMessage();
-  };
-
-  return {
-    inputFields,
-    messages,
-    reset,
-  };
+  return inputFields;
 };
 
 interface ContactValidationProps extends IWithError, IWithWarning {
-  messages: IMessage[];
+  messages: IMessages;
   setValidated: (validated: boolean) => void;
 }
 
@@ -244,9 +219,9 @@ export const useContactPageValidation = ({
   pushWarning,
 }: ContactValidationProps) => {
   const validate = () =>
-    messages.every((msg) => msg.type === 'success')
+    Object.values(messages).every((msg) => msg.type === 'success')
       ? setValidated(true)
-      : messages
+      : Object.values(messages)
         .filter((msg) => msg.type !== 'success')
         .map((msg) =>
           msg.type === 'error'
@@ -257,7 +232,7 @@ export const useContactPageValidation = ({
   return validate;
 };
 
-interface SendEmailProps extends IWithSuccess {
+interface SendEmailProps extends IWithError, IWithSuccess {
   validated: boolean;
   setValidated: (validated: boolean) => void;
   reset: () => void;
@@ -267,6 +242,7 @@ export const useSendEmail = ({
   validated,
   setValidated,
   reset,
+  pushError,
   pushSuccess,
 }: SendEmailProps) => {
   const sendEmail = (e: any) => {
@@ -280,10 +256,8 @@ export const useSendEmail = ({
           e.target,
           'user_sKeSExZkAa6453YNTtvdY'
         )
-        .then(() =>
-          toast('Your message was successfully sent', { type: 'success' })
-        )
-        .catch((e) => pushSuccess(e))
+        .then(() => pushSuccess('Your message was successfully sent'))
+        .catch((e) => pushError(e))
         .finally(() => {
           setValidated(false);
           reset();
