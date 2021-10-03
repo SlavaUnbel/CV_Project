@@ -1,18 +1,14 @@
 import React, { FC } from 'react';
 import { useFetchPortfolioData, useWindowTitle } from '../../utils/hooks';
-import { portfolioPath } from '../../utils/route';
 import ComponentWrapper from '../utils/componentWrapper/ComponentWrapper';
 import Loader from '../utils/loader/Loader';
 import './portfolio.scss';
 import PortfolioItem from './portfolioItem/PortfolioItem';
 import PortfolioPage from './portfolioPages/PortfolioPage';
 
-interface Props extends IWithError, IWithWarning {
+interface Props extends IWithLoading, IWithError, IWithWarning {
   portfolioData: IPortfolio[];
   setPortfolioData: (portfolioData: IPortfolio[]) => void;
-
-  loading: boolean;
-  setLoading: (loading: boolean) => void;
 
   active: number;
   setActivePage: (active: number) => void;
@@ -66,14 +62,15 @@ const Portfolio: FC<Props> = ({
 
         {!loading ? (
           <div className="container">
-            {portfolioData.map((item) => (
-              <PortfolioItem
-                key={item.id}
-                imgSrc={item.imgSrc}
-                title={item.title}
-                link={`${portfolioPath}/${item.link}`}
-              />
-            ))}
+            {portfolioData &&
+              portfolioData.map((item) => (
+                <PortfolioItem
+                  key={item.id}
+                  imgSrc={item.imgSrc}
+                  title={item.title}
+                  link={item.link}
+                />
+              ))}
           </div>
         ) : (
           <Loader />

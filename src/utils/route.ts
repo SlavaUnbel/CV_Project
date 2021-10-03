@@ -5,6 +5,4 @@ export const worksPath = '/works';
 export const contactPath = '/contact';
 
 //portfolio paths
-export const portfolioPaths = {
-  expandingCards: `${portfolioPath}/expanding-cards`,
-}
+export const expandingCardsPath = '/expanding-cards'

@@ -6,12 +6,9 @@ import Arrow from './arrow/Arrow';
 import WorkCard from './workCard/WorkCard';
 import './works.scss';
 
-interface Props extends IWithError, IWithWarning {
+interface Props extends IWithLoading, IWithError, IWithWarning {
   worksData: IWorks[];
   setWorksData: (worksData: IWorks[]) => void;
-
-  loading: boolean;
-  setLoading: (loading: boolean) => void;
 
   current: number;
   setCurrent: (current: number) => void;
