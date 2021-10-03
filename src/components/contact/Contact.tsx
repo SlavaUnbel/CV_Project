@@ -4,40 +4,29 @@ import {
   useContactInputFields,
   useContactPageValidation,
   useSendEmail,
+  useWindowTitle,
 } from '../../utils/hooks';
 import ComponentWrapper from '../utils/componentWrapper/ComponentWrapper';
 import './contact.scss';
 import InputField from './inputField/InputField';
 
 interface Props extends IWithError, IWithWarning, IWithSuccess {
-  nameMessage: IMessage;
-  setNameMessage: (message: IMessage) => void;
-  resetNameMessage: () => void;
-
-  emailMessage: IMessage;
-  setEmailMessage: (message: IMessage) => void;
-  resetEmailMessage: () => void;
-
-  subjectMessage: IMessage;
-  setSubjectMessage: (message: IMessage) => void;
-  resetSubjectMessage: () => void;
+  messages: IMessages;
+  setNameMessage: (messages: IMessages, nameMessage: IMessage) => void;
+  setEmailMessage: (messages: IMessages, emailMessage: IMessage) => void;
+  setSubjectMessage: (messages: IMessages, subjectMessage: IMessage) => void;
+  reset: () => void;
 
   validated: boolean;
   setValidated: (validated: boolean) => void;
 }
 
 const Contact: FC<Props> = ({
-  nameMessage,
+  messages,
   setNameMessage,
-  resetNameMessage,
-
-  emailMessage,
   setEmailMessage,
-  resetEmailMessage,
-
-  subjectMessage,
   setSubjectMessage,
-  resetSubjectMessage,
+  reset,
 
   validated,
   setValidated,
@@ -46,18 +35,13 @@ const Contact: FC<Props> = ({
   pushWarning,
   pushSuccess,
 }) => {
-  const { inputFields, messages, reset } = useContactInputFields({
-    nameMessage,
+  useWindowTitle('Contact');
+
+  const inputFields = useContactInputFields({
+    messages,
     setNameMessage,
-    resetNameMessage,
-
-    emailMessage,
     setEmailMessage,
-    resetEmailMessage,
-
-    subjectMessage,
     setSubjectMessage,
-    resetSubjectMessage,
   });
 
   const validate = useContactPageValidation({
@@ -71,6 +55,7 @@ const Contact: FC<Props> = ({
     validated,
     setValidated,
     reset,
+    pushError,
     pushSuccess,
   });
 

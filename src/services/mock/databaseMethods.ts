@@ -50,13 +50,22 @@ export const generateWorksData = (amount: number, id: number): IWorks[] => {
   });
 };
 
-export const getInitialMessagesForContactInputFields = (): IMessage[] => {
+export const getInitialMessagesForContactInputFields = (): IMessages => {
   const names = ['Name', 'Email', 'Subject'];
 
-  return new Array(3).fill(1).map((_, idx) => {
-    return {
-      message: `Please, fill in the "${names[idx]}" field`,
+  return {
+    nameMessage: {
+      message: `Please, fill in the "${names[0]}" field`,
       type: 'error',
-    };
-  });
+    },
+    emailMessage: {
+      message: `Please, fill in the "${names[1]}" field`,
+      type: 'error',
+    },
+    subjectMessage: {
+      message: `Please, fill in the "${names[2]}" field`,
+      type: 'error',
+    },
+  }
+
 };

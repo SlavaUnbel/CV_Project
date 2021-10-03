@@ -1,22 +1,26 @@
 import React, { FC } from 'react';
-import { useChangeCurrentWork, useFetchWorksData } from '../../utils/hooks';
+import { useFetchWorksData, useWindowTitle } from '../../utils/hooks';
 import ComponentWrapper from '../utils/componentWrapper/ComponentWrapper';
 import Loader from '../utils/loader/Loader';
 import Arrow from './arrow/Arrow';
 import WorkCard from './workCard/WorkCard';
 import './works.scss';
 
-interface Props {
+interface Props extends IWithError, IWithWarning {
+  worksData: IWorks[];
+  setWorksData: (worksData: IWorks[]) => void;
+
   loading: boolean;
   setLoading: (loading: boolean) => void;
 
   current: number;
   setCurrent: (current: number) => void;
-
-  pushError: (text: string) => void;
 }
 
 const Works: FC<Props> = ({
+  worksData,
+  setWorksData,
+
   loading,
   setLoading,
 
@@ -24,10 +28,11 @@ const Works: FC<Props> = ({
   setCurrent,
 
   pushError,
+  pushWarning,
 }) => {
-  const data = useFetchWorksData({ setLoading, pushError });
+  useWindowTitle('Works');
 
-  const changeCurrent = useChangeCurrentWork({ data, current, setCurrent });
+  useFetchWorksData({ setWorksData, setLoading, pushError, pushWarning });
 
   return (
     <ComponentWrapper>
@@ -39,7 +44,7 @@ const Works: FC<Props> = ({
             className="slider"
             style={{ transform: `translateX(-${current * 100}vw)` }}
           >
-            {data.map((item) => (
+            {worksData.map((item) => (
               <WorkCard key={item.id} item={item} />
             ))}
           </div>
@@ -50,13 +55,13 @@ const Works: FC<Props> = ({
         <Arrow
           direction="left"
           disabled={current === 0}
-          onClick={changeCurrent}
+          changeCurrent={() => setCurrent(current - 1)}
         />
 
         <Arrow
           direction="right"
-          disabled={current === data.length - 1}
-          onClick={changeCurrent}
+          disabled={current === worksData.length - 1}
+          changeCurrent={() => setCurrent(current + 1)}
         />
       </div>
     </ComponentWrapper>

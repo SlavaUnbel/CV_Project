@@ -1,16 +1,26 @@
 import { createSymbiote } from 'redux-symbiote';
 
 export interface PortfolioState {
+  portfolioData: IPortfolio[];
   selected: number;
+  pagesCount: number;
 };
 
 const initialPortfolioState: PortfolioState = {
+  portfolioData: [],
   selected: 0,
+  pagesCount: 0,
 };
 
 const symbiotes = {
+  portfolioData: {
+    set: (state: PortfolioState, portfolioData: IPortfolio[]) => ({ ...state, portfolioData })
+  },
   selected: {
     set: (state: PortfolioState, selected: number) => ({ ...state, selected }),
+  },
+  pagesCount: {
+    set: (state: PortfolioState, pagesCount: number) => ({ ...state, pagesCount })
   },
 };
 

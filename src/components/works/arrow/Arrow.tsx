@@ -4,17 +4,17 @@ import { arrowSrc } from '../../../utils/constants';
 interface Props {
   direction: SliderDirection;
   disabled: boolean;
-  onClick: (direction: SliderDirection) => void;
+  changeCurrent: () => void;
 }
 
-const Arrow: FC<Props> = ({ direction, disabled, onClick }) => (
+const Arrow: FC<Props> = ({ direction, disabled, changeCurrent }) => (
   <img
     src={arrowSrc.replace('arrow', `${direction}-arrow`)}
     className={`arrow ${direction} ${disabled ? 'disabled' : ''}`}
     alt=""
     onClick={() => {
       if (disabled) return;
-      onClick(direction);
+      changeCurrent();
     }}
   />
 );

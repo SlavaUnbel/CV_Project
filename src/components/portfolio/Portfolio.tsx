@@ -1,34 +1,50 @@
 import React, { FC } from 'react';
-import { useFetchPortfolioData } from '../../utils/hooks';
+import { useFetchPortfolioData, useWindowTitle } from '../../utils/hooks';
 import ComponentWrapper from '../utils/componentWrapper/ComponentWrapper';
 import Loader from '../utils/loader/Loader';
 import './portfolio.scss';
 import PortfolioItem from './portfolioItem/PortfolioItem';
 import PortfolioPage from './portfolioPages/PortfolioPage';
 
-interface Props {
+interface Props extends IWithError, IWithWarning {
+  portfolioData: IPortfolio[];
+  setPortfolioData: (portfolioData: IPortfolio[]) => void;
+
   loading: boolean;
   setLoading: (loading: boolean) => void;
 
   active: number;
   setActivePage: (active: number) => void;
 
-  pushError: (text: string) => void;
+  pagesCount: number;
+  setPagesCount: (pagesCount: number) => void;
 }
 
 const Portfolio: FC<Props> = ({
+  portfolioData,
+  setPortfolioData,
+
   loading,
   setLoading,
 
   active,
   setActivePage,
 
+  pagesCount,
+  setPagesCount,
+
   pushError,
+  pushWarning,
 }) => {
-  const { data, pagesCount } = useFetchPortfolioData({
+  useWindowTitle('Portfolio');
+
+  useFetchPortfolioData({
     active,
+    setPortfolioData,
+    setPagesCount,
     setLoading,
     pushError,
+    pushWarning,
   });
 
   return (
@@ -49,7 +65,7 @@ const Portfolio: FC<Props> = ({
 
         {!loading ? (
           <div className="container">
-            {data.map((item) => (
+            {portfolioData.map((item) => (
               <PortfolioItem
                 key={item.id}
                 imgSrc={item.imgSrc}

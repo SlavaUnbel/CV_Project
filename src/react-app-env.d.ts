@@ -45,6 +45,12 @@ interface IFormInput {
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
+interface IMessages {
+  nameMessage: IMessage;
+  emailMessage: IMessage;
+  subjectMessage: IMessage;
+}
+
 interface IMessage {
   message: string | null;
   type: MessageType;
