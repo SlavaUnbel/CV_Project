@@ -1,14 +1,12 @@
 import {
-  avatarSrc,
   firstIconSrc,
   firstWorkSrc,
+  portfolioItems,
   secondIconSrc,
   secondWorkSrc,
   thirdIconSrc,
   thirdWorkSrc
 } from '../../utils/constants';
-
-const portfolioItems = ['Expanding Cards'];
 
 export const getMenuOptions = (): string[] => {
   const options = ['Home', 'Portfolio', 'Works', 'Contact'];
@@ -31,7 +29,12 @@ export const generatePortfolioData = (
 
     return {
       id,
-      imgSrc: avatarSrc,
+      imgSrc: paths.map(
+        (preview) => `${process.env.PUBLIC_URL}/images/${preview}.png`
+      )[index],
+      videoSrc: paths.map(
+        (video) => `${process.env.PUBLIC_URL}/videos/${video}.mp4`
+      )[index],
       title: portfolioItems[index],
       link: paths[index],
     };
@@ -75,7 +78,10 @@ export const getInitialMessagesForContactInputFields = (): IMessages => {
   };
 };
 
-export const generateExpandingCardsData = (amount: number, id: number): IExpandingCards[] => {
+export const generateExpandingCardsData = (
+  amount: number,
+  id: number
+): IExpandingCards[] => {
   const titles = ['Viñales', 'Oak Alley', 'Austria', 'Big Sur', 'Deutschland'];
 
   return new Array(amount).fill(1).map((_, index) => {

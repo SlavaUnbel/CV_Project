@@ -67,6 +67,7 @@ const Portfolio: FC<Props> = ({
                 <PortfolioItem
                   key={item.id}
                   imgSrc={item.imgSrc}
+                  videoSrc={item.videoSrc}
                   title={item.title}
                   link={item.link}
                 />
