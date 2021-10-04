@@ -15,6 +15,6 @@ export const email = 'slavlen1999@gmail.com'
 export const linkedIn = 'https://linkedin.com/in/slava-levkovich'
 
 export const portfolioAmountPerPage = 6;
-export const portfolioItems = ['Expanding Cards'];
+export const portfolioItems = ['Expanding Cards', 'Progress Steps'];
 
 export const expandingCardsSrc = `${process.env.PUBLIC_URL + '/images/expandingCards'}`

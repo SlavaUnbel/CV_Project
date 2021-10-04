@@ -1,0 +1,121 @@
+@import '../../../index.scss';
+
+.progress-steps__container {
+  @include container;
+  @include flex(column nowrap, center, center);
+  text-align: center;
+  
+  .progress-container {
+    @include flex(row nowrap, center, space-between);
+    position: relative;
+    margin-bottom: 1.5rem;
+    max-width: 100%;
+    width: 30vw;
+
+    @include screen-1200px {
+      width: 40vw;
+    }
+
+    @include screen-1000px {
+      width: 45vw;
+    }
+
+    @include mobile {
+      width: 75vw;
+      margin-bottom: 1rem;
+    }
+
+    @include tablet {
+      width: 50vw;
+      margin-bottom: 1.5rem;
+    }
+  
+    .progress {
+      background-color: var(--active-progress-steps-color);
+      position: absolute;
+      top: 50%;
+      left: 0;
+      height: 0.25rem;
+      transform: translateY(-50%);
+      z-index: -1;
+      transition: 0.5s ease;
+    }
+  
+    .circle {
+      @include flex(row nowrap, center, center);
+      background-color: var(--white-color);
+      color: var(--darkgrey-color);
+      border-radius: 50%;
+      height: 2.5rem;
+      width: 2.5rem;
+      font-size: 1rem;
+      border: 3px solid var(--inactive-progress-steps-color);
+      transition: 0.5s ease;
+
+      @include mobile {
+        height: 2rem;
+        width: 2rem;
+        font-size: 0.9rem;
+      }
+
+      @include tablet {
+        height: 2.5rem;
+        width: 2.5rem;
+        font-size: 1rem;
+      }
+
+      &.active {
+        border-color: var(--active-progress-steps-color);
+      }
+    }
+  }
+  
+  .progress-container::before {
+    content: '';
+    background-color: var(--inactive-progress-steps-color);
+    position: absolute;
+    top: 50%;
+    left: 0;
+    height: 0.25rem;
+    width: 100%;
+    transform: translateY(-50%);
+    z-index: -1;
+  }
+  
+  .btn-group {
+    button {
+      background-color: var(--active-progress-steps-color);
+      color: var(--white-color);
+      border: 0;
+      border-radius: 10px;
+      cursor: pointer;
+      font-family: inherit;
+      padding: 0.5rem 2rem;
+      margin: 0.25rem;
+      font-size: 1rem;
+
+      @include mobile {
+        padding: 0.5rem 1.5rem;
+        font-size: 0.9rem;
+      }
+
+      @include tablet {
+        padding: 0.5rem 2rem;
+        font-size: 1rem;
+      }
+  
+      &:active {
+        transform: scale(0.95);
+      }
+  
+      &:focus {
+        outline: 0;
+      }
+  
+      &:disabled {
+        background-color: var(--inactive-progress-steps-color);
+        cursor: not-allowed;
+      }
+    }
+  }
+}

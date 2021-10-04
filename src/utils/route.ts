@@ -6,3 +6,4 @@ export const contactPath = '/contact';
 
 //portfolio paths
 export const expandingCardsPath = '/expanding-cards'
+export const progressStepsPath = '/progress-steps'
