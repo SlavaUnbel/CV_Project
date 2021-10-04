@@ -9,4 +9,10 @@ export default class PortfolioItemsServiceMock extends PortfolioItemsService {
 
     return database.expandingCards;
   }
+
+  public async getProgressStepsData(): Promise<number[]> {
+    await delay(SECOND / 3);
+
+    return database.progressStepsData;
+  }
 }

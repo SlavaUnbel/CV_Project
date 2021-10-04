@@ -181,7 +181,7 @@ export const useContactInputFields = ({
     '.{1,}',
   ];
   const [namePattern, emailPattern, subjectPattern] = patterns.map(
-    (pattern) => new RegExp(pattern)
+    (pattern) => new RegExp(pattern),
   );
   const { nameMessage, emailMessage, subjectMessage } = messages;
 
@@ -210,8 +210,8 @@ export const useContactInputFields = ({
       ? setName(getError('Please, fill in the "Name" field'))
       : setName(
           getWarning(
-            'Please, provide 3 or more letter characters to "Name" field'
-          )
+            'Please, provide 3 or more letter characters to "Name" field',
+          ),
         );
 
   const onEmailChange = (e: ChangeEvent<HTMLInputElement>) =>
@@ -221,8 +221,8 @@ export const useContactInputFields = ({
       ? setEmail(getError('Please, fill in the "Email" field'))
       : setEmail(
           getWarning(
-            'Please, provide the "Email" field with value as shown below: \n smth@domain.com'
-          )
+            'Please, provide the "Email" field with value as shown below: \n smth@domain.com',
+          ),
         );
 
   const onSubjectChange = (e: ChangeEvent<HTMLInputElement>) =>
@@ -282,7 +282,7 @@ export const useContactPageValidation = ({
           .map((msg) =>
             msg.type === 'error'
               ? pushError(msg.message)
-              : pushWarning(msg.message)
+              : pushWarning(msg.message),
           );
 
   return validate;
@@ -310,7 +310,7 @@ export const useSendEmail = ({
           'gmail',
           'gmail_template',
           e.target,
-          'user_sKeSExZkAa6453YNTtvdY'
+          'user_sKeSExZkAa6453YNTtvdY',
         )
         .then(() => pushSuccess('Your message was successfully sent'))
         .catch((e) => pushError(e))
@@ -366,4 +366,86 @@ export const useExpandingCardRef = () => {
   };
 
   return { ref, handleClick };
+};
+
+//Progress Steps Hooks
+interface ProgressStepsProps extends IWithLoading, IWithError, IWithWarning {
+  setProgressStepsData: (progressStepsData: number[]) => void;
+}
+
+export const useFetchProgressStepsData = ({
+  setProgressStepsData,
+  setLoading,
+  pushError,
+  pushWarning,
+}: ProgressStepsProps) => {
+  useEffect(() => {
+    setLoading(true);
+
+    services.portfolioItemsService
+      .getProgressStepsData()
+      .then((data) => {
+        setProgressStepsData(data);
+        data.length === 0 && pushWarning('No data found');
+        console.log(data);
+      })
+      .catch((e) => pushError(e))
+      .finally(() => setLoading(false));
+  }, [setProgressStepsData, setLoading, pushError, pushWarning]);
+};
+
+interface ButtonNavigatonProps {
+  currentProgressStep: number;
+  setCurrentProgressStep: (step: number) => void;
+  setProgressStepsWidth: (width: string) => void;
+}
+
+export const useButtonNavigation = ({
+  currentProgressStep,
+  setCurrentProgressStep,
+  setProgressStepsWidth,
+}: ButtonNavigatonProps) => {
+  const [circles, setCircles] = useState<NodeListOf<HTMLDivElement>>();
+
+  const ref: LegacyRef<HTMLDivElement> = createRef();
+
+  const prev = () => {
+    setCurrentProgressStep(currentProgressStep - 1);
+
+    if (circles) {
+      setProgressStepsWidth(
+        `${((currentProgressStep - 2) / (circles.length - 2)) * 100}%`,
+      );
+      circles.forEach(
+        (circle, idx) =>
+          currentProgressStep - 1 < idx &&
+          !circle.classList.contains('progress') &&
+          circle.classList.remove('active'),
+      );
+    }
+  };
+
+  const next = () => {
+    setCurrentProgressStep(currentProgressStep + 1);
+
+    if (circles) {
+      setProgressStepsWidth(
+        `${(currentProgressStep / (circles.length - 2)) * 100}%`,
+      );
+      circles.forEach(
+        (circle, idx) =>
+          currentProgressStep + 1 === idx &&
+          !circle.classList.contains('progress') &&
+          circle.classList.add('active'),
+      );
+    }
+  };
+
+  useEffect(() => {
+    setCircles(
+      ref.current?.childNodes[0].childNodes as NodeListOf<HTMLDivElement>,
+    );
+  }, [ref]);
+
+  return { ref, prev, next };
 };
