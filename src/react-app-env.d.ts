@@ -25,8 +25,9 @@ interface IHome {
 
 interface IPortfolio {
   id: number;
-  title: string;
   imgSrc: string;
+  videoSrc: string;
+  title: string;
   link: string;
 }
 

@@ -1,6 +1,6 @@
 import emailjs from 'emailjs-com';
 import { init } from 'ityped';
-import { ChangeEvent, createRef, LegacyRef, useEffect } from 'react';
+import { ChangeEvent, createRef, LegacyRef, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { services } from '../services/services';
 import { portfolioAmountPerPage } from './constants';
@@ -11,6 +11,12 @@ export const useWindowTitle = (title?: string) => {
   useEffect(() => {
     document.title = title ? title : 'CV Homepage';
   }, [title]);
+};
+
+export const useHover = () => {
+  const [hovered, setHovered] = useState(false);
+
+  return { hovered, setHovered };
 };
 
 //Menu Hooks
@@ -91,7 +97,41 @@ export const useRedirectToItem = (link: string) => {
   const redirect = () => history.push(link);
 
   return redirect;
+};
+
+interface PortfolioMediaElementProps {
+  hovered: boolean;
+  imgSrc: string;
+  videoSrc: string;
 }
+
+export const useGetMediaElement = ({
+  hovered,
+  imgSrc,
+  videoSrc,
+}: PortfolioMediaElementProps) => {
+  if (!imgSrc || !videoSrc) return <></>;
+
+  const mediaElement = (() =>
+    hovered ? (
+      <video
+        src={videoSrc}
+        autoPlay
+        muted
+        playsInline
+        loop
+        style={{ width: '100%', height: '100%' }}
+      />
+    ) : (
+      <img
+        src={imgSrc}
+        alt=""
+        style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+      />
+    ))();
+
+  return mediaElement;
+};
 
 //Works Hooks
 interface WorksProps extends IWithError, IWithWarning {
@@ -99,13 +139,21 @@ interface WorksProps extends IWithError, IWithWarning {
   setLoading: (loading: boolean) => void;
 }
 
-export const useFetchWorksData = ({ setWorksData, setLoading, pushError, pushWarning }: WorksProps) => {
+export const useFetchWorksData = ({
+  setWorksData,
+  setLoading,
+  pushError,
+  pushWarning,
+}: WorksProps) => {
   useEffect(() => {
     setLoading(true);
 
     services.worksService
       .getWorksData()
-      .then((data) => { setWorksData(data); data.length === 0 && pushWarning('No data found') })
+      .then((data) => {
+        setWorksData(data);
+        data.length === 0 && pushWarning('No data found');
+      })
       .catch((e) => pushError(e))
       .finally(() => setLoading(false));
   }, [setWorksData, setLoading, pushError, pushWarning]);
@@ -159,8 +207,8 @@ export const useContactInputFields = ({
     namePattern.test(e.currentTarget.value)
       ? setName(getSuccess())
       : e.currentTarget.value === ''
-        ? setName(getError('Please, fill in the "Name" field'))
-        : setName(
+      ? setName(getError('Please, fill in the "Name" field'))
+      : setName(
           getWarning(
             'Please, provide 3 or more letter characters to "Name" field'
           )
@@ -170,8 +218,8 @@ export const useContactInputFields = ({
     emailPattern.test(e.currentTarget.value)
       ? setEmail(getSuccess())
       : e.currentTarget.value === ''
-        ? setEmail(getError('Please, fill in the "Email" field'))
-        : setEmail(
+      ? setEmail(getError('Please, fill in the "Email" field'))
+      : setEmail(
           getWarning(
             'Please, provide the "Email" field with value as shown below: \n smth@domain.com'
           )
@@ -230,12 +278,12 @@ export const useContactPageValidation = ({
     Object.values(messages).every((msg) => msg.type === 'success')
       ? setValidated(true)
       : Object.values(messages)
-        .filter((msg) => msg.type !== 'success')
-        .map((msg) =>
-          msg.type === 'error'
-            ? pushError(msg.message)
-            : pushWarning(msg.message)
-        );
+          .filter((msg) => msg.type !== 'success')
+          .map((msg) =>
+            msg.type === 'error'
+              ? pushError(msg.message)
+              : pushWarning(msg.message)
+          );
 
   return validate;
 };
@@ -300,12 +348,7 @@ export const useFetchExpandingCardsData = ({
       })
       .catch((e) => pushError(e))
       .finally(() => setLoading(false));
-  }, [
-    setExpandingCardsData,
-    setLoading,
-    pushError,
-    pushWarning,
-  ]);
+  }, [setExpandingCardsData, setLoading, pushError, pushWarning]);
 };
 
 export const useExpandingCardRef = () => {
@@ -314,12 +357,13 @@ export const useExpandingCardRef = () => {
   const handleClick = () => {
     removeActiveClasses();
     ref.current?.classList.add('active');
-  }
+  };
 
   const removeActiveClasses = () => {
-    const parent = ref.current?.parentNode?.childNodes as NodeListOf<HTMLDivElement>
-    parent.forEach((node) => node.classList.remove('active'))
-  }
+    const parent = ref.current?.parentNode
+      ?.childNodes as NodeListOf<HTMLDivElement>;
+    parent.forEach((node) => node.classList.remove('active'));
+  };
 
-  return { ref, handleClick }
-}
+  return { ref, handleClick };
+};
