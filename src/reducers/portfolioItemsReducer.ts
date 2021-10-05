@@ -5,6 +5,7 @@ export interface PortfolioItemsState {
   progressStepsData: number[];
   progressStepsWidth: string;
   currentProgressStep: number;
+  rotatingNavigationData: IRotatingNavigation;
 }
 
 const initialPortfolioItemsState: PortfolioItemsState = {
@@ -12,6 +13,7 @@ const initialPortfolioItemsState: PortfolioItemsState = {
   progressStepsData: [],
   progressStepsWidth: '0%',
   currentProgressStep: 1,
+  rotatingNavigationData: {} as IRotatingNavigation,
 };
 
 const symbiotes = {
@@ -21,7 +23,7 @@ const symbiotes = {
       expandingCards,
     }),
   },
-  progressStepsData: {
+  progressSteps: {
     set: (state: PortfolioItemsState, progressStepsData: number[]) => ({
       ...state,
       progressStepsData,
@@ -34,6 +36,12 @@ const symbiotes = {
       ...state,
       currentProgressStep,
     }),
+  },
+  rotatingNavigation: {
+    set: (
+      state: PortfolioItemsState,
+      rotatingNavigationData: IRotatingNavigation,
+    ) => ({ ...state, rotatingNavigationData }),
   },
 };
 

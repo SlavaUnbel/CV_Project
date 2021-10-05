@@ -15,4 +15,10 @@ export default class PortfolioItemsServiceMock extends PortfolioItemsService {
 
     return database.progressStepsData;
   }
+
+  public async getRotatingNavigationData(): Promise<IRotatingNavigation> {
+    await delay(SECOND / 3);
+
+    return database.rotatingNavigation;
+  }
 }

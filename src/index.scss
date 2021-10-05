@@ -1,12 +1,16 @@
-@import './assets/roboto.scss';
+@import './assets/Roboto/roboto.scss';
+@import './assets/Solelil/solelil.scss';
+@import './assets/FreightTextPro/freight-text-pro.scss';
 
 :root {
   --white-color: #fff;
   --primary-color: #3f51b5;
   --red-color: #dc143c;
   --lightgrey-color: #d3d3d3;
-  --darkgrey-color: #999; 
-  --pink-color: #f5b39b;
+  --grey-color: #555;
+  --darkgrey-color: #999;
+  --brown-color: #333;
+  --pink-color: #ff7979;
   --green-color: #07bc0c;
   --yellow-color: #f1c40f;
   --active-progress-steps-color: #3498db;

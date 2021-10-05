@@ -387,7 +387,6 @@ export const useFetchProgressStepsData = ({
       .then((data) => {
         setProgressStepsData(data);
         data.length === 0 && pushWarning('No data found');
-        console.log(data);
       })
       .catch((e) => pushError(e))
       .finally(() => setLoading(false));
@@ -448,4 +447,48 @@ export const useButtonNavigation = ({
   }, [ref]);
 
   return { ref, prev, next };
+};
+
+//Rotating Navigation Hooks
+interface RotatingNavigationProps
+  extends IWithLoading,
+    IWithError,
+    IWithWarning {
+  setRotatingNavigationData: (data: IRotatingNavigation) => void;
+}
+
+export const useFetchRotatingNavigationData = ({
+  setRotatingNavigationData,
+  setLoading,
+  pushError,
+  pushWarning,
+}: RotatingNavigationProps) => {
+  useEffect(() => {
+    setLoading(true);
+
+    services.portfolioItemsService
+      .getRotatingNavigationData()
+      .then((data) => {
+        setRotatingNavigationData(data);
+        !data && pushWarning('No data found');
+      })
+      .catch((e) => pushError(e))
+      .finally(() => setLoading(false));
+  }, [setRotatingNavigationData, setLoading, pushError, pushWarning]);
+};
+
+export const useNavigationAnimation = () => {
+  const ref: LegacyRef<HTMLDivElement> = createRef();
+
+  const open = () => {
+    ref.current?.classList.add('show-nav');
+    ref.current?.parentElement?.children[0].classList.add('rotate');
+  };
+
+  const close = () => {
+    ref.current?.classList.remove('show-nav');
+    ref.current?.parentElement?.children[0].classList.remove('rotate');
+  };
+
+  return { ref, open, close };
 };
