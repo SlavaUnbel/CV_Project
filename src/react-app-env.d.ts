@@ -68,3 +68,13 @@ interface IExpandingCards {
   id: Id;
   title: string;
 }
+
+interface IRotatingNavigation {
+  title: string;
+  author: string;
+  date: string;
+  introText: string;
+  images: string[];
+  articleTitles: string[];
+  articleParagraphs: string[];
+}
