@@ -303,9 +303,8 @@
         margin: 2.5rem 0;
         transform: translateX(-100%);
         transition: transform 0.4s ease-in;
-        font-family: 'FreightTextPro', serif;
-        font-weight: 100;
-        font-size: 1rem;
+        font-family: 'Soleil Light', sans-serif;
+        font-size: 0.9rem;
 
         @include mobile {
           margin: 2rem 0;

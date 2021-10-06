@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import {
   useButtonNavigation,
   useFetchProgressStepsData,
+  useWindowTitle,
 } from '../../../utils/hooks';
 import ComponentWrapper from '../../utils/componentWrapper/ComponentWrapper';
 import Loader from '../../utils/loader/Loader';
@@ -36,6 +37,8 @@ const ProgressSteps: FC<Props> = ({
   pushError,
   pushWarning,
 }) => {
+  useWindowTitle('Progress Steps');
+
   useFetchProgressStepsData({
     setProgressStepsData,
     setLoading,

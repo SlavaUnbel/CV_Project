@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import {
   useFetchRotatingNavigationData,
   useNavigationAnimation,
+  useWindowTitle,
 } from '../../../utils/hooks';
 import ComponentWrapper from '../../utils/componentWrapper/ComponentWrapper';
 import Loader from '../../utils/loader/Loader';
@@ -25,6 +26,8 @@ const RotatingNavigation: FC<Props> = ({
   pushError,
   pushWarning,
 }) => {
+  useWindowTitle('Rotating Navigation');
+
   useFetchRotatingNavigationData({
     setRotatingNavigationData,
     setLoading,
