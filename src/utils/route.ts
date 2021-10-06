@@ -8,3 +8,4 @@ export const contactPath = '/contact';
 export const expandingCardsPath = '/expanding-cards'
 export const progressStepsPath = '/progress-steps'
 export const rotatingNavigationPath = '/rotating-navigation'
+export const scrollAnimationPath = '/scroll-animation'

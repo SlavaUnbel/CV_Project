@@ -1,6 +1,13 @@
 import emailjs from 'emailjs-com';
 import { init } from 'ityped';
-import { ChangeEvent, createRef, LegacyRef, useEffect, useState } from 'react';
+import {
+  ChangeEvent,
+  createRef,
+  LegacyRef,
+  useCallback,
+  useEffect,
+  useState,
+} from 'react';
 import { useHistory } from 'react-router-dom';
 import { services } from '../services/services';
 import { portfolioAmountPerPage } from './constants';
@@ -491,4 +498,34 @@ export const useNavigationAnimation = () => {
   };
 
   return { ref, open, close };
+};
+
+//Scroll Animation Hooks
+export const useScrollingAnimation = () => {
+  const [boxes, setBoxes] = useState<NodeListOf<HTMLDivElement>>();
+  const [wrapper, setWrapper] = useState<HTMLElement | null>();
+  const ref: LegacyRef<HTMLDivElement> = createRef();
+
+  const showBoxesFunction = useCallback(
+    () =>
+      boxes?.forEach((box) =>
+        box.getBoundingClientRect().top < (window.innerHeight / 5) * 4
+          ? box.classList.add('show')
+          : box.classList.remove('show'),
+      ),
+    [boxes],
+  );
+
+  useEffect(() => {
+    setBoxes(ref.current?.childNodes as NodeListOf<HTMLDivElement>);
+    setWrapper(ref.current?.parentElement);
+    showBoxesFunction();
+  }, [ref, showBoxesFunction]);
+
+  useEffect(
+    () => wrapper?.addEventListener('scroll', showBoxesFunction),
+    [wrapper, showBoxesFunction],
+  );
+
+  return ref;
 };
