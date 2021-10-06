@@ -1,5 +1,8 @@
 import React, { FC } from 'react';
-import { useFetchExpandingCardsData } from '../../../utils/hooks';
+import {
+  useFetchExpandingCardsData,
+  useWindowTitle,
+} from '../../../utils/hooks';
 import ComponentWrapper from '../../utils/componentWrapper/ComponentWrapper';
 import Loader from '../../utils/loader/Loader';
 import './expanding-cards.scss';
@@ -20,6 +23,8 @@ const ExpandingCards: FC<Props> = ({
   pushError,
   pushWarning,
 }) => {
+  useWindowTitle('Expanding Cards');
+
   useFetchExpandingCardsData({
     setExpandingCardsData,
     setLoading,
