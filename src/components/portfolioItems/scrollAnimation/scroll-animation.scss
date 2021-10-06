@@ -1,0 +1,71 @@
+@import '../../../index.scss';
+
+.scroll-animation__container {
+  @include flex(column nowrap, center, center);
+
+  h1 {
+    margin: 0.7rem;
+    font-size: 2rem;
+
+    @include screen-1000px {
+      font-size: 1.8rem;
+    }
+
+    @include mobile {
+      text-align: center;
+      font-size: 1.5rem;
+    }
+
+    @include tablet {
+      text-align: unset;
+      font-size: 2rem;
+    }
+  }
+
+  .box {
+    @include flex(row nowrap, center, center);
+    background-color: var(--bg-content-scroll-animation-color);
+    color: var(--white-color);
+    width: 40vw;
+    height: 20vh;
+    margin: 0.75rem;
+    border-radius: 10px;
+    box-shadow: 3px 6px 6px rgba(0, 0, 0, 0.3);
+    transform: translateX(200%);
+    transition: transform 0.5s ease;
+
+    @include screen-1000px {
+      width: 50vw;
+      height: 25vh;
+    }
+
+    @include mobile {
+      width: 80vw;
+    }
+
+    @include tablet {
+      width: 50vw;
+      height: 25vh;
+    }
+
+    h2 {
+      font-size: 1.8rem;
+
+      @include screen-1000px {
+        font-size: 1.6rem;
+      }
+
+      @include mobile {
+        font-size: 1.4rem;
+      }
+    }
+
+    &:nth-of-type(even) {
+      transform: translateX(-200%)
+    }
+
+    &.show {
+      transform: translateX(0);
+    }
+  }
+}

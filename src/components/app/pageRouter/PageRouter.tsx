@@ -13,9 +13,11 @@ import {
   portfolioPath,
   progressStepsPath,
   rotatingNavigationPath,
+  scrollAnimationPath,
   worksPath,
 } from '../../../utils/route';
 import Home from '../../home/Home';
+import ScrollAnimation from '../../portfolioItems/scrollAnimation/ScrollAnimation';
 
 const PageRouter: FC = () => (
   <Switch>
@@ -35,6 +37,7 @@ const PageRouter: FC = () => (
       path={rotatingNavigationPath}
       component={RotatingNavigationContainer}
     />
+    <Route exact path={scrollAnimationPath} component={ScrollAnimation} />
   </Switch>
 );
 
