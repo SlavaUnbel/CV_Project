@@ -1,11 +1,12 @@
-import { generateExpandingCardsData, generatePortfolioData, generateRotatingNavigationData, generateWorksData } from './databaseMethods';
+import { generateExpandingCardsData, generatePortfolioData, generateRotatingNavigationData, generateWorksData, getSplitLandingPageData } from './databaseMethods';
 
 interface DATABASE {
   portfolioData: IPortfolio[];
   worksData: IWorks[];
   expandingCards: IExpandingCards[];
   progressStepsData: number[];
-  rotatingNavigation: IRotatingNavigation
+  rotatingNavigation: IRotatingNavigation;
+  splitLandingPage: ISplitLandingPage[];
 }
 
 export const database: DATABASE = {
@@ -14,6 +15,7 @@ export const database: DATABASE = {
   expandingCards: [...generateExpandingCardsData(5, 1)],
   progressStepsData: [1, 2, 3, 4],
   rotatingNavigation: generateRotatingNavigationData(),
+  splitLandingPage: getSplitLandingPageData(),
 };
 
 

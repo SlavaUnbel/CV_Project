@@ -78,3 +78,12 @@ interface IRotatingNavigation {
   articleTitles: string[];
   articleParagraphs: string[];
 }
+
+type SplitLandingSide = 'left' | 'right'
+
+interface ISplitLandingPage {
+  title: string;
+  link: string;
+  side: SplitLandingSide;
+  background: string;
+}

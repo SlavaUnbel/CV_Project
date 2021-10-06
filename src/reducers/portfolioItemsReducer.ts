@@ -6,6 +6,7 @@ export interface PortfolioItemsState {
   progressStepsWidth: string;
   currentProgressStep: number;
   rotatingNavigationData: IRotatingNavigation;
+  splitLandingPageData: ISplitLandingPage[];
 }
 
 const initialPortfolioItemsState: PortfolioItemsState = {
@@ -14,6 +15,7 @@ const initialPortfolioItemsState: PortfolioItemsState = {
   progressStepsWidth: '0%',
   currentProgressStep: 1,
   rotatingNavigationData: {} as IRotatingNavigation,
+  splitLandingPageData: [],
 };
 
 const symbiotes = {
@@ -42,6 +44,12 @@ const symbiotes = {
       state: PortfolioItemsState,
       rotatingNavigationData: IRotatingNavigation,
     ) => ({ ...state, rotatingNavigationData }),
+  },
+  splitLandingPage: {
+    set: (
+      state: PortfolioItemsState,
+      splitLandingPageData: ISplitLandingPage[],
+    ) => ({ ...state, splitLandingPageData }),
   },
 };
 

@@ -16,6 +16,10 @@
   --active-progress-steps-color: #3498db;
   --inactive-progress-steps-color: #e0e0e0;
   --bg-content-scroll-animation-color: #4682b4;
+  --left-bg-split-landing-page-color: rgba(87, 84, 236, 0.7);
+  --right-bg-split-landing-page-color: rgba(43, 43, 43, 0.8);
+  --left-btn-hover-split-landing-page-color: rgba(68, 65, 255, 0.7);
+  --right-btn-hover-split-landing-page-color: rgba(28, 122, 28, 1);
 }
 
 @mixin scrollbar($bg-color) {

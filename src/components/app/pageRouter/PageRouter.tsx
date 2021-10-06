@@ -5,6 +5,7 @@ import PortfolioContainer from '../../../containers/portfolio/PortfolioContainer
 import ExpandingCardsContainer from '../../../containers/portfolioItems/ExpandingCardsContainer';
 import ProgressStepsContainer from '../../../containers/portfolioItems/ProgressStepsContainer';
 import RotatingNavigationContainer from '../../../containers/portfolioItems/RotatingNavigationContainer';
+import SplitLandingPageContainer from '../../../containers/portfolioItems/SplitLandingPageContainer';
 import WorksContainer from '../../../containers/works/WorksContainer';
 import {
   contactPath,
@@ -14,6 +15,7 @@ import {
   progressStepsPath,
   rotatingNavigationPath,
   scrollAnimationPath,
+  splitLandingPagePath,
   worksPath,
 } from '../../../utils/route';
 import Home from '../../home/Home';
@@ -38,6 +40,11 @@ const PageRouter: FC = () => (
       component={RotatingNavigationContainer}
     />
     <Route exact path={scrollAnimationPath} component={ScrollAnimation} />
+    <Route
+      exact
+      path={splitLandingPagePath}
+      component={SplitLandingPageContainer}
+    />
   </Switch>
 );
 

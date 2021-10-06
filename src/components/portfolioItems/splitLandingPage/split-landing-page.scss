@@ -1,0 +1,172 @@
+@import '../../../index.scss';
+
+@mixin before-elem($bg-color) {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: $bg-color;
+}
+
+@mixin text($left, $top) {
+  position: absolute;
+  left: $left;
+  top: $top;
+  transform: translateX(-50%);
+}
+
+@mixin hover-btn($bg-color) {
+  background-color: $bg-color;
+  transition: background-color 0.5s ease;
+}
+
+.split-landing-page__container {
+  @include container;
+  position: relative;
+  background: var(--brown-color);
+
+  .split {
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    overflow: hidden;
+    
+    &.left {
+      left: 0;
+      background-repeat: 'no-repeat';
+      background-size: 'cover';
+
+      &::before {
+        @include before-elem(var(--left-bg-split-landing-page-color));
+      }
+
+      a {
+        &:hover {
+          @include hover-btn(var(--left-btn-hover-split-landing-page-color));
+        }
+      }
+    }
+
+    &.right {
+      right: 0;
+      background-repeat: 'no-repeat';
+      background-size: 'cover';
+
+      &::before {
+        @include before-elem(var(--right-bg-split-landing-page-color));
+      }
+
+      a {
+        &:hover {
+          @include hover-btn(var(--right-btn-hover-split-landing-page-color));
+        }
+      }
+    }
+
+    h1 {
+      @include text(50%, 30%);
+      font-size: 4rem;
+      color: var(--white-color);
+      white-space: nowrap;
+      font-family: 'FreightTextPro';
+      font-weight: 700;
+
+      @include screen-1400px {
+        font-size: 3.5rem;
+      }
+
+      @include screen-1200px {
+        @include text(50%, 35%);
+        font-size: 3rem;
+      }
+
+      @include screen-1000px {
+        font-size: 2.5rem;
+      }
+
+      @include mobile {
+        @include text(50%, 45%);
+        font-size: 1.5rem;
+      }
+
+      @include tablet {
+        @include text(50%, 35%);
+        font-size: 3.5rem;
+      }
+    }
+
+    a {
+      @include text(50%, 50%);
+      display: flex;
+      justify-content: center;
+      text-decoration: none;
+      color: var(--white-color);
+      border: 0.2rem solid var(--white-color);
+      font-size: 1rem;
+      font-weight: bold;
+      width: 15rem;
+      padding: 1.5rem;
+      text-transform: uppercase;
+      font-family: 'FreightTextPro';
+      font-weight: 700;
+
+      @include screen-1400px {
+        width: 14rem;
+        padding: 1.4rem;
+      }
+
+      @include screen-1200px {
+        width: 13rem;
+        padding: 1.3rem;
+      }
+
+      @include screen-1000px {
+        width: 12rem;
+        padding: 1.2rem;
+      }
+
+      @include mobile {
+        @include text(50%, 55%);
+        width: 10rem;
+        padding: 1rem;
+        font-size: 0.9rem;
+        border: 0.15rem solid var(--white-color);
+      }
+
+      @include tablet {
+        @include text(50%, 50%);
+        width: 14rem;
+        padding: 1.4rem;
+        font-size: 1rem;
+        border: 0.2rem solid var(--white-color);
+      }
+    }
+  }
+
+  &.hover-left {
+    .left {
+      width: 75%;
+    }
+  
+    .right {
+      width: 25%;
+    }
+  }
+
+  &.hover-right {
+    .right {
+      width: 75%;
+    }
+  
+    .left {
+      width: 25%;
+    }
+  }
+}
+
+.split.left, 
+.split.right,
+.split.left::before,
+.split.right::before {
+  transition: all 1s ease-in-out;
+}

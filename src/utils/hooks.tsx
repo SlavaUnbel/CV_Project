@@ -529,3 +529,47 @@ export const useScrollingAnimation = () => {
 
   return ref;
 };
+
+//Split Landing Page Hooks
+interface SplitLandingPageProps extends IWithLoading, IWithError, IWithWarning {
+  setSplitLandingPageData: (data: ISplitLandingPage[]) => void;
+}
+
+export const useFetchSplitLandingPageData = ({
+  setSplitLandingPageData,
+  setLoading,
+  pushError,
+  pushWarning,
+}: SplitLandingPageProps) => {
+  useEffect(() => {
+    setLoading(true);
+
+    services.portfolioItemsService
+      .getSplitLandingPageData()
+      .then((data) => {
+        setSplitLandingPageData(data);
+        !data && pushWarning('No data found');
+      })
+      .catch((e) => pushError(e))
+      .finally(() => setLoading(false));
+  }, [setSplitLandingPageData, setLoading, pushError, pushWarning]);
+};
+
+export const useSplitLandingPageHoverEffect = (data: ISplitLandingPage[]) => {
+  const ref: LegacyRef<HTMLDivElement> = createRef();
+
+  const enterLeft = () => ref.current?.classList.add('hover-left');
+
+  const enterRight = () => ref.current?.classList.add('hover-right');
+
+  const leaveLeft = () => ref.current?.classList.remove('hover-left');
+
+  const leaveRight = () => ref.current?.classList.remove('hover-right');
+
+  const leaveBoth = () => {
+    leaveLeft();
+    leaveRight();
+  };
+
+  return { ref, enterLeft, enterRight, leaveLeft, leaveRight, leaveBoth };
+};
