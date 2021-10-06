@@ -21,4 +21,10 @@ export default class PortfolioItemsServiceMock extends PortfolioItemsService {
 
     return database.rotatingNavigation;
   }
+
+  public async getSplitLandingPageData(): Promise<ISplitLandingPage[]> {
+    await delay(SECOND / 3);
+
+    return database.splitLandingPage;
+  }
 }
