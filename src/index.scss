@@ -1,9 +1,10 @@
 @import './assets/Roboto/roboto.scss';
-@import './assets/Solelil/solelil.scss';
+@import './assets/Soleil/soleil.scss';
 @import './assets/FreightTextPro/freight-text-pro.scss';
 
 :root {
   --white-color: #fff;
+  --primary2-color: #9398c9;
   --primary-color: #3f51b5;
   --red-color: #dc143c;
   --lightgrey-color: #d3d3d3;
@@ -20,6 +21,7 @@
   --right-bg-split-landing-page-color: rgba(43, 43, 43, 0.8);
   --left-btn-hover-split-landing-page-color: rgba(68, 65, 255, 0.7);
   --right-btn-hover-split-landing-page-color: rgba(28, 122, 28, 1);
+  --link-form-wave-animation-color: #add8e6;
 }
 
 @mixin scrollbar($bg-color) {

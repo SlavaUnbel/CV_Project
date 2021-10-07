@@ -27,6 +27,7 @@ export const portfolioItems = [
   'Rotating Navigation',
   'Scroll Animation',
   'Split Landing Page',
+  'Form Wave Animation'
 ];
 
 export const expandingCardsSrc =

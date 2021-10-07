@@ -573,3 +573,21 @@ export const useSplitLandingPageHoverEffect = (data: ISplitLandingPage[]) => {
 
   return { ref, enterLeft, enterRight, leaveLeft, leaveRight, leaveBoth };
 };
+
+//Form Wave Animation Hooks
+export const useFormWaveAnimationEffect = () => {
+  const ref: LegacyRef<HTMLLabelElement> = createRef();
+
+  useEffect(() => {
+    if (ref.current && ref.current.innerText)
+      ref.current.innerHTML = ref.current.innerText
+        .split('')
+        .map(
+          (letter, idx) =>
+            `<span style='transition-delay: ${idx * 50}ms'>${letter}</span>`,
+        )
+        .join('');
+  }, [ref]);
+
+  return ref;
+};

@@ -1,0 +1,184 @@
+@import '../../../index.scss';
+
+.form-wave-animation__container {
+  @include container;
+  @include flex(column nowrap, center, center);
+  overflow: hidden;
+  margin: 0;
+  background-color: var(--bg-content-scroll-animation-color);
+  color: var(--white-color);
+  
+  .form-wrapper {
+    background-color: rgba(0, 0, 0, 0.4);
+    padding: 1.5rem 2.5rem;
+    border-radius: 10px;
+
+    @include mobile {
+      padding: 1rem 2rem;
+    }
+
+    @include tablet {
+      padding: 1.5rem 2.5rem;
+    }
+
+    h1 {
+      font-family: 'Soleil Bold';
+      text-align: center;
+      margin-bottom: 1rem;
+
+      @include mobile {
+        margin-bottom: 0.7rem;
+        font-size: 1.5rem;
+      }
+
+      @include mobile {
+        margin-bottom: 1rem;
+        font-size: 1.8rem;
+      }
+    }
+  
+    .form-control {
+      margin: 1.5rem 0 0.5rem;
+      width: 20rem;
+
+      @include mobile {
+        margin: 1rem 0 0.5rem;
+        width: 70vw;
+      }
+
+      @include tablet {
+        margin: 1.5rem 0 0.5rem;
+        width: 20rem;
+      }
+
+      input {
+        background-color: transparent;
+        border: 0;
+        border-bottom: 2px solid var(--white-color);
+        display: block;
+        width: 100%;
+        padding: 1.5rem 0 0.5rem;
+        font-size: 1.2rem;
+        color: var(--white-color);
+        transition: 0.4s ease;
+
+        @include mobile {
+          padding: 1.2rem 0 0.5rem;
+          font-size: 1rem;
+        }
+
+        @include tablet {
+          padding: 1.5rem 0 0.5rem;
+          font-size: 1.2rem;
+        }
+
+        &:hover {
+          border-bottom-color: var(--bg-content-scroll-animation-color);
+
+          + label {
+            span {
+              color: var(--bg-content-scroll-animation-color);
+            }
+          }
+        }
+
+        &:focus, &:valid {
+          outline: none;
+          border-bottom-color: var(--link-form-wave-animation-color);
+
+          + label {
+            cursor: default;
+
+            span {
+              color: var(--link-form-wave-animation-color);
+              transform: translateY(-1.5rem);
+            }
+          }
+        }
+      }
+
+      label {
+        position: relative;
+        top: -2rem;
+        left: 0;
+
+        &:hover {
+          cursor: text;
+        }
+
+        span {
+          font-family: 'Soleil Light';
+          display: inline-block;
+          font-size: 1rem;
+          min-width: 5px;
+          transition: 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+          @include mobile {
+            font-size: 0.9rem;
+          }
+
+          @include tablet {
+            font-size: 1rem;
+          }
+        }
+      }
+    }
+
+    button {
+      font-family: 'Soleil Regular';
+      cursor: pointer;
+      display: inline-flex;
+      align-content: center;
+      justify-content: center;
+      width: 100%;
+      background-color: var(--link-form-wave-animation-color);
+      padding: 1rem;
+      font-family: inherit;
+      font-size: 1rem;
+      border: 0;
+      border-radius: 5px;
+
+      @include mobile {
+        padding: 0.9rem;
+        font-size: 0.9rem;
+      }
+
+      @include tablet {
+        padding: 1rem;
+        font-size: 1rem;
+      }
+
+      p {
+        font-family: 'Soleil Regular';
+      }
+
+      &:hover {
+        opacity: 0.8;
+      }
+
+      &:focus {
+        outline: none;
+      }
+
+      &:active {
+        transform: scale(0.95)
+      }
+    }
+
+    p.text {
+      display: flex;
+      align-items: center;
+      font-family: 'Soleil Regular';
+      margin-top: 1rem;
+
+      a {
+        font-family: 'Soleil Light';
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+        margin-left: 0.5rem;
+        color: var(--link-form-wave-animation-color);
+      }
+    }
+  }
+}
