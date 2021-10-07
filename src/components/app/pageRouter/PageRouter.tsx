@@ -10,6 +10,7 @@ import WorksContainer from '../../../containers/works/WorksContainer';
 import {
   contactPath,
   expandingCardsPath,
+  formWaveAnimationPath,
   homePath,
   portfolioPath,
   progressStepsPath,
@@ -19,6 +20,7 @@ import {
   worksPath,
 } from '../../../utils/route';
 import Home from '../../home/Home';
+import FormWaveAnimation from '../../portfolioItems/formWaveAnimation/FormWaveAnimation';
 import ScrollAnimation from '../../portfolioItems/scrollAnimation/ScrollAnimation';
 
 const PageRouter: FC = () => (
@@ -45,6 +47,7 @@ const PageRouter: FC = () => (
       path={splitLandingPagePath}
       component={SplitLandingPageContainer}
     />
+    <Route exact path={formWaveAnimationPath} component={FormWaveAnimation} />
   </Switch>
 );
 
