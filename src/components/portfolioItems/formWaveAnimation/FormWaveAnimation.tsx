@@ -13,7 +13,7 @@ const FormWaveAnimation: FC = () => {
         <div className="form-wrapper">
           <h1>Please Login</h1>
 
-          <form>
+          <form autoComplete="off">
             <FormField type="text" label="Email" required />
 
             <FormField type="password" label="Password" required />
