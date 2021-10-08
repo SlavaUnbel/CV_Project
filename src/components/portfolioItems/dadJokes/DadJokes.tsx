@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import { useFetchDadJokesData, useWindowTitle } from '../../../utils/hooks';
 import ComponentWrapper from '../../utils/componentWrapper/ComponentWrapper';
+import Loader from '../../utils/loader/Loader';
 import './dad-jokes.scss';
 
 interface Props extends IWithLoading, IWithError {
@@ -31,9 +32,20 @@ const DadJokes: FC<Props> = ({
         <div className="dad-jokes__wrapper">
           <h3>Don't Laugh Challenge</h3>
 
-          <div className="joke">
-            {!loading ? dadJokesData.joke : 'Loading...'}
-          </div>
+          {!loading ? (
+            <div className="joke">
+              {dadJokesData.joke || '<-- Joke goes here -->'}
+            </div>
+          ) : (
+            <Loader
+              wrapperStyle={{ height: '15vh', width: '100%', margin: 'auto' }}
+              circleStyle={{
+                height: '3.5rem',
+                width: '3.5rem',
+                borderWidth: '0.5rem',
+              }}
+            />
+          )}
 
           <button onClick={getJoke}>Get Another Joke</button>
         </div>
