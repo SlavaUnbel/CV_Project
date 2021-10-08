@@ -74,7 +74,7 @@ const Portfolio: FC<Props> = ({
               ))}
           </div>
         ) : (
-          <Loader />
+          <Loader height="75vh" />
         )}
       </div>
     </ComponentWrapper>

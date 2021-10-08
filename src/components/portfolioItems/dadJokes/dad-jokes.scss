@@ -1,0 +1,102 @@
+@import '../../../index.scss';
+
+.dad-jokes__container {
+  @include container;
+  @include flex(column nowrap, center, center);
+  background: var(--bg-dad-jokes-color);
+  
+  .dad-jokes__wrapper {
+    background: var(--white-color);
+    border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2), 0 6px 6px rgba(0, 0, 0, 0.2);
+    padding: 3rem 1.5rem;
+    text-align: center;
+    width: 50rem;
+
+    @include screen-1400px {
+      width: 45rem;
+    }
+
+    @include screen-1200px {
+      width: 40rem;
+      padding: 2.5rem 1rem;
+    }
+
+    @include screen-1000px {
+      width: 70vw;
+    }
+
+    @include tablet {
+      padding: 3rem 1.5rem;
+    }
+
+    h3 {
+      margin: 0;
+      opacity: 0.5;
+      letter-spacing: 0.1rem;
+
+      @include screen-1000px {
+        letter-spacing: 0.05rem;
+      }
+
+      @include tablet {
+        letter-spacing: 0.1rem;
+      }
+    }
+
+    .joke {
+      font-size: 2rem;
+      letter-spacing: 0.05rem;
+      line-height: 2.5rem;
+      margin: 3rem auto;
+
+      @include screen-1000px {
+        font-size: 1.8rem;
+        margin: 2rem auto;
+      }
+
+      @include mobile {
+        font-size: 1.5rem;
+      }
+
+      @include tablet {
+        font-size: 2rem;
+        margin: 3rem auto;
+      }
+    }
+
+    button {
+      background: var(--btn-dad-jokes-color);
+      border-radius: 10px;
+      box-shadow: 0 10px 20px var(--shadow-color), 0 6px 6px var(--shadow-color);
+      color: var(--white-color);
+      border: 0;
+      padding: 0.8rem 2.5rem;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.4s ease;
+
+      @include screen-1000px {
+        padding: 0.6rem 2rem;
+        font-size: 0.9rem;
+      }
+
+      @include tablet {
+        padding: 0.8rem 2.5rem;
+        font-size: 1rem;
+      }
+
+      &:hover {
+        background: var(--bg-dad-jokes-color);
+      }
+
+      &:focus {
+        outline: 0;
+      }
+  
+      &:active {
+        transform: scale(0.9);
+      }
+    }
+  }
+}

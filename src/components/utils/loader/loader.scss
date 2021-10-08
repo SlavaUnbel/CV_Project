@@ -2,9 +2,7 @@
 
 .loader-wrapper {
   @include container;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  @include flex(row nowrap, center, center);
   z-index: 4;
 
   .loader {

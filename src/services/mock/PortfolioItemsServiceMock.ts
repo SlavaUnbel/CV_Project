@@ -27,4 +27,20 @@ export default class PortfolioItemsServiceMock extends PortfolioItemsService {
 
     return database.splitLandingPage;
   }
+
+  public async getDadJokesDataFromApi(): Promise<IDadJokes> {
+    const response = await fetch('https://icanhazdadjoke.com', {
+      headers: {
+        Accept: 'application/json',
+      }
+    });
+
+    return await response.json();
+  }
+
+  public async getDadJokesData(): Promise<IDadJokes> {
+    await delay(SECOND / 3);
+
+    return database.dadJokes;
+  }
 }

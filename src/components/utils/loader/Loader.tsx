@@ -1,8 +1,12 @@
 import React, { FC } from 'react';
 import './loader.scss';
 
-const Loader: FC = () => (
-  <div className="loader-wrapper">
+interface Props {
+  height?: string;
+}
+
+const Loader: FC<Props> = ({ height }) => (
+  <div className="loader-wrapper" style={{ height }}>
     <div className="loader" />
   </div>
 );

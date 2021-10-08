@@ -7,7 +7,7 @@ import { portfolioItemsActions } from '../../reducers/portfolioItemsReducer';
 import { IState } from '../../reducers/rootReducer';
 
 const mapStateToProps = (state: IState) => ({
-  rotatingNavigationData: state.portfolioItems.rotatingNavigationData,
+  rotatingNavigationData: state.portfolioItems.rotatingNavigation,
   loading: state.loading.loading,
 });
 

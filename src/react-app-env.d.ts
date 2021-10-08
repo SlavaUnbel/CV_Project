@@ -87,3 +87,9 @@ interface ISplitLandingPage {
   side: SplitLandingSide;
   background: string;
 }
+
+interface IDadJokes {
+  id: string;
+  joke: string;
+  status: number;
+}
