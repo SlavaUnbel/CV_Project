@@ -8,5 +8,4 @@ export default abstract class PortfolioItemsService {
   public abstract getSplitLandingPageData(): Promise<ISplitLandingPage[]>
 
   public abstract getDadJokesDataFromApi(): Promise<IDadJokes>
-  public abstract getDadJokesData(): Promise<IDadJokes>
 }

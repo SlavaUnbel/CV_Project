@@ -1,13 +1,14 @@
-import React, { FC } from 'react';
+import React, { CSSProperties, FC } from 'react';
 import './loader.scss';
 
 interface Props {
-  height?: string;
+  wrapperStyle?: CSSProperties;
+  circleStyle?: CSSProperties;
 }
 
-const Loader: FC<Props> = ({ height }) => (
-  <div className="loader-wrapper" style={{ height }}>
-    <div className="loader" />
+const Loader: FC<Props> = ({ wrapperStyle, circleStyle }) => (
+  <div className="loader-wrapper" style={wrapperStyle}>
+    <div className="loader" style={circleStyle} />
   </div>
 );
 

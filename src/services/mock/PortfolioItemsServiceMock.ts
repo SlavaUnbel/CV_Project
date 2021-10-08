@@ -29,6 +29,7 @@ export default class PortfolioItemsServiceMock extends PortfolioItemsService {
   }
 
   public async getDadJokesDataFromApi(): Promise<IDadJokes> {
+    await delay(SECOND / 3);
     const response = await fetch('https://icanhazdadjoke.com', {
       headers: {
         Accept: 'application/json',
@@ -36,11 +37,5 @@ export default class PortfolioItemsServiceMock extends PortfolioItemsService {
     });
 
     return await response.json();
-  }
-
-  public async getDadJokesData(): Promise<IDadJokes> {
-    await delay(SECOND / 3);
-
-    return database.dadJokes;
   }
 }

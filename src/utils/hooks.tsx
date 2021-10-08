@@ -602,38 +602,20 @@ export const useFetchDadJokesData = ({
   setLoading,
   pushError,
 }: DadJokesProps) => {
-  const [fetchIsSuccessful, setFetchIsSuccessful] = useState(true);
-
   const getJoke = useCallback(() => {
     setLoading(true);
 
-    if (fetchIsSuccessful) {
-      services.portfolioItemsService
-        .getDadJokesDataFromApi()
-        .then((data) => {
-          if (data.status === 200) {
-            setDadJokesData(data);
-            setFetchIsSuccessful(true);
-          } else {
-            pushError(`Api responded with error code ${data.status}`);
-            setFetchIsSuccessful(false);
-          }
-        })
-        .catch((e) => pushError(e))
-        .finally(() => {
-          setLoading(false);
-          setFetchIsSuccessful(false);
-        });
-    } else {
-      services.portfolioItemsService
-        .getDadJokesData()
-        .then(setDadJokesData)
-        .catch((e) => pushError(e))
-        .finally(() => {
-          setLoading(false);
-          setFetchIsSuccessful(true);
-        });
-    }
+    services.portfolioItemsService
+      .getDadJokesDataFromApi()
+      .then((data) => {
+        if (data.status === 200) {
+          setDadJokesData(data);
+        } else {
+          pushError(`Api responded with error code ${data.status}`);
+        }
+      })
+      .catch((e) => pushError(e))
+      .finally(() => setLoading(false));
     //eslint-disable-next-line
   }, [setDadJokesData, setLoading, pushError]);
 
