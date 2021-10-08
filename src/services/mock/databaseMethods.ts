@@ -121,3 +121,11 @@ export const getSplitLandingPageData = (): ISplitLandingPage[] => [
     background: `${splitLandingPageSrc}/xbox.jpg`
   },
 ]
+
+export const getDadJokesData = (): IDadJokes => {
+  return {
+    id: 'randomId',
+    joke: '<-- Joke goes here -->',
+    status: 200
+  }
+}

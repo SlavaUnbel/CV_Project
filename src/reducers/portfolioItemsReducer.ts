@@ -2,20 +2,30 @@ import { createSymbiote } from 'redux-symbiote';
 
 export interface PortfolioItemsState {
   expandingCards: IExpandingCards[];
+
   progressStepsData: number[];
   progressStepsWidth: string;
   currentProgressStep: number;
-  rotatingNavigationData: IRotatingNavigation;
-  splitLandingPageData: ISplitLandingPage[];
+
+  rotatingNavigation: IRotatingNavigation;
+
+  splitLandingPage: ISplitLandingPage[];
+
+  dadJokes: IDadJokes;
 }
 
 const initialPortfolioItemsState: PortfolioItemsState = {
   expandingCards: [],
+
   progressStepsData: [],
   progressStepsWidth: '0%',
   currentProgressStep: 1,
-  rotatingNavigationData: {} as IRotatingNavigation,
-  splitLandingPageData: [],
+
+  rotatingNavigation: {} as IRotatingNavigation,
+
+  splitLandingPage: [],
+
+  dadJokes: {} as IDadJokes,
 };
 
 const symbiotes = {
@@ -42,14 +52,20 @@ const symbiotes = {
   rotatingNavigation: {
     set: (
       state: PortfolioItemsState,
-      rotatingNavigationData: IRotatingNavigation,
-    ) => ({ ...state, rotatingNavigationData }),
+      rotatingNavigation: IRotatingNavigation,
+    ) => ({ ...state, rotatingNavigation }),
   },
   splitLandingPage: {
     set: (
       state: PortfolioItemsState,
-      splitLandingPageData: ISplitLandingPage[],
-    ) => ({ ...state, splitLandingPageData }),
+      splitLandingPage: ISplitLandingPage[],
+    ) => ({ ...state, splitLandingPage }),
+  },
+  dadJokes: {
+    set: (state: PortfolioItemsState, dadJokes: IDadJokes) => ({
+      ...state,
+      dadJokes,
+    }),
   },
 };
 

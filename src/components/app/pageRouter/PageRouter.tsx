@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import ContactContainer from '../../../containers/contact/ContactContainer';
 import PortfolioContainer from '../../../containers/portfolio/PortfolioContainer';
+import DadJokesContainer from '../../../containers/portfolioItems/DadJokesContainer';
 import ExpandingCardsContainer from '../../../containers/portfolioItems/ExpandingCardsContainer';
 import ProgressStepsContainer from '../../../containers/portfolioItems/ProgressStepsContainer';
 import RotatingNavigationContainer from '../../../containers/portfolioItems/RotatingNavigationContainer';
@@ -9,6 +10,7 @@ import SplitLandingPageContainer from '../../../containers/portfolioItems/SplitL
 import WorksContainer from '../../../containers/works/WorksContainer';
 import {
   contactPath,
+  dadJokesPath,
   expandingCardsPath,
   formWaveAnimationPath,
   homePath,
@@ -48,6 +50,7 @@ const PageRouter: FC = () => (
       component={SplitLandingPageContainer}
     />
     <Route exact path={formWaveAnimationPath} component={FormWaveAnimation} />
+    <Route exact path={dadJokesPath} component={DadJokesContainer} />
   </Switch>
 );
 

@@ -7,7 +7,7 @@ import { portfolioItemsActions } from '../../reducers/portfolioItemsReducer';
 import { IState } from '../../reducers/rootReducer';
 
 const mapStateToProps = (state: IState) => ({
-  splitLandingPageData: state.portfolioItems.splitLandingPageData,
+  splitLandingPageData: state.portfolioItems.splitLandingPage,
   loading: state.loading.loading,
 });
 
