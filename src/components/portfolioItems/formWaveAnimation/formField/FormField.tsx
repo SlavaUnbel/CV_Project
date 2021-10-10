@@ -8,13 +8,13 @@ interface Props {
 }
 
 const FormField: FC<Props> = ({ type, label, required }) => {
-  const ref = useFormWaveAnimationEffect();
+  const labelRef = useFormWaveAnimationEffect();
 
   return (
     <div className="form-control">
       <input type={type} required={required} id={label} />
 
-      <label ref={ref} htmlFor={label}>
+      <label ref={labelRef} htmlFor={label}>
         {label}
       </label>
     </div>

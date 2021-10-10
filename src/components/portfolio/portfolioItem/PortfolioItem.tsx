@@ -6,18 +6,15 @@ import {
 } from '../../../utils/hooks';
 
 interface Props {
-  imgSrc: string;
-  videoSrc: string;
-  title: string;
-  link: string;
+  item: IPortfolio;
 }
 
-const PortfolioItem: FC<Props> = ({ imgSrc, videoSrc, title, link }) => {
+const PortfolioItem: FC<Props> = ({ item }) => {
   const { hovered, setHovered } = useHover();
 
-  const redirect = useRedirectToItem(link);
+  const redirect = useRedirectToItem(item.link);
 
-  const mediaElement = useGetMediaElement({ hovered, imgSrc, videoSrc });
+  const mediaElement = useGetMediaElement({ hovered, item });
 
   return (
     <div className="item">
@@ -30,7 +27,7 @@ const PortfolioItem: FC<Props> = ({ imgSrc, videoSrc, title, link }) => {
         {mediaElement}
       </div>
 
-      <h3>{title}</h3>
+      <h3>{item.title}</h3>
     </div>
   );
 };

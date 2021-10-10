@@ -13,3 +13,7 @@ export const splitLandingPagePath = '/split-landing-page'
 export const formWaveAnimationPath = '/form-wave-animation'
 export const dadJokesPath = '/dad-jokes'
 export const faqCollapsePath = '/faq-collapse'
+
+//works paths
+export const authProjectRegistrationPath = '/auth-project-registration'
+export const authProjectLoginPath = '/auth-project-login'
