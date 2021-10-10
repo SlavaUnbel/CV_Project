@@ -62,16 +62,9 @@ const Portfolio: FC<Props> = ({
 
         {!loading ? (
           <div className="container">
-            {portfolioData &&
-              portfolioData.map((item) => (
-                <PortfolioItem
-                  key={item.id}
-                  imgSrc={item.imgSrc}
-                  videoSrc={item.videoSrc}
-                  title={item.title}
-                  link={item.link}
-                />
-              ))}
+            {portfolioData.map((item) => (
+              <PortfolioItem key={item.id} item={item} />
+            ))}
           </div>
         ) : (
           <Loader wrapperStyle={{ height: '75vh' }} />

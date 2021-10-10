@@ -26,6 +26,14 @@ export const useHover = () => {
   return { hovered, setHovered };
 };
 
+export const useRedirectToItem = (link: string) => {
+  const history = useHistory();
+
+  const redirect = () => history.push(link);
+
+  return redirect;
+};
+
 //Menu Hooks
 export const useMenuRouter = (title: string) => {
   const history = useHistory();
@@ -98,31 +106,21 @@ export const useFetchPortfolioData = ({
   ]);
 };
 
-export const useRedirectToItem = (link: string) => {
-  const history = useHistory();
-
-  const redirect = () => history.push(link);
-
-  return redirect;
-};
-
 interface PortfolioMediaElementProps {
   hovered: boolean;
-  imgSrc: string;
-  videoSrc: string;
+  item: IPortfolio;
 }
 
 export const useGetMediaElement = ({
   hovered,
-  imgSrc,
-  videoSrc,
+  item,
 }: PortfolioMediaElementProps) => {
-  if (!imgSrc || !videoSrc) return <></>;
+  if (!item.imgSrc || !item.videoSrc) return <></>;
 
   const mediaElement = (() =>
     hovered ? (
       <video
-        src={videoSrc}
+        src={item.videoSrc}
         autoPlay
         muted
         playsInline
@@ -131,7 +129,7 @@ export const useGetMediaElement = ({
       />
     ) : (
       <img
-        src={imgSrc}
+        src={item.imgSrc}
         alt=""
         style={{ width: '100%', height: '100%', objectFit: 'contain' }}
       />

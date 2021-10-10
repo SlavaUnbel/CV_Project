@@ -8,6 +8,7 @@ import {
   thirdIconSrc,
   thirdWorkSrc
 } from '../../utils/constants';
+import { authProjectLoginPath } from '../../utils/route';
 
 export const getMenuOptions = (): string[] => {
   const options = ['Home', 'Portfolio', 'Works', 'Contact'];
@@ -45,6 +46,7 @@ export const generateWorksData = (amount: number, id: number): IWorks[] => {
   const icons = [firstIconSrc, secondIconSrc, thirdIconSrc];
   const titles = ['Web Design', 'Mobile Oak Alley', 'Branding'];
   const images = [firstWorkSrc, secondWorkSrc, thirdWorkSrc];
+  const links = [authProjectLoginPath]
 
   return new Array(amount).fill(1).map((_, index) => {
     if (index) id++;
@@ -56,6 +58,7 @@ export const generateWorksData = (amount: number, id: number): IWorks[] => {
       description:
         'Lorem ipsum dolor sit amet, consectetur adipisicing elit.Ratione, possimus. Lorem ipsum dolor sit amet, elit. Ratione, possimus.',
       imgSrc: images[id - 1],
+      link: links[id - 1],
     };
   });
 };

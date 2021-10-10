@@ -36,7 +36,7 @@ interface IWorks {
   iconSrc: string;
   title: string;
   description: string;
-  // githubLink: string; TODO
+  link: string;
   imgSrc: string;
 }
 
