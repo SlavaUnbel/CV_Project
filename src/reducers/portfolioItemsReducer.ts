@@ -12,6 +12,8 @@ export interface PortfolioItemsState {
   splitLandingPage: ISplitLandingPage[];
 
   dadJokes: IDadJokes;
+
+  faqCollapse: IFaqCollapse[];
 }
 
 const initialPortfolioItemsState: PortfolioItemsState = {
@@ -26,6 +28,8 @@ const initialPortfolioItemsState: PortfolioItemsState = {
   splitLandingPage: [],
 
   dadJokes: {} as IDadJokes,
+
+  faqCollapse: [],
 };
 
 const symbiotes = {
@@ -65,6 +69,12 @@ const symbiotes = {
     set: (state: PortfolioItemsState, dadJokes: IDadJokes) => ({
       ...state,
       dadJokes,
+    }),
+  },
+  faqCollapse: {
+    set: (state: PortfolioItemsState, faqCollapse: IFaqCollapse[]) => ({
+      ...state,
+      faqCollapse,
     }),
   },
 };

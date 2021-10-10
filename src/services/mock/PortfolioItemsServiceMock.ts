@@ -38,4 +38,10 @@ export default class PortfolioItemsServiceMock extends PortfolioItemsService {
 
     return await response.json();
   }
+
+  public async getFaqCollapseData(): Promise<IFaqCollapse[]> {
+    await delay(SECOND / 3);
+
+    return database.faqCollapse
+  }
 }

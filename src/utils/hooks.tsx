@@ -623,3 +623,36 @@ export const useFetchDadJokesData = ({
 
   return getJoke;
 };
+
+//Faq Collapse Hooks
+interface FaqCollapseProps extends IWithLoading, IWithError, IWithWarning {
+  setFaqCollapseData: (data: IFaqCollapse[]) => void;
+}
+
+export const useFetchFaqCollapseData = ({
+  setFaqCollapseData,
+  setLoading,
+  pushError,
+  pushWarning,
+}: FaqCollapseProps) => {
+  useEffect(() => {
+    setLoading(true);
+
+    services.portfolioItemsService
+      .getFaqCollapseData()
+      .then((data) => {
+        setFaqCollapseData(data);
+        !data && pushWarning('No data found');
+      })
+      .catch((e) => pushError(e))
+      .finally(() => setLoading(false));
+  }, [setFaqCollapseData, setLoading, pushError, pushWarning]);
+};
+
+export const useToggleFaqCollapse = () => {
+  const [active, setActive] = useState(false);
+
+  const openCloseFaq = () => setActive(!active);
+
+  return { active, openCloseFaq };
+};
