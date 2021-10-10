@@ -4,6 +4,7 @@ import ContactContainer from '../../../containers/contact/ContactContainer';
 import PortfolioContainer from '../../../containers/portfolio/PortfolioContainer';
 import DadJokesContainer from '../../../containers/portfolioItems/DadJokesContainer';
 import ExpandingCardsContainer from '../../../containers/portfolioItems/ExpandingCardsContainer';
+import FaqCollapseContainer from '../../../containers/portfolioItems/FaqCollapseContainer';
 import ProgressStepsContainer from '../../../containers/portfolioItems/ProgressStepsContainer';
 import RotatingNavigationContainer from '../../../containers/portfolioItems/RotatingNavigationContainer';
 import SplitLandingPageContainer from '../../../containers/portfolioItems/SplitLandingPageContainer';
@@ -12,6 +13,7 @@ import {
   contactPath,
   dadJokesPath,
   expandingCardsPath,
+  faqCollapsePath,
   formWaveAnimationPath,
   homePath,
   portfolioPath,
@@ -51,6 +53,7 @@ const PageRouter: FC = () => (
     />
     <Route exact path={formWaveAnimationPath} component={FormWaveAnimation} />
     <Route exact path={dadJokesPath} component={DadJokesContainer} />
+    <Route exact path={faqCollapsePath} component={FaqCollapseContainer} />
   </Switch>
 );
 

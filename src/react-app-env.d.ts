@@ -93,3 +93,9 @@ interface IDadJokes {
   joke: string;
   status: number;
 }
+
+interface IFaqCollapse {
+  id: number;
+  title: string;
+  answer: string;
+}

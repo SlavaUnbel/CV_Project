@@ -1,6 +1,7 @@
 @import './assets/Roboto/roboto.scss';
 @import './assets/Soleil/soleil.scss';
 @import './assets/FreightTextPro/freight-text-pro.scss';
+@import './assets/MaterialIcons/material-icons.scss';
 
 :root {
   --white-color: #fff;
@@ -24,6 +25,9 @@
   --link-form-wave-animation-color: #add8e6;
   --bg-dad-jokes-color: #686de0;
   --btn-dad-jokes-color: #9f68e0;
+  --bg-faq-collapse-color: #f0f0f0;
+  --bg-icon-faq-collapse-color: #2ecc71;
+  --bg-buttons-faq-collapse-color: #9fa4a8;
 }
 
 @mixin scrollbar($bg-color) {
