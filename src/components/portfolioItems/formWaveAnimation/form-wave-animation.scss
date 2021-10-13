@@ -52,6 +52,7 @@
       }
 
       input {
+        position: relative;
         background-color: transparent;
         border: 0;
         border-bottom: 2px solid var(--white-color);
@@ -82,7 +83,7 @@
           }
         }
 
-        &:focus, &:valid {
+        &:focus, &:not([value='']) {
           outline: none;
           border-bottom-color: var(--link-form-wave-animation-color);
 
@@ -165,18 +166,19 @@
       }
     }
 
-    p.text {
+    .text {
       display: flex;
       align-items: center;
       font-family: 'Soleil Regular';
       margin-top: 1rem;
 
-      a {
+      .link {
         font-family: 'Soleil Light';
-        display: flex;
-        align-items: center;
+        background-color: transparent;
         text-decoration: none;
+        padding: 0;
         margin-left: 0.5rem;
+        width: 4rem;
         color: var(--link-form-wave-animation-color);
       }
     }

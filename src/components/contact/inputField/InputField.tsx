@@ -1,31 +1,25 @@
-import React, { ChangeEvent, FC } from 'react';
+import React, { FC } from 'react';
 import '../contact.scss';
 
 interface Props {
-  name: string;
-  pattern: string;
-  valid: boolean;
-  invalid: boolean;
-  incorrect: boolean;
-  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  field: IFormInput;
 }
 
-const InputField: FC<Props> = ({
-  name,
-  pattern,
-  valid,
-  invalid,
-  incorrect,
-  onChange,
-}) => (
+const InputField: FC<Props> = ({ field }) => (
   <input
-    placeholder={name}
-    name={name.toLowerCase()}
-    pattern={pattern}
+    placeholder={field.name}
+    name={field.name.toLowerCase()}
+    pattern={field.pattern}
     className={`${
-      valid ? 'valid' : invalid ? 'invalid' : incorrect ? 'incorrect' : ''
+      field.valid
+        ? 'valid'
+        : field.invalid
+        ? 'invalid'
+        : field.incorrect
+        ? 'incorrect'
+        : ''
     }`}
-    onChange={(e) => onChange(e)}
+    onChange={(e) => field.onChange(e)}
   />
 );
 

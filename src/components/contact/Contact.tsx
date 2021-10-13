@@ -71,15 +71,7 @@ const Contact: FC<Props> = ({
 
           <form onSubmit={sendEmail} autoComplete="off">
             {inputFields.map((field, idx) => (
-              <InputField
-                key={idx}
-                name={field.name}
-                pattern={field.pattern}
-                valid={field.valid}
-                invalid={field.invalid}
-                incorrect={field.incorrect}
-                onChange={field.onChange}
-              />
+              <InputField key={idx} field={field} />
             ))}
 
             <textarea placeholder="Your message" name="message" />
