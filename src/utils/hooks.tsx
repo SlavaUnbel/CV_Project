@@ -3,6 +3,7 @@ import { init } from 'ityped';
 import {
   ChangeEvent,
   createRef,
+  FormEvent,
   LegacyRef,
   useCallback,
   useEffect,
@@ -574,20 +575,20 @@ export const useSplitLandingPageHoverEffect = (data: ISplitLandingPage[]) => {
 
 //Form Wave Animation Hooks
 export const useFormWaveAnimationEffect = () => {
-  const ref: LegacyRef<HTMLLabelElement> = createRef();
+  const labelRef: LegacyRef<HTMLLabelElement> = createRef();
 
   useEffect(() => {
-    if (ref.current && ref.current.innerText)
-      ref.current.innerHTML = ref.current.innerText
+    if (labelRef.current && labelRef.current.innerText)
+      labelRef.current.innerHTML = labelRef.current.innerText
         .split('')
         .map(
           (letter, idx) =>
             `<span style='transition-delay: ${idx * 50}ms'>${letter}</span>`,
         )
         .join('');
-  }, [ref]);
+  }, [labelRef]);
 
-  return ref;
+  return labelRef;
 };
 
 //Dad Jokes Hooks
@@ -653,4 +654,198 @@ export const useToggleFaqCollapse = () => {
   const openCloseFaq = () => setActive(!active);
 
   return { active, openCloseFaq };
+};
+
+// Auth Project Hooks
+interface AuthProjectInputFieldsProps {
+  messages: IAuthProjectMessages;
+  setEmailMessage: (
+    messages: IAuthProjectMessages,
+    emailMessage: IMessage,
+  ) => void;
+  setPasswordMessage: (
+    messages: IAuthProjectMessages,
+    passwordMessage: IMessage,
+  ) => void;
+
+  username: string;
+  setUsername: (username: string) => void;
+
+  password: string;
+  setPassword: (password: string) => void;
+}
+
+export const useAuthProjectInputFields = ({
+  messages,
+  setEmailMessage,
+  setPasswordMessage,
+
+  username,
+  setUsername,
+
+  password,
+  setPassword,
+}: AuthProjectInputFieldsProps) => {
+  //every input options
+  const labels = ['Email', 'Password'];
+  const patterns = ['.{4,}', '.{4,}'];
+  const [emailPattern, passwordPattern] = patterns.map(
+    (pattern) => new RegExp(pattern),
+  );
+  const { emailMessage, passwordMessage } = messages;
+
+  //functions to change inputs' states
+  const getSuccess = (): IMessage => ({ message: null, type: 'success' });
+  const getError = (message: string | null): IMessage => ({
+    message,
+    type: 'error',
+  });
+  const getWarning = (message: string | null): IMessage => ({
+    message,
+    type: 'warning',
+  });
+  const setEmailMsg = (emailMessage: IMessage) =>
+    setEmailMessage(messages, emailMessage);
+  const setPasswordMsg = (passwordMessage: IMessage) =>
+    setPasswordMessage(messages, passwordMessage);
+
+  //inputs' values change handlers
+  const onEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setUsername(e.target.value);
+
+    emailPattern.test(e.currentTarget.value)
+      ? setEmailMsg(getSuccess())
+      : e.currentTarget.value === ''
+      ? setEmailMsg(getError('Please, fill in the "Email" field'))
+      : setEmailMsg(
+          getWarning(
+            'Please, provide the "Email" field with value as shown below: \n smth@domain.com',
+          ),
+        );
+  };
+
+  const onPasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setPassword(e.target.value);
+
+    passwordPattern.test(e.currentTarget.value)
+      ? setPasswordMsg(getSuccess())
+      : e.currentTarget.value === ''
+      ? setPasswordMsg(getError('Please, fill in the "Email" field'))
+      : setPasswordMsg(
+          getWarning(
+            'Please, provide at least 4 symbols to the "Password" field',
+          ),
+        );
+  };
+
+  const changeHandlers = [onEmailChange, onPasswordChange];
+
+  //resulting array of inputs to render
+  const inputFields: IFormInput[] = [
+    {
+      name: labels[0],
+      valid: emailMessage.type === 'success',
+      invalid: emailMessage.type === 'error',
+      incorrect: emailMessage.type === 'warning',
+      value: username,
+      type: 'text',
+      onChange: changeHandlers[0],
+    },
+    {
+      name: labels[1],
+      valid: passwordMessage.type === 'success',
+      invalid: passwordMessage.type === 'error',
+      incorrect: passwordMessage.type === 'warning',
+      value: password,
+      type: 'password',
+      onChange: changeHandlers[1],
+    },
+  ];
+
+  return inputFields;
+};
+
+interface AuthProjectValidationProps extends IWithError, IWithWarning {
+  messages: IAuthProjectMessages;
+  setValidated: (validated: boolean) => void;
+}
+
+export const useAuthProjectPageValidation = ({
+  messages,
+  setValidated,
+  pushError,
+  pushWarning,
+}: AuthProjectValidationProps) => {
+  const validate = () =>
+    Object.values(messages).every((msg) => msg.type === 'success')
+      ? setValidated(true)
+      : Object.values(messages)
+          .filter((msg) => msg.type !== 'success')
+          .map((msg) =>
+            msg.type === 'error'
+              ? pushError(msg.message)
+              : pushWarning(msg.message),
+          );
+
+  return validate;
+};
+
+interface AuthProjectSubmitProps extends IWithError, IWithSuccess {
+  username: string;
+  password: string;
+  validated: boolean;
+  setValidated: (validated: boolean) => void;
+  reset: () => void;
+  setUsage: (usage: AuthProjectUsage) => void;
+}
+
+export const useAuthProjectSubmit = ({
+  validated,
+  username,
+  password,
+  setValidated,
+  reset,
+  setUsage,
+  pushError,
+  pushSuccess,
+}: AuthProjectSubmitProps) => {
+  const register = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (validated)
+      services.authProjectService
+        .register(username, password)
+        .then((response) =>
+          response.type === 'error'
+            ? pushError(response.message)
+            : pushSuccess(response.message),
+        )
+        .catch((err) => pushError(err))
+        .finally(() => {
+          setValidated(false);
+          reset();
+          setUsage('login');
+        });
+  };
+
+  const login = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (validated)
+      services.authProjectService
+        .login(username, password)
+        .then((response) =>
+          response.type === 'error'
+            ? pushError(response.message)
+            : pushSuccess(response.message),
+        )
+        .catch((err) => pushError(err))
+        .finally(() => {
+          setValidated(false);
+          reset();
+          setUsage('login');
+        });
+  };
+
+  return { register, login };
 };

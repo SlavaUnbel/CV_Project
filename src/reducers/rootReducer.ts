@@ -1,4 +1,5 @@
 import { combineReducers, Store } from 'redux';
+import { authProjectReducer, AuthProjectState } from './authProjectReducer';
 import { contactReducer, ContactState } from './contactReducer';
 import { headerReducer, HeaderState } from './headerReducer';
 import { loadingReducer, LoadingState } from './loadingReducer';
@@ -13,6 +14,7 @@ export type IState = {
   works: WorksState;
   contact: ContactState;
   portfolioItems: PortfolioItemsState;
+  authProject: AuthProjectState;
 };
 
 export type IStore = Store<IState>;
@@ -24,4 +26,5 @@ export default combineReducers({
   works: worksReducer,
   contact: contactReducer,
   portfolioItems: portfolioItemsReducer,
+  authProject: authProjectReducer
 });

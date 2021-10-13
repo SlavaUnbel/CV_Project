@@ -51,7 +51,9 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "server": "nodemon src/server.js",
+    "client": "react-scripts start",
+    "start": "concurrently \"npm run server \" \"npm run client\" ",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -98,11 +100,12 @@
     ]
   },
   "devDependencies": {
-    "react-scripts": "4.0.3",
     "@types/classnames": "^2.3.1",
     "@types/ityped": "^1.0.1",
     "@types/lodash": "^4.14.173",
+    "@types/mysql": "^2.15.19",
     "husky": "^7.0.2",
-    "prettier": "^2.4.1"
+    "prettier": "^2.4.1",
+    "react-scripts": "4.0.3"
   }
 }

@@ -15,5 +15,4 @@ export const dadJokesPath = '/dad-jokes'
 export const faqCollapsePath = '/faq-collapse'
 
 //works paths
-export const authProjectRegistrationPath = '/auth-project-registration'
-export const authProjectLoginPath = '/auth-project-login'
+export const authProjectPath = '/auth-project'

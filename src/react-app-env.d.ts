@@ -44,10 +44,12 @@ type SliderDirection = 'left' | 'right';
 
 interface IFormInput {
   name: string;
-  pattern: string;
   valid: boolean;
   invalid: boolean;
   incorrect: boolean;
+  pattern?: string;
+  value?: string;
+  type?: string;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
@@ -55,6 +57,11 @@ interface IMessages {
   nameMessage: IMessage;
   emailMessage: IMessage;
   subjectMessage: IMessage;
+}
+
+interface IAuthProjectMessages {
+  emailMessage: IMessage;
+  passwordMessage: IMessage;
 }
 
 interface IMessage {
@@ -99,3 +106,5 @@ interface IFaqCollapse {
   title: string;
   answer: string;
 }
+
+type AuthProjectUsage = 'login' | 'registration' | undefined

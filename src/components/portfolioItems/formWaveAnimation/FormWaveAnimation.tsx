@@ -1,37 +1,64 @@
-import React, { FC } from 'react';
+import React, { FC, FormEvent } from 'react';
 import { useWindowTitle } from '../../../utils/hooks';
-import { authProjectRegistrationPath } from '../../../utils/route';
 import ComponentWrapper from '../../utils/componentWrapper/ComponentWrapper';
 import './form-wave-animation.scss';
 import FormField from './formField/FormField';
+import FormRegisterLink from './formRegisterLink/FormRegisterLink';
+import FormSubmitButton from './formSubmitButton/FormSubmitButton';
+import FormTitle from './formTitle/FormTitle';
 
 interface Props {
-  registration?: boolean;
+  inputFields?: IFormInput[];
+  validate?: () => void;
+  submit?: (e: FormEvent<HTMLFormElement>) => void;
+
+  usage?: AuthProjectUsage;
+  setUsage?: (usage: AuthProjectUsage) => void;
 }
 
-const FormWaveAnimation: FC<Props> = ({ registration }) => {
+const FormWaveAnimation: FC<Props> = ({
+  inputFields,
+  validate,
+  submit,
+
+  usage,
+  setUsage,
+}) => {
   useWindowTitle('Form Wave Animation');
 
   return (
     <ComponentWrapper>
       <div className="form-wave-animation__container">
         <div className="form-wrapper">
-          <h1>{registration ? 'Please Fill To Register' : 'Please Login'}</h1>
+          <FormTitle usage={usage} />
 
-          <form autoComplete="off">
-            <FormField type="text" label="Email" required />
+          <form onSubmit={submit} autoComplete="off">
+            {inputFields ? (
+              inputFields.map((field, idx) => (
+                <FormField
+                  key={idx}
+                  label={field.name}
+                  pattern={field.pattern}
+                  valid={field.valid}
+                  invalid={field.invalid}
+                  incorrect={field.incorrect}
+                  value={field.value}
+                  type={field.type}
+                  onChange={field.onChange}
+                />
+              ))
+            ) : (
+              <>
+                <FormField type="text" label="Email" />
 
-            <FormField type="password" label="Password" required />
+                <FormField type="password" label="Password" />
+              </>
+            )}
 
-            <button>
-              <p>{registration ? 'Register' : 'Login'}</p>
-            </button>
+            <FormSubmitButton usage={usage} onClick={validate} />
 
-            {!registration && (
-              <p className="text">
-                Don't have an account?
-                <a href={authProjectRegistrationPath}>Register</a>
-              </p>
+            {usage !== 'registration' && (
+              <FormRegisterLink setUsage={setUsage} />
             )}
           </form>
         </div>
