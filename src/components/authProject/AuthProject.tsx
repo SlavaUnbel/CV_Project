@@ -30,6 +30,10 @@ interface Props extends IWithError, IWithWarning, IWithSuccess {
 
   usage: AuthProjectUsage;
   setUsage: (usage: AuthProjectUsage) => void;
+
+  currentUserInfo: string;
+  setCurrentUserInfo: (info: string, role?: string) => void;
+  currentUserRole?: string;
 }
 
 const AuthProject: FC<Props> = ({
@@ -49,6 +53,10 @@ const AuthProject: FC<Props> = ({
 
   usage,
   setUsage,
+
+  currentUserInfo,
+  setCurrentUserInfo,
+  currentUserRole,
 
   pushError,
   pushWarning,
@@ -75,13 +83,19 @@ const AuthProject: FC<Props> = ({
     pushWarning,
   });
 
-  const { register, login } = useAuthProjectSubmit({
-    validated,
+  const { submit, logout } = useAuthProjectSubmit({
     username,
     password,
-    setValidated,
-    setUsage,
     reset,
+
+    validated,
+    setValidated,
+
+    usage,
+    setUsage,
+
+    setCurrentUserInfo,
+
     pushError,
     pushSuccess,
   });
@@ -90,15 +104,12 @@ const AuthProject: FC<Props> = ({
     <FormWaveAnimation
       inputFields={inputFields}
       validate={validate}
-      submit={
-        usage === 'registration'
-          ? register
-          : usage === 'login'
-          ? login
-          : undefined
-      }
+      submit={submit}
       usage={usage}
       setUsage={setUsage}
+      currentUserInfo={currentUserInfo}
+      currentUserRole={currentUserRole}
+      logout={logout}
     />
   );
 };

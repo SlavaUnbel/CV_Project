@@ -107,4 +107,4 @@ interface IFaqCollapse {
   answer: string;
 }
 
-type AuthProjectUsage = 'login' | 'registration' | undefined
+type AuthProjectUsage = 'login' | 'registration' | 'loggedIn' | undefined

@@ -3,10 +3,11 @@ import { useMenuRouter } from '../../../utils/hooks';
 
 interface Props {
   title: string;
+  openCloseMenu: (menuOpen: boolean) => void;
 }
 
-const MenuItem: FC<Props> = ({ title }) => {
-  const redirect = useMenuRouter(title);
+const MenuItem: FC<Props> = ({ title, openCloseMenu }) => {
+  const redirect = useMenuRouter(title, openCloseMenu);
 
   return <li onClick={redirect}>{title}</li>;
 };

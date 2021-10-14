@@ -36,11 +36,16 @@ export const useRedirectToItem = (link: string) => {
 };
 
 //Menu Hooks
-export const useMenuRouter = (title: string) => {
+export const useMenuRouter = (
+  title: string,
+  openCloseMenu: (menuOpen: boolean) => void,
+) => {
   const history = useHistory();
 
-  const redirect = () =>
+  const redirect = () => {
     history.push(title !== 'Home' ? title.toLowerCase() : '');
+    openCloseMenu(false);
+  };
 
   return redirect;
 };
@@ -793,19 +798,30 @@ export const useAuthProjectPageValidation = ({
 interface AuthProjectSubmitProps extends IWithError, IWithSuccess {
   username: string;
   password: string;
+  reset: () => void;
+
   validated: boolean;
   setValidated: (validated: boolean) => void;
-  reset: () => void;
+
+  setCurrentUserInfo: (info: string, role?: string) => void;
+
+  usage: AuthProjectUsage;
   setUsage: (usage: AuthProjectUsage) => void;
 }
 
 export const useAuthProjectSubmit = ({
-  validated,
   username,
   password,
-  setValidated,
   reset,
+
+  validated,
+  setValidated,
+
+  usage,
   setUsage,
+
+  setCurrentUserInfo,
+
   pushError,
   pushSuccess,
 }: AuthProjectSubmitProps) => {
@@ -843,9 +859,35 @@ export const useAuthProjectSubmit = ({
         .finally(() => {
           setValidated(false);
           reset();
-          setUsage('login');
+          setUsage('loggedIn');
         });
   };
 
-  return { register, login };
+  const logout = () =>
+    services.authProjectService
+      .logout()
+      .then((_response) => {
+        pushSuccess('Your session has been finished!');
+      })
+      .finally(() => setUsage('login'));
+
+  useEffect(() => {
+    services.authProjectService.checkIfLoggedIn().then((response) => {
+      if (response.data.loggedIn) {
+        setCurrentUserInfo(
+          `You are now logged in as "${response.data.user[0].username}"`,
+          `User role: ${response.data.user[0].role}`,
+        );
+        setUsage('loggedIn');
+      } else {
+        setCurrentUserInfo('No user data is provided');
+        setUsage('login');
+      }
+    });
+  }, [setCurrentUserInfo, setUsage]);
+
+  const submit =
+    usage === 'registration' ? register : usage === 'login' ? login : undefined;
+
+  return { submit, logout };
 };

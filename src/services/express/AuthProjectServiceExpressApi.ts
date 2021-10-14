@@ -3,7 +3,7 @@ import AuthProjectService from '../abstract/AuthProjectService';
 
 export class AuthProjectServiceExpressApi extends AuthProjectService {
   public async register(username: string, password: string) {
-    const response = await axios.post('http://localhost:8080/authProject/register', {
+    const response = await axios.post('/authProject/register', {
       username,
       password,
     });
@@ -12,11 +12,19 @@ export class AuthProjectServiceExpressApi extends AuthProjectService {
   }
 
   public async login(username: string, password: string) {
-    const response = await axios.post('http://localhost:8080/authProject/login', {
+    const response = await axios.post('/authProject/login', {
       username,
       password,
     });
 
     return response.data;
+  }
+
+  public async checkIfLoggedIn() {
+    return await axios.get('/authProject/login');
+  }
+
+  public async logout() {
+    return await axios.post('/authProject/logout', {}, { withCredentials: true })
   }
 }
