@@ -2,7 +2,7 @@ import React, { FC, FormEvent } from 'react';
 import { useWindowTitle } from '../../../utils/hooks';
 import ComponentWrapper from '../../utils/componentWrapper/ComponentWrapper';
 import './form-wave-animation.scss';
-import FormField from './formField/FormField';
+import FormFields from './formFields/FormFields';
 import FormRegisterLink from './formRegisterLink/FormRegisterLink';
 import FormSubmitButton from './formSubmitButton/FormSubmitButton';
 import FormTitle from './formTitle/FormTitle';
@@ -33,27 +33,7 @@ const FormWaveAnimation: FC<Props> = ({
           <FormTitle usage={usage} />
 
           <form onSubmit={submit} autoComplete="off">
-            {inputFields ? (
-              inputFields.map((field, idx) => (
-                <FormField
-                  key={idx}
-                  label={field.name}
-                  pattern={field.pattern}
-                  valid={field.valid}
-                  invalid={field.invalid}
-                  incorrect={field.incorrect}
-                  value={field.value}
-                  type={field.type}
-                  onChange={field.onChange}
-                />
-              ))
-            ) : (
-              <>
-                <FormField type="text" label="Email" />
-
-                <FormField type="password" label="Password" />
-              </>
-            )}
+            <FormFields inputFields={inputFields} />
 
             <FormSubmitButton usage={usage} onClick={validate} />
 
