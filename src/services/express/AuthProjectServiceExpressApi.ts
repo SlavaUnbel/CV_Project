@@ -3,7 +3,7 @@ import AuthProjectService from '../abstract/AuthProjectService';
 
 export class AuthProjectServiceExpressApi extends AuthProjectService {
   public async register(username: string, password: string) {
-    const response = await axios.post('http://localhost:3001/register', {
+    const response = await axios.post('http://localhost:8080/authProject/register', {
       username,
       password,
     });
@@ -12,7 +12,7 @@ export class AuthProjectServiceExpressApi extends AuthProjectService {
   }
 
   public async login(username: string, password: string) {
-    const response = await axios.post('http://localhost:3001/login', {
+    const response = await axios.post('http://localhost:8080/authProject/login', {
       username,
       password,
     });
