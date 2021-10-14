@@ -7,6 +7,8 @@ export interface AuthProjectState {
   username: string;
   password: string;
   usage: AuthProjectUsage;
+  currentUserInfo: string;
+  currentUserRole?: string;
 }
 
 const initialMessages = getInitialMessagesForFormWaveAnimationInputFields();
@@ -17,6 +19,7 @@ const initialAuthProjectState: AuthProjectState = {
   username: '',
   password: '',
   usage: 'login',
+  currentUserInfo: '',
 };
 
 const symbiotes = {
@@ -63,6 +66,13 @@ const symbiotes = {
     set: (state: AuthProjectState, usage: AuthProjectUsage) => ({
       ...state,
       usage,
+    }),
+  },
+  currentUser: {
+    set: (state: AuthProjectState, currentUserInfo: string, currentUserRole?: string) => ({
+      ...state,
+      currentUserInfo,
+      currentUserRole,
     }),
   },
 };

@@ -1,6 +1,7 @@
 import React, { FC, FormEvent } from 'react';
 import { useWindowTitle } from '../../../utils/hooks';
 import ComponentWrapper from '../../utils/componentWrapper/ComponentWrapper';
+import CurrentUserInfo from './currentUserInfo/CurrentUserInfo';
 import './form-wave-animation.scss';
 import FormFields from './formFields/FormFields';
 import FormRegisterLink from './formRegisterLink/FormRegisterLink';
@@ -14,6 +15,10 @@ interface Props {
 
   usage?: AuthProjectUsage;
   setUsage?: (usage: AuthProjectUsage) => void;
+
+  currentUserInfo?: string;
+  currentUserRole?: string;
+  logout?: () => void;
 }
 
 const FormWaveAnimation: FC<Props> = ({
@@ -23,6 +28,10 @@ const FormWaveAnimation: FC<Props> = ({
 
   usage,
   setUsage,
+
+  currentUserInfo,
+  currentUserRole,
+  logout,
 }) => {
   useWindowTitle('Form Wave Animation');
 
@@ -32,15 +41,27 @@ const FormWaveAnimation: FC<Props> = ({
         <div className="form-wrapper">
           <FormTitle usage={usage} />
 
-          <form onSubmit={submit} autoComplete="off">
-            <FormFields inputFields={inputFields} />
+          {usage && usage !== 'registration' && (
+            <CurrentUserInfo info={currentUserInfo} role={currentUserRole} />
+          )}
 
-            <FormSubmitButton usage={usage} onClick={validate} />
+          {usage === 'loggedIn' && (
+            <button onClick={logout}>
+              <p>Logout</p>
+            </button>
+          )}
 
-            {usage !== 'registration' && (
-              <FormRegisterLink setUsage={setUsage} />
-            )}
-          </form>
+          {usage !== 'loggedIn' && (
+            <form onSubmit={submit} autoComplete="off">
+              <FormFields inputFields={inputFields} />
+
+              <FormSubmitButton usage={usage} onClick={validate} />
+
+              {usage !== 'registration' && (
+                <FormRegisterLink setUsage={setUsage} />
+              )}
+            </form>
+          )}
         </div>
       </div>
     </ComponentWrapper>
