@@ -3,4 +3,5 @@ export default abstract class AuthProjectService {
   public abstract login(username: string, password: string): Promise<any>;
   public abstract checkIfLoggedIn(): Promise<any>;
   public abstract logout(): Promise<any>;
+  public abstract checkIfAuthenticated(): Promise<any>
 }

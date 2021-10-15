@@ -2,8 +2,10 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
+const jwt = require('jsonwebtoken');
 
 const db = require('../db/db');
+const verifyJWT = require('./verifyJWT');
 
 router.post('/register', (req, res) =>
   bcrypt.hash(req.body.password, saltRounds, (err, hash) => {
@@ -22,8 +24,8 @@ router.post('/register', (req, res) =>
         }
       },
     );
-  })
-)
+  }),
+);
 
 router.post('/login', (req, res) =>
   db.query(
@@ -39,12 +41,22 @@ router.post('/login', (req, res) =>
             result[0].password,
             (_error, response) => {
               if (response) {
+                const id = result[0].id;
+                const token = jwt.sign({ id }, 'secretJWT', {
+                  expiresIn: 300,
+                });
+
                 req.session.user = result;
+
                 res.send({
-                  message: `You are logged in as ${result[0].username}`,
+                  auth: true,
+                  token,
+                  result,
+                  message: `You are logged in as "${result[0].username}"`,
                 });
               } else {
                 res.send({
+                  auth: false,
                   message: 'Wrong username/password combination!',
                   type: 'error',
                 });
@@ -53,6 +65,7 @@ router.post('/login', (req, res) =>
           );
         } else {
           res.send({
+            auth: false,
             message: 'There is no such user in the database!',
             type: 'error',
           });
@@ -62,14 +75,21 @@ router.post('/login', (req, res) =>
   ),
 );
 
+router.get('/authenticated', verifyJWT, (req, res) => {
+  req.headers['x-access-token'] &&
+    res.send({ message: 'You are authenticated!' });
+});
+
 router.get('/login', (req, res) =>
-  req.session.user ?
-    res.send({ loggedIn: true, user: req.session.user }) : res.send({ loggedIn: false }))
+  req.session.user
+    ? res.send({ loggedIn: true, user: req.session.user })
+    : res.send({ loggedIn: false }),
+);
 
 router.post('/logout', (req, res) => {
   req.session.destroy();
   res.clearCookie('userId');
   res.sendStatus(200);
-})
+});
 
 module.exports = router;

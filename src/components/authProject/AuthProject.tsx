@@ -90,7 +90,7 @@ const AuthProject: FC<Props> = ({
     pushWarning,
   });
 
-  const { submit, logout } = useAuthProjectSubmit({
+  const { submit, logout, checkAuth } = useAuthProjectSubmit({
     username,
     password,
     role,
@@ -118,6 +118,7 @@ const AuthProject: FC<Props> = ({
       role={role}
       onRoleChange={changeRole}
       logout={logout}
+      checkAuth={checkAuth}
     />
   );
 };
