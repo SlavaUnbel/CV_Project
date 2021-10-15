@@ -31,9 +31,13 @@ interface Props extends IWithError, IWithWarning, IWithSuccess {
   usage: AuthProjectUsage;
   setUsage: (usage: AuthProjectUsage) => void;
 
+  role: string;
+  changeRole: (role: string) => void;
+
   currentUserInfo: string;
   setCurrentUserInfo: (info: string, role?: string) => void;
   currentUserRole?: string;
+  setCurrentUserRole?: (role?: string) => void;
 }
 
 const AuthProject: FC<Props> = ({
@@ -53,6 +57,9 @@ const AuthProject: FC<Props> = ({
 
   usage,
   setUsage,
+
+  role,
+  changeRole,
 
   currentUserInfo,
   setCurrentUserInfo,
@@ -86,10 +93,9 @@ const AuthProject: FC<Props> = ({
   const { submit, logout } = useAuthProjectSubmit({
     username,
     password,
-    reset,
-
+    role,
     validated,
-    setValidated,
+    reset,
 
     usage,
     setUsage,
@@ -109,6 +115,8 @@ const AuthProject: FC<Props> = ({
       setUsage={setUsage}
       currentUserInfo={currentUserInfo}
       currentUserRole={currentUserRole}
+      role={role}
+      onRoleChange={changeRole}
       logout={logout}
     />
   );

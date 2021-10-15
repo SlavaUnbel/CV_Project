@@ -2,10 +2,11 @@ import axios from 'axios';
 import AuthProjectService from '../abstract/AuthProjectService';
 
 export class AuthProjectServiceExpressApi extends AuthProjectService {
-  public async register(username: string, password: string) {
+  public async register(username: string, password: string, role: string) {
     const response = await axios.post('/authProject/register', {
       username,
       password,
+      role,
     });
 
     return response.data;

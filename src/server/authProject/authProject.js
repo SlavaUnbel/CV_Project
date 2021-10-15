@@ -4,7 +4,6 @@ const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
 const db = require('../db/db');
-const { destroy } = require('../db/db');
 
 router.post('/register', (req, res) =>
   bcrypt.hash(req.body.password, saltRounds, (err, hash) => {
@@ -14,7 +13,7 @@ router.post('/register', (req, res) =>
 
     db.query(
       'INSERT INTO users (username, password, role) VALUES (?,?,?)',
-      [req.body.username, hash, 'visitor'],
+      [req.body.username, hash, req.body.role],
       (err) => {
         if (err) {
           res.send({ message: err, type: 'error' });

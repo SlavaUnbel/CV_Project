@@ -7,6 +7,7 @@ export interface AuthProjectState {
   username: string;
   password: string;
   usage: AuthProjectUsage;
+  role: string;
   currentUserInfo: string;
   currentUserRole?: string;
 }
@@ -19,6 +20,7 @@ const initialAuthProjectState: AuthProjectState = {
   username: '',
   password: '',
   usage: 'login',
+  role: 'visitor',
   currentUserInfo: '',
 };
 
@@ -42,6 +44,7 @@ const symbiotes = {
     reset: (state: AuthProjectState) => ({
       ...state,
       messages: initialMessages,
+      validated: false,
       username: '',
       password: '',
     }),
@@ -68,8 +71,18 @@ const symbiotes = {
       usage,
     }),
   },
+  role: {
+    set: (state: AuthProjectState, role: string) =>
+      role === 'visitor'
+        ? { ...state, role: 'moderator' }
+        : { ...state, role: 'visitor' },
+  },
   currentUser: {
-    set: (state: AuthProjectState, currentUserInfo: string, currentUserRole?: string) => ({
+    set: (
+      state: AuthProjectState,
+      currentUserInfo: string,
+      currentUserRole?: string,
+    ) => ({
       ...state,
       currentUserInfo,
       currentUserRole,
