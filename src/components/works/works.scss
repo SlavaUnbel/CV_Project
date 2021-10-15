@@ -106,15 +106,15 @@
 
         .left {
           @include flex(row nowrap, center, center);
-          flex: 4;
+          flex: 5;
           height: 80%;
 
           @include mobile {
-            flex: 5;
+            flex: 7;
           }
 
           @include tablet {
-            flex: 4;
+            flex: 5;
           }
 
           .left-container {
@@ -176,6 +176,7 @@
 
             h2 {
               font-size: 1.4rem;
+              overflow: hidden;
 
               @include screen-1300px {
                 font-size: 1.25rem;
