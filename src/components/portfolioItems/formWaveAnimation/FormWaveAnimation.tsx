@@ -21,6 +21,7 @@ interface Props {
   role?: string;
   onRoleChange?: (role: string) => void;
   logout?: () => void;
+  checkAuth?: () => void;
 }
 
 const FormWaveAnimation: FC<Props> = ({
@@ -36,6 +37,7 @@ const FormWaveAnimation: FC<Props> = ({
   role,
   onRoleChange,
   logout,
+  checkAuth,
 }) => {
   useWindowTitle('Form Wave Animation');
 
@@ -50,9 +52,15 @@ const FormWaveAnimation: FC<Props> = ({
           )}
 
           {usage === 'loggedIn' && (
-            <button onClick={logout}>
-              <p>Logout</p>
-            </button>
+            <>
+              <button onClick={logout}>
+                <p>Logout</p>
+              </button>
+
+              <button style={{ marginTop: '1rem' }} onClick={checkAuth}>
+                <p>Check Authentication</p>
+              </button>
+            </>
           )}
 
           {usage !== 'loggedIn' && (

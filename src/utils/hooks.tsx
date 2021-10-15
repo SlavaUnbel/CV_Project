@@ -823,17 +823,18 @@ export const useAuthProjectSubmit = ({
   pushError,
   pushSuccess,
 }: AuthProjectSubmitProps) => {
+  const message = (response: any) =>
+    response.type === 'error'
+      ? pushError(response.message)
+      : pushSuccess(response.message);
+
   const register = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (validated)
       services.authProjectService
         .register(username, password, role)
-        .then((response) =>
-          response.type === 'error'
-            ? pushError(response.message)
-            : pushSuccess(response.message),
-        )
+        .then((response) => message(response))
         .catch((err) => pushError(err))
         .finally(() => {
           reset();
@@ -847,11 +848,7 @@ export const useAuthProjectSubmit = ({
     if (validated)
       services.authProjectService
         .login(username, password)
-        .then((response) =>
-          response.type === 'error'
-            ? pushError(response.message)
-            : pushSuccess(response.message),
-        )
+        .then((response) => message(response))
         .catch((err) => pushError(err))
         .finally(() => {
           reset();
@@ -865,6 +862,12 @@ export const useAuthProjectSubmit = ({
       .then(() => pushSuccess('Your session has been finished!'))
       .catch((err) => pushError(err))
       .finally(() => setUsage('login'));
+
+  const checkAuth = () =>
+    services.authProjectService
+      .checkIfAuthenticated()
+      .then((response) => message(response))
+      .catch((err) => pushError(err));
 
   useEffect(() => {
     services.authProjectService.checkIfLoggedIn().then((response) => {
@@ -884,5 +887,5 @@ export const useAuthProjectSubmit = ({
   const submit =
     usage === 'registration' ? register : usage === 'login' ? login : undefined;
 
-  return { submit, logout };
+  return { submit, logout, checkAuth };
 };

@@ -3,22 +3,21 @@ import AuthProjectService from '../abstract/AuthProjectService';
 
 export class AuthProjectServiceExpressApi extends AuthProjectService {
   public async register(username: string, password: string, role: string) {
-    const response = await axios.post('/authProject/register', {
+    return await axios.post('/authProject/register', {
       username,
       password,
       role,
-    });
-
-    return response.data;
+    }).then((response) => response.data);
   }
 
   public async login(username: string, password: string) {
-    const response = await axios.post('/authProject/login', {
+    return await axios.post('/authProject/login', {
       username,
       password,
+    }).then((response) => {
+      localStorage.setItem('jwtToken', response.data.token);
+      return response.data
     });
-
-    return response.data;
   }
 
   public async checkIfLoggedIn() {
@@ -27,5 +26,13 @@ export class AuthProjectServiceExpressApi extends AuthProjectService {
 
   public async logout() {
     return await axios.post('/authProject/logout', {}, { withCredentials: true })
+  }
+
+  public async checkIfAuthenticated() {
+    return await axios.get('/authProject/authenticated', {
+      headers: {
+        "X-Access-Token": localStorage.getItem('jwtToken')
+      }
+    }).then((response) => response.data)
   }
 }
