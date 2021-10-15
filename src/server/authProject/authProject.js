@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
 const db = require('../db/db');
+const { destroy } = require('../db/db');
 
 router.post('/register', (req, res) =>
   bcrypt.hash(req.body.password, saltRounds, (err, hash) => {
@@ -40,7 +41,6 @@ router.post('/login', (req, res) =>
             (_error, response) => {
               if (response) {
                 req.session.user = result;
-                console.log(req.session.user)
                 res.send({
                   message: `You are logged in as ${result[0].username}`,
                 });
@@ -70,6 +70,7 @@ router.get('/login', (req, res) =>
 router.post('/logout', (req, res) => {
   req.session.destroy();
   res.clearCookie('userId');
+  res.sendStatus(200);
 })
 
 module.exports = router;
