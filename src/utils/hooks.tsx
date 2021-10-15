@@ -866,9 +866,7 @@ export const useAuthProjectSubmit = ({
   const logout = () =>
     services.authProjectService
       .logout()
-      .then((_response) => {
-        pushSuccess('Your session has been finished!');
-      })
+      .then(() => pushSuccess('Your session has been finished!'))
       .finally(() => setUsage('login'));
 
   useEffect(() => {

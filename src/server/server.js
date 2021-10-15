@@ -2,7 +2,6 @@ const express = require('express');
 const cors = require('cors');
 const app = express();
 const PORT = 8080;
-const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 
@@ -16,7 +15,7 @@ app.use(cors({
 }));
 app.use(cookieParser())
 app.use(session({
-  key: 'userId',
+  name: 'userId',
   secret: 'userCookie',
   resave: false,
   saveUninitialized: false,
