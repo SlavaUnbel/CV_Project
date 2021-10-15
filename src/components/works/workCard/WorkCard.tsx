@@ -20,8 +20,6 @@ const WorkCard: FC<Props> = ({ item }) => {
             <h2>{item.title}</h2>
 
             <p>{item.description}</p>
-
-            <span>Projects</span>
           </div>
         </div>
 

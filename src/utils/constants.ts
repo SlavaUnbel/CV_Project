@@ -2,9 +2,9 @@ export const avatarSrc = process.env.PUBLIC_URL + '/images/general/avatar.png';
 export const downSrc = process.env.PUBLIC_URL + '/images/general/down.png';
 export const mobileSrc = process.env.PUBLIC_URL + '/images/general/mobile.png';
 export const firstWorkSrc =
-  process.env.PUBLIC_URL + '/images/general/1st_work.jpeg';
+  process.env.PUBLIC_URL + '/images/general/1st_work.jpg';
 export const secondWorkSrc =
-  process.env.PUBLIC_URL + '/images/general/2nd_work.jpg';
+  process.env.PUBLIC_URL + '/images/general/2nd_work.jpeg';
 export const thirdWorkSrc =
   process.env.PUBLIC_URL + '/images/general/3rd_work.jpg';
 export const arrowSrc = process.env.PUBLIC_URL + '/images/general/arrow.png';

@@ -45,8 +45,13 @@ export const generatePortfolioData = (
 
 export const generateWorksData = (amount: number, id: number): IWorks[] => {
   const icons = [firstIconSrc, secondIconSrc, thirdIconSrc];
-  const titles = ['Web Design', 'Mobile Oak Alley', 'Branding'];
+  const titles = ['Auth Project', 'Second Project', 'Third Project'];
   const images = [firstWorkSrc, secondWorkSrc, thirdWorkSrc];
+  const descriptions = [
+    'This project represents an immitation of real-world application with usage of session through managing cookies and storaging the JWT into localStorage for authentication check purpose.',
+    '2nd desc',
+    '3rd desc',
+  ];
   const links = [authProjectPath];
 
   return new Array(amount).fill(1).map((_, index) => {
@@ -56,8 +61,7 @@ export const generateWorksData = (amount: number, id: number): IWorks[] => {
       id,
       iconSrc: icons[id - 1],
       title: titles[id - 1],
-      description:
-        'Lorem ipsum dolor sit amet, consectetur adipisicing elit.Ratione, possimus. Lorem ipsum dolor sit amet, elit. Ratione, possimus.',
+      description: descriptions[id - 1],
       imgSrc: images[id - 1],
       link: links[id - 1],
     };
