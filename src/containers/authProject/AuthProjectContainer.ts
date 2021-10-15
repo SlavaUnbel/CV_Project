@@ -11,6 +11,7 @@ const mapStateToProps = (state: IState) => ({
   username: state.authProject.username,
   password: state.authProject.password,
   usage: state.authProject.usage,
+  role: state.authProject.role,
   currentUserInfo: state.authProject.currentUserInfo,
   currentUserRole: state.authProject.currentUserRole,
 });
@@ -23,6 +24,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   setUsername: bindActionCreators(authProjectActions.userData.setUsername, dispatch),
   setPassword: bindActionCreators(authProjectActions.userData.setPassword, dispatch),
   setUsage: bindActionCreators(authProjectActions.usage.set, dispatch),
+  changeRole: bindActionCreators(authProjectActions.role.set, dispatch),
   setCurrentUserInfo: bindActionCreators(authProjectActions.currentUser.set, dispatch),
   pushError: bindActionCreators(messageActions.message.error, dispatch),
   pushWarning: bindActionCreators(messageActions.message.warning, dispatch),

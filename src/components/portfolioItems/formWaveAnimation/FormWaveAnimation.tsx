@@ -18,6 +18,8 @@ interface Props {
 
   currentUserInfo?: string;
   currentUserRole?: string;
+  role?: string;
+  onRoleChange?: (role: string) => void;
   logout?: () => void;
 }
 
@@ -31,6 +33,8 @@ const FormWaveAnimation: FC<Props> = ({
 
   currentUserInfo,
   currentUserRole,
+  role,
+  onRoleChange,
   logout,
 }) => {
   useWindowTitle('Form Wave Animation');
@@ -57,9 +61,12 @@ const FormWaveAnimation: FC<Props> = ({
 
               <FormSubmitButton usage={usage} onClick={validate} />
 
-              {usage !== 'registration' && (
-                <FormRegisterLink setUsage={setUsage} />
-              )}
+              <FormRegisterLink
+                usage={usage}
+                role={role}
+                setUsage={setUsage}
+                onRoleChange={onRoleChange}
+              />
             </form>
           )}
         </div>

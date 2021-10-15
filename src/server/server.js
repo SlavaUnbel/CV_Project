@@ -13,6 +13,7 @@ app.use(cors({
   methods: ['GET', 'POST'],
   credentials: true
 }));
+
 app.use(cookieParser())
 app.use(session({
   name: 'userId',
@@ -20,10 +21,9 @@ app.use(session({
   resave: false,
   saveUninitialized: false,
   cookie: {
-    expires: 60 * 60 * 24,
+    expires: 1000 * 60 * 60 * 24,
   }
 }))
-
 app.use('/authProject', authProject);
 
 app.listen(PORT, () => {

@@ -798,10 +798,9 @@ export const useAuthProjectPageValidation = ({
 interface AuthProjectSubmitProps extends IWithError, IWithSuccess {
   username: string;
   password: string;
-  reset: () => void;
-
+  role: string;
   validated: boolean;
-  setValidated: (validated: boolean) => void;
+  reset: () => void;
 
   setCurrentUserInfo: (info: string, role?: string) => void;
 
@@ -812,10 +811,9 @@ interface AuthProjectSubmitProps extends IWithError, IWithSuccess {
 export const useAuthProjectSubmit = ({
   username,
   password,
-  reset,
-
+  role,
   validated,
-  setValidated,
+  reset,
 
   usage,
   setUsage,
@@ -830,7 +828,7 @@ export const useAuthProjectSubmit = ({
 
     if (validated)
       services.authProjectService
-        .register(username, password)
+        .register(username, password, role)
         .then((response) =>
           response.type === 'error'
             ? pushError(response.message)
@@ -838,7 +836,6 @@ export const useAuthProjectSubmit = ({
         )
         .catch((err) => pushError(err))
         .finally(() => {
-          setValidated(false);
           reset();
           setUsage('login');
         });
@@ -857,7 +854,6 @@ export const useAuthProjectSubmit = ({
         )
         .catch((err) => pushError(err))
         .finally(() => {
-          setValidated(false);
           reset();
           setUsage('loggedIn');
         });
@@ -867,6 +863,7 @@ export const useAuthProjectSubmit = ({
     services.authProjectService
       .logout()
       .then(() => pushSuccess('Your session has been finished!'))
+      .catch((err) => pushError(err))
       .finally(() => setUsage('login'));
 
   useEffect(() => {
