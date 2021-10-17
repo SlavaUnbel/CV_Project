@@ -200,7 +200,7 @@ export const generateFaqCollapseData = (id: number): IFaqCollapse[] => {
 
 export const getInitialMessagesForFormWaveAnimationInputFields =
   (): IAuthProjectMessages => {
-    const names = ['Email', 'Password'];
+    const names = ['Username', 'Password'];
 
     return {
       emailMessage: {
