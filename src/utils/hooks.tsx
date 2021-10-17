@@ -852,7 +852,6 @@ export const useAuthProjectSubmit = ({
         .login(username, password)
         .then((response) => {
           message(response);
-          console.log(response);
           if (response.auth) {
             setUserExists(true);
             setCurrentUserInfo('Refresh the page to proceed');
@@ -870,12 +869,15 @@ export const useAuthProjectSubmit = ({
   const logout = () =>
     services.authProjectService
       .logout()
-      .then(() => pushSuccess('Your session has been finished!'))
+      .then((response) => {
+        if (response.status === 200) {
+          setUserExists(false);
+          setCurrentUserInfo('Refresh the page to proceed');
+          pushSuccess('Your session has been finished!');
+        }
+      })
       .catch((err) => pushError(err))
-      .finally(() => {
-        setUsage('login');
-        setUserExists(false);
-      });
+      .finally(() => !userExists && setUsage('login'));
 
   const checkAuth = () =>
     services.authProjectService

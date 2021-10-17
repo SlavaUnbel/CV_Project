@@ -89,7 +89,7 @@ router.get('/login', (req, res) =>
 router.post('/logout', (req, res) => {
   req.session.destroy();
   res.clearCookie('userId');
-  res.sendStatus(200);
+  res.sendStatus(res.statusCode);
 });
 
 module.exports = router;

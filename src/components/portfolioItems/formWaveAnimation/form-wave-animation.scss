@@ -76,6 +76,8 @@
       }
 
       &.proceed {
+        margin-bottom: 0.25rem;
+        
         &:hover {
           color: var(--link-form-wave-animation-color);
           border: 1px solid var(--link-form-wave-animation-color);
