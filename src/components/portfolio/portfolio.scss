@@ -13,6 +13,7 @@
   h1 {
     font-size: 3rem;
     overflow: hidden;
+    height: 7.5vh;
 
     @include screen-1300px {
       font-size: 2.5rem;
@@ -24,6 +25,7 @@
 
     @include mobile {
       font-size: 1.5rem;
+      height: 5vh;
     }
 
     @include tablet {
@@ -37,15 +39,18 @@
     padding: 0;
     list-style: none;
     overflow: hidden;
+    height: 7.5vh;
 
     @include mobile {
-      margin: 0.25rem;
       @include flex(row wrap, center, center);
+      margin: 0.25rem;
+      height: 10vh;
     }
 
     @include tablet {
       @include flex(row nowrap, center, space-between);
       margin: 0.5rem;
+      height: 7.5vh;
     }
 
     li {
@@ -80,15 +85,24 @@
   }
 
   .container {
-    @include flex(row wrap, center, center);   
+    @include flex(row wrap, center, space-evenly);   
     width: 70vw;
+    height: 80vh;
+
+    @include screen-1600px {
+      width: 80vw;
+    }
 
     @include screen-1000px {
-      width: 85vw;
+      width: 90vw;
     }
 
     @include mobile {
       width: 100vw;
+    }
+
+    @include tablet {
+      width: 70vw;
     }
 
     .item {
@@ -109,7 +123,7 @@
 
       .img-wrapper {
         width: 20rem;
-        height: 15rem;
+        height: 12rem;
         border-radius: 20px;
         border: 1px solid var(--lightgrey-color);
         margin-bottom: 1rem;
@@ -117,38 +131,42 @@
         cursor: pointer;
 
         @include screen-1600px {
-          width: 18rem;
-          height: 14rem;
-          margin-bottom: 0.9rem;
+          margin-bottom: 0.7rem;
         }
         
         @include screen-1500px {
-          width: 15rem;
-          height: 12rem;
+          width: 18rem;
+          height: 11.5rem;
           margin-bottom: 0.9rem;
         }
 
         @include screen-1300px {
-          width: 14rem;
-          height: 10rem;
+          width: 15rem;
+          height: 9.5rem;
           margin-bottom: 0.8rem;
         }
 
-        @include screen-1000px {
+        @include screen-1100px {
           width: 13rem;
-          height: 10rem;
+          height: 8rem;
+          margin-bottom: 0.7rem;
+        }
+
+        @include screen-1000px {
+          width: 12rem;
+          height: 7.5rem;
           margin-bottom: 0.6rem;
         }
 
         @include mobile {
           width: 8rem;
-          height: 6rem;
+          height: 5.5rem;
           margin-bottom: 0.3rem;
         }
 
         @include tablet {
-          width: 14rem;
-          height: 10rem;
+          width: 13rem;
+          height: 8rem;
           margin-bottom: 1rem;
         }
 

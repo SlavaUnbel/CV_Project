@@ -67,7 +67,7 @@ const Portfolio: FC<Props> = ({
             ))}
           </div>
         ) : (
-          <Loader wrapperStyle={{ height: '75vh' }} />
+          <Loader wrapperStyle={{ height: '80vh' }} />
         )}
       </div>
     </ComponentWrapper>
