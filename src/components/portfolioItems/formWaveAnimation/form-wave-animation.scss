@@ -74,15 +74,23 @@
           border: 1px solid var(--yellow-color);
         }
       }
+
+      &.proceed {
+        &:hover {
+          color: var(--link-form-wave-animation-color);
+          border: 1px solid var(--link-form-wave-animation-color);
+        }
+      }
     }
     
     .form-control {
       margin: 1.5rem 0 0.5rem;
       width: 20rem;
       
+      
       @include mobile {
         margin: 1rem 0 0.5rem;
-        width: 70vw;
+        width: 80vw;
       }
 
       @include tablet {
@@ -218,6 +226,17 @@
       align-items: center;
       font-family: 'Soleil Regular';
       margin-top: 1rem;
+      font-size: 0.9rem;
+
+      @include mobile {
+        margin-top: 0.8rem;
+        font-size: 0.8rem;
+      }
+
+      @include tablet {
+        margin-top: 1rem;
+        font-size: 0.9rem;
+      }
 
       .link {
         font-family: 'Soleil Light';
@@ -232,6 +251,14 @@
       .checkbox {
         margin-left: 0.5rem;
         color: var(--link-form-wave-animation-color);
+
+        @include mobile {
+          margin-left: 0.25rem;
+        }
+  
+        @include tablet {
+          margin-left: 0.5rem;
+        }
       }
     }
   }
