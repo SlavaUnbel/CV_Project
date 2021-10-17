@@ -692,7 +692,7 @@ export const useAuthProjectInputFields = ({
   setPassword,
 }: AuthProjectInputFieldsProps) => {
   //every input options
-  const labels = ['Email', 'Password'];
+  const labels = ['Username', 'Password'];
   const patterns = ['.{4,}', '.{4,}'];
   const [emailPattern, passwordPattern] = patterns.map(
     (pattern) => new RegExp(pattern),
@@ -721,10 +721,10 @@ export const useAuthProjectInputFields = ({
     emailPattern.test(e.currentTarget.value)
       ? setEmailMsg(getSuccess())
       : e.currentTarget.value === ''
-      ? setEmailMsg(getError('Please, fill in the "Email" field'))
+      ? setEmailMsg(getError('Please, fill in the "Username" field'))
       : setEmailMsg(
           getWarning(
-            'Please, provide the "Email" field with value as shown below: \n smth@domain.com',
+            'Please, provide the "Username" field with at least 4 symbols',
           ),
         );
   };
@@ -823,6 +823,8 @@ export const useAuthProjectSubmit = ({
   pushError,
   pushSuccess,
 }: AuthProjectSubmitProps) => {
+  const [userExists, setUserExists] = useState(false);
+
   const message = (response: any) =>
     response.type === 'error'
       ? pushError(response.message)
@@ -848,11 +850,20 @@ export const useAuthProjectSubmit = ({
     if (validated)
       services.authProjectService
         .login(username, password)
-        .then((response) => message(response))
+        .then((response) => {
+          message(response);
+          console.log(response);
+          if (response.auth) {
+            setUserExists(true);
+            setCurrentUserInfo('Refresh the page to proceed');
+          }
+        })
         .catch((err) => pushError(err))
         .finally(() => {
-          reset();
-          setUsage('loggedIn');
+          if (userExists) {
+            reset();
+            setUsage('loggedIn');
+          }
         });
   };
 
@@ -861,7 +872,10 @@ export const useAuthProjectSubmit = ({
       .logout()
       .then(() => pushSuccess('Your session has been finished!'))
       .catch((err) => pushError(err))
-      .finally(() => setUsage('login'));
+      .finally(() => {
+        setUsage('login');
+        setUserExists(false);
+      });
 
   const checkAuth = () =>
     services.authProjectService

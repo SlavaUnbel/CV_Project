@@ -69,6 +69,15 @@ const FormWaveAnimation: FC<Props> = ({
 
               <FormSubmitButton usage={usage} onClick={validate} />
 
+              {usage === 'registration' && (
+                <button
+                  style={{ marginTop: '1rem' }}
+                  onClick={() => setUsage && setUsage('login')}
+                >
+                  <p>Return To Login</p>
+                </button>
+              )}
+
               <FormRegisterLink
                 usage={usage}
                 role={role}

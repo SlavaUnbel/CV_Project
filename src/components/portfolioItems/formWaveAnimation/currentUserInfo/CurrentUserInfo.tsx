@@ -8,7 +8,11 @@ interface Props {
 const CurrentUserInfo: FC<Props> = ({ info, role }) => (
   <div
     className={`user-info ${
-      info && info.split(' ')[0] === 'No' ? 'no-data' : ''
+      info && info.split(' ')[0] === 'No'
+        ? 'no-data'
+        : info && info.split(' ')[0] === 'Refresh'
+        ? 'proceed'
+        : ''
     }`}
   >
     <h4>{info}</h4>
