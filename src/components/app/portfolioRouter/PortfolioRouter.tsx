@@ -12,11 +12,13 @@ import {
   faqCollapsePath,
   formWaveAnimationPath,
   progressStepsPath,
+  randomChoicePickerPath,
   rotatingNavigationPath,
   scrollAnimationPath,
   splitLandingPagePath,
 } from '../../../utils/route';
 import FormWaveAnimation from '../../portfolioItems/formWaveAnimation/FormWaveAnimation';
+import RandomChoicePicker from '../../portfolioItems/randomChoicePicker/RandomChoicePicker';
 import ScrollAnimation from '../../portfolioItems/scrollAnimation/ScrollAnimation';
 
 const PortfolioRouter: FC = () => (
@@ -41,6 +43,7 @@ const PortfolioRouter: FC = () => (
     <Route exact path={formWaveAnimationPath} component={FormWaveAnimation} />
     <Route exact path={dadJokesPath} component={DadJokesContainer} />
     <Route exact path={faqCollapsePath} component={FaqCollapseContainer} />
+    <Route exact path={randomChoicePickerPath} component={RandomChoicePicker} />
   </Switch>
 );
 

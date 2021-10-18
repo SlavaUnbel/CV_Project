@@ -1,0 +1,109 @@
+@import '../../../index.scss';
+
+.random-choice-picker__container {
+  @include container;
+  @include flex(column nowrap, center, center);
+  background-color: var(--bg-random-choice-picker-color);
+
+  .random-choice-picker__wrapper {
+    width: 30rem;
+
+    @include mobile {
+      width: 80vw;
+    }
+
+    @include tablet {
+      width: 30rem;
+    }
+
+    h3 {
+      font-family: 'Soleil Book';
+      color: var(--white-color);
+      margin-bottom: 1.5rem;
+      text-align: center;
+      font-size: 1.25rem;
+      
+      @include mobile {
+        font-size: 1rem;
+        margin-bottom: 1rem;
+      }
+      
+      @include tablet {
+        font-size: 1.25rem;
+        margin-bottom: 1.5rem;
+      }
+    }
+
+    button {
+      @include flex(row nowrap, center, center);
+      display: none;
+      font-family: 'Soleil Light';
+      color: var(--white-color);
+      background-color: var(--bg-tag-random-choice-picker-color);
+      margin: 0 auto 1rem;
+      text-align: center;
+      font-size: 1rem;
+      border: none;
+      padding: 0.5rem 1.5rem;
+      border-radius: 3rem;
+      transition: all 0.4s ease;
+
+      @include mobile {
+        @include flex(row nowrap, center, center);
+      }
+
+      @include tablet {
+        font-size: 1.2rem;
+        margin: 0 auto 1.5rem;
+      }
+
+      &:focus {
+        outline: none;
+      }
+
+      &:active {
+        transform: scale(0.9);
+      }
+    }
+  
+    textarea {
+      font-family: 'Soleil Light';
+      border: none;
+      display: block;
+      width: 100%;
+      height: 7rem;
+      padding: 0.5rem;
+      margin: 0 0 1.5rem;
+      font-size: 1rem;
+
+      @include mobile {
+        font-size: 0.9rem;
+        margin: 0 0 1rem;
+      }
+
+      @include tablet {
+        font-size: 1rem;
+        margin: 0 0 1.5rem;
+      }
+      
+      &:focus {
+        outline: none;
+      }
+    }
+    
+    .tag {
+      font-family: 'Soleil Light';
+      background-color: var(--bg-tag-random-choice-picker-color);
+      color: var(--white-color);
+      border-radius: 3rem;
+      padding: 0.5rem 1.5rem;
+      margin: 0 0.25rem 0.5rem 0;
+      font-size: 0.9rem;
+      display: inline-flex;
+
+      &.highlight {
+        background-color: var(--bg-highlight-random-choice-picker-color);
+      }
+    }
+  }
+}

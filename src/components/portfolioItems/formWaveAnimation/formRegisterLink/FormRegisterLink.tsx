@@ -15,7 +15,7 @@ const FormRegisterLink: FC<Props> = ({
   onRoleChange,
 }) => (
   <>
-    {usage === 'login' ? (
+    {usage === 'login' || !usage ? (
       <p className="text">
         Don't have an account?
         <button
