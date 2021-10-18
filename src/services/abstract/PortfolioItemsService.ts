@@ -10,4 +10,6 @@ export default abstract class PortfolioItemsService {
   public abstract getDadJokesDataFromApi(): Promise<IDadJokes>
 
   public abstract getFaqCollapseData(): Promise<IFaqCollapse[]>
+
+  public abstract getAnimatedNavigationData(): Promise<string[]>
 }

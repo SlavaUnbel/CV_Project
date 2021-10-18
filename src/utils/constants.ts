@@ -30,7 +30,8 @@ export const portfolioItems = [
   'Form Wave Animation',
   'Dad Jokes',
   'FAQ Collapse',
-  'Random Choice Picker'
+  'Random Choice Picker',
+  'Animated Navigation'
 ];
 
 export const expandingCardsSrc =

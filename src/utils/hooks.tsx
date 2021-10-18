@@ -981,3 +981,39 @@ export const useChooseRandomTag = () => {
 
   return { tagsRef, handleKeyUp, handleClick };
 };
+
+//Animated Navigation Hooks
+interface AnimatedNavigationProps
+  extends IWithLoading,
+    IWithError,
+    IWithWarning {
+  setAnimatedNavigationData: (data: string[]) => void;
+}
+
+export const useFetchAnimatedNavigationData = ({
+  setAnimatedNavigationData,
+  setLoading,
+  pushError,
+  pushWarning,
+}: AnimatedNavigationProps) => {
+  useEffect(() => {
+    setLoading(true);
+
+    services.portfolioItemsService
+      .getAnimatedNavigationData()
+      .then((data) => {
+        setAnimatedNavigationData(data);
+        !data && pushWarning('No data found');
+      })
+      .catch((e) => pushError(e))
+      .finally(() => setLoading(false));
+  }, [setAnimatedNavigationData, setLoading, pushError, pushWarning]);
+};
+
+export const useAnimatiedNavigationToggle = () => {
+  const navRef: LegacyRef<HTMLElement> = createRef();
+
+  const toggle = () => navRef.current?.classList.toggle('active');
+
+  return { navRef, toggle };
+};
