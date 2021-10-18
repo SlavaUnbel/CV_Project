@@ -13,6 +13,7 @@ import {
   expandingCardsPath,
   faqCollapsePath,
   formWaveAnimationPath,
+  incrementingCounterPath,
   progressStepsPath,
   randomChoicePickerPath,
   rotatingNavigationPath,
@@ -20,6 +21,7 @@ import {
   splitLandingPagePath,
 } from '../../../utils/route';
 import FormWaveAnimation from '../../portfolioItems/formWaveAnimation/FormWaveAnimation';
+import IncrementingCounter from '../../portfolioItems/incrementingCounter/IncrementingCounter';
 import RandomChoicePicker from '../../portfolioItems/randomChoicePicker/RandomChoicePicker';
 import ScrollAnimation from '../../portfolioItems/scrollAnimation/ScrollAnimation';
 
@@ -50,6 +52,11 @@ const PortfolioRouter: FC = () => (
       exact
       path={animatedNavigationPath}
       component={AnimatedNavigationContainer}
+    />
+    <Route
+      exact
+      path={incrementingCounterPath}
+      component={IncrementingCounter}
     />
   </Switch>
 );

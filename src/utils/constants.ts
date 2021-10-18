@@ -31,7 +31,8 @@ export const portfolioItems = [
   'Dad Jokes',
   'FAQ Collapse',
   'Random Choice Picker',
-  'Animated Navigation'
+  'Animated Navigation',
+  'Incrementing Counter'
 ];
 
 export const expandingCardsSrc =

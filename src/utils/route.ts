@@ -15,6 +15,7 @@ export const dadJokesPath = '/dad-jokes'
 export const faqCollapsePath = '/faq-collapse'
 export const randomChoicePickerPath = '/random-choice-picker'
 export const animatedNavigationPath = '/animated-navigation'
+export const incrementingCounterPath = '/incrementing-counter'
 
 //works paths
 export const authProjectPath = '/auth-project'

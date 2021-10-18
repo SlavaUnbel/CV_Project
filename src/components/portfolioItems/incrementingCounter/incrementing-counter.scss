@@ -1,0 +1,91 @@
+@import '../../../index.scss';
+
+.incrementing-counter__container {
+  @include container;
+  @include flex(row nowrap, center, center);
+  background-color: var(--bg-incrementing-counter-color);
+  color: var(--white-color);
+
+  @include mobile {
+    @include flex(column nowrap, center, center);
+  }
+
+  @include tablet {
+    @include flex(row nowrap, center, center);
+  }
+
+  .counter-container {
+    @include flex(column nowrap, center, center);
+    font-family: 'Soleil Book';
+    margin: 2rem 3rem;
+    width: 20vw;
+
+    @include screen-1000px {
+      margin: 1.5rem 2.5rem;
+    }
+
+    @include mobile {
+      width: 100vw;
+    }
+
+    @include tablet {
+      width: 25vw;
+      margin: 2rem 3rem;
+    }
+
+    .icon {
+      font-size: 3rem;
+
+      @include screen-1000px {
+        font-size: 2.5rem;
+      }
+
+      @include mobile {
+        font-size: 2rem;
+      }
+
+      @include tablet {
+        font-size: 2.5rem;
+      }
+    }
+
+    .counter {
+      font-size: 4rem;
+      margin-top: 0.5rem;
+      font-family: inherit;
+      overflow: hidden;
+
+      @include screen-1000px {
+        font-size: 3.5rem;
+      }
+
+      @include mobile {
+        font-size: 3.25rem;
+        margin-top: 0.25rem;
+      }
+
+      @include tablet {
+        font-size: 3.75rem;
+        margin-top: 0.5rem;
+      }
+    }
+
+    span {
+      font-family: inherit;
+      font-size: 1.25rem;
+      overflow: hidden;
+
+      @include screen-1000px {
+        font-size: 1rem;
+      }
+
+      @include mobile {
+        font-size: 0.9rem;
+      }
+
+      @include tablet {
+        font-size: 1rem;
+      }
+    }
+  }
+}
