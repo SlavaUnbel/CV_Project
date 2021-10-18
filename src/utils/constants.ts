@@ -29,7 +29,8 @@ export const portfolioItems = [
   'Split Landing Page',
   'Form Wave Animation',
   'Dad Jokes',
-  'FAQ Collapse'
+  'FAQ Collapse',
+  'Random Choice Picker'
 ];
 
 export const expandingCardsSrc =

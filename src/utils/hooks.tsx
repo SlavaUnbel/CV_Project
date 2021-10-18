@@ -905,3 +905,79 @@ export const useAuthProjectSubmit = ({
 
   return { submit, logout, checkAuth };
 };
+
+//Random Choice Picker Hooks
+export const useChooseRandomTag = () => {
+  const tagsRef: LegacyRef<HTMLDivElement> = createRef();
+
+  const handleKeyUp = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    createChoices(e.currentTarget.value);
+
+    if (e.key === 'Enter') {
+      e.currentTarget.value = '';
+      chooseRandomTag();
+    }
+  };
+
+  const handleClick = (e: any) => {
+    e.currentTarget.value = '';
+    chooseRandomTag();
+  };
+
+  const createChoices = (input: string) => {
+    const tags = input
+      .split(',')
+      .filter((tag) => tag.trim() !== '')
+      .map((tag) => tag.trim());
+
+    if (tagsRef.current) tagsRef.current.innerHTML = '';
+
+    tags.forEach((tag) => {
+      const tagEl = document.createElement('span');
+      tagEl.classList.add('tag');
+      tagEl.innerText = tag;
+      tagsRef.current?.appendChild(tagEl);
+    });
+  };
+
+  const chooseRandomTag = () => {
+    const times = 30;
+    const timeout = SECOND / 10;
+
+    const interval = setInterval(() => {
+      const randomTag = pickRandomTag();
+
+      highlightTag(randomTag);
+
+      setTimeout(() => {
+        unHighlightTag(randomTag);
+      }, timeout);
+    }, timeout);
+
+    setTimeout(() => {
+      clearInterval(interval);
+
+      setTimeout(() => {
+        const randomTag = pickRandomTag();
+
+        highlightTag(randomTag);
+      }, timeout);
+    }, times * timeout);
+  };
+
+  const pickRandomTag = () => {
+    if (!tagsRef.current) return;
+
+    return tagsRef.current.childNodes[
+      Math.floor(Math.random() * tagsRef.current.childNodes.length)
+    ] as HTMLSpanElement;
+  };
+
+  const highlightTag = (tag?: HTMLSpanElement) =>
+    tag?.classList.add('highlight');
+
+  const unHighlightTag = (tag?: HTMLSpanElement) =>
+    tag?.classList.remove('highlight');
+
+  return { tagsRef, handleKeyUp, handleClick };
+};

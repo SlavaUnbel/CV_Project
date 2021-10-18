@@ -13,6 +13,7 @@ export const splitLandingPagePath = '/split-landing-page'
 export const formWaveAnimationPath = '/form-wave-animation'
 export const dadJokesPath = '/dad-jokes'
 export const faqCollapsePath = '/faq-collapse'
+export const randomChoicePickerPath = '/random-choice-picker'
 
 //works paths
 export const authProjectPath = '/auth-project'
