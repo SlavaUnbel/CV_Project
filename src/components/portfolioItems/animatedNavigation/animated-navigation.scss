@@ -1,0 +1,108 @@
+@import '../../../index.scss';
+
+@mixin transition($property) {
+  transition: $property 0.7s linear;
+}
+
+.animated-navigation__container {
+  @include container;
+  @include flex(row nowrap, center, center);
+  background-color: var(--bg-animated-navigation-first-color);
+  background-image: linear-gradient(
+    to bottom,
+    var(--bg-animated-navigation-first-color) 0%,
+    var(--bg-animated-navigation-first-color) 50%,
+    var(--bg-animated-navigation-second-color) 50%,
+    var(--bg-animated-navigation-second-color) 100%
+  );
+  margin: 0;
+
+  nav {
+    @include flex(row nowrap, center, center);
+    @include transition(width);
+    font-family: 'FreightTextPro';
+    font-weight: 500;
+    background-color: var(--white-color);
+    padding: 1.25rem;
+    width: 5rem;
+    border-radius: 3px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+
+    &.active {
+      width: 20rem;
+
+      ul {
+        width: 100%;
+
+        li {
+          opacity: 1;
+          transform: rotateY(360deg);
+        }
+      }
+
+      button {
+        .line1 {
+          transform: rotate(-765deg) translateY(0.475rem);
+        }
+
+        .line2 {
+          transform: rotate(765deg) translateY(-0.475rem);
+        }
+      }
+    }
+
+    ul {
+      @include flex(row nowrap, center);
+      @include transition(width);
+      padding: 0;
+      margin: 0;
+      width: 0;
+
+      li {
+        transform: rotateY(0deg);
+        opacity: 0;
+        transition: transform 0.7s linear, opacity 0.7s linear;
+      }
+
+      a {
+        position: relative;
+        color: var(--black-color);
+        text-decoration: none;
+        margin: 0 0.5rem;
+      }
+    }
+
+    button {
+      background-color: var(--white-color);
+      overflow: hidden;
+      border: none;
+      cursor: pointer;
+      position: relative;
+      height: 2rem;
+      width: 2rem;
+
+      &:focus {
+        outline: none;
+      }
+
+      .line {
+        @include transition(transform);
+        background-color: var(--bg-animated-navigation-second-color);
+        height: 2px;
+        width: 20px;
+        position: absolute;
+
+        &.line1 {
+          top: 0.6rem;
+          left: 0.3rem;
+        }
+
+        &.line2 {
+          top: auto;
+          left: 0.3rem;
+          bottom: 0.6rem;
+        }
+      }
+    }
+  }
+}

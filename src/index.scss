@@ -5,6 +5,7 @@
 
 :root {
   --white-color: #fff;
+  --black-color: #000;
   --primary2-color: #9398c9;
   --primary-color: #3f51b5;
   --red-color: #dc143c;
@@ -31,6 +32,8 @@
   --bg-random-choice-picker-color: #2b88f0;
   --bg-tag-random-choice-picker-color: #f0932b;
   --bg-highlight-random-choice-picker-color: #273c75;
+  --bg-animated-navigation-first-color: #eafbff;
+  --bg-animated-navigation-second-color: #5290f9;
 }
 
 @mixin scrollbar($bg-color) {
@@ -40,7 +43,11 @@
   background-color: $bg-color;
 }
 
-@mixin flex($flex-flow: row nowrap, $align-items: initial, $justify-content: initial) {
+@mixin flex(
+  $flex-flow: row nowrap,
+  $align-items: initial,
+  $justify-content: initial
+) {
   display: flex;
   flex-flow: $flex-flow;
   align-items: $align-items;
@@ -49,57 +56,57 @@
 
 @mixin screen-1600px {
   @media screen and (max-width: 1600px) {
-    @content
+    @content;
   }
-};
+}
 
 @mixin screen-1500px {
   @media screen and (max-width: 1500px) {
-    @content
+    @content;
   }
-};
+}
 
 @mixin screen-1400px {
   @media screen and (max-width: 1400px) {
-    @content
+    @content;
   }
-};
+}
 
 @mixin screen-1300px {
   @media screen and (max-width: 1300px) {
-    @content
+    @content;
   }
-};
+}
 
 @mixin screen-1200px {
   @media screen and (max-width: 1200px) {
-    @content
+    @content;
   }
-};
+}
 
 @mixin screen-1100px {
   @media screen and (max-width: 1100px) {
-    @content
+    @content;
   }
-};
+}
 
 @mixin screen-1000px {
   @media screen and (max-width: 1000px) {
-    @content
+    @content;
   }
-};
+}
 
 @mixin mobile {
   @media (max-width: 50rem) {
-    @content
+    @content;
   }
-};
+}
 
 @mixin tablet {
   @media (max-width: 1200px) and (min-height: 1000px) {
-    @content
+    @content;
   }
-};
+}
 
 @mixin container {
   width: 100vw;

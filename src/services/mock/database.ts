@@ -7,7 +7,8 @@ interface DATABASE {
   progressStepsData: number[];
   rotatingNavigation: IRotatingNavigation;
   splitLandingPage: ISplitLandingPage[];
-  faqCollapse: IFaqCollapse[]
+  faqCollapse: IFaqCollapse[];
+  animatedNavigation: string[];
 }
 
 export const database: DATABASE = {
@@ -18,6 +19,7 @@ export const database: DATABASE = {
   rotatingNavigation: generateRotatingNavigationData(),
   splitLandingPage: getSplitLandingPageData(),
   faqCollapse: [...generateFaqCollapseData(1)],
+  animatedNavigation: ['Home', 'About', 'Works', 'Contact']
 };
 
 

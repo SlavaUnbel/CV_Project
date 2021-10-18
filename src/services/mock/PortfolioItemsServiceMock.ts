@@ -44,4 +44,10 @@ export default class PortfolioItemsServiceMock extends PortfolioItemsService {
 
     return database.faqCollapse
   }
+
+  public async getAnimatedNavigationData(): Promise<string[]> {
+    await delay(SECOND / 3);
+
+    return database.animatedNavigation
+  }
 }

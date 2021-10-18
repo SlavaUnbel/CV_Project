@@ -14,6 +14,8 @@ export interface PortfolioItemsState {
   dadJokes: IDadJokes;
 
   faqCollapse: IFaqCollapse[];
+
+  animatedNavigation: string[]
 }
 
 const initialPortfolioItemsState: PortfolioItemsState = {
@@ -30,6 +32,8 @@ const initialPortfolioItemsState: PortfolioItemsState = {
   dadJokes: {} as IDadJokes,
 
   faqCollapse: [],
+
+  animatedNavigation: []
 };
 
 const symbiotes = {
@@ -75,6 +79,12 @@ const symbiotes = {
     set: (state: PortfolioItemsState, faqCollapse: IFaqCollapse[]) => ({
       ...state,
       faqCollapse,
+    }),
+  },
+  animatedNavigation: {
+    set: (state: PortfolioItemsState, animatedNavigation: string[]) => ({
+      ...state,
+      animatedNavigation,
     }),
   },
 };

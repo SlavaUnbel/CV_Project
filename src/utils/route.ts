@@ -14,6 +14,7 @@ export const formWaveAnimationPath = '/form-wave-animation'
 export const dadJokesPath = '/dad-jokes'
 export const faqCollapsePath = '/faq-collapse'
 export const randomChoicePickerPath = '/random-choice-picker'
+export const animatedNavigationPath = '/animated-navigation'
 
 //works paths
 export const authProjectPath = '/auth-project'

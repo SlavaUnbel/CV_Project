@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import { Route, Switch } from 'react-router-dom';
+import AnimatedNavigationContainer from '../../../containers/portfolioItems/AnimatedNavigationContainer';
 import DadJokesContainer from '../../../containers/portfolioItems/DadJokesContainer';
 import ExpandingCardsContainer from '../../../containers/portfolioItems/ExpandingCardsContainer';
 import FaqCollapseContainer from '../../../containers/portfolioItems/FaqCollapseContainer';
@@ -7,6 +8,7 @@ import ProgressStepsContainer from '../../../containers/portfolioItems/ProgressS
 import RotatingNavigationContainer from '../../../containers/portfolioItems/RotatingNavigationContainer';
 import SplitLandingPageContainer from '../../../containers/portfolioItems/SplitLandingPageContainer';
 import {
+  animatedNavigationPath,
   dadJokesPath,
   expandingCardsPath,
   faqCollapsePath,
@@ -44,6 +46,11 @@ const PortfolioRouter: FC = () => (
     <Route exact path={dadJokesPath} component={DadJokesContainer} />
     <Route exact path={faqCollapsePath} component={FaqCollapseContainer} />
     <Route exact path={randomChoicePickerPath} component={RandomChoicePicker} />
+    <Route
+      exact
+      path={animatedNavigationPath}
+      component={AnimatedNavigationContainer}
+    />
   </Switch>
 );
 
