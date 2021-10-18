@@ -1017,3 +1017,36 @@ export const useAnimatiedNavigationToggle = () => {
 
   return { navRef, toggle };
 };
+
+//Incrementing Counter Hooks
+export const useIncrementingCounter = () => {
+  const ref: LegacyRef<HTMLDivElement> = createRef();
+
+  useEffect(() => {
+    if (ref.current) {
+      ref.current.innerText = '0';
+
+      const updateCounter = () => {
+        //@ts-ignore
+        const target = +ref.current.getAttribute('data-target');
+        //@ts-ignore
+        const c = +ref.current.innerText;
+
+        const increment = target / 200;
+
+        if (ref.current) {
+          if (c < target) {
+            ref.current.innerText = `${Math.ceil(c + increment)}`;
+            setTimeout(updateCounter, 1);
+          } else {
+            ref.current.innerText = target.toString();
+          }
+        }
+      };
+
+      updateCounter();
+    }
+  }, [ref]);
+
+  return ref;
+};
