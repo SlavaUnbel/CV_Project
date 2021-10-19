@@ -1,4 +1,4 @@
-import { Checkbox } from '@material-ui/core';
+import Checkbox from '@material-ui/core/Checkbox';
 import React, { FC } from 'react';
 
 interface Props {

@@ -3,15 +3,15 @@
 .form-wave-animation__container {
   @include container;
   @include flex(column nowrap, center, center);
-  overflow: hidden;
   margin: 0;
   background-color: var(--bg-content-scroll-animation-color);
   color: var(--white-color);
-  
+
   .form-wrapper {
     background-color: rgba(0, 0, 0, 0.4);
     padding: 1.5rem 2.5rem;
     border-radius: 10px;
+    position: relative;
 
     @include mobile {
       padding: 1rem 2rem;
@@ -43,29 +43,31 @@
       margin-bottom: 1rem;
       border: 1px solid transparent;
       padding: 0.75rem;
-      border-radius: 10px;
-      
+      border-radius: 20px;
+      position: relative;
+      overflow: hidden;
+
       h4 {
         font-family: 'Soleil Light';
         text-align: center;
         font-size: 1rem;
         padding: 0.25rem;
-        
+
         @include mobile {
           font-size: 0.9rem;
         }
-        
+
         @include tablet {
           font-size: 1rem;
         }
       }
-      
+
       &:hover {
         cursor: default;
         color: var(--green-color);
         border: 1px solid var(--green-color);
       }
-      
+
       &.no-data {
         margin-bottom: 0.25rem;
 
@@ -77,19 +79,18 @@
 
       &.proceed {
         margin-bottom: 0.25rem;
-        
+
         &:hover {
           color: var(--link-form-wave-animation-color);
           border: 1px solid var(--link-form-wave-animation-color);
         }
       }
     }
-    
+
     .form-control {
       margin: 1.5rem 0 0.5rem;
       width: 20rem;
-      
-      
+
       @include mobile {
         margin: 1rem 0 0.5rem;
         width: 80vw;
@@ -132,7 +133,8 @@
           }
         }
 
-        &:focus, &:not([value='']) {
+        &:focus,
+        &:not([value='']) {
           outline: none;
           border-bottom-color: var(--link-form-wave-animation-color);
 
@@ -146,7 +148,7 @@
               @include mobile {
                 transform: translateY(-1.2rem);
               }
-      
+
               @include tablet {
                 transform: translateY(-1.5rem);
               }
@@ -219,7 +221,7 @@
       }
 
       &:active {
-        transform: scale(0.95)
+        transform: scale(0.95);
       }
     }
 
@@ -257,7 +259,7 @@
         @include mobile {
           margin-left: 0.25rem;
         }
-  
+
         @include tablet {
           margin-left: 0.5rem;
         }

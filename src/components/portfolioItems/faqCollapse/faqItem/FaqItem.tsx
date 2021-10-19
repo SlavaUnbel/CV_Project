@@ -1,20 +1,21 @@
 import { Close, KeyboardArrowDown } from '@material-ui/icons';
 import React, { FC } from 'react';
-import { useToggleFaqCollapse } from '../../../../utils/hooks';
+import { useToggleClass } from '../../../../utils/hooks';
 
 interface Props {
   data: IFaqCollapse;
 }
 
 const FaqItem: FC<Props> = ({ data }) => {
-  const { active, openCloseFaq } = useToggleFaqCollapse();
+  const { newClass, toggleClass } = useToggleClass();
 
   return (
     <div className="faq-wrapper-container">
-      <div className={`faq ${active ? 'active' : ''}`}>
+      <div className={`faq ${newClass ? 'active' : ''}`}>
         <div className="faq-head">
           <h3>{data.title}</h3>
-          <button onClick={openCloseFaq}>
+
+          <button onClick={toggleClass}>
             <KeyboardArrowDown className="arrow" />
             <Close className="close" />
           </button>

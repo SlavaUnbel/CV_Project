@@ -1,5 +1,5 @@
 import { SECOND } from '../../utils/date';
-import { delay } from '../../utils/delay';
+import { delay } from '../../utils/hooks';
 import PortfolioService from '../abstract/PortfolioService';
 import { database } from './database';
 

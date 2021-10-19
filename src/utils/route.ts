@@ -16,6 +16,7 @@ export const faqCollapsePath = '/faq-collapse'
 export const randomChoicePickerPath = '/random-choice-picker'
 export const animatedNavigationPath = '/animated-navigation'
 export const incrementingCounterPath = '/incrementing-counter'
+export const movieAppPath = '/movie-app'
 
 //works paths
 export const authProjectPath = '/auth-project'

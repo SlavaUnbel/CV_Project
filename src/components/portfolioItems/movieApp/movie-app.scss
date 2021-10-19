@@ -1,0 +1,111 @@
+@import '../../../index.scss';
+
+.movie-app__container {
+  @include container;
+  background: var(--primary-movie-app-color);
+
+  header {
+    padding: 1rem;
+    @include flex(row nowrap, initial, space-between);
+    background: var(--secondary-movie-app-color);
+
+    h1 {
+      font-family: 'Poppins';
+      color: var(--white-color);
+    }
+
+    .search {
+      background: transparent;
+      border: 2px solid var(--secondary-movie-app-color);
+      border-radius: 3rem;
+      font-family: 'Poppins';
+      font-size: 1rem;
+      padding: 0.5rem 1rem;
+      color: var(--white-color);
+      transition: all 0.4s ease;
+
+      &::placeholder {
+        color: var(--search-movie-app-color);
+      }
+
+      &:focus {
+        background: var(--primary-movie-app-color);
+        outline: none;
+      }
+    }
+  }
+
+  main {
+    @include flex(row wrap);
+
+    .movie {
+      width: 20rem;
+      margin: 1rem;
+      background: var(--secondary-movie-app-color);
+      box-shadow: 0 4px 5px rgba(0, 0, 0, 0.2);
+      position: relative;
+      overflow: hidden;
+      border-radius: 5px;
+
+      &:hover {
+        .overview {
+          transform: translateY(0);
+        }
+      }
+
+      img {
+        width: 100%;
+      }
+
+      .movie-info {
+        @include flex(row nowrap, center, space-between);
+        color: var(--white-color);
+        padding: 0.5rem 1rem 1rem;
+        letter-spacing: 0.5px;
+
+        h3 {
+          font-family: 'Poppins';
+          flex: 10;
+        }
+
+        span {
+          font-family: 'Poppins';
+          font-weight: bold;
+          padding: 0.25rem 0.5rem;
+          background: var(--primary-movie-app-color);
+          border-radius: 5px;
+          flex: 1;
+          text-align: center;
+
+          &.green {
+            color: lightgreen;
+          }
+
+          &.orange {
+            color: orange;
+          }
+
+          &.red {
+            color: red;
+          }
+        }
+      }
+
+      .overview {
+        font-family: 'Poppins';
+        background: var(--white-color);
+        padding: 0 2rem 2rem 2rem;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        max-height: 100%;
+        transform: translateY(100%);
+        transition: transform 0.3s ease-in;
+
+        h3 {
+          margin: 1rem 0;
+        }
+      }
+    }
+  }
+}

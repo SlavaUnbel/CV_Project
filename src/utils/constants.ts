@@ -15,7 +15,6 @@ export const secondIconSrc =
 export const thirdIconSrc =
   process.env.PUBLIC_URL + '/images/general/writing.png';
 export const shakeSrc = process.env.PUBLIC_URL + '/images/general/shake.svg';
-
 export const phoneNumber = '+375 (44) 555-55-55';
 export const email = 'slavlen1999@gmail.com';
 export const linkedIn = 'https://linkedin.com/in/slava-levkovich';
@@ -32,12 +31,19 @@ export const portfolioItems = [
   'FAQ Collapse',
   'Random Choice Picker',
   'Animated Navigation',
-  'Incrementing Counter'
+  'Incrementing Counter',
+  'Movie App'
 ];
 
 export const expandingCardsSrc =
   process.env.PUBLIC_URL + '/images/expandingCards';
+
 export const rotatingNavigationSrc =
   process.env.PUBLIC_URL + '/images/rotatingNavigation';
+
 export const splitLandingPageSrc =
   process.env.PUBLIC_URL + '/images/splitLandingPage';
+
+export const movieAppApi = 'https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=34c0884110d32daca6dae564a5df9308&page=1';
+export const movieAppImagesApi = 'https://image.tmdb.org/t/p/w500';
+export const movieAppSearchApi = 'https://api.themoviedb.org/3/search/movie?api_key=34c0884110d32daca6dae564a5df9308&query="'
