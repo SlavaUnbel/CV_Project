@@ -15,7 +15,9 @@ export interface PortfolioItemsState {
 
   faqCollapse: IFaqCollapse[];
 
-  animatedNavigation: string[]
+  animatedNavigation: string[];
+
+  movies: IMovieApp[];
 }
 
 const initialPortfolioItemsState: PortfolioItemsState = {
@@ -33,7 +35,9 @@ const initialPortfolioItemsState: PortfolioItemsState = {
 
   faqCollapse: [],
 
-  animatedNavigation: []
+  animatedNavigation: [],
+
+  movies: [],
 };
 
 const symbiotes = {
@@ -85,6 +89,12 @@ const symbiotes = {
     set: (state: PortfolioItemsState, animatedNavigation: string[]) => ({
       ...state,
       animatedNavigation,
+    }),
+  },
+  movies: {
+    set: (state: PortfolioItemsState, movies: IMovieApp[]) => ({
+      ...state,
+      movies,
     }),
   },
 };

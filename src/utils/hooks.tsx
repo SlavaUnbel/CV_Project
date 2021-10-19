@@ -2,16 +2,20 @@ import emailjs from 'emailjs-com';
 import { init } from 'ityped';
 import {
   ChangeEvent,
-  createRef,
   FormEvent,
   LegacyRef,
   useCallback,
   useEffect,
+  useRef,
   useState,
 } from 'react';
 import { useHistory } from 'react-router-dom';
 import { services } from '../services/services';
-import { portfolioAmountPerPage } from './constants';
+import {
+  movieAppApi,
+  movieAppSearchApi,
+  portfolioAmountPerPage,
+} from './constants';
 import { SECOND } from './date';
 
 // General Hooks
@@ -35,6 +39,17 @@ export const useRedirectToItem = (link: string) => {
   return redirect;
 };
 
+export const useToggleClass = () => {
+  const [newClass, setNewClass] = useState(false);
+
+  const toggleClass = () => setNewClass(!newClass);
+
+  return { newClass, toggleClass };
+};
+
+export const delay = (delay: number) =>
+  new Promise((resolve) => window.setTimeout(resolve, delay));
+
 //Menu Hooks
 export const useMenuRouter = (
   title: string,
@@ -52,7 +67,7 @@ export const useMenuRouter = (
 
 // Home Hooks
 export const useITypedLib = () => {
-  const textRef: LegacyRef<HTMLSpanElement> = createRef();
+  const textRef: LegacyRef<HTMLSpanElement> = useRef(null);
 
   useEffect(() => {
     textRef.current &&
@@ -363,7 +378,7 @@ export const useFetchExpandingCardsData = ({
 };
 
 export const useExpandingCardRef = () => {
-  const ref: LegacyRef<HTMLDivElement> = createRef();
+  const ref: LegacyRef<HTMLDivElement> = useRef(null);
 
   const handleClick = () => {
     removeActiveClasses();
@@ -371,9 +386,9 @@ export const useExpandingCardRef = () => {
   };
 
   const removeActiveClasses = () => {
-    const parent = ref.current?.parentNode
+    const siblings = ref.current?.parentNode
       ?.childNodes as NodeListOf<HTMLDivElement>;
-    parent.forEach((node) => node.classList.remove('active'));
+    siblings.forEach((node) => node.classList.remove('active'));
   };
 
   return { ref, handleClick };
@@ -417,7 +432,7 @@ export const useButtonNavigation = ({
 }: ButtonNavigatonProps) => {
   const [circles, setCircles] = useState<NodeListOf<HTMLDivElement>>();
 
-  const ref: LegacyRef<HTMLDivElement> = createRef();
+  const ref: LegacyRef<HTMLDivElement> = useRef(null);
 
   const prev = () => {
     setCurrentProgressStep(currentProgressStep - 1);
@@ -489,7 +504,7 @@ export const useFetchRotatingNavigationData = ({
 };
 
 export const useNavigationAnimation = () => {
-  const ref: LegacyRef<HTMLDivElement> = createRef();
+  const ref: LegacyRef<HTMLDivElement> = useRef(null);
 
   const open = () => {
     ref.current?.classList.add('show-nav');
@@ -508,7 +523,7 @@ export const useNavigationAnimation = () => {
 export const useScrollingAnimation = () => {
   const [boxes, setBoxes] = useState<NodeListOf<HTMLDivElement>>();
   const [wrapper, setWrapper] = useState<HTMLElement | null>();
-  const ref: LegacyRef<HTMLDivElement> = createRef();
+  const ref: LegacyRef<HTMLDivElement> = useRef(null);
 
   const showBoxesFunction = useCallback(
     () =>
@@ -560,7 +575,7 @@ export const useFetchSplitLandingPageData = ({
 };
 
 export const useSplitLandingPageHoverEffect = (data: ISplitLandingPage[]) => {
-  const ref: LegacyRef<HTMLDivElement> = createRef();
+  const ref: LegacyRef<HTMLDivElement> = useRef(null);
 
   const enterLeft = () => ref.current?.classList.add('hover-left');
 
@@ -580,7 +595,7 @@ export const useSplitLandingPageHoverEffect = (data: ISplitLandingPage[]) => {
 
 //Form Wave Animation Hooks
 export const useFormWaveAnimationEffect = () => {
-  const labelRef: LegacyRef<HTMLLabelElement> = createRef();
+  const labelRef: LegacyRef<HTMLLabelElement> = useRef(null);
 
   useEffect(() => {
     if (labelRef.current && labelRef.current.innerText)
@@ -651,14 +666,6 @@ export const useFetchFaqCollapseData = ({
       .catch((e) => pushError(e))
       .finally(() => setLoading(false));
   }, [setFaqCollapseData, setLoading, pushError, pushWarning]);
-};
-
-export const useToggleFaqCollapse = () => {
-  const [active, setActive] = useState(false);
-
-  const openCloseFaq = () => setActive(!active);
-
-  return { active, openCloseFaq };
 };
 
 // Auth Project Hooks
@@ -908,7 +915,7 @@ export const useAuthProjectSubmit = ({
 
 //Random Choice Picker Hooks
 export const useChooseRandomTag = () => {
-  const tagsRef: LegacyRef<HTMLDivElement> = createRef();
+  const tagsRef: LegacyRef<HTMLDivElement> = useRef(null);
 
   const handleKeyUp = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     createChoices(e.currentTarget.value);
@@ -1010,17 +1017,9 @@ export const useFetchAnimatedNavigationData = ({
   }, [setAnimatedNavigationData, setLoading, pushError, pushWarning]);
 };
 
-export const useAnimatiedNavigationToggle = () => {
-  const navRef: LegacyRef<HTMLElement> = createRef();
-
-  const toggle = () => navRef.current?.classList.toggle('active');
-
-  return { navRef, toggle };
-};
-
 //Incrementing Counter Hooks
 export const useIncrementingCounter = () => {
-  const ref: LegacyRef<HTMLDivElement> = createRef();
+  const ref: LegacyRef<HTMLDivElement> = useRef(null);
 
   useEffect(() => {
     if (ref.current) {
@@ -1049,4 +1048,58 @@ export const useIncrementingCounter = () => {
   }, [ref]);
 
   return ref;
+};
+
+//Movie App Hooks
+interface MovieAppProps extends IWithLoading, IWithError, IWithWarning {
+  setMovies: (movies: any[]) => void;
+}
+
+export const useMovieAppApi = ({
+  setMovies,
+  setLoading,
+  pushError,
+  pushWarning,
+}: MovieAppProps) => {
+  const getData = useCallback(
+    (url: string) => {
+      setLoading(true);
+
+      services.portfolioItemsService
+        .getMovieAppDataFromApi(url)
+        .then((data) => {
+          setMovies(data.results);
+          data.results.length === 0 && pushWarning('No data found!');
+        })
+        .catch((e) => pushError(e))
+        .finally(() => setLoading(false));
+    },
+    [setMovies, setLoading, pushError, pushWarning],
+  );
+
+  useEffect(() => getData(movieAppApi), [getData]);
+
+  return getData;
+};
+
+export const useMovieAppSearch = (getData: (url: string) => void) => {
+  const searchRef: LegacyRef<HTMLInputElement> = useRef(null);
+
+  const submit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (searchRef.current) {
+      const searchTerm = searchRef.current.value;
+
+      if (searchTerm !== '') {
+        getData(`${movieAppSearchApi}${searchTerm}`);
+
+        searchRef.current.value = '';
+      } else {
+        window.location.reload();
+      }
+    }
+  };
+
+  return { searchRef, submit };
 };

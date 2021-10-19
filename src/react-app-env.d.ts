@@ -107,4 +107,12 @@ interface IFaqCollapse {
   answer: string;
 }
 
-type AuthProjectUsage = 'login' | 'registration' | 'loggedIn' | undefined
+type AuthProjectUsage = 'login' | 'registration' | 'loggedIn' | undefined;
+
+interface IMovieApp {
+  poster_path: string;
+  title: string;
+  vote_average: number;
+  overview: string;
+  release_date: string;
+}

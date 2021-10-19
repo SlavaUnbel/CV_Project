@@ -1,6 +1,6 @@
 @import '../../index.scss';
 
-@mixin opacity ($opacity) {
+@mixin opacity($opacity) {
   opacity: $opacity;
   transition: opacity 1s ease;
 }
@@ -9,7 +9,7 @@
   @include container;
   @include flex(column nowrap, center);
   background-color: var(--white-color);
-  
+
   h1 {
     font-size: 3rem;
     overflow: hidden;
@@ -17,11 +17,11 @@
 
     @include screen-1300px {
       font-size: 2.5rem;
-    };
+    }
 
     @include screen-1000px {
       font-size: 2rem;
-    };
+    }
 
     @include mobile {
       font-size: 1.5rem;
@@ -60,6 +60,7 @@
       border-radius: 10px;
       cursor: pointer;
       overflow: hidden;
+      transition: all 0.5s ease;
 
       @include screen-1000px {
         font-size: 0.9rem;
@@ -85,7 +86,7 @@
   }
 
   .container {
-    @include flex(row wrap, center, space-evenly);   
+    @include flex(row wrap, center, space-evenly);
     width: 70vw;
     height: 80vh;
 
@@ -106,7 +107,7 @@
     }
 
     .item {
-      @include flex(column nowrap, center, center);   
+      @include flex(column nowrap, center, center);
       margin: 1rem 1.5rem;
 
       @include screen-1000px {
@@ -133,7 +134,7 @@
         @include screen-1600px {
           margin-bottom: 0.7rem;
         }
-        
+
         @include screen-1500px {
           width: 18rem;
           height: 11.5rem;
@@ -195,7 +196,7 @@
           font-size: 1.25rem;
         }
       }
-      
+
       &:hover {
         h3 {
           @include opacity(1);

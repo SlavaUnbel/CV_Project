@@ -2,6 +2,7 @@
 @import './assets/Soleil/soleil.scss';
 @import './assets/FreightTextPro/freight-text-pro.scss';
 @import './assets/MaterialIcons/material-icons.scss';
+@import './assets/Poppins/poppins.scss';
 
 :root {
   --white-color: #fff;
@@ -35,6 +36,9 @@
   --bg-animated-navigation-first-color: #eafbff;
   --bg-animated-navigation-second-color: #5290f9;
   --bg-incrementing-counter-color: #8e44ad;
+  --primary-movie-app-color: #22254b;
+  --secondary-movie-app-color: #373b69;
+  --search-movie-app-color: #7378c5;
 }
 
 @mixin scrollbar($bg-color) {

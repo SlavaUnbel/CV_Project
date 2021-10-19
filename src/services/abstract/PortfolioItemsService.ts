@@ -12,4 +12,6 @@ export default abstract class PortfolioItemsService {
   public abstract getFaqCollapseData(): Promise<IFaqCollapse[]>
 
   public abstract getAnimatedNavigationData(): Promise<string[]>
+
+  public abstract getMovieAppDataFromApi(url: string): Promise<any>
 }

@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import {
-  useAnimatiedNavigationToggle,
   useFetchAnimatedNavigationData,
+  useToggleClass,
   useWindowTitle,
 } from '../../../utils/hooks';
 import { animatedNavigationPath } from '../../../utils/route';
@@ -33,13 +33,13 @@ const AnimatedNavigation: FC<Props> = ({
     pushWarning,
   });
 
-  const { navRef, toggle } = useAnimatiedNavigationToggle();
+  const { newClass, toggleClass } = useToggleClass();
 
   return (
     <ComponentWrapper>
       {!loading ? (
         <div className="animated-navigation__container">
-          <nav className="active" ref={navRef}>
+          <nav className={newClass ? 'active' : ''}>
             <ul>
               {animatedNavigationData.map((item) => (
                 <li key={item}>
@@ -48,7 +48,7 @@ const AnimatedNavigation: FC<Props> = ({
               ))}
             </ul>
 
-            <button onClick={toggle}>
+            <button onClick={toggleClass}>
               <span className="line line1" />
               <span className="line line2" />
             </button>
