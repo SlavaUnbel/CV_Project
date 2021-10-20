@@ -11,6 +11,7 @@ import SplitLandingPageContainer from '../../../containers/portfolioItems/SplitL
 import {
   animatedNavigationPath,
   dadJokesPath,
+  drinkWaterPath,
   expandingCardsPath,
   faqCollapsePath,
   formWaveAnimationPath,
@@ -22,6 +23,7 @@ import {
   scrollAnimationPath,
   splitLandingPagePath,
 } from '../../../utils/route';
+import DrinkWater from '../../portfolioItems/drinkWater/DrinkWater';
 import FormWaveAnimation from '../../portfolioItems/formWaveAnimation/FormWaveAnimation';
 import IncrementingCounter from '../../portfolioItems/incrementingCounter/IncrementingCounter';
 import RandomChoicePicker from '../../portfolioItems/randomChoicePicker/RandomChoicePicker';
@@ -61,6 +63,7 @@ const PortfolioRouter: FC = () => (
       component={IncrementingCounter}
     />
     <Route exact path={movieAppPath} component={MovieAppContainer} />
+    <Route exact path={drinkWaterPath} component={DrinkWater} />
   </Switch>
 );
 

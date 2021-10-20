@@ -32,7 +32,8 @@ export const portfolioItems = [
   'Random Choice Picker',
   'Animated Navigation',
   'Incrementing Counter',
-  'Movie App'
+  'Movie App',
+  'Drink Water'
 ];
 
 export const expandingCardsSrc =

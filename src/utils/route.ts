@@ -17,6 +17,7 @@ export const randomChoicePickerPath = '/random-choice-picker'
 export const animatedNavigationPath = '/animated-navigation'
 export const incrementingCounterPath = '/incrementing-counter'
 export const movieAppPath = '/movie-app'
+export const drinkWaterPath = '/drink-water'
 
 //works paths
 export const authProjectPath = '/auth-project'
