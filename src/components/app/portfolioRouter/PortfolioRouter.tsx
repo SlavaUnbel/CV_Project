@@ -22,12 +22,14 @@ import {
   rotatingNavigationPath,
   scrollAnimationPath,
   splitLandingPagePath,
+  themeClockPath,
 } from '../../../utils/route';
 import DrinkWater from '../../portfolioItems/drinkWater/DrinkWater';
 import FormWaveAnimation from '../../portfolioItems/formWaveAnimation/FormWaveAnimation';
 import IncrementingCounter from '../../portfolioItems/incrementingCounter/IncrementingCounter';
 import RandomChoicePicker from '../../portfolioItems/randomChoicePicker/RandomChoicePicker';
 import ScrollAnimation from '../../portfolioItems/scrollAnimation/ScrollAnimation';
+import ThemeClock from '../../portfolioItems/themeClock/ThemeClock';
 
 const PortfolioRouter: FC = () => (
   <Switch>
@@ -64,6 +66,7 @@ const PortfolioRouter: FC = () => (
     />
     <Route exact path={movieAppPath} component={MovieAppContainer} />
     <Route exact path={drinkWaterPath} component={DrinkWater} />
+    <Route exact path={themeClockPath} component={ThemeClock} />
   </Switch>
 );
 
