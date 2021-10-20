@@ -4,6 +4,7 @@ import {
   ChangeEvent,
   FormEvent,
   LegacyRef,
+  RefObject,
   useCallback,
   useEffect,
   useRef,
@@ -12,6 +13,8 @@ import {
 import { useHistory } from 'react-router-dom';
 import { services } from '../services/services';
 import {
+  days,
+  months,
   movieAppApi,
   movieAppSearchApi,
   portfolioAmountPerPage,
@@ -1102,4 +1105,147 @@ export const useMovieAppSearch = (getData: (url: string) => void) => {
   };
 
   return { searchRef, submit };
+};
+
+//Drink Water Hooks
+interface DrinkWaterProps {
+  percentageRef: RefObject<HTMLDivElement>;
+  remainedRef: RefObject<HTMLDivElement>;
+  litersRef: RefObject<HTMLSpanElement>;
+}
+
+export const useEstimateRemainedWater = ({
+  percentageRef,
+  remainedRef,
+  litersRef,
+}: DrinkWaterProps) => {
+  const [cups, setCups] = useState<NodeListOf<HTMLDivElement>>();
+  const cupRef: LegacyRef<HTMLDivElement> = useRef(null);
+  useEffect(() => {
+    setCups(
+      cupRef.current?.parentElement?.childNodes as NodeListOf<HTMLDivElement>,
+    );
+  }, []);
+
+  const isMobile = window.innerWidth <= 800 && window.innerHeight <= 1000;
+  const filledCups: HTMLDivElement[] = [];
+  cups?.forEach(
+    (cup) => cup.classList.contains('filled') && filledCups.push(cup),
+  );
+
+  const fillCup = (idx: number) => {
+    if (
+      !percentageRef.current ||
+      !remainedRef.current ||
+      !litersRef.current ||
+      !cups
+    )
+      return;
+
+    if (
+      cups[idx].classList.contains('filled') &&
+      !cups[idx].nextElementSibling?.classList.contains('filled')
+    ) {
+      idx--;
+    }
+
+    cups.forEach((cup, cupId) =>
+      cupId <= idx
+        ? cup.classList.add('filled')
+        : cup.classList.remove('filled'),
+    );
+
+    if (filledCups.length === 0) {
+      percentageRef.current.style.display = 'none';
+      percentageRef.current.style.height = '0';
+    } else {
+      percentageRef.current.style.display = 'flex';
+      percentageRef.current.style.height = `${
+        (filledCups.length / cups.length) * (isMobile ? 16 : 24)
+      }rem`;
+      percentageRef.current.innerText = `${
+        (filledCups.length / cups.length) * 100
+      }%`;
+    }
+
+    if (filledCups.length === cups.length) {
+      remainedRef.current.style.display = 'none';
+      remainedRef.current.style.height = '0';
+    } else {
+      remainedRef.current.style.display = 'flex';
+
+      if (cups.length - filledCups.length === 1 && isMobile) {
+        remainedRef.current.style.flexFlow = 'row wrap';
+      } else {
+        remainedRef.current.style.flexFlow = 'column nowrap';
+      }
+
+      litersRef.current.innerText = `${2 - (250 * filledCups.length) / 1000}L`;
+    }
+  };
+
+  return { cupRef, fillCup };
+};
+
+//Theme Clock Hooks
+export const useSetTimeAndDate = () => {
+  const hourRef: LegacyRef<HTMLDivElement> = useRef(null);
+  const minuteRef: LegacyRef<HTMLDivElement> = useRef(null);
+  const secondRef: LegacyRef<HTMLDivElement> = useRef(null);
+  const timeRef: LegacyRef<HTMLDivElement> = useRef(null);
+  const dateRef: LegacyRef<HTMLDivElement> = useRef(null);
+  const refs = { hourRef, minuteRef, secondRef, timeRef, dateRef };
+
+  const scaleClockArrows = (
+    num: number,
+    inMin: number,
+    inMax: number,
+    outMin: number,
+    outMax: number,
+  ) => ((num - inMin) * (outMax - outMin)) / (inMax - inMin) + outMin;
+
+  const changeTimeValue = useCallback(
+    (ref: RefObject<HTMLDivElement>, value: number, timeBorders: number[]) => {
+      if (!ref.current) return;
+      const [start, end] = timeBorders;
+
+      ref.current.style.transform = `translate(-50%, -100%) rotate(${scaleClockArrows(
+        value,
+        start,
+        end,
+        0,
+        360,
+      )}deg)`;
+    },
+    [],
+  );
+
+  const setTime = useCallback(() => {
+    if (!timeRef.current || !dateRef.current) return;
+
+    const time = new Date();
+    const month = time.getMonth();
+    const day = time.getDay();
+    const date = time.getDate();
+    const hours = time.getHours();
+    const minutes = time.getMinutes();
+    const seconds = time.getSeconds();
+
+    changeTimeValue(hourRef, hours, [0, 11]);
+    changeTimeValue(minuteRef, minutes, [0, 59]);
+    changeTimeValue(secondRef, seconds, [0, 59]);
+
+    timeRef.current.innerHTML = `${hours < 10 ? `0${hours}` : hours}:${
+      minutes < 10 ? `0${minutes}` : minutes
+    }`;
+    dateRef.current.innerHTML = `${days[day]}, ${months[month]} <span class="circle">${date}</span>`;
+  }, [changeTimeValue]);
+
+  useEffect(() => setTime(), [setTime]);
+
+  useEffect(() => {
+    setInterval(setTime, SECOND);
+  }, [setTime]);
+
+  return refs;
 };

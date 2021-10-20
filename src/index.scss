@@ -7,7 +7,6 @@
 :root {
   --white-color: #fff;
   --black-color: #000;
-  --primary2-color: #9398c9;
   --primary-color: #3f51b5;
   --red-color: #dc143c;
   --lightgrey-color: #d3d3d3;
@@ -42,6 +41,7 @@
   --bg-drink-water-color: #3494e4;
   --border-drink-water-color: #144fc6;
   --fill-drink-water-color: #6ab3f8;
+  --date-theme-clock-color: #aaa;
 }
 
 @mixin scrollbar($bg-color) {

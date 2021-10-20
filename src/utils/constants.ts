@@ -33,7 +33,8 @@ export const portfolioItems = [
   'Animated Navigation',
   'Incrementing Counter',
   'Movie App',
-  'Drink Water'
+  'Drink Water',
+  'Theme Clock',
 ];
 
 export const expandingCardsSrc =
@@ -45,6 +46,32 @@ export const rotatingNavigationSrc =
 export const splitLandingPageSrc =
   process.env.PUBLIC_URL + '/images/splitLandingPage';
 
-export const movieAppApi = 'https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=34c0884110d32daca6dae564a5df9308&page=1';
+export const movieAppApi =
+  'https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=34c0884110d32daca6dae564a5df9308&page=1';
 export const movieAppImagesApi = 'https://image.tmdb.org/t/p/w500';
-export const movieAppSearchApi = 'https://api.themoviedb.org/3/search/movie?api_key=34c0884110d32daca6dae564a5df9308&query="'
+export const movieAppSearchApi =
+  'https://api.themoviedb.org/3/search/movie?api_key=34c0884110d32daca6dae564a5df9308&query="';
+
+export const days = [
+  'Sunday',
+  'Monday',
+  'Tuesday',
+  'Wednesday',
+  'Thursday',
+  'Friday',
+  'Saturday',
+];
+export const months = [
+  'Jan',
+  'Feb',
+  'Mar',
+  'Apr',
+  'May',
+  'Jun',
+  'Jul',
+  'Aug',
+  'Sep',
+  'Oct',
+  'Nov',
+  'Dec',
+];
