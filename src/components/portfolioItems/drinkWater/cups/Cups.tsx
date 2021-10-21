@@ -1,25 +1,14 @@
-import React, { FC, RefObject } from 'react';
-import { useEstimateRemainedWater } from '../../../../utils/hooks';
+import React, { FC } from 'react';
 
 interface Props {
-  idx: number;
-  percentageRef: RefObject<HTMLDivElement>;
-  remainedRef: RefObject<HTMLDivElement>;
-  litersRef: RefObject<HTMLSpanElement>;
+  cup: number;
+  fillCup: (cup: number) => void;
 }
 
-const Cups: FC<Props> = ({ idx, percentageRef, remainedRef, litersRef }) => {
-  const { cupRef, fillCup } = useEstimateRemainedWater({
-    percentageRef,
-    remainedRef,
-    litersRef,
-  });
-
-  return (
-    <div className="cup cup-small" ref={cupRef} onClick={() => fillCup(idx)}>
-      250 ml
-    </div>
-  );
-};
+const Cups: FC<Props> = ({ cup, fillCup }) => (
+  <div className="cup cup-small" onClick={() => fillCup(cup)}>
+    250 ml
+  </div>
+);
 
 export default Cups;
