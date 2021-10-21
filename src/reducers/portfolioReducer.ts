@@ -8,7 +8,7 @@ export interface PortfolioState {
 
 const initialPortfolioState: PortfolioState = {
   portfolioData: [],
-  selected: 0,
+  selected: 1,
   pagesCount: 0,
 };
 

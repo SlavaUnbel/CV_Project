@@ -50,11 +50,11 @@ const Portfolio: FC<Props> = ({
         <h1>Portfolio</h1>
 
         <ul>
-          {new Array(pagesCount).fill(1).map((_, idx) => (
+          {Array.from({ length: pagesCount }, (_, i) => i).map((page) => (
             <PortfolioPage
-              key={idx}
-              idx={idx}
-              active={active === idx}
+              key={page}
+              pageNumber={page}
+              active={active === page}
               setActive={setActivePage}
             />
           ))}

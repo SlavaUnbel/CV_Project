@@ -1108,39 +1108,20 @@ export const useMovieAppSearch = (getData: (url: string) => void) => {
 };
 
 //Drink Water Hooks
-interface DrinkWaterProps {
-  percentageRef: RefObject<HTMLDivElement>;
-  remainedRef: RefObject<HTMLDivElement>;
-  litersRef: RefObject<HTMLSpanElement>;
-}
-
-export const useEstimateRemainedWater = ({
-  percentageRef,
-  remainedRef,
-  litersRef,
-}: DrinkWaterProps) => {
-  const [cups, setCups] = useState<NodeListOf<HTMLDivElement>>();
+export const useEstimateRemainedWater = () => {
+  const litersRef: LegacyRef<HTMLSpanElement> = useRef(null);
+  const remainedRef: LegacyRef<HTMLDivElement> = useRef(null);
+  const percentageRef: LegacyRef<HTMLDivElement> = useRef(null);
   const cupRef: LegacyRef<HTMLDivElement> = useRef(null);
+  const refs = { litersRef, remainedRef, percentageRef, cupRef };
+
+  const [cups, setCups] = useState<NodeListOf<HTMLDivElement>>();
   useEffect(() => {
-    setCups(
-      cupRef.current?.parentElement?.childNodes as NodeListOf<HTMLDivElement>,
-    );
+    setCups(cupRef.current?.childNodes as NodeListOf<HTMLDivElement>);
   }, []);
 
-  const isMobile = window.innerWidth <= 800 && window.innerHeight <= 1000;
-  const filledCups: HTMLDivElement[] = [];
-  cups?.forEach(
-    (cup) => cup.classList.contains('filled') && filledCups.push(cup),
-  );
-
   const fillCup = (idx: number) => {
-    if (
-      !percentageRef.current ||
-      !remainedRef.current ||
-      !litersRef.current ||
-      !cups
-    )
-      return;
+    if (!cups) return;
 
     if (
       cups[idx].classList.contains('filled') &&
@@ -1155,11 +1136,27 @@ export const useEstimateRemainedWater = ({
         : cup.classList.remove('filled'),
     );
 
+    fillBigCup();
+  };
+
+  const fillBigCup = () => {
+    if (
+      !percentageRef.current ||
+      !remainedRef.current ||
+      !litersRef.current ||
+      !cups
+    )
+      return;
+
+    const isMobile = window.innerWidth <= 800 && window.innerHeight <= 1000;
+    const filledCups: HTMLDivElement[] = [];
+    cups?.forEach(
+      (cup) => cup.classList.contains('filled') && filledCups.push(cup),
+    );
+
     if (filledCups.length === 0) {
-      percentageRef.current.style.display = 'none';
       percentageRef.current.style.height = '0';
     } else {
-      percentageRef.current.style.display = 'flex';
       percentageRef.current.style.height = `${
         (filledCups.length / cups.length) * (isMobile ? 16 : 24)
       }rem`;
@@ -1169,22 +1166,17 @@ export const useEstimateRemainedWater = ({
     }
 
     if (filledCups.length === cups.length) {
-      remainedRef.current.style.display = 'none';
       remainedRef.current.style.height = '0';
+    } else if (cups.length - filledCups.length === 1 && isMobile) {
+      remainedRef.current.style.flexFlow = 'row wrap';
     } else {
-      remainedRef.current.style.display = 'flex';
-
-      if (cups.length - filledCups.length === 1 && isMobile) {
-        remainedRef.current.style.flexFlow = 'row wrap';
-      } else {
-        remainedRef.current.style.flexFlow = 'column nowrap';
-      }
-
-      litersRef.current.innerText = `${2 - (250 * filledCups.length) / 1000}L`;
+      remainedRef.current.style.flexFlow = 'column nowrap';
     }
+
+    litersRef.current.innerText = `${2 - (250 * filledCups.length) / 1000}L`;
   };
 
-  return { cupRef, fillCup };
+  return { refs, fillCup };
 };
 
 //Theme Clock Hooks

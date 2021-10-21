@@ -12,7 +12,7 @@ interface DATABASE {
 }
 
 export const database: DATABASE = {
-  portfolioData: [...generatePortfolioData(30, 1)],
+  portfolioData: [...generatePortfolioData(1)],
   worksData: [...generateWorksData(3, 1)],
   expandingCards: [...generateExpandingCardsData(5, 1)],
   progressStepsData: [1, 2, 3, 4],

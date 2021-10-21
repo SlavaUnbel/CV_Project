@@ -14,34 +14,37 @@ import { authProjectPath } from '../../utils/route';
 export const getMenuOptions = (): string[] => {
   const options = ['Home', 'Portfolio', 'Works', 'Contact'];
 
-  return new Array(options.length).fill(1).map((_, index) => options[index]);
+  return Array.from({ length: options.length }, (_, idx) => idx).map(
+    (option) => options[option],
+  );
 };
 
 export const getMenuIconSpans = (): number[] =>
-  new Array(3).fill(1).map((_, index) => index + 1);
+  Array.from({ length: 3 }, (_, idx) => idx + 1).map((span) => span);
 
 export const generatePortfolioData = (
-  amount: number,
   id: number,
 ): IPortfolio[] =>
-  new Array(portfolioItems.length).fill(1).map((_, index) => {
-    if (index) id++;
-    const paths = portfolioItems.map((item) =>
-      item.replaceAll(' ', '-').toLowerCase(),
-    );
+  Array.from({ length: portfolioItems.length }, (_, idx) => idx).map(
+    (index) => {
+      if (index) id++;
+      const paths = portfolioItems.map((item) =>
+        item.replaceAll(' ', '-').toLowerCase(),
+      );
 
-    return {
-      id,
-      imgSrc: paths.map(
-        (preview) => `${process.env.PUBLIC_URL}/images/${preview}.png`,
-      )[index],
-      videoSrc: paths.map(
-        (video) => `${process.env.PUBLIC_URL}/videos/${video}.mp4`,
-      )[index],
-      title: portfolioItems[index],
-      link: paths[index],
-    };
-  });
+      return {
+        id,
+        imgSrc: paths.map(
+          (preview) => `${process.env.PUBLIC_URL}/images/${preview}.png`,
+        )[index],
+        videoSrc: paths.map(
+          (video) => `${process.env.PUBLIC_URL}/videos/${video}.mp4`,
+        )[index],
+        title: portfolioItems[index],
+        link: paths[index],
+      };
+    },
+  );
 
 export const generateWorksData = (amount: number, id: number): IWorks[] => {
   const icons = [firstIconSrc, secondIconSrc, thirdIconSrc];
@@ -54,7 +57,7 @@ export const generateWorksData = (amount: number, id: number): IWorks[] => {
   ];
   const links = [authProjectPath];
 
-  return new Array(amount).fill(1).map((_, index) => {
+  return Array.from({ length: amount }, (_, idx) => idx).map((index) => {
     if (index) id++;
 
     return {
@@ -93,7 +96,7 @@ export const generateExpandingCardsData = (
 ): IExpandingCards[] => {
   const titles = ['Viñales', 'Oak Alley', 'Austria', 'Big Sur', 'Deutschland'];
 
-  return new Array(amount).fill(1).map((_, index) => {
+  return Array.from({ length: amount }, (_, idx) => idx).map((index) => {
     if (index) id++;
 
     return {
@@ -110,9 +113,9 @@ export const generateRotatingNavigationData = (): IRotatingNavigation => {
     date: '11 November, 2018',
     introText:
       'You already know they’re cute, compact, and smart. But there’s a lot more to these beloved little dogs that you might not know.',
-    images: new Array(7)
-      .fill(1)
-      .map((_, idx) => `${rotatingNavigationSrc}/dog-${idx + 1}.jpg`),
+    images: Array.from({ length: 7 }, (_, idx) => idx).map(
+      (_, idx) => `${rotatingNavigationSrc}/dog-${idx + 1}.jpg`,
+    ),
     articleTitles: [
       '1. There are two distinct breeds of corgis.',
       '2. The cardigan welsh corgi is the older breed.',
@@ -187,7 +190,7 @@ export const generateFaqCollapseData = (id: number): IFaqCollapse[] => {
     count: 10,
   };
 
-  return new Array(faqs.count).fill(1).map((_, index) => {
+  return Array.from({ length: faqs.count }, (_, idx) => idx).map((index) => {
     if (index) id++;
 
     return {
