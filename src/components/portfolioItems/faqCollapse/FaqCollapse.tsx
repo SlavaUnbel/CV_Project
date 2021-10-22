@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { useFetchFaqCollapseData, useWindowTitle } from '../../../utils/hooks';
 import ComponentWrapper from '../../utils/componentWrapper/ComponentWrapper';
-import Loader from '../../utils/loader/Loader';
+import LoaderWrapper from '../../utils/loaderWrapper/LoaderWrapper';
 import './faq-collapse.scss';
 import FaqItem from './faqItem/FaqItem';
 
@@ -31,7 +31,7 @@ const FaqCollapse: FC<Props> = ({
 
   return (
     <ComponentWrapper>
-      {!loading ? (
+      <LoaderWrapper>
         <div className="faq-collapse__container">
           <h1>Frequently Asked Questions</h1>
 
@@ -39,9 +39,7 @@ const FaqCollapse: FC<Props> = ({
             <FaqItem key={faq.id} data={faq} />
           ))}
         </div>
-      ) : (
-        <Loader />
-      )}
+      </LoaderWrapper>
     </ComponentWrapper>
   );
 };

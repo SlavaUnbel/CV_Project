@@ -1,6 +1,7 @@
 import { Close, KeyboardArrowDown } from '@material-ui/icons';
 import React, { FC } from 'react';
 import { useToggleClass } from '../../../../utils/hooks';
+import Button from '../../../utils/button/Button';
 
 interface Props {
   data: IFaqCollapse;
@@ -15,10 +16,10 @@ const FaqItem: FC<Props> = ({ data }) => {
         <div className="faq-head">
           <h3>{data.title}</h3>
 
-          <button onClick={toggleClass}>
+          <Button onClick={toggleClass}>
             <KeyboardArrowDown className="arrow" />
             <Close className="close" />
-          </button>
+          </Button>
         </div>
 
         <p>{data.answer}</p>

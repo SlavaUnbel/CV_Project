@@ -14,7 +14,7 @@ interface IWithSuccess {
 
 interface IWithLoading {
   loading?: boolean;
-  setLoading: (loading: boolean) => void;
+  setLoading?: (loading: boolean) => void;
 }
 
 interface IHome {

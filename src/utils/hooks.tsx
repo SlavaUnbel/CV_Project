@@ -1,6 +1,6 @@
 import emailjs from 'emailjs-com';
 import { init } from 'ityped';
-import {
+import React, {
   ChangeEvent,
   FormEvent,
   LegacyRef,
@@ -90,11 +90,10 @@ export const useITypedLib = () => {
 };
 
 //Portfolio Hooks
-interface PortfolioProps extends IWithError, IWithWarning {
+interface PortfolioProps extends IWithLoading, IWithError, IWithWarning {
   active: number;
   setPortfolioData: (portfolioData: IPortfolio[]) => void;
   setPagesCount: (pagesCount: number) => void;
-  setLoading: (loading: boolean) => void;
 }
 
 export const useFetchPortfolioData = ({
@@ -106,6 +105,7 @@ export const useFetchPortfolioData = ({
   pushWarning,
 }: PortfolioProps) => {
   useEffect(() => {
+    if (!setLoading) return;
     const startIdx = active * portfolioAmountPerPage;
     const endIdx = startIdx + portfolioAmountPerPage;
 
@@ -163,9 +163,8 @@ export const useGetMediaElement = ({
 };
 
 //Works Hooks
-interface WorksProps extends IWithError, IWithWarning {
+interface WorksProps extends IWithLoading, IWithError, IWithWarning {
   setWorksData: (worksData: IWorks[]) => void;
-  setLoading: (loading: boolean) => void;
 }
 
 export const useFetchWorksData = ({
@@ -175,6 +174,7 @@ export const useFetchWorksData = ({
   pushWarning,
 }: WorksProps) => {
   useEffect(() => {
+    if (!setLoading) return;
     setLoading(true);
 
     services.worksService
@@ -367,6 +367,7 @@ export const useFetchExpandingCardsData = ({
   pushWarning,
 }: ExpandingCardsProps) => {
   useEffect(() => {
+    if (!setLoading) return;
     setLoading(true);
 
     services.portfolioItemsService
@@ -409,6 +410,7 @@ export const useFetchProgressStepsData = ({
   pushWarning,
 }: ProgressStepsProps) => {
   useEffect(() => {
+    if (!setLoading) return;
     setLoading(true);
 
     services.portfolioItemsService
@@ -493,6 +495,7 @@ export const useFetchRotatingNavigationData = ({
   pushWarning,
 }: RotatingNavigationProps) => {
   useEffect(() => {
+    if (!setLoading) return;
     setLoading(true);
 
     services.portfolioItemsService
@@ -564,6 +567,7 @@ export const useFetchSplitLandingPageData = ({
   pushWarning,
 }: SplitLandingPageProps) => {
   useEffect(() => {
+    if (!setLoading) return;
     setLoading(true);
 
     services.portfolioItemsService
@@ -625,6 +629,7 @@ export const useFetchDadJokesData = ({
   pushError,
 }: DadJokesProps) => {
   const getJoke = useCallback(() => {
+    if (!setLoading) return;
     setLoading(true);
 
     services.portfolioItemsService
@@ -658,6 +663,7 @@ export const useFetchFaqCollapseData = ({
   pushWarning,
 }: FaqCollapseProps) => {
   useEffect(() => {
+    if (!setLoading) return;
     setLoading(true);
 
     services.portfolioItemsService
@@ -919,6 +925,7 @@ export const useAuthProjectSubmit = ({
 //Random Choice Picker Hooks
 export const useChooseRandomTag = () => {
   const tagsRef: LegacyRef<HTMLDivElement> = useRef(null);
+  const areaRef: LegacyRef<HTMLTextAreaElement> = useRef(null);
 
   const handleKeyUp = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     createChoices(e.currentTarget.value);
@@ -929,8 +936,9 @@ export const useChooseRandomTag = () => {
     }
   };
 
-  const handleClick = (e: any) => {
-    e.currentTarget.value = '';
+  const handleClick = () => {
+    if (!areaRef.current) return;
+    areaRef.current.value = '';
     chooseRandomTag();
   };
 
@@ -989,7 +997,7 @@ export const useChooseRandomTag = () => {
   const unHighlightTag = (tag?: HTMLSpanElement) =>
     tag?.classList.remove('highlight');
 
-  return { tagsRef, handleKeyUp, handleClick };
+  return { tagsRef, areaRef, handleKeyUp, handleClick };
 };
 
 //Animated Navigation Hooks
@@ -1007,6 +1015,7 @@ export const useFetchAnimatedNavigationData = ({
   pushWarning,
 }: AnimatedNavigationProps) => {
   useEffect(() => {
+    if (!setLoading) return;
     setLoading(true);
 
     services.portfolioItemsService
@@ -1066,6 +1075,7 @@ export const useMovieAppApi = ({
 }: MovieAppProps) => {
   const getData = useCallback(
     (url: string) => {
+      if (!setLoading) return;
       setLoading(true);
 
       services.portfolioItemsService

@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { useFetchWorksData, useWindowTitle } from '../../utils/hooks';
 import ComponentWrapper from '../utils/componentWrapper/ComponentWrapper';
-import Loader from '../utils/loader/Loader';
+import LoaderWrapper from '../utils/loaderWrapper/LoaderWrapper';
 import Arrow from './arrow/Arrow';
 import WorkCard from './workCard/WorkCard';
 import './works.scss';
@@ -36,7 +36,7 @@ const Works: FC<Props> = ({
       <div className="works">
         <h1>Works</h1>
 
-        {!loading ? (
+        <LoaderWrapper>
           <div
             className="slider"
             style={{ transform: `translateX(-${current * 100}vw)` }}
@@ -45,9 +45,7 @@ const Works: FC<Props> = ({
               <WorkCard key={item.id} item={item} />
             ))}
           </div>
-        ) : (
-          <Loader />
-        )}
+        </LoaderWrapper>
 
         <Arrow
           direction="left"

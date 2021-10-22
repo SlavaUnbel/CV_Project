@@ -1,0 +1,28 @@
+@import '../../../index.scss';
+
+.ripple {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+
+  &:focus {
+    outline: none;
+  }
+
+  .circle {
+    position: absolute;
+    background: var(--white-color);
+    width: 5rem;
+    height: 5rem;
+    border-radius: 50%;
+    transform: translate(-50%, -150%) scale(0);
+    animation: scale 0.5s ease-out;
+  }
+
+  @keyframes scale {
+    to {
+      transform: translate(-50%, -150%) scale(3);
+      opacity: 0;
+    }
+  }
+}

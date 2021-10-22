@@ -5,7 +5,7 @@ import {
   useWindowTitle,
 } from '../../../utils/hooks';
 import ComponentWrapper from '../../utils/componentWrapper/ComponentWrapper';
-import Loader from '../../utils/loader/Loader';
+import LoaderWrapper from '../../utils/loaderWrapper/LoaderWrapper';
 import Circle from './circle/Circle';
 import NavigationBar from './navigationBar/NavigationBar';
 import RandomContent from './randomContent/RandomContent';
@@ -43,11 +43,9 @@ const RotatingNavigation: FC<Props> = ({
         <Circle open={open} close={close} />
 
         <div className="rotating-navigation__container" ref={ref}>
-          {!loading ? (
+          <LoaderWrapper>
             <RandomContent data={rotatingNavigationData} />
-          ) : (
-            <Loader />
-          )}
+          </LoaderWrapper>
         </div>
 
         <NavigationBar />

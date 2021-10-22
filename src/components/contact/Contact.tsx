@@ -6,6 +6,7 @@ import {
   useSendEmail,
   useWindowTitle,
 } from '../../utils/hooks';
+import Button from '../utils/button/Button';
 import ComponentWrapper from '../utils/componentWrapper/ComponentWrapper';
 import './contact.scss';
 import InputField from './inputField/InputField';
@@ -76,9 +77,9 @@ const Contact: FC<Props> = ({
 
             <textarea placeholder="Your message" name="message" />
 
-            <button type="submit" onClick={validate}>
+            <Button type="submit" onClick={validate}>
               Send Message
-            </button>
+            </Button>
           </form>
         </div>
       </div>

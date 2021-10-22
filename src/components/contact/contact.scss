@@ -29,15 +29,15 @@
       height: 100%;
 
       @include screen-1400px {
-        transform: translateX(-100px)
+        transform: translateX(-100px);
       }
 
       @include screen-1200px {
-        transform: translateX(-200px)
+        transform: translateX(-200px);
       }
 
       @include screen-1000px {
-        transform: translateX(-300px)
+        transform: translateX(-300px);
       }
 
       @include mobile {
@@ -109,7 +109,7 @@
 
         &:focus {
           outline: none;
-      
+
           &.invalid {
             @include border-bottom(var(--red-color));
           }
@@ -155,31 +155,24 @@
         }
       }
 
-      button {
+      .btn {
         width: 10rem;
-        height: 2rem;
         font-size: 1rem;
         color: var(--white-color);
         background-color: var(--red-color);
         border: none;
         border-radius: 10px;
         font-weight: 500;
-        cursor: pointer;
+        padding: 0.5rem;
 
         @include mobile {
           width: 7rem;
-          height: 1.25rem;
           font-size: 0.7rem;
         }
 
         @include tablet {
           width: 9rem;
-          height: 1.5rem;
           font-size: 0.9rem;
-        }
-
-        &:focus {
-          outline: none;
         }
 
         &:active {

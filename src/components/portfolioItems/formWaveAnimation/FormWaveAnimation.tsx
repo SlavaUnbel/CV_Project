@@ -1,5 +1,6 @@
 import React, { FC, FormEvent } from 'react';
 import { useWindowTitle } from '../../../utils/hooks';
+import Button from '../../utils/button/Button';
 import ComponentWrapper from '../../utils/componentWrapper/ComponentWrapper';
 import CurrentUserInfo from './currentUserInfo/CurrentUserInfo';
 import './form-wave-animation.scss';
@@ -53,13 +54,11 @@ const FormWaveAnimation: FC<Props> = ({
 
           {usage === 'loggedIn' && (
             <>
-              <button onClick={logout}>
-                <p>Logout</p>
-              </button>
+              <Button onClick={logout}>Logout</Button>
 
-              <button style={{ marginTop: '1rem' }} onClick={checkAuth}>
-                <p>Check Authentication</p>
-              </button>
+              <Button style={{ marginTop: '1rem' }} onClick={checkAuth}>
+                Check Authentication
+              </Button>
             </>
           )}
 
@@ -70,12 +69,12 @@ const FormWaveAnimation: FC<Props> = ({
               <FormSubmitButton usage={usage} onClick={validate} />
 
               {usage === 'registration' && (
-                <button
+                <Button
                   style={{ marginTop: '1rem' }}
                   onClick={() => setUsage && setUsage('login')}
                 >
-                  <p>Return To Login</p>
-                </button>
+                  Return To Login
+                </Button>
               )}
 
               <FormRegisterLink

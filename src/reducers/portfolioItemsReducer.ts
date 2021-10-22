@@ -3,10 +3,6 @@ import { createSymbiote } from 'redux-symbiote';
 export interface PortfolioItemsState {
   expandingCards: IExpandingCards[];
 
-  progressStepsData: number[];
-  progressStepsWidth: string;
-  currentProgressStep: number;
-
   rotatingNavigation: IRotatingNavigation;
 
   splitLandingPage: ISplitLandingPage[];
@@ -22,10 +18,6 @@ export interface PortfolioItemsState {
 
 const initialPortfolioItemsState: PortfolioItemsState = {
   expandingCards: [],
-
-  progressStepsData: [],
-  progressStepsWidth: '0%',
-  currentProgressStep: 1,
 
   rotatingNavigation: {} as IRotatingNavigation,
 
@@ -45,20 +37,6 @@ const symbiotes = {
     set: (state: PortfolioItemsState, expandingCards: IExpandingCards[]) => ({
       ...state,
       expandingCards,
-    }),
-  },
-  progressSteps: {
-    set: (state: PortfolioItemsState, progressStepsData: number[]) => ({
-      ...state,
-      progressStepsData,
-    }),
-    setWidth: (state: PortfolioItemsState, progressStepsWidth: string) => ({
-      ...state,
-      progressStepsWidth,
-    }),
-    setCurrent: (state: PortfolioItemsState, currentProgressStep: number) => ({
-      ...state,
-      currentProgressStep,
     }),
   },
   rotatingNavigation: {
