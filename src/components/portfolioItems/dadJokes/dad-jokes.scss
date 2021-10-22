@@ -4,7 +4,7 @@
   @include container;
   @include flex(column nowrap, center, center);
   background: var(--bg-dad-jokes-color);
-  
+
   .dad-jokes__wrapper {
     background: var(--white-color);
     border-radius: 10px;
@@ -65,15 +65,14 @@
       }
     }
 
-    button {
+    .btn {
       background: var(--btn-dad-jokes-color);
-      border-radius: 10px;
-      box-shadow: 0 10px 20px var(--shadow-color), 0 6px 6px var(--shadow-color);
       color: var(--white-color);
-      border: 0;
+      border-radius: 10px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2), 0 6px 6px rgba(0, 0, 0, 0.2);
+      border: none;
       padding: 0.8rem 2.5rem;
       font-size: 1rem;
-      cursor: pointer;
       transition: 0.4s ease;
 
       @include screen-1000px {
@@ -90,10 +89,6 @@
         background: var(--bg-dad-jokes-color);
       }
 
-      &:focus {
-        outline: 0;
-      }
-  
       &:active {
         transform: scale(0.9);
       }

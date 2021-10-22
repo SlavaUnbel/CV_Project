@@ -1,12 +1,13 @@
 import React, { FC } from 'react';
 import { useChooseRandomTag, useWindowTitle } from '../../../utils/hooks';
+import Button from '../../utils/button/Button';
 import ComponentWrapper from '../../utils/componentWrapper/ComponentWrapper';
 import './random-choice-picker.scss';
 
 const RandomChoicePicker: FC = () => {
   useWindowTitle('Random Choice Picker');
 
-  const { tagsRef, handleKeyUp, handleClick } = useChooseRandomTag();
+  const { tagsRef, areaRef, handleKeyUp, handleClick } = useChooseRandomTag();
 
   return (
     <ComponentWrapper>
@@ -17,9 +18,10 @@ const RandomChoicePicker: FC = () => {
             Press enter when you're done.
           </h3>
 
-          <button onClick={handleClick}>Enter</button>
+          <Button onClick={handleClick}>Enter</Button>
 
           <textarea
+            ref={areaRef}
             placeholder="Enter choices here..."
             id="textarea"
             onKeyUp={handleKeyUp}

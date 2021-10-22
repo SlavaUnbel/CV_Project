@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+import Button from '../../../utils/button/Button';
 
 interface Props {
   usage?: AuthProjectUsage;
@@ -6,19 +7,19 @@ interface Props {
 }
 
 const FormSubmitButton: FC<Props> = ({ usage, onClick }) => (
-  <button
+  <Button
     type="submit"
     onClick={
       usage
         ? onClick
         : (e) => {
-            e.preventDefault();
+            e?.preventDefault();
             return;
           }
     }
   >
-    <p>{usage === 'registration' ? 'Register' : 'Login'}</p>
-  </button>
+    {usage === 'registration' ? 'Register' : 'Login'}
+  </Button>
 );
 
 export default FormSubmitButton;

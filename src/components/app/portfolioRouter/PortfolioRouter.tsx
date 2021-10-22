@@ -5,7 +5,6 @@ import DadJokesContainer from '../../../containers/portfolioItems/DadJokesContai
 import ExpandingCardsContainer from '../../../containers/portfolioItems/ExpandingCardsContainer';
 import FaqCollapseContainer from '../../../containers/portfolioItems/FaqCollapseContainer';
 import MovieAppContainer from '../../../containers/portfolioItems/MovieAppContainer';
-import ProgressStepsContainer from '../../../containers/portfolioItems/ProgressStepsContainer';
 import RotatingNavigationContainer from '../../../containers/portfolioItems/RotatingNavigationContainer';
 import SplitLandingPageContainer from '../../../containers/portfolioItems/SplitLandingPageContainer';
 import {
@@ -17,7 +16,6 @@ import {
   formWaveAnimationPath,
   incrementingCounterPath,
   movieAppPath,
-  progressStepsPath,
   randomChoicePickerPath,
   rotatingNavigationPath,
   scrollAnimationPath,
@@ -38,7 +36,6 @@ const PortfolioRouter: FC = () => (
       path={expandingCardsPath}
       component={ExpandingCardsContainer}
     />
-    <Route exact path={progressStepsPath} component={ProgressStepsContainer} />
     <Route
       exact
       path={rotatingNavigationPath}

@@ -4,6 +4,7 @@ import {
   useToggleClass,
   useWindowTitle,
 } from '../../../utils/hooks';
+import Button from '../../utils/button/Button';
 import ComponentWrapper from '../../utils/componentWrapper/ComponentWrapper';
 import './theme-clock.scss';
 
@@ -17,9 +18,9 @@ const ThemeClock: FC = () => {
   return (
     <ComponentWrapper>
       <div className={`theme-clock__container ${newClass ? 'dark' : ''}`}>
-        <button className="theme-toggle" onClick={toggleClass}>
+        <Button className="theme-toggle" onClick={toggleClass}>
           {newClass ? 'Light' : 'Dark'} mode
-        </button>
+        </Button>
 
         <div className="clock-container">
           <div className="clock">

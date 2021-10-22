@@ -5,7 +5,7 @@ import {
   useWindowTitle,
 } from '../../../utils/hooks';
 import ComponentWrapper from '../../utils/componentWrapper/ComponentWrapper';
-import Loader from '../../utils/loader/Loader';
+import LoaderWrapper from '../../utils/loaderWrapper/LoaderWrapper';
 import SidePage from './sidePage/SidePage';
 import './split-landing-page.scss';
 
@@ -38,7 +38,7 @@ const SplitLandingPage: FC<Props> = ({
 
   return (
     <ComponentWrapper>
-      {!loading ? (
+      <LoaderWrapper>
         <div
           className="split-landing-page__container"
           ref={ref}
@@ -54,9 +54,7 @@ const SplitLandingPage: FC<Props> = ({
             />
           ))}
         </div>
-      ) : (
-        <Loader />
-      )}
+      </LoaderWrapper>
     </ComponentWrapper>
   );
 };

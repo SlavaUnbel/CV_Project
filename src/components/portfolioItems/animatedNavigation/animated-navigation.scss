@@ -40,7 +40,7 @@
         }
       }
 
-      button {
+      .btn {
         .line1 {
           transform: rotate(-765deg) translateY(0.475rem);
         }
@@ -72,7 +72,7 @@
       }
     }
 
-    button {
+    .btn {
       background-color: var(--white-color);
       overflow: hidden;
       border: none;

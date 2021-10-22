@@ -22,7 +22,6 @@ export const linkedIn = 'https://linkedin.com/in/slava-levkovich';
 export const portfolioAmountPerPage = 6;
 export const portfolioItems = [
   'Expanding Cards',
-  'Progress Steps',
   'Rotating Navigation',
   'Scroll Animation',
   'Split Landing Page',

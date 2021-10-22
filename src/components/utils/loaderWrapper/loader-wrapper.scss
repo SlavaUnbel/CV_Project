@@ -1,0 +1,33 @@
+@import '../../../index.scss';
+
+.loader-wrapper {
+  @include container;
+  @include flex(row nowrap, center, center);
+  z-index: 4;
+
+  .loader {
+    border: 1rem solid var(--lightgrey-color);
+    border-top: 1rem solid var(--primary-color);
+    border-radius: 50%;
+    width: 7rem;
+    height: 7rem;
+    animation: spin 0.5s ease infinite;
+
+    @include mobile {
+      border: 0.7rem solid var(--lightgrey-color);
+      border-top: 0.7rem solid var(--primary-color);
+      width: 5rem;
+      height: 5rem;
+    }
+  }
+
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+}

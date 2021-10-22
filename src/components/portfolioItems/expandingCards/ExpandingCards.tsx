@@ -4,7 +4,7 @@ import {
   useWindowTitle,
 } from '../../../utils/hooks';
 import ComponentWrapper from '../../utils/componentWrapper/ComponentWrapper';
-import Loader from '../../utils/loader/Loader';
+import LoaderWrapper from '../../utils/loaderWrapper/LoaderWrapper';
 import './expanding-cards.scss';
 import ExpandingCard from './expandingCard/ExpandingCard';
 
@@ -34,15 +34,13 @@ const ExpandingCards: FC<Props> = ({
 
   return (
     <ComponentWrapper>
-      {!loading ? (
+      <LoaderWrapper>
         <div className="expanding-cards__container">
           {expandingCardsData.map((card) => (
             <ExpandingCard key={card.id} card={card} />
           ))}
         </div>
-      ) : (
-        <Loader />
-      )}
+      </LoaderWrapper>
     </ComponentWrapper>
   );
 };

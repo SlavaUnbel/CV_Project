@@ -5,7 +5,7 @@ import {
   useWindowTitle,
 } from '../../../utils/hooks';
 import ComponentWrapper from '../../utils/componentWrapper/ComponentWrapper';
-import Loader from '../../utils/loader/Loader';
+import LoaderWrapper from '../../utils/loaderWrapper/LoaderWrapper';
 import './movie-app.scss';
 import MovieItem from './movieItem/MovieItem';
 
@@ -47,11 +47,11 @@ const MovieApp: FC<Props> = ({
         </header>
 
         <main>
-          {!loading ? (
-            movies.map((movie, idx) => <MovieItem key={idx} movie={movie} />)
-          ) : (
-            <Loader />
-          )}
+          <LoaderWrapper>
+            {movies.map((movie, idx) => (
+              <MovieItem key={idx} movie={movie} />
+            ))}
+          </LoaderWrapper>
         </main>
       </div>
     </ComponentWrapper>

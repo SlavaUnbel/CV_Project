@@ -1,5 +1,6 @@
 import { Close, Menu } from '@material-ui/icons';
 import React, { FC } from 'react';
+import Button from '../../../utils/button/Button';
 
 interface Props {
   open: () => void;
@@ -9,13 +10,13 @@ interface Props {
 const Circle: FC<Props> = ({ open, close }) => (
   <div className="circle-container">
     <div className="circle">
-      <button className="close" onClick={close}>
+      <Button className="close" onClick={close}>
         <Close />
-      </button>
+      </Button>
 
-      <button className="open" onClick={open}>
+      <Button className="open" onClick={open}>
         <Menu />
-      </button>
+      </Button>
     </div>
   </div>
 );

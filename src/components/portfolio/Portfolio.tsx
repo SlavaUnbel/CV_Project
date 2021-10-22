@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { useFetchPortfolioData, useWindowTitle } from '../../utils/hooks';
 import ComponentWrapper from '../utils/componentWrapper/ComponentWrapper';
-import Loader from '../utils/loader/Loader';
+import LoaderWrapper from '../utils/loaderWrapper/LoaderWrapper';
 import './portfolio.scss';
 import PortfolioItem from './portfolioItem/PortfolioItem';
 import PortfolioPage from './portfolioPages/PortfolioPage';
@@ -60,15 +60,13 @@ const Portfolio: FC<Props> = ({
           ))}
         </ul>
 
-        {!loading ? (
+        <LoaderWrapper wrapperStyle={{ height: '80vh' }}>
           <div className="container">
             {portfolioData.map((item) => (
               <PortfolioItem key={item.id} item={item} />
             ))}
           </div>
-        ) : (
-          <Loader wrapperStyle={{ height: '80vh' }} />
-        )}
+        </LoaderWrapper>
       </div>
     </ComponentWrapper>
   );

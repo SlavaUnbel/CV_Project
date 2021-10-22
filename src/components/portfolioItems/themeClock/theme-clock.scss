@@ -26,11 +26,6 @@
     padding: 0.5rem 0.7rem;
     position: absolute;
     top: 6rem;
-    cursor: pointer;
-
-    &:focus {
-      outline: none;
-    }
   }
 
   .clock-container {
@@ -48,6 +43,7 @@
         left: 50%;
         height: 5rem;
         width: 0.4rem;
+        border-radius: 10px;
         transform-origin: bottom center;
         transition: all 0.25s ease;
 

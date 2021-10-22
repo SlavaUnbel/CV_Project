@@ -11,7 +11,6 @@
     background-color: rgba(0, 0, 0, 0.4);
     padding: 1.5rem 2.5rem;
     border-radius: 10px;
-    position: relative;
 
     @include mobile {
       padding: 1rem 2rem;
@@ -184,18 +183,16 @@
       }
     }
 
-    button {
+    .btn {
       font-family: 'Soleil Regular';
-      cursor: pointer;
       display: inline-flex;
       align-content: center;
       justify-content: center;
       width: 100%;
       background-color: var(--link-form-wave-animation-color);
       padding: 1rem;
-      font-family: inherit;
       font-size: 1rem;
-      border: 0;
+      border: none;
       border-radius: 5px;
 
       @include mobile {
@@ -208,16 +205,8 @@
         font-size: 1rem;
       }
 
-      p {
-        font-family: 'Soleil Regular';
-      }
-
       &:hover {
         opacity: 0.8;
-      }
-
-      &:focus {
-        outline: none;
       }
 
       &:active {
@@ -249,7 +238,18 @@
         padding: 0;
         margin-left: 0.5rem;
         width: 4rem;
+        border: none;
+        font-size: 1rem;
+        cursor: pointer;
         color: var(--link-form-wave-animation-color);
+
+        &:hover {
+          opacity: 0.8;
+        }
+
+        &:active {
+          transform: scale(0.95);
+        }
       }
 
       .checkbox {

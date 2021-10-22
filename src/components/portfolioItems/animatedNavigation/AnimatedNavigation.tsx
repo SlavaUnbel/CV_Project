@@ -5,8 +5,9 @@ import {
   useWindowTitle,
 } from '../../../utils/hooks';
 import { animatedNavigationPath } from '../../../utils/route';
+import Button from '../../utils/button/Button';
 import ComponentWrapper from '../../utils/componentWrapper/ComponentWrapper';
-import Loader from '../../utils/loader/Loader';
+import LoaderWrapper from '../../utils/loaderWrapper/LoaderWrapper';
 import './animated-navigation.scss';
 
 interface Props extends IWithLoading, IWithError, IWithWarning {
@@ -37,7 +38,7 @@ const AnimatedNavigation: FC<Props> = ({
 
   return (
     <ComponentWrapper>
-      {!loading ? (
+      <LoaderWrapper>
         <div className="animated-navigation__container">
           <nav className={newClass ? 'active' : ''}>
             <ul>
@@ -48,15 +49,13 @@ const AnimatedNavigation: FC<Props> = ({
               ))}
             </ul>
 
-            <button onClick={toggleClass}>
+            <Button onClick={toggleClass}>
               <span className="line line1" />
               <span className="line line2" />
-            </button>
+            </Button>
           </nav>
         </div>
-      ) : (
-        <Loader />
-      )}
+      </LoaderWrapper>
     </ComponentWrapper>
   );
 };
