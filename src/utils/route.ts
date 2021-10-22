@@ -19,6 +19,7 @@ export const incrementingCounterPath = '/incrementing-counter'
 export const movieAppPath = '/movie-app'
 export const drinkWaterPath = '/drink-water'
 export const themeClockPath = '/theme-clock'
+export const drawingAppPath = '/drawing-app'
 
 //works paths
 export const authProjectPath = '/auth-project'
