@@ -34,6 +34,7 @@ export const portfolioItems = [
   'Movie App',
   'Drink Water',
   'Theme Clock',
+  'Drawing App'
 ];
 
 export const expandingCardsSrc =
