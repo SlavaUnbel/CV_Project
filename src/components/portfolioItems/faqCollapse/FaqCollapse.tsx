@@ -6,15 +6,13 @@ import './faq-collapse.scss';
 import FaqItem from './faqItem/FaqItem';
 
 interface Props extends IWithLoading, IWithError, IWithWarning {
-  faqCollapseData: IFaqCollapse[];
+  data: IFaqCollapse[];
   setFaqCollapseData: (data: IFaqCollapse[]) => void;
 }
 
 const FaqCollapse: FC<Props> = ({
-  faqCollapseData,
+  data,
   setFaqCollapseData,
-
-  loading,
   setLoading,
 
   pushError,
@@ -35,7 +33,7 @@ const FaqCollapse: FC<Props> = ({
         <div className="faq-collapse__container">
           <h1>Frequently Asked Questions</h1>
 
-          {faqCollapseData.map((faq) => (
+          {data.map((faq) => (
             <FaqItem key={faq.id} data={faq} />
           ))}
         </div>

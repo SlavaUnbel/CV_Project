@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { arrowSrc } from '../../../utils/constants';
 
 interface Props {
-  direction: SliderDirection;
+  direction: Side;
   disabled: boolean;
   changeCurrent: () => void;
 }

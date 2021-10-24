@@ -19,7 +19,7 @@ export const database: DATABASE = {
   rotatingNavigation: generateRotatingNavigationData(),
   splitLandingPage: getSplitLandingPageData(),
   faqCollapse: [...generateFaqCollapseData(1)],
-  animatedNavigation: ['Home', 'About', 'Works', 'Contact']
+  animatedNavigation: ['Home', 'About', 'Works', 'Contact'],
 };
 
 

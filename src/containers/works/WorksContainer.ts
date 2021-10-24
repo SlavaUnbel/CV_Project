@@ -8,7 +8,6 @@ import { worksActions } from '../../reducers/worksReducer';
 
 const mapStateToProps = (state: IState) => ({
   worksData: state.works.worksData,
-  loading: state.loading.loading,
   current: state.works.current,
 });
 

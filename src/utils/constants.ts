@@ -34,7 +34,7 @@ export const portfolioItems = [
   'Movie App',
   'Drink Water',
   'Theme Clock',
-  'Drawing App'
+  'GitHub Profiles'
 ];
 
 export const expandingCardsSrc =
@@ -75,3 +75,4 @@ export const months = [
   'Nov',
   'Dec',
 ];
+

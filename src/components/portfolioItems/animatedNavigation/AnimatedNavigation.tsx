@@ -11,15 +11,13 @@ import LoaderWrapper from '../../utils/loaderWrapper/LoaderWrapper';
 import './animated-navigation.scss';
 
 interface Props extends IWithLoading, IWithError, IWithWarning {
-  animatedNavigationData: string[];
+  data: string[];
   setAnimatedNavigationData: (data: string[]) => void;
 }
 
 const AnimatedNavigation: FC<Props> = ({
-  animatedNavigationData,
+  data,
   setAnimatedNavigationData,
-
-  loading,
   setLoading,
 
   pushError,
@@ -42,7 +40,7 @@ const AnimatedNavigation: FC<Props> = ({
         <div className="animated-navigation__container">
           <nav className={newClass ? 'active' : ''}>
             <ul>
-              {animatedNavigationData.map((item) => (
+              {data.map((item) => (
                 <li key={item}>
                   <a href={animatedNavigationPath}>{item}</a>
                 </li>

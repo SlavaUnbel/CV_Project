@@ -35,7 +35,7 @@ const Button: FC<Props> = ({
 
     ref.current?.appendChild(circle);
 
-    setTimeout(() => circle.remove(), SECOND / 0.02);
+    setTimeout(() => circle.remove(), SECOND / 20);
   };
 
   return (

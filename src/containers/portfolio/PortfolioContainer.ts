@@ -8,7 +8,6 @@ import { IState } from '../../reducers/rootReducer';
 
 const mapStateToProps = (state: IState) => ({
   portfolioData: state.portfolio.portfolioData,
-  loading: state.loading.loading,
   active: state.portfolio.selected,
   pagesCount: state.portfolio.pagesCount,
 });

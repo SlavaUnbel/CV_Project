@@ -6,15 +6,13 @@ import LoaderWrapper from '../../utils/loaderWrapper/LoaderWrapper';
 import './dad-jokes.scss';
 
 interface Props extends IWithLoading, IWithError {
-  dadJokesData: IDadJokes;
+  data: IDadJokes;
   setDadJokesData: (data: IDadJokes) => void;
 }
 
 const DadJokes: FC<Props> = ({
-  dadJokesData,
+  data,
   setDadJokesData,
-
-  loading,
   setLoading,
 
   pushError,
@@ -41,9 +39,7 @@ const DadJokes: FC<Props> = ({
               borderWidth: '0.5rem',
             }}
           >
-            <div className="joke">
-              {dadJokesData.joke || '<-- Joke goes here -->'}
-            </div>
+            <div className="joke">{data.joke || '<-- Joke goes here -->'}</div>
           </LoaderWrapper>
 
           <Button onClick={getJoke}>Get Another Joke</Button>

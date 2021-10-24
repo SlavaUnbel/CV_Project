@@ -9,15 +9,13 @@ import './expanding-cards.scss';
 import ExpandingCard from './expandingCard/ExpandingCard';
 
 interface Props extends IWithLoading, IWithError, IWithWarning {
-  expandingCardsData: IExpandingCards[];
+  data: IExpandingCards[];
   setExpandingCardsData: (data: IExpandingCards[]) => void;
 }
 
 const ExpandingCards: FC<Props> = ({
-  expandingCardsData,
+  data,
   setExpandingCardsData,
-
-  loading,
   setLoading,
 
   pushError,
@@ -36,7 +34,7 @@ const ExpandingCards: FC<Props> = ({
     <ComponentWrapper>
       <LoaderWrapper>
         <div className="expanding-cards__container">
-          {expandingCardsData.map((card) => (
+          {data.map((card) => (
             <ExpandingCard key={card.id} card={card} />
           ))}
         </div>

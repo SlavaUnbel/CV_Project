@@ -17,8 +17,6 @@ interface Props extends IWithLoading, IWithError, IWithWarning {
 const Works: FC<Props> = ({
   worksData,
   setWorksData,
-
-  loading,
   setLoading,
 
   current,

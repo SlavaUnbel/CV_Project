@@ -10,15 +10,13 @@ import SidePage from './sidePage/SidePage';
 import './split-landing-page.scss';
 
 interface Props extends IWithLoading, IWithError, IWithWarning {
-  splitLandingPageData: ISplitLandingPage[];
+  data: ISplitLandingPage[];
   setSplitLandingPageData: (data: ISplitLandingPage[]) => void;
 }
 
 const SplitLandingPage: FC<Props> = ({
-  splitLandingPageData,
+  data,
   setSplitLandingPageData,
-
-  loading,
   setLoading,
 
   pushError,
@@ -34,7 +32,7 @@ const SplitLandingPage: FC<Props> = ({
   });
 
   const { ref, enterLeft, enterRight, leaveLeft, leaveRight, leaveBoth } =
-    useSplitLandingPageHoverEffect(splitLandingPageData);
+    useSplitLandingPageHoverEffect(data);
 
   return (
     <ComponentWrapper>
@@ -45,7 +43,7 @@ const SplitLandingPage: FC<Props> = ({
           onMouseLeave={leaveBoth}
           onClick={leaveBoth}
         >
-          {splitLandingPageData.map((page, idx) => (
+          {data.map((page, idx) => (
             <SidePage
               key={idx}
               page={page}

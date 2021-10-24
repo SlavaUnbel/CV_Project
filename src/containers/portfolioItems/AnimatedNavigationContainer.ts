@@ -7,8 +7,7 @@ import { portfolioItemsActions } from '../../reducers/portfolioItemsReducer';
 import { IState } from '../../reducers/rootReducer';
 
 const mapStateToProps = (state: IState) => ({
-  animatedNavigationData: state.portfolioItems.animatedNavigation,
-  loading: state.loading.loading,
+  data: state.portfolioItems.animatedNavigation,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({

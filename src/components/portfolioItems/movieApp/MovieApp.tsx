@@ -17,8 +17,6 @@ interface Props extends IWithLoading, IWithError, IWithWarning {
 const MovieApp: FC<Props> = ({
   movies,
   setMovies,
-
-  loading,
   setLoading,
 
   pushError,
