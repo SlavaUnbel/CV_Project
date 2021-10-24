@@ -1251,3 +1251,69 @@ export const useSetTimeAndDate = () => {
 
   return refs;
 };
+
+//GitHub Profiles Hooks
+
+interface GithubProfilesProps extends IWithLoading, IWithError, IWithWarning {
+  setGithubProfilesData: (user: any) => void;
+  setGithubProfilesReposData: (repos: any[]) => void;
+}
+
+export const useFetchGithubProfilesUserData = ({
+  setGithubProfilesData,
+  setGithubProfilesReposData,
+  setLoading,
+  pushError,
+  pushWarning,
+}: GithubProfilesProps) => {
+  const [noUserFound, setNoUserFound] = useState(false);
+  const [searchForAUser, setSearchForAUser] = useState(true);
+  const searchRef: LegacyRef<HTMLInputElement> = useRef(null);
+
+  const getUserAndRepos = (user: string) => {
+    if (!setLoading) return;
+    setLoading(true);
+
+    services.portfolioItemsService
+      .getGithubProfilesUserDataFromApi(user)
+      .then((res) => {
+        if (res.message === 'Not Found') {
+          setNoUserFound(true);
+          pushWarning('No user found!');
+        } else {
+          setGithubProfilesData(res);
+        }
+      })
+      .catch((e) => pushError(e))
+      .finally(() => {
+        setLoading(false);
+        setSearchForAUser(false);
+      });
+
+    services.portfolioItemsService
+      .getGithubProfilesReposDataFromApi(user)
+      .then((res) =>
+        res.message === 'Not Found'
+          ? pushWarning('No repositories found!')
+          : setGithubProfilesReposData(res),
+      )
+      .catch((e) => pushError(e))
+      .finally(() => setLoading(false));
+  };
+
+  const submitSearch = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (searchRef.current) {
+      searchRef.current.value
+        ? getUserAndRepos(searchRef.current.value)
+        : pushWarning("Type a user's name!");
+
+      searchRef.current.value = '';
+    }
+
+    noUserFound && setNoUserFound(false);
+  };
+
+  return { noUserFound, searchForAUser, searchRef, submitSearch };
+};

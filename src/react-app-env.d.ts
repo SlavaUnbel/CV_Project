@@ -115,3 +115,19 @@ interface IMovieApp {
   overview: string;
   release_date: string;
 }
+
+interface IGithubUser {
+  name: string;
+  avatar_url: string;
+  html_url: string;
+  bio: string;
+  followers: number;
+  following: number;
+  public_repos: number;
+}
+
+interface IGithubRepo {
+  id: number;
+  name: string;
+  html_url: string;
+}

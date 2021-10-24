@@ -41,7 +41,7 @@ const Button: FC<Props> = ({
   return (
     <button
       type={type}
-      className={`ripple btn ${className}`}
+      className={`ripple btn ${className ? className : ''}`}
       style={style}
       ref={ref}
       disabled={disabled}
