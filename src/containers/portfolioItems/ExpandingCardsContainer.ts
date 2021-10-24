@@ -7,8 +7,7 @@ import { portfolioItemsActions } from '../../reducers/portfolioItemsReducer';
 import { IState } from '../../reducers/rootReducer';
 
 const mapStateToProps = (state: IState) => ({
-  expandingCardsData: state.portfolioItems.expandingCards,
-  loading: state.loading.loading,
+  data: state.portfolioItems.expandingCards,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({

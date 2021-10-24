@@ -20,8 +20,6 @@ interface Props extends IWithLoading, IWithError, IWithWarning {
 const Portfolio: FC<Props> = ({
   portfolioData,
   setPortfolioData,
-
-  loading,
   setLoading,
 
   active,

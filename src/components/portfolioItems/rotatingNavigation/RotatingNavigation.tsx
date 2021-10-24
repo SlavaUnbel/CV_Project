@@ -12,15 +12,13 @@ import RandomContent from './randomContent/RandomContent';
 import './rotating-navigation.scss';
 
 interface Props extends IWithLoading, IWithError, IWithWarning {
-  rotatingNavigationData: IRotatingNavigation;
+  data: IRotatingNavigation;
   setRotatingNavigationData: (data: IRotatingNavigation) => void;
 }
 
 const RotatingNavigation: FC<Props> = ({
-  rotatingNavigationData,
+  data,
   setRotatingNavigationData,
-
-  loading,
   setLoading,
 
   pushError,
@@ -44,7 +42,7 @@ const RotatingNavigation: FC<Props> = ({
 
         <div className="rotating-navigation__container" ref={ref}>
           <LoaderWrapper>
-            <RandomContent data={rotatingNavigationData} />
+            <RandomContent data={data} />
           </LoaderWrapper>
         </div>
 

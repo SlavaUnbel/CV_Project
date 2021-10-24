@@ -8,7 +8,6 @@ import { IState } from '../../reducers/rootReducer';
 
 const mapStateToProps = (state: IState) => ({
   movies: state.portfolioItems.movies,
-  loading: state.loading.loading,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({

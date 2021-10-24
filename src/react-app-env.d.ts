@@ -40,7 +40,8 @@ interface IWorks {
   imgSrc: string;
 }
 
-type SliderDirection = 'left' | 'right';
+type Side = 'left' | 'right';
+type Direction = 'up' | 'down';
 
 interface IFormInput {
   name: string;
@@ -86,12 +87,10 @@ interface IRotatingNavigation {
   articleParagraphs: string[];
 }
 
-type SplitLandingSide = 'left' | 'right'
-
 interface ISplitLandingPage {
   title: string;
   link: string;
-  side: SplitLandingSide;
+  side: Side;
   background: string;
 }
 

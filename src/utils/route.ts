@@ -19,7 +19,7 @@ export const incrementingCounterPath = '/incrementing-counter'
 export const movieAppPath = '/movie-app'
 export const drinkWaterPath = '/drink-water'
 export const themeClockPath = '/theme-clock'
-export const drawingAppPath = '/drawing-app'
+export const githubProfilesPath = '/github-profiles'
 
 //works paths
 export const authProjectPath = '/auth-project'
