@@ -40,6 +40,10 @@
   --border-drink-water-color: #144fc6;
   --fill-drink-water-color: #6ab3f8;
   --date-theme-clock-color: #aaa;
+  --bg-github-profiles-color: #2a2a72;
+  --items-bg-github-profiles-color: #4c2885;
+  --input-placeholder-github-profiles-color: #bbb;
+  --repo-github-profiles-color: #212a72;
 }
 
 @mixin scrollbar($bg-color) {
@@ -98,6 +102,12 @@
 
 @mixin screen-1000px {
   @media screen and (max-width: 1000px) {
+    @content;
+  }
+}
+
+@mixin screen-900px {
+  @media screen and (max-width: 900px) {
     @content;
   }
 }

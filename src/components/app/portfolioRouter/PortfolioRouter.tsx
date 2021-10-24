@@ -4,6 +4,7 @@ import AnimatedNavigationContainer from '../../../containers/portfolioItems/Anim
 import DadJokesContainer from '../../../containers/portfolioItems/DadJokesContainer';
 import ExpandingCardsContainer from '../../../containers/portfolioItems/ExpandingCardsContainer';
 import FaqCollapseContainer from '../../../containers/portfolioItems/FaqCollapseContainer';
+import GithubProfilesContainer from '../../../containers/portfolioItems/GithubProfilesContainer';
 import MovieAppContainer from '../../../containers/portfolioItems/MovieAppContainer';
 import RotatingNavigationContainer from '../../../containers/portfolioItems/RotatingNavigationContainer';
 import SplitLandingPageContainer from '../../../containers/portfolioItems/SplitLandingPageContainer';
@@ -14,6 +15,7 @@ import {
   expandingCardsPath,
   faqCollapsePath,
   formWaveAnimationPath,
+  githubProfilesPath,
   incrementingCounterPath,
   movieAppPath,
   randomChoicePickerPath,
@@ -64,6 +66,11 @@ const PortfolioRouter: FC = () => (
     <Route exact path={movieAppPath} component={MovieAppContainer} />
     <Route exact path={drinkWaterPath} component={DrinkWater} />
     <Route exact path={themeClockPath} component={ThemeClock} />
+    <Route
+      exact
+      path={githubProfilesPath}
+      component={GithubProfilesContainer}
+    />
   </Switch>
 );
 

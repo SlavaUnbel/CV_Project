@@ -76,3 +76,4 @@ export const months = [
   'Dec',
 ];
 
+export const githubUsersApi = 'https://api.github.com/users/'

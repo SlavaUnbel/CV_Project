@@ -1,3 +1,4 @@
+import { githubUsersApi } from '../../utils/constants';
 import { SECOND } from '../../utils/date';
 import { delay } from '../../utils/hooks';
 import PortfolioItemsService from '../abstract/PortfolioItemsService';
@@ -34,25 +35,45 @@ export default class PortfolioItemsServiceMock extends PortfolioItemsService {
     return await fetch('https://icanhazdadjoke.com', {
       headers: {
         Accept: 'application/json',
-      }
+      },
     }).then((data) => data.json());
   }
 
   public async getFaqCollapseData(): Promise<IFaqCollapse[]> {
     await delay(SECOND / 3);
 
-    return database.faqCollapse
+    return database.faqCollapse;
   }
 
   public async getAnimatedNavigationData(): Promise<string[]> {
     await delay(SECOND / 3);
 
-    return database.animatedNavigation
+    return database.animatedNavigation;
   }
 
   public async getMovieAppDataFromApi(url: string): Promise<any> {
     await delay(SECOND / 3);
 
     return await fetch(url).then((data) => data.json());
+  }
+
+  public async getGithubProfilesUserDataFromApi(
+    username: string,
+  ): Promise<any> {
+    await delay(SECOND / 3);
+
+    return await fetch(`${githubUsersApi}${username}`).then((data) =>
+      data.json(),
+    );
+  }
+
+  public async getGithubProfilesReposDataFromApi(
+    username: string,
+  ): Promise<any> {
+    await delay(SECOND / 3);
+
+    return await fetch(`${githubUsersApi}${username}/repos?sort=created`).then(
+      (data) => data.json(),
+    );
   }
 }

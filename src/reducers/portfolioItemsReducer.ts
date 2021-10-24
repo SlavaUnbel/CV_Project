@@ -14,6 +14,9 @@ export interface PortfolioItemsState {
   animatedNavigation: string[];
 
   movies: IMovieApp[];
+
+  githubUser: IGithubUser;
+  githubRepos: IGithubRepo[]
 }
 
 const initialPortfolioItemsState: PortfolioItemsState = {
@@ -30,6 +33,9 @@ const initialPortfolioItemsState: PortfolioItemsState = {
   animatedNavigation: [],
 
   movies: [],
+
+  githubUser: {} as IGithubUser,
+  githubRepos: []
 };
 
 const symbiotes = {
@@ -75,6 +81,10 @@ const symbiotes = {
       movies,
     }),
   },
+  githubProfiles: {
+    setUser: (state: PortfolioItemsState, githubUser: IGithubUser) => ({ ...state, githubUser }),
+    setRepos: (state: PortfolioItemsState, githubRepos: IGithubRepo[]) => ({ ...state, githubRepos })
+  }
 };
 
 export const {

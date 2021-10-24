@@ -14,4 +14,7 @@ export default abstract class PortfolioItemsService {
   public abstract getAnimatedNavigationData(): Promise<string[]>
 
   public abstract getMovieAppDataFromApi(url: string): Promise<any>
+
+  public abstract getGithubProfilesUserDataFromApi(username: string): Promise<any>
+  public abstract getGithubProfilesReposDataFromApi(username: string): Promise<any>
 }
