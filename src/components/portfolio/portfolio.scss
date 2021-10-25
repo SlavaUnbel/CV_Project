@@ -78,9 +78,20 @@
         margin: 0 1.5rem;
       }
 
+      &:hover {
+        background-color: var(--lightgrey-color);
+        box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
+        transform: scale(1.05);
+      }
+
       &.active {
         background-color: var(--primary-color);
         color: var(--white-color);
+        box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
+
+        &:hover {
+          transform: none;
+        }
       }
     }
   }

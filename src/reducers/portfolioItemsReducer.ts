@@ -16,7 +16,9 @@ export interface PortfolioItemsState {
   movies: IMovieApp[];
 
   githubUser: IGithubUser;
-  githubRepos: IGithubRepo[]
+  githubRepos: IGithubRepo[];
+
+  passwordGenerator: string;
 }
 
 const initialPortfolioItemsState: PortfolioItemsState = {
@@ -35,7 +37,9 @@ const initialPortfolioItemsState: PortfolioItemsState = {
   movies: [],
 
   githubUser: {} as IGithubUser,
-  githubRepos: []
+  githubRepos: [],
+
+  passwordGenerator: '',
 };
 
 const symbiotes = {
@@ -82,9 +86,21 @@ const symbiotes = {
     }),
   },
   githubProfiles: {
-    setUser: (state: PortfolioItemsState, githubUser: IGithubUser) => ({ ...state, githubUser }),
-    setRepos: (state: PortfolioItemsState, githubRepos: IGithubRepo[]) => ({ ...state, githubRepos })
-  }
+    setUser: (state: PortfolioItemsState, githubUser: IGithubUser) => ({
+      ...state,
+      githubUser,
+    }),
+    setRepos: (state: PortfolioItemsState, githubRepos: IGithubRepo[]) => ({
+      ...state,
+      githubRepos,
+    }),
+  },
+  passwordGenerator: {
+    set: (state: PortfolioItemsState, passwordGenerator: string) => ({
+      ...state,
+      passwordGenerator,
+    }),
+  },
 };
 
 export const {

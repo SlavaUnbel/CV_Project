@@ -1,4 +1,4 @@
-import { Facebook, Twitter, YouTube } from '@material-ui/icons';
+import { Facebook, Twitter, YouTube } from '@mui/icons-material';
 import React, { FC } from 'react';
 import { useWindowTitle } from '../../../utils/hooks';
 import ComponentWrapper from '../../utils/componentWrapper/ComponentWrapper';

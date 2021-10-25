@@ -6,6 +6,7 @@ import ExpandingCardsContainer from '../../../containers/portfolioItems/Expandin
 import FaqCollapseContainer from '../../../containers/portfolioItems/FaqCollapseContainer';
 import GithubProfilesContainer from '../../../containers/portfolioItems/GithubProfilesContainer';
 import MovieAppContainer from '../../../containers/portfolioItems/MovieAppContainer';
+import PasswordGeneratorContainer from '../../../containers/portfolioItems/PasswordGeneratorContainer';
 import RotatingNavigationContainer from '../../../containers/portfolioItems/RotatingNavigationContainer';
 import SplitLandingPageContainer from '../../../containers/portfolioItems/SplitLandingPageContainer';
 import {
@@ -18,6 +19,7 @@ import {
   githubProfilesPath,
   incrementingCounterPath,
   movieAppPath,
+  passwordGeneratorPath,
   randomChoicePickerPath,
   rotatingNavigationPath,
   scrollAnimationPath,
@@ -70,6 +72,11 @@ const PortfolioRouter: FC = () => (
       exact
       path={githubProfilesPath}
       component={GithubProfilesContainer}
+    />
+    <Route
+      exact
+      path={passwordGeneratorPath}
+      component={PasswordGeneratorContainer}
     />
   </Switch>
 );

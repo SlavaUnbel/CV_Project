@@ -1,4 +1,4 @@
-import { Search } from '@material-ui/icons';
+import { Search } from '@mui/icons-material';
 import React, { FC, FormEvent, RefObject } from 'react';
 
 interface Props {

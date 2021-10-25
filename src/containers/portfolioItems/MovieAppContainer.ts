@@ -17,7 +17,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   ),
   setLoading: bindActionCreators(loadingActions.loading.set, dispatch),
   pushError: bindActionCreators(messageActions.message.error, dispatch),
-  pushWarning: bindActionCreators(messageActions.message.error, dispatch),
+  pushWarning: bindActionCreators(messageActions.message.warning, dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(MovieApp);
