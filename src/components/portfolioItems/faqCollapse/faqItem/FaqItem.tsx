@@ -1,4 +1,4 @@
-import { Close, KeyboardArrowDown } from '@material-ui/icons';
+import { Close, KeyboardArrowDown } from '@mui/icons-material';
 import React, { FC } from 'react';
 import { useToggleClass } from '../../../../utils/hooks';
 import Button from '../../../utils/button/Button';

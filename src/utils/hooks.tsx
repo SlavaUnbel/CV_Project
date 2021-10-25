@@ -1317,3 +1317,143 @@ export const useFetchGithubProfilesUserData = ({
 
   return { noUserFound, searchForAUser, searchRef, submitSearch };
 };
+
+//Password Generator Hooks
+interface PasswordGeneratorProps
+  extends IWithError,
+    IWithWarning,
+    IWithSuccess {
+  setPasswordVal: (password: string) => void;
+}
+
+export const useGeneratePassword = ({
+  setPasswordVal,
+  pushError,
+  pushWarning,
+  pushSuccess,
+}: PasswordGeneratorProps) => {
+  const lengthRef: LegacyRef<HTMLInputElement> = useRef(null);
+  const upperRef: LegacyRef<HTMLInputElement> = useRef(null);
+  const lowerRef: LegacyRef<HTMLInputElement> = useRef(null);
+  const numberRef: LegacyRef<HTMLInputElement> = useRef(null);
+  const symbolRef: LegacyRef<HTMLInputElement> = useRef(null);
+  const resultRef: LegacyRef<HTMLSpanElement> = useRef(null);
+  const refs = {
+    lengthRef,
+    upperRef,
+    lowerRef,
+    numberRef,
+    symbolRef,
+    resultRef,
+  };
+
+  const getRandomLower = () =>
+    String.fromCharCode(Math.floor(Math.random() * 26) + 97);
+  const getRandomUpper = () =>
+    String.fromCharCode(Math.floor(Math.random() * 26) + 65);
+  const getRandomNumber = () =>
+    String.fromCharCode(Math.floor(Math.random() * 10) + 48);
+  const getRandomSymbol = () => {
+    const symbols = '!@#$%^&*()_{}[]=+<>/|,.?';
+    return symbols[Math.floor(Math.random() * symbols.length)];
+  };
+  const generationFuncs: any = {
+    lower: getRandomLower,
+    upper: getRandomUpper,
+    number: getRandomNumber,
+    symbol: getRandomSymbol,
+  };
+
+  const generate = () => {
+    if (
+      !lengthRef.current ||
+      !upperRef.current ||
+      !lowerRef.current ||
+      !numberRef.current ||
+      !symbolRef.current ||
+      !resultRef.current
+    )
+      return;
+
+    const length = +lengthRef.current.value;
+    const hasProp = (prop: boolean) => (prop ? 1 : 0);
+    const hasUpper = hasProp(upperRef.current.checked);
+    const hasLower = hasProp(lowerRef.current.checked);
+    const hasNumber = hasProp(numberRef.current.checked);
+    const hasSymbol = hasProp(symbolRef.current.checked);
+
+    resultRef.current.innerText = generatePassword(
+      hasUpper,
+      hasLower,
+      hasNumber,
+      hasSymbol,
+      length,
+    );
+  };
+
+  const generatePassword = (
+    upper: number,
+    lower: number,
+    number: number,
+    symbol: number,
+    length: number,
+  ) => {
+    let password = '';
+    const typesCount = upper + lower + number + symbol;
+    const typesArr = [{ upper }, { lower }, { number }, { symbol }].filter(
+      (type) => Object.values(type)[0],
+    );
+
+    console.log(length);
+
+    if (typesCount === 0 || length === 0) {
+      pushWarning('Please, provide password length and at least one parameter');
+      return '';
+    }
+
+    for (let i = 0; i < length; i += typesCount) {
+      typesArr.forEach(
+        //eslint-disable-next-line
+        (type) => (password += generationFuncs[Object.keys(type)[0]]()),
+      );
+    }
+
+    return password.slice(0, length);
+  };
+
+  const copyPassword = () => {
+    if (!resultRef.current || !resultRef.current.innerText) return;
+
+    navigator.clipboard.writeText(resultRef.current.innerText);
+    navigator.clipboard
+      .readText()
+      .then(
+        (text) =>
+          resultRef.current &&
+          resultRef.current.innerText === text &&
+          setPasswordVal(text),
+      )
+      .catch((e) => pushError(e))
+      .finally(() => pushSuccess('The password is copied into the clipboard!'));
+  };
+
+  const subtract = () => {
+    if (lengthRef.current) {
+      let len = +lengthRef.current.value;
+      len > 4 ? (len -= 1) : (len = 4);
+      lengthRef.current.value = len.toString();
+    }
+  };
+
+  const add = () => {
+    if (lengthRef.current) {
+      let len = +lengthRef.current.value;
+      !len ? (len = 4) : len < 20 ? (len += 1) : (len = 20);
+      lengthRef.current.value = len.toString();
+    }
+  };
+
+  useEffect(() => () => setPasswordVal(''), [setPasswordVal]);
+
+  return { refs, generate, copyPassword, add, subtract };
+};

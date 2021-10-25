@@ -20,6 +20,7 @@ export const movieAppPath = '/movie-app'
 export const drinkWaterPath = '/drink-water'
 export const themeClockPath = '/theme-clock'
 export const githubProfilesPath = '/github-profiles'
+export const passwordGeneratorPath = '/password-generator'
 
 //works paths
 export const authProjectPath = '/auth-project'

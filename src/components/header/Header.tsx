@@ -1,4 +1,4 @@
-import { LinkedIn, Mail, Phone } from '@material-ui/icons';
+import { LinkedIn, Mail, Phone } from '@mui/icons-material';
 import React, { FC } from 'react';
 import { getMenuIconSpans } from '../../services/mock/databaseMethods';
 import { email, linkedIn, phoneNumber } from '../../utils/constants';

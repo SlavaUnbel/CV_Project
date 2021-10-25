@@ -1,4 +1,4 @@
-import { Close, Menu } from '@material-ui/icons';
+import { Close, Menu } from '@mui/icons-material';
 import React, { FC } from 'react';
 import Button from '../../../utils/button/Button';
 

@@ -1,23 +1,22 @@
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
-import AnimatedNavigation from '../../components/portfolioItems/animatedNavigation/AnimatedNavigation';
-import { loadingActions } from '../../reducers/loadingReducer';
+import PasswordGenerator from '../../components/portfolioItems/passwordGenerator/PasswordGenerator';
 import { messageActions } from '../../reducers/messageReducer';
 import { portfolioItemsActions } from '../../reducers/portfolioItemsReducer';
 import { IState } from '../../reducers/rootReducer';
 
 const mapStateToProps = (state: IState) => ({
-  data: state.portfolioItems.animatedNavigation,
+  passwordVal: state.portfolioItems.passwordGenerator,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  setAnimatedNavigationData: bindActionCreators(
-    portfolioItemsActions.animatedNavigation.set,
+  setPasswordVal: bindActionCreators(
+    portfolioItemsActions.passwordGenerator.set,
     dispatch,
   ),
-  setLoading: bindActionCreators(loadingActions.loading.set, dispatch),
   pushError: bindActionCreators(messageActions.message.error, dispatch),
   pushWarning: bindActionCreators(messageActions.message.warning, dispatch),
+  pushSuccess: bindActionCreators(messageActions.message.success, dispatch),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(AnimatedNavigation);
+export default connect(mapStateToProps, mapDispatchToProps)(PasswordGenerator);

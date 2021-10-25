@@ -1,4 +1,4 @@
-import { Email, Home, Person } from '@material-ui/icons';
+import { Email, Home, Person } from '@mui/icons-material';
 import React, { FC } from 'react';
 import { useHistory } from 'react-router';
 import { contactPath, homePath, portfolioPath } from '../../../../utils/route';
