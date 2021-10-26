@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
-import SplitLandingPage from '../../components/portfolioItems/splitLandingPage/SplitLandingPage';
+import SplitLandingPageContext from '../../context/portfolioItems/SplitLandingPageContext';
 import { loadingActions } from '../../reducers/loadingReducer';
 import { messageActions } from '../../reducers/messageReducer';
 import { portfolioItemsActions } from '../../reducers/portfolioItemsReducer';
@@ -11,7 +11,7 @@ const mapStateToProps = (state: IState) => ({
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  setSplitLandingPageData: bindActionCreators(
+  setData: bindActionCreators(
     portfolioItemsActions.splitLandingPage.set,
     dispatch,
   ),
@@ -20,4 +20,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   pushWarning: bindActionCreators(messageActions.message.warning, dispatch),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(SplitLandingPage);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(SplitLandingPageContext);

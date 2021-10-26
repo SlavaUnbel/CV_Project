@@ -1,14 +1,18 @@
-import React, { FC } from 'react';
+import React, { FC, useContext } from 'react';
+import { DrinkWaterCtx } from '../../../../utils/context';
 
 interface Props {
   cup: number;
-  fillCup: (cup: number) => void;
 }
 
-const Cups: FC<Props> = ({ cup, fillCup }) => (
-  <div className="cup cup-small" onClick={() => fillCup(cup)}>
-    250 ml
-  </div>
-);
+const Cups: FC<Props> = ({ cup }) => {
+  const { fillCup } = useContext(DrinkWaterCtx);
+
+  return (
+    <div className="cup cup-small" onClick={() => fillCup(cup)}>
+      250 ml
+    </div>
+  );
+};
 
 export default Cups;

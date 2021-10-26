@@ -1,36 +1,14 @@
-import {
-  Add,
-  AssignmentTurnedIn,
-  ContentCopy,
-  Remove,
-} from '@mui/icons-material';
-import React, { FC } from 'react';
-import { useGeneratePassword, useWindowTitle } from '../../../utils/hooks';
+import React, { FC, useContext } from 'react';
+import { PasswordGeneratorCtx } from '../../../utils/context';
 import Button from '../../utils/button/Button';
 import ComponentWrapper from '../../utils/componentWrapper/ComponentWrapper';
 import './password-generator.scss';
+import PasswordLength from './passwordLength/PasswordLength';
+import Result from './result/Result';
 
-interface Props extends IWithError, IWithWarning, IWithSuccess {
-  passwordVal: string;
-  setPasswordVal: (password: string) => void;
-}
-
-const PasswordGenerator: FC<Props> = ({
-  passwordVal,
-  setPasswordVal,
-
-  pushError,
-  pushWarning,
-  pushSuccess,
-}) => {
-  useWindowTitle('Password Generator');
-
-  const { refs, generate, copyPassword, subtract, add } = useGeneratePassword({
-    setPasswordVal,
-    pushError,
-    pushWarning,
-    pushSuccess,
-  });
+const PasswordGenerator: FC = () => {
+  const { generate, upperRef, lowerRef, numberRef, symbolRef } =
+    useContext(PasswordGeneratorCtx);
 
   return (
     <ComponentWrapper>
@@ -38,62 +16,33 @@ const PasswordGenerator: FC<Props> = ({
         <div className="password-generator__wrapper">
           <h2>Password Generator</h2>
 
-          <div className="result-container">
-            <span className="result" ref={refs.resultRef} />
-
-            <Button onClick={copyPassword}>
-              {passwordVal === refs.resultRef.current?.innerText ? (
-                <AssignmentTurnedIn />
-              ) : (
-                <ContentCopy />
-              )}
-            </Button>
-          </div>
+          <Result />
 
           <div className="settings">
-            <div className="setting">
-              <label htmlFor="length">Password Length</label>
-
-              <div className="length">
-                <Button onClick={subtract}>
-                  <Remove className="icon" />
-                </Button>
-
-                <input
-                  type="number"
-                  id="length"
-                  ref={refs.lengthRef}
-                  onKeyPress={(e) => e.preventDefault()}
-                />
-
-                <Button onClick={add}>
-                  <Add className="icon" />
-                </Button>
-              </div>
-            </div>
+            <PasswordLength />
 
             <div className="setting">
               <label htmlFor="uppercase">Include uppercase letters</label>
 
-              <input type="checkbox" id="uppercase" ref={refs.upperRef} />
+              <input type="checkbox" id="uppercase" ref={upperRef} />
             </div>
 
             <div className="setting">
               <label htmlFor="lowercase">Include lowercase letters</label>
 
-              <input type="checkbox" id="lowercase" ref={refs.lowerRef} />
+              <input type="checkbox" id="lowercase" ref={lowerRef} />
             </div>
 
             <div className="setting">
               <label htmlFor="numbers">Include numbers</label>
 
-              <input type="checkbox" id="numbers" ref={refs.numberRef} />
+              <input type="checkbox" id="numbers" ref={numberRef} />
             </div>
 
             <div className="setting">
               <label htmlFor="symbols">Include symbols</label>
 
-              <input type="checkbox" id="symbols" ref={refs.symbolRef} />
+              <input type="checkbox" id="symbols" ref={symbolRef} />
             </div>
           </div>
 

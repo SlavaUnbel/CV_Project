@@ -1,18 +1,13 @@
-import { LinkedIn, Mail, Phone } from '@mui/icons-material';
-import React, { FC } from 'react';
-import { getMenuIconSpans } from '../../services/mock/databaseMethods';
-import { email, linkedIn, phoneNumber } from '../../utils/constants';
-import { contactPath, homePath } from '../../utils/route';
+import React, { FC, useContext } from 'react';
+import { HeaderCtx } from '../../utils/context';
+import { homePath } from '../../utils/route';
 import './header.scss';
 import HeaderItem from './headerItem/HeaderItem';
+import HeaderMenuIcon from './headerMenuIcon/HeaderMenuIcon';
 
-interface Props {
-  menuOpen: boolean;
-  openCloseMenu: (menuOpen: boolean) => void;
-}
-
-const Header: FC<Props> = ({ menuOpen, openCloseMenu }) => {
-  const spans = getMenuIconSpans();
+const Header: FC = () => {
+  const { creds, menuOpen } = useContext(HeaderCtx);
+  const { phone, email, linkedin } = creds;
 
   return (
     <div className={`header${menuOpen ? ' active' : ''}`}>
@@ -22,37 +17,14 @@ const Header: FC<Props> = ({ menuOpen, openCloseMenu }) => {
             creative.
           </a>
 
-          <HeaderItem
-            icon={<Phone className="icon" />}
-            title={phoneNumber}
-            href={`tel:${phoneNumber}`}
-            target="_blank"
-          />
+          <HeaderItem cred={phone} />
 
-          <HeaderItem
-            icon={<Mail className="icon" />}
-            title={email}
-            href={contactPath}
-          />
+          <HeaderItem cred={email} />
 
-          <HeaderItem
-            icon={<LinkedIn className="icon" />}
-            title="Slava Levkovich"
-            href={linkedIn}
-            target="_blank"
-          />
+          <HeaderItem cred={linkedin} />
         </div>
 
-        <div className="right">
-          <div
-            className="collapsing-menu"
-            onClick={() => openCloseMenu(!menuOpen)}
-          >
-            {spans.map((span) => (
-              <span key={span} className={`line${span}`} />
-            ))}
-          </div>
-        </div>
+        <HeaderMenuIcon />
       </div>
     </div>
   );

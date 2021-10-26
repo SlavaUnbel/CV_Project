@@ -1,13 +1,16 @@
-import React, { FC } from 'react';
-import { useChooseRandomTag, useWindowTitle } from '../../../utils/hooks';
+import React, { FC, useContext } from 'react';
+import { RandomChoicePickerCtx } from '../../../utils/context';
+import { useRandomChoicePickerOnMobile } from '../../../utils/hooks';
 import Button from '../../utils/button/Button';
 import ComponentWrapper from '../../utils/componentWrapper/ComponentWrapper';
 import './random-choice-picker.scss';
 
 const RandomChoicePicker: FC = () => {
-  useWindowTitle('Random Choice Picker');
+  const { areaRef, tagsRef, handleKeyUp, chooseRandomTag } = useContext(
+    RandomChoicePickerCtx,
+  );
 
-  const { tagsRef, areaRef, handleKeyUp, handleClick } = useChooseRandomTag();
+  const handleClick = useRandomChoicePickerOnMobile(areaRef, chooseRandomTag);
 
   return (
     <ComponentWrapper>

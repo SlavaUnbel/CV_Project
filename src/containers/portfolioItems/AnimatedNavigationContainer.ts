@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
-import AnimatedNavigation from '../../components/portfolioItems/animatedNavigation/AnimatedNavigation';
+import AnimatedNavigationContext from '../../context/portfolioItems/AnimatedNavigationContext';
 import { loadingActions } from '../../reducers/loadingReducer';
 import { messageActions } from '../../reducers/messageReducer';
 import { portfolioItemsActions } from '../../reducers/portfolioItemsReducer';
@@ -11,7 +11,7 @@ const mapStateToProps = (state: IState) => ({
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  setAnimatedNavigationData: bindActionCreators(
+  setData: bindActionCreators(
     portfolioItemsActions.animatedNavigation.set,
     dispatch,
   ),
@@ -20,4 +20,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   pushWarning: bindActionCreators(messageActions.message.warning, dispatch),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(AnimatedNavigation);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(AnimatedNavigationContext);

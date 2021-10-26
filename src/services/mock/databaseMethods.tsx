@@ -1,15 +1,26 @@
 import {
+  Facebook,
+  LinkedIn,
+  Mail,
+  Phone,
+  Twitter,
+  YouTube,
+} from '@mui/icons-material';
+import {
+  email,
   firstIconSrc,
   firstWorkSrc,
+  linkedIn,
+  phoneNumber,
   portfolioItems,
   rotatingNavigationSrc,
   secondIconSrc,
   secondWorkSrc,
   splitLandingPageSrc,
   thirdIconSrc,
-  thirdWorkSrc
+  thirdWorkSrc,
 } from '../../utils/constants';
-import { authProjectPath } from '../../utils/route';
+import { authProjectPath, contactPath } from '../../utils/route';
 
 export const getMenuOptions = (): string[] => {
   const options = ['Home', 'Portfolio', 'Works', 'Contact'];
@@ -22,9 +33,29 @@ export const getMenuOptions = (): string[] => {
 export const getMenuIconSpans = (): number[] =>
   Array.from({ length: 3 }, (_, idx) => idx + 1).map((span) => span);
 
-export const generatePortfolioData = (
-  id: number,
-): IPortfolio[] =>
+export const getHeaderCreds = (): IHeader => {
+  return {
+    phone: {
+      icon: <Phone className="icon" />,
+      title: phoneNumber,
+      href: `tel:${phoneNumber}`,
+      target: '_blank',
+    },
+    email: {
+      icon: <Mail className="icon" />,
+      title: email,
+      href: contactPath,
+    },
+    linkedin: {
+      icon: <LinkedIn className="icon" />,
+      title: 'Slava Levkovich',
+      href: linkedIn,
+      target: '_blank',
+    },
+  };
+};
+
+export const generatePortfolioData = (id: number): IPortfolio[] =>
   Array.from({ length: portfolioItems.length }, (_, idx) => idx).map(
     (index) => {
       if (index) id++;
@@ -216,3 +247,23 @@ export const getInitialMessagesForFormWaveAnimationInputFields =
       },
     };
   };
+
+export const getIncrementingCounterItemsInfo = (): IIncrementingCounter => {
+  return {
+    twitter: {
+      icon: <Twitter className="icon" />,
+      dataTarget: 12000,
+      title: 'Twitter Followers',
+    },
+    youtube: {
+      icon: <YouTube className="icon" />,
+      dataTarget: 5000,
+      title: 'YouTube Subscribers',
+    },
+    facebook: {
+      icon: <Facebook className="icon" />,
+      dataTarget: 7500,
+      title: 'Facebook Fans',
+    },
+  };
+};

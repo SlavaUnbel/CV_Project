@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
-import FaqCollapse from '../../components/portfolioItems/faqCollapse/FaqCollapse';
+import FaqCollapseContext from '../../context/portfolioItems/FaqCollapseContext';
 import { loadingActions } from '../../reducers/loadingReducer';
 import { messageActions } from '../../reducers/messageReducer';
 import { portfolioItemsActions } from '../../reducers/portfolioItemsReducer';
@@ -11,13 +11,10 @@ const mapStateToProps = (state: IState) => ({
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  setFaqCollapseData: bindActionCreators(
-    portfolioItemsActions.faqCollapse.set,
-    dispatch,
-  ),
+  setData: bindActionCreators(portfolioItemsActions.faqCollapse.set, dispatch),
   setLoading: bindActionCreators(loadingActions.loading.set, dispatch),
   pushError: bindActionCreators(messageActions.message.error, dispatch),
   pushWarning: bindActionCreators(messageActions.message.warning, dispatch),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(FaqCollapse);
+export default connect(mapStateToProps, mapDispatchToProps)(FaqCollapseContext);

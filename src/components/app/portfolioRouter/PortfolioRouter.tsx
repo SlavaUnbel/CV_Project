@@ -9,6 +9,10 @@ import MovieAppContainer from '../../../containers/portfolioItems/MovieAppContai
 import PasswordGeneratorContainer from '../../../containers/portfolioItems/PasswordGeneratorContainer';
 import RotatingNavigationContainer from '../../../containers/portfolioItems/RotatingNavigationContainer';
 import SplitLandingPageContainer from '../../../containers/portfolioItems/SplitLandingPageContainer';
+import DrinkWaterContext from '../../../context/portfolioItems/DrinkWaterContext';
+import IncrementingCounterContext from '../../../context/portfolioItems/IncrementingCounterContext';
+import RandomChoicePickerContext from '../../../context/portfolioItems/RandomChoicePickerContext';
+import ThemeClockContext from '../../../context/portfolioItems/ThemeClockContext';
 import {
   animatedNavigationPath,
   dadJokesPath,
@@ -26,12 +30,8 @@ import {
   splitLandingPagePath,
   themeClockPath,
 } from '../../../utils/route';
-import DrinkWater from '../../portfolioItems/drinkWater/DrinkWater';
 import FormWaveAnimation from '../../portfolioItems/formWaveAnimation/FormWaveAnimation';
-import IncrementingCounter from '../../portfolioItems/incrementingCounter/IncrementingCounter';
-import RandomChoicePicker from '../../portfolioItems/randomChoicePicker/RandomChoicePicker';
 import ScrollAnimation from '../../portfolioItems/scrollAnimation/ScrollAnimation';
-import ThemeClock from '../../portfolioItems/themeClock/ThemeClock';
 
 const PortfolioRouter: FC = () => (
   <Switch>
@@ -54,7 +54,11 @@ const PortfolioRouter: FC = () => (
     <Route exact path={formWaveAnimationPath} component={FormWaveAnimation} />
     <Route exact path={dadJokesPath} component={DadJokesContainer} />
     <Route exact path={faqCollapsePath} component={FaqCollapseContainer} />
-    <Route exact path={randomChoicePickerPath} component={RandomChoicePicker} />
+    <Route
+      exact
+      path={randomChoicePickerPath}
+      component={RandomChoicePickerContext}
+    />
     <Route
       exact
       path={animatedNavigationPath}
@@ -63,11 +67,11 @@ const PortfolioRouter: FC = () => (
     <Route
       exact
       path={incrementingCounterPath}
-      component={IncrementingCounter}
+      component={IncrementingCounterContext}
     />
     <Route exact path={movieAppPath} component={MovieAppContainer} />
-    <Route exact path={drinkWaterPath} component={DrinkWater} />
-    <Route exact path={themeClockPath} component={ThemeClock} />
+    <Route exact path={drinkWaterPath} component={DrinkWaterContext} />
+    <Route exact path={themeClockPath} component={ThemeClockContext} />
     <Route
       exact
       path={githubProfilesPath}

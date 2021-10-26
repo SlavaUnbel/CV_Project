@@ -2,14 +2,10 @@ import React, { FC } from 'react';
 import ToastContainer from '../toastContainer/ToastContainer';
 import './component-wrapper.scss';
 
-interface Props {
-  children: any;
-}
-
-const ComponentWrapper: FC<Props> = ({ children }) => {
+const ComponentWrapper: FC = (props) => {
   return (
     <div className="component-wrapper">
-      {children}
+      {props.children}
 
       <ToastContainer />
     </div>

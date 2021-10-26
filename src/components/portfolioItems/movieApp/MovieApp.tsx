@@ -1,37 +1,12 @@
-import React, { FC } from 'react';
-import {
-  useMovieAppApi,
-  useMovieAppSearch,
-  useWindowTitle,
-} from '../../../utils/hooks';
+import React, { FC, useContext } from 'react';
+import { MovieAppCtx } from '../../../utils/context';
 import ComponentWrapper from '../../utils/componentWrapper/ComponentWrapper';
 import LoaderWrapper from '../../utils/loaderWrapper/LoaderWrapper';
 import './movie-app.scss';
 import MovieItem from './movieItem/MovieItem';
 
-interface Props extends IWithLoading, IWithError, IWithWarning {
-  movies: IMovieApp[];
-  setMovies: (movies: IMovieApp[]) => void;
-}
-
-const MovieApp: FC<Props> = ({
-  movies,
-  setMovies,
-  setLoading,
-
-  pushError,
-  pushWarning,
-}) => {
-  useWindowTitle('Movie App');
-
-  const getData = useMovieAppApi({
-    setMovies,
-    setLoading,
-    pushError,
-    pushWarning,
-  });
-
-  const { searchRef, submit } = useMovieAppSearch(getData);
+const MovieApp: FC = () => {
+  const { movies, searchRef, submit } = useContext(MovieAppCtx);
 
   return (
     <ComponentWrapper>

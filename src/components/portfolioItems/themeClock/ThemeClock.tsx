@@ -1,19 +1,12 @@
-import React, { FC } from 'react';
-import {
-  useSetTimeAndDate,
-  useToggleClass,
-  useWindowTitle,
-} from '../../../utils/hooks';
+import React, { FC, useContext } from 'react';
+import { ThemeClockCtx } from '../../../utils/context';
 import Button from '../../utils/button/Button';
 import ComponentWrapper from '../../utils/componentWrapper/ComponentWrapper';
+import Clock from './clock/Clock';
 import './theme-clock.scss';
 
 const ThemeClock: FC = () => {
-  useWindowTitle('Theme Clock');
-
-  const { newClass, toggleClass } = useToggleClass();
-
-  const refs = useSetTimeAndDate();
+  const { newClass, toggleClass } = useContext(ThemeClockCtx);
 
   return (
     <ComponentWrapper>
@@ -22,18 +15,7 @@ const ThemeClock: FC = () => {
           {newClass ? 'Light' : 'Dark'} mode
         </Button>
 
-        <div className="clock-container">
-          <div className="clock">
-            <div className="needle hour" ref={refs.hourRef} />
-            <div className="needle minute" ref={refs.minuteRef} />
-            <div className="needle second" ref={refs.secondRef} />
-
-            <div className="center-point" />
-          </div>
-
-          <div className="time" ref={refs.timeRef} />
-          <div className="date" ref={refs.dateRef} />
-        </div>
+        <Clock />
       </div>
     </ComponentWrapper>
   );

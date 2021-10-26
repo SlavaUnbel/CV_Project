@@ -1,24 +1,28 @@
-import React, { FC } from 'react';
+import React, { FC, useContext } from 'react';
+import { SplitLandingPageCtx } from '../../../../utils/context';
 
 interface Props {
   page: ISplitLandingPage;
-  onMouseEnter: () => void;
-  onMouseLeave: () => void;
 }
 
-const SidePage: FC<Props> = ({ page, onMouseEnter, onMouseLeave }) => (
-  <div
-    className={`split ${page.side}`}
-    style={{ backgroundImage: `url(${page.background})` }}
-    onMouseEnter={onMouseEnter}
-    onMouseLeave={onMouseLeave}
-  >
-    <h1>{page.title}</h1>
+const SidePage: FC<Props> = ({ page }) => {
+  const { enterLeft, enterRight, leaveLeft, leaveRight } =
+    useContext(SplitLandingPageCtx);
 
-    <a href={page.link} target="_blank" rel="noreferrer">
-      Buy Now
-    </a>
-  </div>
-);
+  return (
+    <div
+      className={`split ${page.side}`}
+      style={{ backgroundImage: `url(${page.background})` }}
+      onMouseEnter={page.side === 'left' ? enterLeft : enterRight}
+      onMouseLeave={page.side === 'left' ? leaveLeft : leaveRight}
+    >
+      <h1>{page.title}</h1>
+
+      <a href={page.link} target="_blank" rel="noreferrer">
+        Buy Now
+      </a>
+    </div>
+  );
+};
 
 export default SidePage;

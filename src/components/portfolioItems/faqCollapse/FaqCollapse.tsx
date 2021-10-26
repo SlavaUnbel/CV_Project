@@ -1,31 +1,12 @@
-import React, { FC } from 'react';
-import { useFetchFaqCollapseData, useWindowTitle } from '../../../utils/hooks';
+import React, { FC, useContext } from 'react';
+import { FaqCollapseCtx } from '../../../utils/context';
 import ComponentWrapper from '../../utils/componentWrapper/ComponentWrapper';
 import LoaderWrapper from '../../utils/loaderWrapper/LoaderWrapper';
 import './faq-collapse.scss';
 import FaqItem from './faqItem/FaqItem';
 
-interface Props extends IWithLoading, IWithError, IWithWarning {
-  data: IFaqCollapse[];
-  setFaqCollapseData: (data: IFaqCollapse[]) => void;
-}
-
-const FaqCollapse: FC<Props> = ({
-  data,
-  setFaqCollapseData,
-  setLoading,
-
-  pushError,
-  pushWarning,
-}) => {
-  useWindowTitle('FAQ Collapse');
-
-  useFetchFaqCollapseData({
-    setFaqCollapseData,
-    setLoading,
-    pushError,
-    pushWarning,
-  });
+const FaqCollapse: FC = () => {
+  const { data } = useContext(FaqCollapseCtx);
 
   return (
     <ComponentWrapper>

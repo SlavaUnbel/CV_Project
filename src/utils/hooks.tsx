@@ -92,13 +92,13 @@ export const useITypedLib = () => {
 //Portfolio Hooks
 interface PortfolioProps extends IWithLoading, IWithError, IWithWarning {
   active: number;
-  setPortfolioData: (portfolioData: IPortfolio[]) => void;
+  setData: (portfolioData: IPortfolio[]) => void;
   setPagesCount: (pagesCount: number) => void;
 }
 
 export const useFetchPortfolioData = ({
   active,
-  setPortfolioData,
+  setData,
   setPagesCount,
   setLoading,
   pushError,
@@ -114,20 +114,13 @@ export const useFetchPortfolioData = ({
     services.portfolioService
       .getPortfolioList()
       .then((data) => {
-        setPortfolioData(data.slice(startIdx, endIdx));
+        setData(data.slice(startIdx, endIdx));
         setPagesCount(Math.ceil(data.length / portfolioAmountPerPage));
         data.length === 0 && pushWarning('No data found');
       })
       .catch((e) => pushError(e))
       .finally(() => setLoading(false));
-  }, [
-    active,
-    setPortfolioData,
-    setPagesCount,
-    setLoading,
-    pushError,
-    pushWarning,
-  ]);
+  }, [active, setData, setPagesCount, setLoading, pushError, pushWarning]);
 };
 
 interface PortfolioMediaElementProps {
@@ -164,11 +157,11 @@ export const useGetMediaElement = ({
 
 //Works Hooks
 interface WorksProps extends IWithLoading, IWithError, IWithWarning {
-  setWorksData: (worksData: IWorks[]) => void;
+  setData: (data: IWorks[]) => void;
 }
 
 export const useFetchWorksData = ({
-  setWorksData,
+  setData,
   setLoading,
   pushError,
   pushWarning,
@@ -180,12 +173,12 @@ export const useFetchWorksData = ({
     services.worksService
       .getWorksData()
       .then((data) => {
-        setWorksData(data);
+        setData(data);
         data.length === 0 && pushWarning('No data found');
       })
       .catch((e) => pushError(e))
       .finally(() => setLoading(false));
-  }, [setWorksData, setLoading, pushError, pushWarning]);
+  }, [setData, setLoading, pushError, pushWarning]);
 };
 
 //Contact Hooks
@@ -357,11 +350,11 @@ export const useSendEmail = ({
 
 // Expanding Cards Hooks
 interface ExpandingCardsProps extends IWithLoading, IWithError, IWithWarning {
-  setExpandingCardsData: (data: IExpandingCards[]) => void;
+  setData: (data: IExpandingCards[]) => void;
 }
 
 export const useFetchExpandingCardsData = ({
-  setExpandingCardsData,
+  setData,
   setLoading,
   pushError,
   pushWarning,
@@ -373,12 +366,12 @@ export const useFetchExpandingCardsData = ({
     services.portfolioItemsService
       .getExpandingCardsData()
       .then((data) => {
-        setExpandingCardsData(data);
+        setData(data);
         data.length === 0 && pushWarning('No data found');
       })
       .catch((e) => pushError(e))
       .finally(() => setLoading(false));
-  }, [setExpandingCardsData, setLoading, pushError, pushWarning]);
+  }, [setData, setLoading, pushError, pushWarning]);
 };
 
 export const useExpandingCardRef = () => {
@@ -485,11 +478,11 @@ interface RotatingNavigationProps
   extends IWithLoading,
     IWithError,
     IWithWarning {
-  setRotatingNavigationData: (data: IRotatingNavigation) => void;
+  setData: (data: IRotatingNavigation) => void;
 }
 
 export const useFetchRotatingNavigationData = ({
-  setRotatingNavigationData,
+  setData,
   setLoading,
   pushError,
   pushWarning,
@@ -501,12 +494,12 @@ export const useFetchRotatingNavigationData = ({
     services.portfolioItemsService
       .getRotatingNavigationData()
       .then((data) => {
-        setRotatingNavigationData(data);
+        setData(data);
         !data && pushWarning('No data found');
       })
       .catch((e) => pushError(e))
       .finally(() => setLoading(false));
-  }, [setRotatingNavigationData, setLoading, pushError, pushWarning]);
+  }, [setData, setLoading, pushError, pushWarning]);
 };
 
 export const useNavigationAnimation = () => {
@@ -557,11 +550,11 @@ export const useScrollingAnimation = () => {
 
 //Split Landing Page Hooks
 interface SplitLandingPageProps extends IWithLoading, IWithError, IWithWarning {
-  setSplitLandingPageData: (data: ISplitLandingPage[]) => void;
+  setData: (data: ISplitLandingPage[]) => void;
 }
 
 export const useFetchSplitLandingPageData = ({
-  setSplitLandingPageData,
+  setData,
   setLoading,
   pushError,
   pushWarning,
@@ -573,24 +566,36 @@ export const useFetchSplitLandingPageData = ({
     services.portfolioItemsService
       .getSplitLandingPageData()
       .then((data) => {
-        setSplitLandingPageData(data);
+        setData(data);
         !data && pushWarning('No data found');
       })
       .catch((e) => pushError(e))
       .finally(() => setLoading(false));
-  }, [setSplitLandingPageData, setLoading, pushError, pushWarning]);
+  }, [setData, setLoading, pushError, pushWarning]);
 };
 
 export const useSplitLandingPageHoverEffect = (data: ISplitLandingPage[]) => {
   const ref: LegacyRef<HTMLDivElement> = useRef(null);
 
-  const enterLeft = () => ref.current?.classList.add('hover-left');
+  const enterLeft = () => {
+    if (!ref.current) return;
+    ref.current.classList.add('hover-left');
+  };
 
-  const enterRight = () => ref.current?.classList.add('hover-right');
+  const enterRight = () => {
+    if (!ref.current) return;
+    ref.current.classList.add('hover-right');
+  };
 
-  const leaveLeft = () => ref.current?.classList.remove('hover-left');
+  const leaveLeft = () => {
+    if (!ref.current) return;
+    ref.current.classList.remove('hover-left');
+  };
 
-  const leaveRight = () => ref.current?.classList.remove('hover-right');
+  const leaveRight = () => {
+    if (!ref.current) return;
+    ref.current.classList.remove('hover-right');
+  };
 
   const leaveBoth = () => {
     leaveLeft();
@@ -620,11 +625,11 @@ export const useFormWaveAnimationEffect = () => {
 
 //Dad Jokes Hooks
 interface DadJokesProps extends IWithLoading, IWithError {
-  setDadJokesData: (data: IDadJokes) => void;
+  setData: (data: IDadJokes) => void;
 }
 
 export const useFetchDadJokesData = ({
-  setDadJokesData,
+  setData,
   setLoading,
   pushError,
 }: DadJokesProps) => {
@@ -636,7 +641,7 @@ export const useFetchDadJokesData = ({
       .getDadJokesDataFromApi()
       .then((data) => {
         if (data.status === 200) {
-          setDadJokesData(data);
+          setData(data);
         } else {
           pushError(`Api responded with error code ${data.status}`);
         }
@@ -644,7 +649,7 @@ export const useFetchDadJokesData = ({
       .catch((e) => pushError(e))
       .finally(() => setLoading(false));
     //eslint-disable-next-line
-  }, [setDadJokesData, setLoading, pushError]);
+  }, [setData, setLoading, pushError]);
 
   useEffect(() => getJoke(), [getJoke]);
 
@@ -653,11 +658,11 @@ export const useFetchDadJokesData = ({
 
 //Faq Collapse Hooks
 interface FaqCollapseProps extends IWithLoading, IWithError, IWithWarning {
-  setFaqCollapseData: (data: IFaqCollapse[]) => void;
+  setData: (data: IFaqCollapse[]) => void;
 }
 
 export const useFetchFaqCollapseData = ({
-  setFaqCollapseData,
+  setData,
   setLoading,
   pushError,
   pushWarning,
@@ -669,12 +674,12 @@ export const useFetchFaqCollapseData = ({
     services.portfolioItemsService
       .getFaqCollapseData()
       .then((data) => {
-        setFaqCollapseData(data);
+        setData(data);
         !data && pushWarning('No data found');
       })
       .catch((e) => pushError(e))
       .finally(() => setLoading(false));
-  }, [setFaqCollapseData, setLoading, pushError, pushWarning]);
+  }, [setData, setLoading, pushError, pushWarning]);
 };
 
 // Auth Project Hooks
@@ -936,12 +941,6 @@ export const useChooseRandomTag = () => {
     }
   };
 
-  const handleClick = () => {
-    if (!areaRef.current) return;
-    areaRef.current.value = '';
-    chooseRandomTag();
-  };
-
   const createChoices = (input: string) => {
     const tags = input
       .split(',')
@@ -997,7 +996,18 @@ export const useChooseRandomTag = () => {
   const unHighlightTag = (tag?: HTMLSpanElement) =>
     tag?.classList.remove('highlight');
 
-  return { tagsRef, areaRef, handleKeyUp, handleClick };
+  return { tagsRef, areaRef, handleKeyUp, chooseRandomTag };
+};
+
+export const useRandomChoicePickerOnMobile = (
+  ref: RefObject<HTMLTextAreaElement>,
+  callback: () => void,
+) => {
+  return () => {
+    if (!ref.current) return;
+    ref.current.value = '';
+    callback();
+  };
 };
 
 //Animated Navigation Hooks
@@ -1005,11 +1015,11 @@ interface AnimatedNavigationProps
   extends IWithLoading,
     IWithError,
     IWithWarning {
-  setAnimatedNavigationData: (data: string[]) => void;
+  setData: (data: string[]) => void;
 }
 
 export const useFetchAnimatedNavigationData = ({
-  setAnimatedNavigationData,
+  setData,
   setLoading,
   pushError,
   pushWarning,
@@ -1021,12 +1031,12 @@ export const useFetchAnimatedNavigationData = ({
     services.portfolioItemsService
       .getAnimatedNavigationData()
       .then((data) => {
-        setAnimatedNavigationData(data);
+        setData(data);
         !data && pushWarning('No data found');
       })
       .catch((e) => pushError(e))
       .finally(() => setLoading(false));
-  }, [setAnimatedNavigationData, setLoading, pushError, pushWarning]);
+  }, [setData, setLoading, pushError, pushWarning]);
 };
 
 //Incrementing Counter Hooks
@@ -1123,7 +1133,6 @@ export const useEstimateRemainedWater = () => {
   const remainedRef: LegacyRef<HTMLDivElement> = useRef(null);
   const percentageRef: LegacyRef<HTMLDivElement> = useRef(null);
   const cupRef: LegacyRef<HTMLDivElement> = useRef(null);
-  const refs = { litersRef, remainedRef, percentageRef, cupRef };
 
   const [cups, setCups] = useState<NodeListOf<HTMLDivElement>>();
   useEffect(() => {
@@ -1186,7 +1195,7 @@ export const useEstimateRemainedWater = () => {
     litersRef.current.innerText = `${2 - (250 * filledCups.length) / 1000}L`;
   };
 
-  return { refs, fillCup };
+  return { litersRef, remainedRef, percentageRef, cupRef, fillCup };
 };
 
 //Theme Clock Hooks
@@ -1196,7 +1205,6 @@ export const useSetTimeAndDate = () => {
   const secondRef: LegacyRef<HTMLDivElement> = useRef(null);
   const timeRef: LegacyRef<HTMLDivElement> = useRef(null);
   const dateRef: LegacyRef<HTMLDivElement> = useRef(null);
-  const refs = { hourRef, minuteRef, secondRef, timeRef, dateRef };
 
   const scaleClockArrows = (
     num: number,
@@ -1249,7 +1257,7 @@ export const useSetTimeAndDate = () => {
     setInterval(setTime, SECOND);
   }, [setTime]);
 
-  return refs;
+  return { hourRef, minuteRef, secondRef, dateRef, timeRef };
 };
 
 //GitHub Profiles Hooks
@@ -1338,14 +1346,6 @@ export const useGeneratePassword = ({
   const numberRef: LegacyRef<HTMLInputElement> = useRef(null);
   const symbolRef: LegacyRef<HTMLInputElement> = useRef(null);
   const resultRef: LegacyRef<HTMLSpanElement> = useRef(null);
-  const refs = {
-    lengthRef,
-    upperRef,
-    lowerRef,
-    numberRef,
-    symbolRef,
-    resultRef,
-  };
 
   const getRandomLower = () =>
     String.fromCharCode(Math.floor(Math.random() * 26) + 97);
@@ -1389,6 +1389,8 @@ export const useGeneratePassword = ({
       hasSymbol,
       length,
     );
+
+    setPasswordVal('');
   };
 
   const generatePassword = (
@@ -1403,8 +1405,6 @@ export const useGeneratePassword = ({
     const typesArr = [{ upper }, { lower }, { number }, { symbol }].filter(
       (type) => Object.values(type)[0],
     );
-
-    console.log(length);
 
     if (typesCount === 0 || length === 0) {
       pushWarning('Please, provide password length and at least one parameter');
@@ -1437,7 +1437,7 @@ export const useGeneratePassword = ({
       .finally(() => pushSuccess('The password is copied into the clipboard!'));
   };
 
-  const subtract = () => {
+  const decrease = () => {
     if (lengthRef.current) {
       let len = +lengthRef.current.value;
       len > 4 ? (len -= 1) : (len = 4);
@@ -1445,7 +1445,7 @@ export const useGeneratePassword = ({
     }
   };
 
-  const add = () => {
+  const increase = () => {
     if (lengthRef.current) {
       let len = +lengthRef.current.value;
       !len ? (len = 4) : len < 20 ? (len += 1) : (len = 20);
@@ -1455,5 +1455,16 @@ export const useGeneratePassword = ({
 
   useEffect(() => () => setPasswordVal(''), [setPasswordVal]);
 
-  return { refs, generate, copyPassword, add, subtract };
+  return {
+    lengthRef,
+    upperRef,
+    lowerRef,
+    numberRef,
+    symbolRef,
+    resultRef,
+    generate,
+    copyPassword,
+    increase,
+    decrease,
+  };
 };

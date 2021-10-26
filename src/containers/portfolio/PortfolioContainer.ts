@@ -1,22 +1,19 @@
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
-import Portfolio from '../../components/portfolio/Portfolio';
+import PortfolioContext from '../../context/portfolio/PortfolioContext';
 import { loadingActions } from '../../reducers/loadingReducer';
 import { messageActions } from '../../reducers/messageReducer';
 import { portfolioActions } from '../../reducers/portfolioReducer';
 import { IState } from '../../reducers/rootReducer';
 
 const mapStateToProps = (state: IState) => ({
-  portfolioData: state.portfolio.portfolioData,
+  data: state.portfolio.portfolioData,
   active: state.portfolio.selected,
   pagesCount: state.portfolio.pagesCount,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  setPortfolioData: bindActionCreators(
-    portfolioActions.portfolioData.set,
-    dispatch
-  ),
+  setData: bindActionCreators(portfolioActions.portfolioData.set, dispatch),
   setLoading: bindActionCreators(loadingActions.loading.set, dispatch),
   setActivePage: bindActionCreators(portfolioActions.selected.set, dispatch),
   setPagesCount: bindActionCreators(portfolioActions.pagesCount.set, dispatch),
@@ -24,4 +21,4 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   pushWarning: bindActionCreators(messageActions.message.warning, dispatch),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Portfolio);
+export default connect(mapStateToProps, mapDispatchToProps)(PortfolioContext);
