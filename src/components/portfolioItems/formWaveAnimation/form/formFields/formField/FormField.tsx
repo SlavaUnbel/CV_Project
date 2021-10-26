@@ -1,5 +1,5 @@
 import React, { ChangeEvent, FC } from 'react';
-import { useFormWaveAnimationEffect } from '../../../../../utils/hooks';
+import { useFormWaveAnimationEffect } from '../../../../../../utils/hooks';
 
 interface Props {
   label: string;

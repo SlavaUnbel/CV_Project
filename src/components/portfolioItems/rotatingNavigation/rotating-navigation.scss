@@ -1,6 +1,6 @@
 @import '../../../index.scss';
 
-.rotating-navigation__wrapper {
+.rotating-navigation__container {
   @include container;
   background-color: var(--brown-color);
   overflow: hidden;
@@ -62,7 +62,7 @@
     }
   }
 
-  .rotating-navigation__container {
+  .rotating-navigation__wrapper {
     @include container;
     background-color: var(--white-color);
     transform-origin: top left;

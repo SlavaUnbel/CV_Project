@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
-import MovieApp from '../../components/portfolioItems/movieApp/MovieApp';
+import MovieAppContext from '../../context/portfolioItems/MovieAppContext';
 import { loadingActions } from '../../reducers/loadingReducer';
 import { messageActions } from '../../reducers/messageReducer';
 import { portfolioItemsActions } from '../../reducers/portfolioItemsReducer';
@@ -20,4 +20,4 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   pushWarning: bindActionCreators(messageActions.message.warning, dispatch),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(MovieApp);
+export default connect(mapStateToProps, mapDispatchToProps)(MovieAppContext);

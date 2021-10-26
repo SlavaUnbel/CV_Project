@@ -1,11 +1,12 @@
 import React, { FC } from 'react';
+import FormWaveAnimation from '../../components/portfolioItems/formWaveAnimation/FormWaveAnimation';
+import { AuthProjectCtx } from '../../utils/context';
 import {
   useAuthProjectInputFields,
   useAuthProjectPageValidation,
   useAuthProjectSubmit,
   useWindowTitle,
 } from '../../utils/hooks';
-import FormWaveAnimation from '../portfolioItems/formWaveAnimation/FormWaveAnimation';
 
 interface Props extends IWithError, IWithWarning, IWithSuccess {
   messages: IAuthProjectMessages;
@@ -40,7 +41,7 @@ interface Props extends IWithError, IWithWarning, IWithSuccess {
   setCurrentUserRole?: (role?: string) => void;
 }
 
-const AuthProject: FC<Props> = ({
+const AuthProjectContext: FC<Props> = ({
   messages,
   setEmailMessage,
   setPasswordMessage,
@@ -107,20 +108,46 @@ const AuthProject: FC<Props> = ({
   });
 
   return (
-    <FormWaveAnimation
-      inputFields={inputFields}
-      validate={validate}
-      submit={submit}
-      usage={usage}
-      setUsage={setUsage}
-      currentUserInfo={currentUserInfo}
-      currentUserRole={currentUserRole}
-      role={role}
-      onRoleChange={changeRole}
-      logout={logout}
-      checkAuth={checkAuth}
-    />
+    <AuthProjectCtx.Provider
+      value={{
+        messages,
+        setEmailMessage,
+        setPasswordMessage,
+        reset,
+
+        validated,
+        setValidated,
+
+        username,
+        setUsername,
+
+        password,
+        setPassword,
+
+        usage,
+        setUsage,
+
+        role,
+        changeRole,
+
+        currentUserInfo,
+        setCurrentUserInfo,
+        currentUserRole,
+
+        pushError,
+        pushWarning,
+        pushSuccess,
+
+        inputFields,
+        validate,
+        submit,
+        logout,
+        checkAuth,
+      }}
+    >
+      <FormWaveAnimation />
+    </AuthProjectCtx.Provider>
   );
 };
 
-export default AuthProject;
+export default AuthProjectContext;

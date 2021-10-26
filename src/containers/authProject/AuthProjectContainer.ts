@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
-import AuthProject from '../../components/authProject/AuthProject';
+import AuthProjectContext from '../../context/authProject/AuthProjectContext';
 import { authProjectActions } from '../../reducers/authProjectReducer';
 import { messageActions } from '../../reducers/messageReducer';
 import { IState } from '../../reducers/rootReducer';
@@ -31,4 +31,4 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   pushSuccess: bindActionCreators(messageActions.message.success, dispatch),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(AuthProject);
+export default connect(mapStateToProps, mapDispatchToProps)(AuthProjectContext);

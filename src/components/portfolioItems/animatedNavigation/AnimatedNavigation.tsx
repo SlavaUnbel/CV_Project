@@ -1,38 +1,13 @@
-import React, { FC } from 'react';
-import {
-  useFetchAnimatedNavigationData,
-  useToggleClass,
-  useWindowTitle,
-} from '../../../utils/hooks';
+import React, { FC, useContext } from 'react';
+import { AnimatedNavigationCtx } from '../../../utils/context';
 import { animatedNavigationPath } from '../../../utils/route';
 import Button from '../../utils/button/Button';
 import ComponentWrapper from '../../utils/componentWrapper/ComponentWrapper';
 import LoaderWrapper from '../../utils/loaderWrapper/LoaderWrapper';
 import './animated-navigation.scss';
 
-interface Props extends IWithLoading, IWithError, IWithWarning {
-  data: string[];
-  setAnimatedNavigationData: (data: string[]) => void;
-}
-
-const AnimatedNavigation: FC<Props> = ({
-  data,
-  setAnimatedNavigationData,
-  setLoading,
-
-  pushError,
-  pushWarning,
-}) => {
-  useWindowTitle('Animated Navigation');
-
-  useFetchAnimatedNavigationData({
-    setAnimatedNavigationData,
-    setLoading,
-    pushError,
-    pushWarning,
-  });
-
-  const { newClass, toggleClass } = useToggleClass();
+const AnimatedNavigation: FC = () => {
+  const { data, newClass, toggleClass } = useContext(AnimatedNavigationCtx);
 
   return (
     <ComponentWrapper>

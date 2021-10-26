@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
-import DadJokes from '../../components/portfolioItems/dadJokes/DadJokes';
+import DadJokesContext from '../../context/portfolioItems/DadJokesContext';
 import { loadingActions } from '../../reducers/loadingReducer';
 import { messageActions } from '../../reducers/messageReducer';
 import { portfolioItemsActions } from '../../reducers/portfolioItemsReducer';
@@ -11,12 +11,9 @@ const mapStateToProps = (state: IState) => ({
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  setDadJokesData: bindActionCreators(
-    portfolioItemsActions.dadJokes.set,
-    dispatch,
-  ),
+  setData: bindActionCreators(portfolioItemsActions.dadJokes.set, dispatch),
   setLoading: bindActionCreators(loadingActions.loading.set, dispatch),
   pushError: bindActionCreators(messageActions.message.error, dispatch),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(DadJokes);
+export default connect(mapStateToProps, mapDispatchToProps)(DadJokesContext);

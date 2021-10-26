@@ -1,22 +1,19 @@
-import React, { FC, HTMLAttributeAnchorTarget } from 'react';
+import React, { FC } from 'react';
 
 interface Props {
-  icon: JSX.Element;
-  title: string;
-  href: string;
-  target?: HTMLAttributeAnchorTarget;
+  cred: IHeaderCreds;
 }
 
-const HeaderItem: FC<Props> = ({ icon, title, href, target }) => (
+const HeaderItem: FC<Props> = ({ cred }) => (
   <div className="item-container">
     <a
-      href={href}
-      target={target}
-      rel={target === '_blank' ? 'noreferrer' : undefined}
+      href={cred.href}
+      target={cred.target}
+      rel={cred.target === '_blank' ? 'noreferrer' : undefined}
     >
-      {icon}
+      {cred.icon}
 
-      <span>{title}</span>
+      <span>{cred.title}</span>
     </a>
   </div>
 );

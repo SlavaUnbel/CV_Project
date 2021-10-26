@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
-import Header from '../../components/header/Header';
+import HeaderContext from '../../context/header/HeaderContext';
 import { headerActions } from '../../reducers/headerReducer';
 import { IState } from '../../reducers/rootReducer';
 
@@ -12,4 +12,4 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   openCloseMenu: bindActionCreators(headerActions.menuOpen.set, dispatch),
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default connect(mapStateToProps, mapDispatchToProps)(HeaderContext);

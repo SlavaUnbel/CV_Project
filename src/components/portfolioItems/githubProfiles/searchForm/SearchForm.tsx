@@ -1,19 +1,19 @@
 import { Search } from '@mui/icons-material';
-import React, { FC, FormEvent, RefObject } from 'react';
+import React, { FC, useContext } from 'react';
+import { GithubProfilesCtx } from '../../../../utils/context';
 
-interface Props {
-  searchRef: RefObject<HTMLInputElement>;
-  onSubmit: (e: FormEvent<HTMLFormElement>) => void;
-}
+const SearchForm: FC = () => {
+  const { searchRef, submitSearch } = useContext(GithubProfilesCtx);
 
-const SearchForm: FC<Props> = ({ searchRef, onSubmit }) => (
-  <form className="user-form" onSubmit={(e) => onSubmit(e)}>
-    <input placeholder="Look up for a GitHub User" ref={searchRef} />
+  return (
+    <form className="user-form" onSubmit={(e) => submitSearch(e)}>
+      <input placeholder="Look up for a GitHub User" ref={searchRef} />
 
-    <button>
-      <Search className="icon" />
-    </button>
-  </form>
-);
+      <button>
+        <Search className="icon" />
+      </button>
+    </form>
+  );
+};
 
 export default SearchForm;

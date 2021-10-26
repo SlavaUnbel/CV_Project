@@ -1,23 +1,24 @@
-import React, { FC } from 'react';
+import React, { FC, useContext } from 'react';
+import { AuthProjectCtx } from '../../../../utils/context';
 
-interface Props {
-  info?: string;
-  role?: string;
-}
+const CurrentUserInfo: FC = () => {
+  const { currentUserInfo, currentUserRole } = useContext(AuthProjectCtx);
 
-const CurrentUserInfo: FC<Props> = ({ info, role }) => (
-  <div
-    className={`user-info ${
-      info && info.split(' ')[0] === 'No'
-        ? 'no-data'
-        : info && info.split(' ')[0] === 'Refresh'
-        ? 'proceed'
-        : ''
-    }`}
-  >
-    <h4>{info}</h4>
-    {role && <h4>{role}</h4>}
-  </div>
-);
+  return (
+    <div
+      className={`user-info ${
+        currentUserInfo && currentUserInfo.split(' ')[0] === 'No'
+          ? 'no-data'
+          : currentUserInfo && currentUserInfo.split(' ')[0] === 'Refresh'
+          ? 'proceed'
+          : ''
+      }`}
+    >
+      <h4>{currentUserInfo}</h4>
+
+      {currentUserRole && <h4>{currentUserRole}</h4>}
+    </div>
+  );
+};
 
 export default CurrentUserInfo;

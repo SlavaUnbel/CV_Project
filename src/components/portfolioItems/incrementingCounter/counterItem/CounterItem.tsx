@@ -2,21 +2,19 @@ import React, { FC } from 'react';
 import { useIncrementingCounter } from '../../../../utils/hooks';
 
 interface Props {
-  icon: JSX.Element;
-  dataTarget: number;
-  title: string;
+  item: IIncrementingCounterItem;
 }
 
-const CounterItem: FC<Props> = ({ icon, dataTarget, title }) => {
+const CounterItem: FC<Props> = ({ item }) => {
   const ref = useIncrementingCounter();
 
   return (
     <div className="counter-container">
-      {icon}
+      {item.icon}
 
-      <div className="counter" data-target={dataTarget.toString()} ref={ref} />
+      <div className="counter" data-target={item.dataTarget} ref={ref} />
 
-      <span>{title}</span>
+      <span>{item.title}</span>
     </div>
   );
 };

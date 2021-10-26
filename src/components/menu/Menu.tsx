@@ -1,21 +1,16 @@
-import React, { FC } from 'react';
-import { getMenuOptions } from '../../services/mock/databaseMethods';
+import React, { FC, useContext } from 'react';
+import { MenuCtx } from '../../utils/context';
 import './menu.scss';
 import MenuItem from './menuItem/MenuItem';
 
-interface Props {
-  menuOpen: boolean;
-  openCloseMenu: (menuOpen: boolean) => void;
-}
-
-const Menu: FC<Props> = ({ menuOpen, openCloseMenu }) => {
-  const data = getMenuOptions();
+const Menu: FC = () => {
+  const { options, menuOpen } = useContext(MenuCtx);
 
   return (
     <div className={`menu${menuOpen ? ' active' : ''}`}>
       <ul>
-        {data.map((item) => (
-          <MenuItem key={item} title={item} openCloseMenu={openCloseMenu} />
+        {options.map((option) => (
+          <MenuItem key={option} title={option} />
         ))}
       </ul>
     </div>

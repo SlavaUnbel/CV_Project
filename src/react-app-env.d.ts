@@ -17,10 +17,17 @@ interface IWithLoading {
   setLoading?: (loading: boolean) => void;
 }
 
-interface IHome {
-  name: string;
-  capabilities: string[];
-  avatar: string;
+interface IHeader {
+  phone: IHeaderCreds;
+  email: IHeaderCreds;
+  linkedin: IHeaderCreds;
+}
+
+interface IHeaderCreds {
+  icon: JSX.Element;
+  title: string;
+  href: string;
+  target?: HTMLAttributeAnchorTarget;
 }
 
 interface IPortfolio {
@@ -70,7 +77,7 @@ interface IMessage {
   type: MessageType;
 }
 
-type MessageType = 'success' | 'error' | 'warning'
+type MessageType = 'success' | 'error' | 'warning';
 
 interface IExpandingCards {
   id: Id;
@@ -108,6 +115,18 @@ interface IFaqCollapse {
 
 type AuthProjectUsage = 'login' | 'registration' | 'loggedIn' | undefined;
 
+interface IIncrementingCounter {
+  twitter: IIncrementingCounterItem;
+  youtube: IIncrementingCounterItem;
+  facebook: IIncrementingCounterItem;
+}
+
+interface IIncrementingCounterItem {
+  icon: JSX.Element;
+  dataTarget: number;
+  title: string;
+}
+
 interface IMovieApp {
   poster_path: string;
   title: string;
@@ -130,4 +149,16 @@ interface IGithubRepo {
   id: number;
   name: string;
   html_url: string;
+}
+
+interface IPasswordGenerator {
+  upper: IPasswordGeneratorOption
+  lower: IPasswordGeneratorOption
+  numbers: IPasswordGeneratorOption
+  symbols: IPasswordGeneratorOption
+}
+
+interface IPasswordGeneratorOption {
+  id: string;
+  title: string;
 }

@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
-import Contact from '../../components/contact/Contact';
+import ContactContext from '../../context/contact/ContactContext';
 import { contactActions } from '../../reducers/contactReducer';
 import { messageActions } from '../../reducers/messageReducer';
 import { IState } from '../../reducers/rootReducer';
@@ -21,4 +21,4 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   pushSuccess: bindActionCreators(messageActions.message.success, dispatch),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Contact);
+export default connect(mapStateToProps, mapDispatchToProps)(ContactContext);

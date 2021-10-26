@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
-import PasswordGenerator from '../../components/portfolioItems/passwordGenerator/PasswordGenerator';
+import PasswordGeneratorContext from '../../context/portfolioItems/PasswordGeneratorContext';
 import { messageActions } from '../../reducers/messageReducer';
 import { portfolioItemsActions } from '../../reducers/portfolioItemsReducer';
 import { IState } from '../../reducers/rootReducer';
@@ -19,4 +19,4 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   pushSuccess: bindActionCreators(messageActions.message.success, dispatch),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(PasswordGenerator);
+export default connect(mapStateToProps, mapDispatchToProps)(PasswordGeneratorContext);

@@ -1,12 +1,14 @@
-import React, { FC } from 'react';
+import React, { FC, useContext } from 'react';
+import { MenuCtx } from '../../../utils/context';
 import { useMenuRouter } from '../../../utils/hooks';
 
 interface Props {
   title: string;
-  openCloseMenu: (menuOpen: boolean) => void;
 }
 
-const MenuItem: FC<Props> = ({ title, openCloseMenu }) => {
+const MenuItem: FC<Props> = ({ title }) => {
+  const { openCloseMenu } = useContext(MenuCtx);
+
   const redirect = useMenuRouter(title, openCloseMenu);
 
   return <li onClick={redirect}>{title}</li>;

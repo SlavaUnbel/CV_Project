@@ -1,46 +1,13 @@
-import React, { FC } from 'react';
-import { useFetchPortfolioData, useWindowTitle } from '../../utils/hooks';
+import React, { FC, useContext } from 'react';
+import { PortfolioCtx } from '../../utils/context';
 import ComponentWrapper from '../utils/componentWrapper/ComponentWrapper';
-import LoaderWrapper from '../utils/loaderWrapper/LoaderWrapper';
+import ItemsWrapper from './itemsWrapper/ItemsWrapper';
 import './portfolio.scss';
 import PortfolioItem from './portfolioItem/PortfolioItem';
 import PortfolioPage from './portfolioPages/PortfolioPage';
 
-interface Props extends IWithLoading, IWithError, IWithWarning {
-  portfolioData: IPortfolio[];
-  setPortfolioData: (portfolioData: IPortfolio[]) => void;
-
-  active: number;
-  setActivePage: (active: number) => void;
-
-  pagesCount: number;
-  setPagesCount: (pagesCount: number) => void;
-}
-
-const Portfolio: FC<Props> = ({
-  portfolioData,
-  setPortfolioData,
-  setLoading,
-
-  active,
-  setActivePage,
-
-  pagesCount,
-  setPagesCount,
-
-  pushError,
-  pushWarning,
-}) => {
-  useWindowTitle('Portfolio');
-
-  useFetchPortfolioData({
-    active,
-    setPortfolioData,
-    setPagesCount,
-    setLoading,
-    pushError,
-    pushWarning,
-  });
+const Portfolio: FC = () => {
+  const { pagesCount, data } = useContext(PortfolioCtx);
 
   return (
     <ComponentWrapper>
@@ -49,22 +16,15 @@ const Portfolio: FC<Props> = ({
 
         <ul>
           {Array.from({ length: pagesCount }, (_, i) => i).map((page) => (
-            <PortfolioPage
-              key={page}
-              pageNumber={page}
-              active={active === page}
-              setActive={setActivePage}
-            />
+            <PortfolioPage key={page} pageNumber={page} />
           ))}
         </ul>
 
-        <LoaderWrapper wrapperStyle={{ height: '80vh' }}>
-          <div className="container">
-            {portfolioData.map((item) => (
-              <PortfolioItem key={item.id} item={item} />
-            ))}
-          </div>
-        </LoaderWrapper>
+        <ItemsWrapper>
+          {data.map((item) => (
+            <PortfolioItem key={item.id} item={item} />
+          ))}
+        </ItemsWrapper>
       </div>
     </ComponentWrapper>
   );
