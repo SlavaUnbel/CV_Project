@@ -269,3 +269,12 @@ interface IAuthProjectContext extends IWithError, IWithWarning, IWithSuccess {
   checkAuth: () => Promise<void>
 }
 export const AuthProjectCtx = createContext({} as IAuthProjectContext);
+
+interface INotesAppContext extends IWithLoading, IWithError {
+  notes: INotesApp[];
+  setNotes: (notes: INotesApp[]) => void;
+  addNote: () => void;
+  editNote: (note: INotesApp) => void;
+  removeNote: (id: number) => void;
+}
+export const NotesAppCtx = createContext({} as INotesAppContext)

@@ -6,6 +6,7 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 
 const authProject = require('./authProject/authProject');
+const notesApp = require('./portfolioItems/notesApp');
 
 app.use(express.json());
 app.use(cors({
@@ -25,6 +26,8 @@ app.use(session({
   }
 }))
 app.use('/authProject', authProject);
+
+app.use('/notesApp', notesApp)
 
 app.listen(PORT, () => {
   console.log(`server is running on port ${PORT}`);

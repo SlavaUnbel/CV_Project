@@ -162,3 +162,9 @@ interface IPasswordGeneratorOption {
   id: string;
   title: string;
 }
+
+interface INotesApp {
+  id: number;
+  note: string;
+  editing: boolean;
+}

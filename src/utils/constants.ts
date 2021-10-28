@@ -35,7 +35,8 @@ export const portfolioItems = [
   'Drink Water',
   'Theme Clock',
   'GitHub Profiles',
-  'Password Generator'
+  'Password Generator',
+  'Notes App'
 ];
 
 export const expandingCardsSrc =

@@ -1,5 +1,5 @@
 const express = require('express');
-const router = express.Router();
+const authRouter = express.Router();
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 const jwt = require('jsonwebtoken');
@@ -7,7 +7,7 @@ const jwt = require('jsonwebtoken');
 const db = require('../db/db');
 const verifyJWT = require('./verifyJWT');
 
-router.post('/register', (req, res) =>
+authRouter.post('/register', (req, res) =>
   bcrypt.hash(req.body.password, saltRounds, (err, hash) => {
     if (err) {
       res.send({ message: err, type: 'error' });
@@ -27,7 +27,7 @@ router.post('/register', (req, res) =>
   }),
 );
 
-router.post('/login', (req, res) =>
+authRouter.post('/login', (req, res) =>
   db.query(
     'SELECT * FROM users WHERE username = ?',
     req.body.username,
@@ -75,21 +75,21 @@ router.post('/login', (req, res) =>
   ),
 );
 
-router.get('/authenticated', verifyJWT, (req, res) => {
+authRouter.get('/authenticated', verifyJWT, (req, res) => {
   req.headers['x-access-token'] &&
     res.send({ message: 'You are authenticated!' });
 });
 
-router.get('/login', (req, res) =>
+authRouter.get('/login', (req, res) =>
   req.session.user
     ? res.send({ loggedIn: true, user: req.session.user })
     : res.send({ loggedIn: false }),
 );
 
-router.post('/logout', (req, res) => {
+authRouter.post('/logout', (req, res) => {
   req.session.destroy();
   res.clearCookie('userId');
   res.sendStatus(res.statusCode);
 });
 
-module.exports = router;
+module.exports = authRouter;
