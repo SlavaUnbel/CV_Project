@@ -1,0 +1,43 @@
+@import '../../../index.scss';
+
+.hoverboard__container {
+  @include container;
+  @include flex(row nowrap, center, center);
+  background: var(--black-color);
+
+  .hoverboard__wrapper {
+    @include flex(row wrap, center, center);
+    max-width: 25rem;
+
+    @include mobile {
+      max-width: 90vw;
+    }
+
+    @include tablet {
+      max-width: 90vw;
+    }
+
+    .square {
+      background: var(--bg-hoverboard-color);
+      box-shadow: 0 0 2px var(--black-color);
+      height: 1rem;
+      width: 1rem;
+      margin: 0.1rem;
+      transition: 2s ease;
+
+      @include mobile {
+        height: 4rem;
+        width: 4rem;
+      }
+
+      @include tablet {
+        height: 4rem;
+        width: 4rem;
+      }
+
+      &:hover {
+        transition-duration: 0s;
+      }
+    }
+  }
+}
