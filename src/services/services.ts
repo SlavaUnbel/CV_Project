@@ -1,9 +1,11 @@
 import axios from 'axios';
 import AuthProjectService from './abstract/AuthProjectService';
+import NotesAppService from './abstract/NotesAppService';
 import PortfolioItemsService from './abstract/PortfolioItemsService';
 import PortfolioService from './abstract/PortfolioService';
 import WorksService from './abstract/WorksService';
 import { AuthProjectServiceExpressApi } from './express/AuthProjectServiceExpressApi';
+import { NotesAppServiceExpressApi } from './express/NotesAppServiceExpressApi';
 import PortfolioItemsServiceMock from './mock/PortfolioItemsServiceMock';
 import PortfolioServiceMock from './mock/PortfolioServiceMock';
 import WorksServiceMock from './mock/WorksServiceMock';
@@ -16,6 +18,7 @@ export interface Services {
   worksService: WorksService;
   portfolioItemsService: PortfolioItemsService;
   authProjectService: AuthProjectService;
+  notesAppService: NotesAppService
 }
 
 export const services: Services = {
@@ -23,4 +26,5 @@ export const services: Services = {
   worksService: new WorksServiceMock(),
   portfolioItemsService: new PortfolioItemsServiceMock(),
   authProjectService: new AuthProjectServiceExpressApi(),
+  notesAppService: new NotesAppServiceExpressApi()
 };

@@ -21,6 +21,7 @@ export const drinkWaterPath = '/drink-water'
 export const themeClockPath = '/theme-clock'
 export const githubProfilesPath = '/github-profiles'
 export const passwordGeneratorPath = '/password-generator'
+export const notesAppPath = '/notes-app'
 
 //works paths
 export const authProjectPath = '/auth-project'

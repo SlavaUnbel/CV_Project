@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import { Route, Switch } from 'react-router-dom';
+import NotesAppContainer from '../../../containers/notesApp/NotesAppContainer';
 import AnimatedNavigationContainer from '../../../containers/portfolioItems/AnimatedNavigationContainer';
 import DadJokesContainer from '../../../containers/portfolioItems/DadJokesContainer';
 import ExpandingCardsContainer from '../../../containers/portfolioItems/ExpandingCardsContainer';
@@ -23,6 +24,7 @@ import {
   githubProfilesPath,
   incrementingCounterPath,
   movieAppPath,
+  notesAppPath,
   passwordGeneratorPath,
   randomChoicePickerPath,
   rotatingNavigationPath,
@@ -82,6 +84,7 @@ const PortfolioRouter: FC = () => (
       path={passwordGeneratorPath}
       component={PasswordGeneratorContainer}
     />
+    <Route exact path={notesAppPath} component={NotesAppContainer} />
   </Switch>
 );
 

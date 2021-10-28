@@ -1468,3 +1468,60 @@ export const useGeneratePassword = ({
     decrease,
   };
 };
+
+//Notes App Hooks
+interface NotesAppProps extends IWithLoading, IWithError {
+  setNotes: (notes: INotesApp[]) => void;
+}
+
+export const useFetchNotesAppDataAndManageNotes = ({
+  setNotes,
+  setLoading,
+  pushError,
+}: NotesAppProps) => {
+  const getNotes = useCallback(() => {
+    if (!setLoading) return;
+    setLoading(true);
+
+    services.notesAppService
+      .getNotes()
+      .then(setNotes)
+      .catch((e) => pushError(e))
+      .finally(() => setLoading(false));
+  }, [setNotes, setLoading, pushError]);
+
+  useEffect(
+    () => getNotes(),
+    // eslint-disable-next-line
+    [getNotes],
+  );
+
+  const addNote = () => {
+    services.notesAppService.addNote().catch((e) => pushError(e));
+    getNotes();
+  };
+
+  const editNote = (note: INotesApp) => {
+    services.notesAppService.editNote(note).catch((e) => pushError(e));
+    getNotes();
+  };
+
+  const removeNote = (id: number) => {
+    services.notesAppService.removeNote(id).catch((e) => pushError(e));
+    getNotes();
+  };
+
+  return { addNote, editNote, removeNote };
+};
+
+export const useNotesAppInput = (item: INotesApp) => {
+  const [note, setNote] = useState(item.note);
+
+  const changeInput = (e: FormEvent<HTMLTextAreaElement>) => {
+    e.preventDefault();
+
+    setNote(e.currentTarget.value);
+  };
+
+  return { note, changeInput };
+};
