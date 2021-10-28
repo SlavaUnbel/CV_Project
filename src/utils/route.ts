@@ -22,6 +22,7 @@ export const themeClockPath = '/theme-clock'
 export const githubProfilesPath = '/github-profiles'
 export const passwordGeneratorPath = '/password-generator'
 export const notesAppPath = '/notes-app'
+export const hoverboardPath = '/hoverboard'
 
 //works paths
 export const authProjectPath = '/auth-project'

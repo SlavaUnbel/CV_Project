@@ -1,3 +1,5 @@
+export const isMobile = window.innerWidth <= 800 && window.innerHeight <= 1000;
+
 export const avatarSrc = process.env.PUBLIC_URL + '/images/general/avatar.png';
 export const downSrc = process.env.PUBLIC_URL + '/images/general/down.png';
 export const mobileSrc = process.env.PUBLIC_URL + '/images/general/mobile.png';
@@ -36,7 +38,8 @@ export const portfolioItems = [
   'Theme Clock',
   'GitHub Profiles',
   'Password Generator',
-  'Notes App'
+  'Notes App',
+  'Hoverboard'
 ];
 
 export const expandingCardsSrc =

@@ -22,6 +22,7 @@ import {
   faqCollapsePath,
   formWaveAnimationPath,
   githubProfilesPath,
+  hoverboardPath,
   incrementingCounterPath,
   movieAppPath,
   notesAppPath,
@@ -33,6 +34,7 @@ import {
   themeClockPath,
 } from '../../../utils/route';
 import FormWaveAnimation from '../../portfolioItems/formWaveAnimation/FormWaveAnimation';
+import Hoverboard from '../../portfolioItems/hoverboard/Hoverboard';
 import ScrollAnimation from '../../portfolioItems/scrollAnimation/ScrollAnimation';
 
 const PortfolioRouter: FC = () => (
@@ -85,6 +87,7 @@ const PortfolioRouter: FC = () => (
       component={PasswordGeneratorContainer}
     />
     <Route exact path={notesAppPath} component={NotesAppContainer} />
+    <Route exact path={hoverboardPath} component={Hoverboard} />
   </Switch>
 );
 

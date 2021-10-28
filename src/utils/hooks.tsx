@@ -14,6 +14,7 @@ import { useHistory } from 'react-router-dom';
 import { services } from '../services/services';
 import {
   days,
+  isMobile,
   months,
   movieAppApi,
   movieAppSearchApi,
@@ -1167,7 +1168,6 @@ export const useEstimateRemainedWater = () => {
     )
       return;
 
-    const isMobile = window.innerWidth <= 800 && window.innerHeight <= 1000;
     const filledCups: HTMLDivElement[] = [];
     cups?.forEach(
       (cup) => cup.classList.contains('filled') && filledCups.push(cup),
@@ -1261,7 +1261,6 @@ export const useSetTimeAndDate = () => {
 };
 
 //GitHub Profiles Hooks
-
 interface GithubProfilesProps extends IWithLoading, IWithError, IWithWarning {
   setGithubProfilesData: (user: any) => void;
   setGithubProfilesReposData: (repos: any[]) => void;
@@ -1524,4 +1523,44 @@ export const useNotesAppInput = (item: INotesApp) => {
   };
 
   return { note, changeInput };
+};
+
+//Hoverboard Hooks
+export const useHoverboard = () => {
+  const wrapperRef: LegacyRef<HTMLDivElement> = useRef(null);
+
+  const setColor = useCallback((square: HTMLDivElement) => {
+    const color = getRandomColor();
+    square.style.background = color;
+    square.style.boxShadow = `0 0 2px ${color}, 0 0 10px ${color}`;
+  }, []);
+
+  const removeColor = useCallback((square: HTMLDivElement) => {
+    square.style.background = '#1d1d1d';
+    square.style.boxShadow = `0 0 2px #000`;
+  }, []);
+
+  const getRandomColor = () =>
+    `rgb(${Math.floor(Math.random() * 255) + 1}, ${Math.floor(
+      Math.random() * 255 + 1,
+    )}, ${Math.floor(Math.random() * 255) + 1})`;
+
+  useEffect(() => {
+    Array.from({ length: isMobile ? 20 : 500 }).forEach((_) => {
+      const square = document.createElement('div');
+      square.classList.add('square');
+
+      square.addEventListener('mouseover', () => setColor(square));
+      square.addEventListener('mouseout', () => removeColor(square));
+
+      if (isMobile) {
+        square.addEventListener('touchstart', () => setColor(square));
+        square.addEventListener('touchend', () => removeColor(square));
+      }
+
+      wrapperRef.current?.appendChild(square);
+    });
+  }, [setColor, removeColor]);
+
+  return wrapperRef;
 };
