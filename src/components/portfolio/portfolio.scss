@@ -8,7 +8,6 @@
 .portfolio {
   @include container;
   @include flex(column nowrap, center);
-  background-color: var(--white-color);
 
   h1 {
     font-size: 3rem;
@@ -60,7 +59,7 @@
       border-radius: 10px;
       cursor: pointer;
       overflow: hidden;
-      transition: all 0.5s ease;
+      transition: all 0.4s ease;
 
       @include screen-1000px {
         font-size: 0.9rem;
@@ -79,16 +78,26 @@
       }
 
       &:hover {
-        background-color: var(--lightgrey-color);
+        background: var(--lightgrey-color);
         box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
         transform: scale(1.05);
       }
 
+      &:active {
+        transform: translate(5px, 5px);
+        box-shadow: none;
+      }
+
       &.active {
-        background-color: var(--primary-color);
+        background: var(--primary-color);
         color: var(--white-color);
         box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
         transform: scale(1.05);
+
+        &:active {
+          transform: translate(5px, 5px);
+          box-shadow: none;
+        }
       }
     }
   }
