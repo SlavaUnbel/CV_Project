@@ -1,0 +1,99 @@
+@import '../../../index.scss';
+
+.testimonials-switcher__container {
+  @include container;
+  @include flex(row nowrap, center, center);
+  background: var(--bg-testimonials-switcher-color);
+  padding: 0.5rem;
+
+  .testimonial-wrapper {
+    @include flex(column nowrap, center, flex-start);
+    background: var(--bg-testimonial-color);
+    border-radius: 15px;
+    margin: 1.5rem auto;
+    padding: 3rem 5rem;
+    max-width: 50rem;
+    position: relative;
+
+    @include mobile {
+      padding: 1.5rem 2rem;
+    }
+
+    @include tablet {
+      padding: 3rem 5rem;
+    }
+
+    .progress-bar {
+      background: var(--white-color);
+      height: 0.25rem;
+      width: 100%;
+      animation: grow 10s linear infinite;
+      transform-origin: left;
+    }
+
+    @keyframes grow {
+      0% {
+        transform: scaleX(0);
+      }
+    }
+
+    .icon {
+      color: var(--white-color);
+      opacity: 0.3;
+      font-size: 3rem;
+      position: absolute;
+
+      @include mobile {
+        display: none;
+      }
+
+      @include tablet {
+        display: unset;
+      }
+
+      &.left {
+        left: 2rem;
+      }
+
+      &.right {
+        right: 2rem;
+        transform: rotate(180deg);
+      }
+    }
+
+    .testimonial {
+      color: var(--white-color);
+      font-family: 'Poppins';
+      text-align: justify;
+      line-height: 1.5rem;
+      margin: 1rem 0;
+    }
+
+    .user {
+      @include flex(row nowrap, center, center);
+
+      .avatar {
+        border-radius: 50%;
+        height: 5rem;
+        width: 5rem;
+        object-fit: cover;
+      }
+
+      .user-details {
+        margin-left: 1rem;
+
+        .username {
+          color: var(--white-color);
+          font-family: 'Poppins';
+          margin: 0;
+        }
+
+        .role {
+          color: var(--white-color);
+          font-family: 'Poppins';
+          margin: 0.1rem 0;
+        }
+      }
+    }
+  }
+}

@@ -39,7 +39,8 @@ export const portfolioItems = [
   'GitHub Profiles',
   'Password Generator',
   'Notes App',
-  'Hoverboard'
+  'Hoverboard',
+  'Testimonials Switcher'
 ];
 
 export const expandingCardsSrc =
@@ -82,3 +83,7 @@ export const months = [
 ];
 
 export const githubUsersApi = 'https://api.github.com/users/'
+
+export const testimonialsSwitcherSrc =
+  process.env.PUBLIC_URL + '/images/testimonialsSwitcher';
+

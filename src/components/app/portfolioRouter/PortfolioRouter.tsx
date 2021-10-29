@@ -10,6 +10,7 @@ import MovieAppContainer from '../../../containers/portfolioItems/MovieAppContai
 import PasswordGeneratorContainer from '../../../containers/portfolioItems/PasswordGeneratorContainer';
 import RotatingNavigationContainer from '../../../containers/portfolioItems/RotatingNavigationContainer';
 import SplitLandingPageContainer from '../../../containers/portfolioItems/SplitLandingPageContainer';
+import TestimonialsSwitcherContainer from '../../../containers/portfolioItems/TestimonialsSwitcherContainer';
 import DrinkWaterContext from '../../../context/portfolioItems/DrinkWaterContext';
 import IncrementingCounterContext from '../../../context/portfolioItems/IncrementingCounterContext';
 import RandomChoicePickerContext from '../../../context/portfolioItems/RandomChoicePickerContext';
@@ -31,6 +32,7 @@ import {
   rotatingNavigationPath,
   scrollAnimationPath,
   splitLandingPagePath,
+  testimonialsSwitcherPath,
   themeClockPath,
 } from '../../../utils/route';
 import FormWaveAnimation from '../../portfolioItems/formWaveAnimation/FormWaveAnimation';
@@ -88,6 +90,11 @@ const PortfolioRouter: FC = () => (
     />
     <Route exact path={notesAppPath} component={NotesAppContainer} />
     <Route exact path={hoverboardPath} component={Hoverboard} />
+    <Route
+      exact
+      path={testimonialsSwitcherPath}
+      component={TestimonialsSwitcherContainer}
+    />
   </Switch>
 );
 

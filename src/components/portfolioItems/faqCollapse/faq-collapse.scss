@@ -71,7 +71,7 @@
         }
 
         &::before {
-          color: var(--active-progress-steps-color);
+          color: var(--primary-color);
           top: -2.3rem;
           left: -2rem;
           transform: rotateY(180deg);

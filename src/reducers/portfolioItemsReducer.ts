@@ -19,6 +19,8 @@ export interface PortfolioItemsState {
   githubRepos: IGithubRepo[];
 
   passwordGenerator: string;
+
+  testimonialsSwitcher: ITestimonialsSwitcher;
 }
 
 const initialPortfolioItemsState: PortfolioItemsState = {
@@ -40,6 +42,8 @@ const initialPortfolioItemsState: PortfolioItemsState = {
   githubRepos: [],
 
   passwordGenerator: '',
+
+  testimonialsSwitcher: {} as ITestimonialsSwitcher,
 };
 
 const symbiotes = {
@@ -99,6 +103,15 @@ const symbiotes = {
     set: (state: PortfolioItemsState, passwordGenerator: string) => ({
       ...state,
       passwordGenerator,
+    }),
+  },
+  testimonialsSwitcher: {
+    set: (
+      state: PortfolioItemsState,
+      testimonialsSwitcher: ITestimonialsSwitcher,
+    ) => ({
+      ...state,
+      testimonialsSwitcher,
     }),
   },
 };

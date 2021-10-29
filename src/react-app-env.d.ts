@@ -168,3 +168,11 @@ interface INotesApp {
   note: string;
   editing: boolean;
 }
+
+interface ITestimonialsSwitcher {
+  id: number;
+  testimonial: string;
+  avatar: string;
+  username: string;
+  role: string;
+}
