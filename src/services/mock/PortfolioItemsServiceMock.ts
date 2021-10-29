@@ -11,12 +11,6 @@ export default class PortfolioItemsServiceMock extends PortfolioItemsService {
     return database.expandingCards;
   }
 
-  public async getProgressStepsData(): Promise<number[]> {
-    await delay(SECOND / 3);
-
-    return database.progressStepsData;
-  }
-
   public async getRotatingNavigationData(): Promise<IRotatingNavigation> {
     await delay(SECOND / 3);
 
@@ -75,5 +69,13 @@ export default class PortfolioItemsServiceMock extends PortfolioItemsService {
     return await fetch(`${githubUsersApi}${username}/repos?sort=created`).then(
       (data) => data.json(),
     );
+  }
+
+  public async getTestimonialsSwitcherDataById(
+    id: number,
+  ): Promise<ITestimonialsSwitcher> {
+    await delay(SECOND / 3);
+
+    return database.testimonialsSwitcher[id]
   }
 }

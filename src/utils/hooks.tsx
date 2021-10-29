@@ -392,88 +392,6 @@ export const useExpandingCardRef = () => {
   return { ref, handleClick };
 };
 
-//Progress Steps Hooks
-interface ProgressStepsProps extends IWithLoading, IWithError, IWithWarning {
-  setProgressStepsData: (progressStepsData: number[]) => void;
-}
-
-export const useFetchProgressStepsData = ({
-  setProgressStepsData,
-  setLoading,
-  pushError,
-  pushWarning,
-}: ProgressStepsProps) => {
-  useEffect(() => {
-    if (!setLoading) return;
-    setLoading(true);
-
-    services.portfolioItemsService
-      .getProgressStepsData()
-      .then((data) => {
-        setProgressStepsData(data);
-        data.length === 0 && pushWarning('No data found');
-      })
-      .catch((e) => pushError(e))
-      .finally(() => setLoading(false));
-  }, [setProgressStepsData, setLoading, pushError, pushWarning]);
-};
-
-interface ButtonNavigatonProps {
-  currentProgressStep: number;
-  setCurrentProgressStep: (step: number) => void;
-  setProgressStepsWidth: (width: string) => void;
-}
-
-export const useButtonNavigation = ({
-  currentProgressStep,
-  setCurrentProgressStep,
-  setProgressStepsWidth,
-}: ButtonNavigatonProps) => {
-  const [circles, setCircles] = useState<NodeListOf<HTMLDivElement>>();
-
-  const ref: LegacyRef<HTMLDivElement> = useRef(null);
-
-  const prev = () => {
-    setCurrentProgressStep(currentProgressStep - 1);
-
-    if (circles) {
-      setProgressStepsWidth(
-        `${((currentProgressStep - 2) / (circles.length - 2)) * 100}%`,
-      );
-      circles.forEach(
-        (circle, idx) =>
-          currentProgressStep - 1 < idx &&
-          !circle.classList.contains('progress') &&
-          circle.classList.remove('active'),
-      );
-    }
-  };
-
-  const next = () => {
-    setCurrentProgressStep(currentProgressStep + 1);
-
-    if (circles) {
-      setProgressStepsWidth(
-        `${(currentProgressStep / (circles.length - 2)) * 100}%`,
-      );
-      circles.forEach(
-        (circle, idx) =>
-          currentProgressStep + 1 === idx &&
-          !circle.classList.contains('progress') &&
-          circle.classList.add('active'),
-      );
-    }
-  };
-
-  useEffect(() => {
-    setCircles(
-      ref.current?.childNodes[0].childNodes as NodeListOf<HTMLDivElement>,
-    );
-  }, [ref]);
-
-  return { ref, prev, next };
-};
-
 //Rotating Navigation Hooks
 interface RotatingNavigationProps
   extends IWithLoading,
@@ -1563,4 +1481,57 @@ export const useHoverboard = () => {
   }, [setColor, removeColor]);
 
   return wrapperRef;
+};
+
+//Testimonials Switcher Hooks
+interface TestimonialsSwitcherProps
+  extends IWithLoading,
+    IWithError,
+    IWithWarning {
+  setData: (data: ITestimonialsSwitcher) => void;
+}
+
+export const useFetchTestimonialsSwitcherData = ({
+  setData,
+  setLoading,
+  pushError,
+  pushWarning,
+}: TestimonialsSwitcherProps) => {
+  const getTestimonial = useCallback(
+    (id: number) => {
+      if (!setLoading) return;
+      setLoading(true);
+
+      services.portfolioItemsService
+        .getTestimonialsSwitcherDataById(id)
+        .then((data) => {
+          setData(data);
+          !data && pushWarning('No data found');
+        })
+        .catch((e) => pushError(e))
+        .finally(() => setLoading(false));
+    },
+    [setData, setLoading, pushError, pushWarning],
+  );
+
+  useEffect(() => {
+    getTestimonial(0);
+    //eslint-disable-next-line
+  }, []);
+
+  useEffect(() => {
+    let idx = 1;
+
+    const interval = setInterval(() => {
+      getTestimonial(idx);
+      idx++;
+
+      if (idx === 7) idx = 0;
+    }, SECOND * 10);
+
+    return () => {
+      clearInterval(interval);
+      idx = 0;
+    };
+  }, [getTestimonial]);
 };

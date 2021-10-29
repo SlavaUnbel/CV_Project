@@ -6,7 +6,6 @@ export const contactPath = '/contact';
 
 //portfolio paths
 export const expandingCardsPath = '/expanding-cards'
-export const progressStepsPath = '/progress-steps'
 export const rotatingNavigationPath = '/rotating-navigation'
 export const scrollAnimationPath = '/scroll-animation'
 export const splitLandingPagePath = '/split-landing-page'
@@ -23,6 +22,7 @@ export const githubProfilesPath = '/github-profiles'
 export const passwordGeneratorPath = '/password-generator'
 export const notesAppPath = '/notes-app'
 export const hoverboardPath = '/hoverboard'
+export const testimonialsSwitcherPath = '/testimonials-switcher'
 
 //works paths
 export const authProjectPath = '/auth-project'

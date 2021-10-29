@@ -278,3 +278,9 @@ interface INotesAppContext extends IWithLoading, IWithError {
   removeNote: (id: number) => void;
 }
 export const NotesAppCtx = createContext({} as INotesAppContext)
+
+export interface ITestimonialsSwitcherContext extends IWithLoading, IWithError, IWithWarning {
+  data: ITestimonialsSwitcher;
+  setData: (data: ITestimonialsSwitcher) => void;
+}
+export const TestimonialsSwitcherCtx = createContext({} as ITestimonialsSwitcherContext)
