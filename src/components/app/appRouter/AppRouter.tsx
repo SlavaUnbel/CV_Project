@@ -1,6 +1,9 @@
-import { FC } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import React, { FC } from 'react';
+import { Redirect, Route, Switch } from 'react-router-dom';
+import AuthProjectContainer from '../../../containers/authProject/AuthProjectContainer';
+import ContactContainer from '../../../containers/contact/ContactContainer';
 import NotesAppContainer from '../../../containers/notesApp/NotesAppContainer';
+import PortfolioContainer from '../../../containers/portfolio/PortfolioContainer';
 import AnimatedNavigationContainer from '../../../containers/portfolioItems/AnimatedNavigationContainer';
 import DadJokesContainer from '../../../containers/portfolioItems/DadJokesContainer';
 import ExpandingCardsContainer from '../../../containers/portfolioItems/ExpandingCardsContainer';
@@ -11,36 +14,50 @@ import PasswordGeneratorContainer from '../../../containers/portfolioItems/Passw
 import RotatingNavigationContainer from '../../../containers/portfolioItems/RotatingNavigationContainer';
 import SplitLandingPageContainer from '../../../containers/portfolioItems/SplitLandingPageContainer';
 import TestimonialsSwitcherContainer from '../../../containers/portfolioItems/TestimonialsSwitcherContainer';
+import WorksContainer from '../../../containers/works/WorksContainer';
+import HomeContext from '../../../context/home/HomeContext';
 import DrinkWaterContext from '../../../context/portfolioItems/DrinkWaterContext';
 import IncrementingCounterContext from '../../../context/portfolioItems/IncrementingCounterContext';
 import RandomChoicePickerContext from '../../../context/portfolioItems/RandomChoicePickerContext';
 import ThemeClockContext from '../../../context/portfolioItems/ThemeClockContext';
 import {
   animatedNavigationPath,
+  authProjectPath,
+  contactPath,
   dadJokesPath,
   drinkWaterPath,
   expandingCardsPath,
   faqCollapsePath,
   formWaveAnimationPath,
   githubProfilesPath,
+  homePath,
   hoverboardPath,
   incrementingCounterPath,
   movieAppPath,
   notesAppPath,
   passwordGeneratorPath,
+  portfolioPath,
   randomChoicePickerPath,
   rotatingNavigationPath,
   scrollAnimationPath,
   splitLandingPagePath,
   testimonialsSwitcherPath,
   themeClockPath,
+  worksPath,
 } from '../../../utils/route';
 import FormWaveAnimation from '../../portfolioItems/formWaveAnimation/FormWaveAnimation';
 import Hoverboard from '../../portfolioItems/hoverboard/Hoverboard';
 import ScrollAnimation from '../../portfolioItems/scrollAnimation/ScrollAnimation';
 
-const PortfolioRouter: FC = () => (
+const AppRouter: FC = () => (
   <Switch>
+    {/* General Pages Routes */}
+    <Route exact path={homePath} component={HomeContext} />
+    <Route exact path={portfolioPath} component={PortfolioContainer} />
+    <Route exact path={worksPath} component={WorksContainer} />
+    <Route exact path={contactPath} component={ContactContainer} />
+
+    {/* Portfolio Pages Routes */}
     <Route
       exact
       path={expandingCardsPath}
@@ -95,7 +112,12 @@ const PortfolioRouter: FC = () => (
       path={testimonialsSwitcherPath}
       component={TestimonialsSwitcherContainer}
     />
+
+    {/* Works Pages Routes */}
+    <Route exact path={authProjectPath} component={AuthProjectContainer} />
+
+    <Redirect to={homePath} />
   </Switch>
 );
 
-export default PortfolioRouter;
+export default AppRouter;
