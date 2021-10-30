@@ -87,7 +87,7 @@ export const generateWorksData = (amount: number, id: number): IWorks[] => {
     '2nd desc',
     '3rd desc',
   ];
-  const links = [authProjectPath];
+  const links = [authProjectPath, authProjectPath, authProjectPath];
 
   return Array.from({ length: amount }, (_, idx) => idx).map((index) => {
     if (index) id++;

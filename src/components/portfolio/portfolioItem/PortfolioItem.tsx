@@ -1,9 +1,6 @@
 import React, { FC } from 'react';
-import {
-  useGetMediaElement,
-  useHover,
-  useRedirectToItem,
-} from '../../../utils/hooks';
+import { Link } from 'react-router-dom';
+import { useGetMediaElement, useHover } from '../../../utils/hooks';
 
 interface Props {
   item: IPortfolio;
@@ -12,19 +9,16 @@ interface Props {
 const PortfolioItem: FC<Props> = ({ item }) => {
   const { hovered, setHovered } = useHover();
 
-  const redirect = useRedirectToItem(item.link);
-
   const mediaElement = useGetMediaElement({ hovered, item });
 
   return (
     <div className="item">
       <div
         className="img-wrapper"
-        onClick={redirect}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
       >
-        {mediaElement}
+        <Link to={item.link}>{mediaElement}</Link>
       </div>
 
       <h3>{item.title}</h3>

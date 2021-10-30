@@ -1,28 +1,30 @@
 import { Email, Home, Person } from '@mui/icons-material';
 import React, { FC } from 'react';
-import { useHistory } from 'react-router';
+import { Link } from 'react-router-dom';
 import { contactPath, homePath, portfolioPath } from '../../../../utils/route';
 
-const NavigationBar: FC = () => {
-  const history = useHistory();
-
-  return (
-    <nav>
-      <ul>
-        <li onClick={() => history.push(homePath)}>
+const NavigationBar: FC = () => (
+  <nav>
+    <ul>
+      <li>
+        <Link to={homePath}>
           <Home /> Home
-        </li>
+        </Link>
+      </li>
 
-        <li onClick={() => history.push(portfolioPath)}>
+      <li>
+        <Link to={portfolioPath}>
           <Person /> About
-        </li>
+        </Link>
+      </li>
 
-        <li onClick={() => history.push(contactPath)}>
+      <li>
+        <Link to={contactPath}>
           <Email /> Contact
-        </li>
-      </ul>
-    </nav>
-  );
-};
+        </Link>
+      </li>
+    </ul>
+  </nav>
+);
 
 export default NavigationBar;

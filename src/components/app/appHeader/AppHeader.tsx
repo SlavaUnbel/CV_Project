@@ -3,11 +3,11 @@ import { Route } from 'react-router-dom';
 import HeaderContainer from '../../../containers/header/HeaderContainer';
 import MenuContainer from '../../../containers/menu/MenuContainer';
 
-const HeadRouter: FC = () => (
+const AppHeader: FC = () => (
   <>
     <Route component={HeaderContainer} />
     <Route component={MenuContainer} />
   </>
 );
 
-export default HeadRouter;
+export default AppHeader;
