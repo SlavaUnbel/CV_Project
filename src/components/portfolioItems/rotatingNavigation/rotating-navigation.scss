@@ -291,15 +291,9 @@
       }
 
       li {
-        @include flex(row nowrap, center);
-        cursor: pointer;
-        text-transform: uppercase;
-        color: var(--white-color);
         margin: 2.5rem 0;
         transform: translateX(-100%);
         transition: transform 0.4s ease-in;
-        font-family: 'Soleil Light', sans-serif;
-        font-size: 0.9rem;
 
         @include mobile {
           margin: 2rem 0;
@@ -307,6 +301,15 @@
 
         @include tablet {
           margin: 2.5rem 0;
+        }
+
+        a {
+          @include flex(row nowrap, center);
+          text-decoration: none;
+          text-transform: uppercase;
+          color: var(--white-color);
+          font-family: 'Soleil Light', sans-serif;
+          font-size: 0.9rem;
         }
 
         &:nth-child(2) {

@@ -25,7 +25,7 @@ import { SECOND } from './date';
 // General Hooks
 export const useWindowTitle = (title?: string) => {
   useEffect(() => {
-    document.title = title ? title : 'CV Homepage';
+    document.title = title ? title : 'Homepage';
   }, [title]);
 };
 
