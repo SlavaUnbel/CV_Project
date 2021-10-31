@@ -35,6 +35,7 @@ import {
   incrementingCounterPath,
   movieAppPath,
   notesAppPath,
+  notFoundPath,
   passwordGeneratorPath,
   portfolioPath,
   randomChoicePickerPath,
@@ -45,6 +46,7 @@ import {
   themeClockPath,
   worksPath,
 } from '../../../utils/route';
+import NotFound from '../../notFound/NotFound';
 import FormWaveAnimation from '../../portfolioItems/formWaveAnimation/FormWaveAnimation';
 import Hoverboard from '../../portfolioItems/hoverboard/Hoverboard';
 import ScrollAnimation from '../../portfolioItems/scrollAnimation/ScrollAnimation';
@@ -116,7 +118,8 @@ const AppRouter: FC = () => (
     {/* Works Pages Routes */}
     <Route exact path={authProjectPath} component={AuthProjectContainer} />
 
-    <Redirect to={homePath} />
+    <Route exact path={notFoundPath} component={NotFound} />
+    <Redirect to={notFoundPath} />
   </Switch>
 );
 
