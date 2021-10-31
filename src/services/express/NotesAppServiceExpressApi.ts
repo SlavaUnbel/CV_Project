@@ -1,8 +1,12 @@
 import axios from 'axios';
+import { SECOND } from '../../utils/date';
+import { delay } from '../../utils/hooks';
 import NotesAppService from '../abstract/NotesAppService';
 
 export class NotesAppServiceExpressApi extends NotesAppService {
   public async getNotes() {
+    await delay(SECOND / 3);
+
     return await axios.get('/notesApp/get').then((response) => response.data);
   }
 

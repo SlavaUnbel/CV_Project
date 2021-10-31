@@ -15,7 +15,6 @@ import RotatingNavigationContainer from '../../../containers/portfolioItems/Rota
 import SplitLandingPageContainer from '../../../containers/portfolioItems/SplitLandingPageContainer';
 import TestimonialsSwitcherContainer from '../../../containers/portfolioItems/TestimonialsSwitcherContainer';
 import WorksContainer from '../../../containers/works/WorksContainer';
-import HomeContext from '../../../context/home/HomeContext';
 import DrinkWaterContext from '../../../context/portfolioItems/DrinkWaterContext';
 import IncrementingCounterContext from '../../../context/portfolioItems/IncrementingCounterContext';
 import RandomChoicePickerContext from '../../../context/portfolioItems/RandomChoicePickerContext';
@@ -46,6 +45,7 @@ import {
   themeClockPath,
   worksPath,
 } from '../../../utils/route';
+import Home from '../../home/Home';
 import NotFound from '../../notFound/NotFound';
 import FormWaveAnimation from '../../portfolioItems/formWaveAnimation/FormWaveAnimation';
 import Hoverboard from '../../portfolioItems/hoverboard/Hoverboard';
@@ -54,7 +54,7 @@ import ScrollAnimation from '../../portfolioItems/scrollAnimation/ScrollAnimatio
 const AppRouter: FC = () => (
   <Switch>
     {/* General Pages Routes */}
-    <Route exact path={homePath} component={HomeContext} />
+    <Route exact path={homePath} component={Home} />
     <Route exact path={portfolioPath} component={PortfolioContainer} />
     <Route exact path={worksPath} component={WorksContainer} />
     <Route exact path={contactPath} component={ContactContainer} />

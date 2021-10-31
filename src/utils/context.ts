@@ -1,11 +1,5 @@
 import { createContext, CSSProperties, FormEvent, RefObject } from 'react';
 
-//Home Context
-interface IHomeContext {
-  textRef: RefObject<HTMLSpanElement>;
-}
-export const HomeCtx = createContext({} as IHomeContext);
-
 //Header Context
 interface IHeaderContext {
   spans: number[];

@@ -3,6 +3,7 @@ import React, { FC, useContext } from 'react';
 import { NotesAppCtx } from '../../../utils/context';
 import Button from '../../utils/button/Button';
 import ComponentWrapper from '../../utils/componentWrapper/ComponentWrapper';
+import LoaderWrapper from '../../utils/loaderWrapper/LoaderWrapper';
 import Note from './note/Note';
 import './notes-app.scss';
 
@@ -12,13 +13,15 @@ const NotesApp: FC = () => {
   return (
     <ComponentWrapper>
       <div className="notes-app__container">
-        <Button className="add" onClick={addNote}>
-          <Add className="icon" /> Add note
-        </Button>
+        <LoaderWrapper wrapperStyle={{ height: 'unset' }}>
+          <Button className="add" onClick={addNote}>
+            <Add className="icon" /> Add note
+          </Button>
 
-        {notes.map((note) => (
-          <Note key={note.id} item={note} />
-        ))}
+          {notes.map((note) => (
+            <Note key={note.id} item={note} />
+          ))}
+        </LoaderWrapper>
       </div>
     </ComponentWrapper>
   );
