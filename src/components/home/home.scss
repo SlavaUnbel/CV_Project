@@ -4,13 +4,14 @@
   @include container;
   @include flex(row nowrap, center);
   background-color: var(--white-color);
+  position: relative;
 
   @include screen-1200px {
-    @include flex(column nowrap, center, center)
+    @include flex(column nowrap, center, center);
   }
-  
+
   @include mobile {
-    @include flex(column nowrap, center, center)
+    @include flex(column nowrap, center, center);
   }
 
   .left {
@@ -62,7 +63,7 @@
       }
     }
   }
-  
+
   .right {
     flex: 0.5;
 
@@ -133,7 +134,7 @@
     a {
       position: absolute;
       bottom: 0.5rem;
-      left: 50%;
+      left: calc(50% - 1rem);
 
       img {
         width: 2rem;
@@ -142,6 +143,9 @@
 
       @keyframes arrowBlink {
         0% {
+          opacity: 0;
+        }
+        50% {
           opacity: 1;
         }
         100% {
@@ -150,6 +154,4 @@
       }
     }
   }
-
-  
 }

@@ -1396,7 +1396,7 @@ export const useFetchNotesAppDataAndManageNotes = ({
   setLoading,
   pushError,
 }: NotesAppProps) => {
-  const getNotes = useCallback(() => {
+  useEffect(() => {
     if (!setLoading) return;
     setLoading(true);
 
@@ -1406,12 +1406,6 @@ export const useFetchNotesAppDataAndManageNotes = ({
       .catch((e) => pushError(e))
       .finally(() => setLoading(false));
   }, [setNotes, setLoading, pushError]);
-
-  useEffect(
-    () => getNotes(),
-    //eslint-disable-next-line
-    [],
-  );
 
   const addNote = () =>
     services.notesAppService
