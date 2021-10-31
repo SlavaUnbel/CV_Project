@@ -72,6 +72,12 @@
   justify-content: $justify-content;
 }
 
+@mixin screen-1700px {
+  @media screen and (max-width: 1700px) {
+    @content;
+  }
+}
+
 @mixin screen-1600px {
   @media screen and (max-width: 1600px) {
     @content;

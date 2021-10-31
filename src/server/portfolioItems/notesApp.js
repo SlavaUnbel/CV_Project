@@ -3,18 +3,16 @@ const notesAppRouter = express.Router();
 
 const db = require('../db/db');
 
-notesAppRouter.get('/get', (_req, res) =>
-  db.query(
-    'SELECT * FROM notes',
-    (err, result) => {
-      if (err) {
-        res.send({ message: err, type: 'error' });
-      } else {
-        res.send(result)
-      }
-    },
-  ),
-);
+const getNotes = (res) =>
+  db.query('SELECT * FROM notes', (err, result) => {
+    if (err) {
+      res.send({ message: err, type: 'error' });
+    } else {
+      res.send(result);
+    }
+  });
+
+notesAppRouter.get('/get', (_req, res) => getNotes(res));
 
 notesAppRouter.post('/add', (_req, res) =>
   db.query(
@@ -24,10 +22,10 @@ notesAppRouter.post('/add', (_req, res) =>
       if (err) {
         res.send({ message: err, type: 'error' });
       } else {
-        res.sendStatus(res.statusCode);
+        getNotes(res);
       }
     },
-  )
+  ),
 );
 
 notesAppRouter.post('/edit', (req, res) =>
@@ -38,24 +36,20 @@ notesAppRouter.post('/edit', (req, res) =>
       if (err) {
         res.send({ message: err, type: 'error' });
       } else {
-        res.sendStatus(res.statusCode);
+        getNotes(res);
       }
     },
-  )
+  ),
 );
 
 notesAppRouter.post('/remove', (req, res) =>
-  db.query(
-    'DELETE FROM notes WHERE id = ?',
-    [req.body.id],
-    (err) => {
-      if (err) {
-        res.send({ message: err, type: 'error' });
-      } else {
-        res.sendStatus(res.statusCode);
-      }
-    },
-  )
+  db.query('DELETE FROM notes WHERE id = ?', [req.body.id], (err) => {
+    if (err) {
+      res.send({ message: err, type: 'error' });
+    } else {
+      getNotes(res);
+    }
+  }),
 );
 
 module.exports = notesAppRouter;

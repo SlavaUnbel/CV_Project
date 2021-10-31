@@ -1409,24 +1409,27 @@ export const useFetchNotesAppDataAndManageNotes = ({
 
   useEffect(
     () => getNotes(),
-    // eslint-disable-next-line
-    [getNotes],
+    //eslint-disable-next-line
+    [],
   );
 
-  const addNote = () => {
-    services.notesAppService.addNote().catch((e) => pushError(e));
-    getNotes();
-  };
+  const addNote = () =>
+    services.notesAppService
+      .addNote()
+      .then(setNotes)
+      .catch((e) => pushError(e));
 
-  const editNote = (note: INotesApp) => {
-    services.notesAppService.editNote(note).catch((e) => pushError(e));
-    getNotes();
-  };
+  const editNote = (note: INotesApp) =>
+    services.notesAppService
+      .editNote(note)
+      .then(setNotes)
+      .catch((e) => pushError(e));
 
-  const removeNote = (id: number) => {
-    services.notesAppService.removeNote(id).catch((e) => pushError(e));
-    getNotes();
-  };
+  const removeNote = (id: number) =>
+    services.notesAppService
+      .removeNote(id)
+      .then(setNotes)
+      .catch((e) => pushError(e));
 
   return { addNote, editNote, removeNote };
 };
