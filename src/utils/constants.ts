@@ -1,3 +1,4 @@
+
 export const isMobile = window.innerWidth <= 800 && window.innerHeight <= 1000;
 
 export const avatarSrc = process.env.PUBLIC_URL + '/images/general/avatar.png';
@@ -87,4 +88,3 @@ export const githubUsersApi = 'https://api.github.com/users/'
 
 export const testimonialsSwitcherSrc =
   process.env.PUBLIC_URL + '/images/testimonialsSwitcher';
-

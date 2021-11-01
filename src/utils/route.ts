@@ -27,3 +27,4 @@ export const testimonialsSwitcherPath = '/testimonials-switcher'
 
 //works paths
 export const authProjectPath = '/auth-project'
+export const liveChatPath = '/live-chat'
