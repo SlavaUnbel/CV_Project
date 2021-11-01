@@ -264,6 +264,7 @@ interface IAuthProjectContext extends IWithError, IWithWarning, IWithSuccess {
 }
 export const AuthProjectCtx = createContext({} as IAuthProjectContext);
 
+//Notes App Context
 interface INotesAppContext extends IWithLoading, IWithError {
   notes: INotesApp[];
   setNotes: (notes: INotesApp[]) => void;
@@ -273,8 +274,15 @@ interface INotesAppContext extends IWithLoading, IWithError {
 }
 export const NotesAppCtx = createContext({} as INotesAppContext)
 
+//Testimonials Switcher Context
 export interface ITestimonialsSwitcherContext extends IWithLoading, IWithError, IWithWarning {
   data: ITestimonialsSwitcher;
   setData: (data: ITestimonialsSwitcher) => void;
 }
 export const TestimonialsSwitcherCtx = createContext({} as ITestimonialsSwitcherContext)
+
+//Live Chat Context
+interface ILiveChatContext {
+
+}
+export const LiveChatCtx = createContext({} as ILiveChatContext)

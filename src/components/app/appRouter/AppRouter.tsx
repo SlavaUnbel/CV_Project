@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import AuthProjectContainer from '../../../containers/authProject/AuthProjectContainer';
 import ContactContainer from '../../../containers/contact/ContactContainer';
+import LiveChatContainer from '../../../containers/liveChat/LiveChatContainer';
 import NotesAppContainer from '../../../containers/notesApp/NotesAppContainer';
 import PortfolioContainer from '../../../containers/portfolio/PortfolioContainer';
 import AnimatedNavigationContainer from '../../../containers/portfolioItems/AnimatedNavigationContainer';
@@ -32,6 +33,7 @@ import {
   homePath,
   hoverboardPath,
   incrementingCounterPath,
+  liveChatPath,
   movieAppPath,
   notesAppPath,
   notFoundPath,
@@ -117,6 +119,7 @@ const AppRouter: FC = () => (
 
     {/* Works Pages Routes */}
     <Route exact path={authProjectPath} component={AuthProjectContainer} />
+    <Route exact path={liveChatPath} component={LiveChatContainer} />
 
     <Route exact path={notFoundPath} component={NotFound} />
     <Redirect to={notFoundPath} />

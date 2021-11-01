@@ -21,7 +21,7 @@ import {
   thirdIconSrc,
   thirdWorkSrc,
 } from '../../utils/constants';
-import { authProjectPath, contactPath } from '../../utils/route';
+import { authProjectPath, contactPath, liveChatPath } from '../../utils/route';
 
 export const getMenuOptions = (): string[] => {
   const options = ['Home', 'Portfolio', 'Works', 'Contact'];
@@ -87,7 +87,7 @@ export const generateWorksData = (amount: number, id: number): IWorks[] => {
     '2nd desc',
     '3rd desc',
   ];
-  const links = [authProjectPath, authProjectPath, authProjectPath];
+  const links = [authProjectPath, liveChatPath, authProjectPath];
 
   return Array.from({ length: amount }, (_, idx) => idx).map((index) => {
     if (index) id++;

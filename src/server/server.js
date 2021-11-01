@@ -1,34 +1,32 @@
 const express = require('express');
 const cors = require('cors');
 const app = express();
-const PORT = 8080;
-const cookieParser = require('cookie-parser');
-const session = require('express-session');
-
-const authProject = require('./authProject/authProject');
-const notesApp = require('./portfolioItems/notesApp');
-
+const PORT_MAIN = 8080;
+const PORT_SOCKET = 8081;
 app.use(express.json());
-app.use(cors({
-  origin: ['http://localhost:3000'],
-  methods: ['GET', 'POST'],
-  credentials: true
-}));
+app.use(
+  cors({
+    origin: ['http://localhost:3000'],
+    methods: ['GET', 'POST'],
+    credentials: true,
+  }),
+);
 
-app.use(cookieParser())
-app.use(session({
-  name: 'userId',
-  secret: 'userCookie',
-  resave: false,
-  saveUninitialized: false,
-  cookie: {
-    expires: 1000 * 60 * 60 * 24,
-  }
-}))
+//Auth Project Session and Cookies Config
+const authProject = require('./authProject/authProject');
+const sessionInit = require('./authProject/session');
+sessionInit(app);
 app.use('/authProject', authProject);
 
-app.use('/notesApp', notesApp)
+//Portfolio Items Router
+const notesApp = require('./portfolioItems/notesApp');
 
-app.listen(PORT, () => {
-  console.log(`server is running on port ${PORT}`);
-});
+app.use('/notesApp', notesApp);
+
+//Live Chat Sockets Connection
+const socket = require('./liveChat/socketsConfig')
+socket(app, PORT_SOCKET)
+
+app.listen(PORT_MAIN, () =>
+  console.log(`server is running on port ${PORT_MAIN}`),
+);
