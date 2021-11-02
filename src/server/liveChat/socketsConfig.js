@@ -10,15 +10,18 @@ const socket = (app, port) =>
   })
     .listen(port)
     .on('connection', (socket) => {
-      console.log(`User connected ${socket.id}`);
-
-      socket.on('join_room', (room) => {
-        socket.join(room);
-        console.log(`User with ID: ${socket.id} joined room: ${room}`);
+      socket.on('join_room', (data) => {
+        socket.join(data.room);
+        socket.to(data.room).emit('receive_message', data)
       });
 
-      socket.on('disconnect', () => {
-        console.log(`User disconnected ${socket.id}`);
+      socket.on('send_message', (data) => {
+        socket.to(data.room).emit('receive_message', data)
+      });
+
+      socket.on('leave_room', (data) => {
+        socket.leave(data.room);
+        socket.to(data.room).emit('receive_message', data)
       });
     });
 

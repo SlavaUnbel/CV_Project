@@ -1,0 +1,222 @@
+@import '../../index.scss';
+
+.live-chat__container {
+  @include container;
+  @include flex(column nowrap, center, center);
+  color: #212121;
+
+  .live-chat__wrapper {
+    @include flex(column nowrap, center, center);
+    text-align: center;
+
+    h3 {
+      font-family: 'Poppins';
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    input,
+    .btn {
+      font-family: 'Poppins';
+      width: 15rem;
+      margin: 0.5rem;
+      padding: 0.5rem;
+      border: 2px solid #43a047;
+      border-radius: 5px;
+      font-size: 1rem;
+
+      &:focus {
+        outline: none;
+      }
+    }
+
+    input {
+      height: 2.5rem;
+      border: 2px solid #43a047;
+      transition: all 0.4s ease;
+
+      &:focus {
+        border: 2px solid var(--primary-color);
+      }
+    }
+
+    .btn {
+      height: 3rem;
+      border: none;
+      background: #43a047;
+      color: var(--white-color);
+
+      &:hover {
+        background: #2e7d32;
+        transition: 0.4s ease;
+      }
+
+      &:active {
+        transform: scale(0.95);
+        transition: 0.2s ease;
+      }
+    }
+  }
+
+  .chat-window {
+    @include flex(column nowrap, center, center);
+    width: 30rem;
+    height: 40rem;
+
+    .chat-header {
+      @include flex(row nowrap, center, space-between);
+      font-family: 'Poppins';
+      font-weight: 500;
+      font-size: 1.2rem;
+      height: 3rem;
+      width: 100%;
+      border-radius: 5px;
+      background: #43a047;
+      color: var(--white-color);
+      position: relative;
+      cursor: default;
+      padding: 0 1rem;
+
+      .btn {
+        @include flex(row nowrap, center, center);
+        background: transparent;
+        padding: 0.4rem;
+        border-radius: 50%;
+        border: none;
+        color: var(--white-color);
+        transition: all 0.2s ease;
+
+        &:hover {
+          background: rgba(0, 0, 0, 0.4);
+        }
+
+        &:active {
+          transform: scale(0.95);
+        }
+      }
+    }
+
+    .chat-body {
+      height: 35rem;
+      border: 2px solid #43a047;
+      border-top: none;
+      position: relative;
+      top: -0.2rem;
+      width: 100%;
+      padding: 0.5rem 0.2rem 0.2rem 0.2rem;
+
+      .message-container {
+        width: 100%;
+        height: 100%;
+        overflow-y: auto;
+        scroll-behavior: smooth;
+
+        button {
+          display: none;
+        }
+
+        .message {
+          @include flex(row nowrap, center, center);
+          height: auto;
+          padding: 0.5rem;
+
+          .new-user {
+            @include flex(row nowrap, center, center);
+            font-family: 'Poppins';
+            font-size: 0.9rem;
+            font-weight: bold;
+          }
+
+          .message-content {
+            @include flex(row nowrap, center, flex-start);
+            font-family: 'Poppins';
+            width: auto;
+            height: auto;
+            min-height: 2rem;
+            max-width: 12.5rem;
+            background: #43a047;
+            border-radius: 5px;
+            color: var(--white-color);
+            margin: 0 0.5rem;
+            padding: 0 0.5rem;
+            overflow-wrap: break-word;
+            word-break: break-word;
+          }
+
+          &.you {
+            @include flex(row nowrap, center, flex-start);
+          }
+
+          &.other {
+            @include flex(row nowrap, center, flex-end);
+
+            .message-content {
+              background: cornflowerblue;
+            }
+          }
+
+          .message-meta {
+            @include flex(row nowrap, center, space-between);
+            margin: 0 0.5rem;
+            max-width: 12.5rem;
+
+            .author {
+              font-size: 0.8rem;
+              font-family: 'Poppins';
+              font-weight: bold;
+              margin-left: 0.5rem;
+              overflow-wrap: break-word;
+              word-break: break-word;
+              text-transform: capitalize;
+            }
+
+            .time {
+              font-size: 0.8rem;
+              font-family: 'Poppins';
+            }
+          }
+        }
+      }
+    }
+
+    .chat-footer {
+      @include flex();
+      height: 2.5rem;
+      width: 100%;
+      position: relative;
+      top: -0.2rem;
+      border: 2px solid #43a047;
+      border-top: none;
+      border-bottom-left-radius: 5px;
+      border-bottom-right-radius: 5px;
+
+      input {
+        height: 100%;
+        flex: 90%;
+        border: none;
+        padding: 0 0.7rem;
+        font-size: 1rem;
+        font-family: 'Poppins';
+        border-right: 1px dotted #607d8b;
+        outline: none;
+      }
+
+      .btn {
+        border: 0;
+        display: grid;
+        place-items: center;
+        flex: 10%;
+        height: 100%;
+        background: transparent;
+        outline: none;
+        font-size: 1.5rem;
+        color: var(--lightgray-color);
+
+        &:hover {
+          background: #43a047;
+          transition: 0.4s ease;
+        }
+      }
+    }
+  }
+}
