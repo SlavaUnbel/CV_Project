@@ -24,6 +24,7 @@ export const passwordGeneratorPath = '/password-generator'
 export const notesAppPath = '/notes-app'
 export const hoverboardPath = '/hoverboard'
 export const testimonialsSwitcherPath = '/testimonials-switcher'
+export const todoAppPath = '/todo-app'
 
 //works paths
 export const authProjectPath = '/auth-project'

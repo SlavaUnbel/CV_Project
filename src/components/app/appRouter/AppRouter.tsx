@@ -45,6 +45,7 @@ import {
   splitLandingPagePath,
   testimonialsSwitcherPath,
   themeClockPath,
+  todoAppPath,
   worksPath,
 } from '../../../utils/route';
 import Home from '../../home/Home';
@@ -116,6 +117,7 @@ const AppRouter: FC = () => (
       path={testimonialsSwitcherPath}
       component={TestimonialsSwitcherContainer}
     />
+    <Route exact path={todoAppPath} component={TestimonialsSwitcherContainer} />
 
     {/* Works Pages Routes */}
     <Route exact path={authProjectPath} component={AuthProjectContainer} />
