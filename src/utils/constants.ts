@@ -7,14 +7,14 @@ export const mobileSrc = process.env.PUBLIC_URL + '/images/general/mobile.png';
 export const firstWorkSrc =
   process.env.PUBLIC_URL + '/images/general/1st_work.jpg';
 export const secondWorkSrc =
-  process.env.PUBLIC_URL + '/images/general/2nd_work.jpeg';
+  process.env.PUBLIC_URL + '/images/general/2nd_work.jpg';
 export const thirdWorkSrc =
   process.env.PUBLIC_URL + '/images/general/3rd_work.jpg';
 export const arrowSrc = process.env.PUBLIC_URL + '/images/general/arrow.png';
 export const firstIconSrc =
-  process.env.PUBLIC_URL + '/images/general/globe.png';
+  process.env.PUBLIC_URL + '/images/general/auth.jpg';
 export const secondIconSrc =
-  process.env.PUBLIC_URL + '/images/general/mobile.png';
+  process.env.PUBLIC_URL + '/images/general/chat.png';
 export const thirdIconSrc =
   process.env.PUBLIC_URL + '/images/general/writing.png';
 export const shakeSrc = process.env.PUBLIC_URL + '/images/general/shake.svg';
