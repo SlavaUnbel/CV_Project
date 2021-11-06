@@ -80,11 +80,11 @@ export const generatePortfolioData = (id: number): IPortfolio[] =>
 
 export const generateWorksData = (amount: number, id: number): IWorks[] => {
   const icons = [firstIconSrc, secondIconSrc, thirdIconSrc];
-  const titles = ['Auth Project', 'Second Project', 'Third Project'];
+  const titles = ['Auth Project', 'Live Chat', 'Third Project'];
   const images = [firstWorkSrc, secondWorkSrc, thirdWorkSrc];
   const descriptions = [
     'This project represents an immitation of real-world application with usage of session through managing cookies and storaging the JWT into localStorage for authentication check purpose.',
-    '2nd desc',
+    'This one shows how web sockets can be used to maintain the process of chatting in realtime. The interface includes emoji picker so that the project looks more user-friendly.',
     '3rd desc',
   ];
   const links = [authProjectPath, liveChatPath, authProjectPath];
