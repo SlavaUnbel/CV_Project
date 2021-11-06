@@ -12,6 +12,10 @@ interface IWithSuccess {
   pushSuccess: (text: string | null) => void;
 }
 
+interface IWithInfo {
+  pushInfo: (text: string | null) => void;
+}
+
 interface IWithLoading {
   loading?: boolean;
   setLoading?: (loading: boolean) => void;
@@ -175,4 +179,16 @@ interface ITestimonialsSwitcher {
   avatar: string;
   username: string;
   role: string;
+}
+
+interface ILiveChat {
+  room: string;
+  content: ILiveChatMsg
+}
+
+interface ILiveChatMsg {
+  id: string;
+  username: string;
+  message: string;
+  time: string;
 }

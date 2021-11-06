@@ -1,29 +1,30 @@
-import React, { FC } from 'react';
+import React, { FC, useContext } from 'react';
+import { LiveChatCtx } from '../../../utils/context';
 import Button from '../../utils/button/Button';
+import RoomChoice from './roomChoice/RoomChoice';
+import RoomField from './roomField/RoomField';
+import UsernameField from './usernameField/UsernameField';
 
-interface Props {
-  setUsername: (username: string) => void;
-  setRoom: (room: string) => void;
-  onJoin: () => void;
-}
+const Login: FC = () => {
+  const { roomChoice, setRoomChoice, joinRoom } = useContext(LiveChatCtx);
 
-const Login: FC<Props> = ({ setUsername, setRoom, onJoin }) => {
   return (
     <div className="live-chat__wrapper">
-      <h3>Join A Chat</h3>
+      <h3>{roomChoice ? 'Choose' : 'Join'} A Chat</h3>
 
-      <input
-        type="text"
-        placeholder="Name..."
-        onChange={(e) => setUsername(e.currentTarget.value)}
-      />
-      <input
-        type="text"
-        placeholder="Room ID..."
-        onChange={(e) => setRoom(e.currentTarget.value)}
-      />
+      {roomChoice ? (
+        <RoomChoice />
+      ) : (
+        <>
+          <UsernameField />
 
-      <Button onClick={onJoin}>Join A Room</Button>
+          <RoomField />
+        </>
+      )}
+
+      <Button onClick={!roomChoice ? joinRoom : () => setRoomChoice(false)}>
+        {!roomChoice ? 'Join A Room' : 'Go Back'}
+      </Button>
     </div>
   );
 };

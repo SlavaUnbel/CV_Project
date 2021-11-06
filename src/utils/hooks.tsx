@@ -1,4 +1,5 @@
 import emailjs from 'emailjs-com';
+import { IEmojiData } from 'emoji-picker-react';
 import { init } from 'ityped';
 import React, {
   ChangeEvent,
@@ -11,6 +12,8 @@ import React, {
   useState,
 } from 'react';
 import { useHistory } from 'react-router-dom';
+import { Socket } from 'socket.io-client';
+import { DefaultEventsMap } from 'socket.io-client/build/typed-events';
 import { services } from '../services/services';
 import {
   days,
@@ -1531,4 +1534,150 @@ export const useFetchTestimonialsSwitcherData = ({
       idx = 0;
     };
   }, [getTestimonial]);
+};
+
+//Live Chat Hooks
+interface LiveChatRoomManageProps {
+  socket: Socket<DefaultEventsMap, DefaultEventsMap>;
+  username: string;
+  room: string;
+  roomList: string[];
+  setChatShown: (shown: boolean) => void;
+  setRoomList: (list: string[]) => void;
+}
+
+export const useRoomManage = ({
+  socket,
+  username,
+  room,
+  roomList,
+  setChatShown,
+  setRoomList,
+}: LiveChatRoomManageProps) => {
+  const joinRoom = useCallback(() => {
+    if (username !== '' && room !== '') {
+      socket.emit('join_room', room, username);
+      socket.emit('choose_room', room);
+      if (!roomList.includes(room)) {
+        setRoomList([...roomList, room]);
+      }
+      setChatShown(true);
+    }
+  }, [socket, username, room, roomList, setChatShown, setRoomList]);
+
+  const leaveRoom = useCallback(() => {
+    socket.emit('leave_room', room, username);
+    setChatShown(false);
+  }, [socket, username, room, setChatShown]);
+
+  useEffect(() => {
+    socket.on('room_chosen', (room) => {
+      !roomList.includes(room) && setRoomList([...roomList, room]);
+    });
+  });
+
+  const keysEventHandler = useCallback(
+    (e: KeyboardEvent) => {
+      e.key === 'Enter' && joinRoom();
+      e.key === 'Escape' && leaveRoom();
+    },
+    [joinRoom, leaveRoom],
+  );
+
+  useEffect(() => {
+    window.addEventListener('keydown', keysEventHandler);
+
+    return () => window.removeEventListener('keydown', keysEventHandler);
+  }, [keysEventHandler]);
+
+  return { joinRoom, leaveRoom };
+};
+
+interface LiveChatManageProps {
+  socket: Socket<DefaultEventsMap, DefaultEventsMap>;
+  username: string;
+  room: string;
+  messageList: ILiveChat[];
+  setMessageList: (list: ILiveChat[]) => void;
+}
+
+export const useChatManage = ({
+  socket,
+  username,
+  room,
+  messageList,
+  setMessageList,
+}: LiveChatManageProps) => {
+  const [message, setMessage] = useState('');
+  const [emojiActive, setEmojiActive] = useState(false);
+
+  const onEmojiClick = (
+    _e: React.MouseEvent<Element, MouseEvent>,
+    emojiObj: IEmojiData,
+  ) => {
+    setMessage(message + emojiObj.emoji);
+  };
+
+  const getUsername = (() => {
+    if (username.includes(' ')) {
+      const userArr = username.split(' ');
+      const name = userArr[0];
+      const surname = userArr[1].substr(0, 1);
+      return name.concat(' ', surname, '.');
+    } else {
+      return username;
+    }
+  })();
+
+  const getId = (() => {
+    const symbols: string[] = [];
+    for (let i = 0; i < 10; i++) {
+      const symbol = String.fromCharCode(Math.floor(Math.random() * 94) + 32);
+      symbols.push(symbol);
+    }
+    return symbols.join('');
+  })();
+
+  const sendMessage = () => {
+    if (message !== '' && message.replaceAll(' ', '').length > 0) {
+      const messageData: ILiveChat = {
+        room,
+        content: {
+          id: getId,
+          username: getUsername,
+          message: message.trim(),
+          time: `${
+            (new Date(Date.now()).getHours() > 9 ? '' : '0') +
+            new Date(Date.now()).getHours()
+          }:${
+            (new Date(Date.now()).getMinutes() > 9 ? '' : '0') +
+            new Date(Date.now()).getMinutes()
+          }`,
+        },
+      };
+
+      socket.emit('send_message', messageData);
+      setMessageList([...messageList, messageData]);
+      setMessage('');
+
+      isMobile && setEmojiActive(false);
+    }
+  };
+
+  useEffect(() => {
+    socket.on('receive_message', (data) =>
+      setMessageList([...messageList, data]),
+    );
+  }, [socket, messageList, setMessageList]);
+
+  return {
+    emojiActive,
+    setEmojiActive,
+    onEmojiClick,
+
+    message,
+    getUsername,
+    setMessage,
+    sendMessage,
+  };
 };

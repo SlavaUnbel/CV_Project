@@ -16,6 +16,7 @@ const symbiotes = {
     error: (state: MessageState, message: string | null) => ({ ...state }),
     success: (state: MessageState, message: string | null) => ({ ...state }),
     warning: (state: MessageState, message: string | null) => ({ ...state }),
+    info: (state: MessageState, message: string | null) => ({ ...state }),
   },
 };
 
