@@ -2,9 +2,13 @@ import { combineReducers, Store } from 'redux';
 import { authProjectReducer, AuthProjectState } from './authProjectReducer';
 import { contactReducer, ContactState } from './contactReducer';
 import { headerReducer, HeaderState } from './headerReducer';
+import { liveChatReducer, LiveChatState } from './liveChatReducer';
 import { loadingReducer, LoadingState } from './loadingReducer';
 import { notesAppReducer, NotesAppState } from './notesAppReducer';
-import { portfolioItemsReducer, PortfolioItemsState } from './portfolioItemsReducer';
+import {
+  portfolioItemsReducer,
+  PortfolioItemsState
+} from './portfolioItemsReducer';
 import { portfolioReducer, PortfolioState } from './portfolioReducer';
 import { worksReducer, WorksState } from './worksReducer';
 
@@ -17,6 +21,7 @@ export type IState = {
   portfolioItems: PortfolioItemsState;
   authProject: AuthProjectState;
   notesApp: NotesAppState;
+  liveChat: LiveChatState;
 };
 
 export type IStore = Store<IState>;
@@ -30,4 +35,5 @@ export default combineReducers({
   portfolioItems: portfolioItemsReducer,
   authProject: authProjectReducer,
   notesApp: notesAppReducer,
+  liveChat: liveChatReducer,
 });

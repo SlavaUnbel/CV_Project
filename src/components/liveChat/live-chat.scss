@@ -3,25 +3,59 @@
 .live-chat__container {
   @include container;
   @include flex(column nowrap, center, center);
-  color: #212121;
 
   .live-chat__wrapper {
-    @include flex(column nowrap, center, center);
+    @include flex(column nowrap, center, space-around);
+    width: 20rem;
+    height: 20rem;
     text-align: center;
+    border-radius: 10px;
+    background: var(--white-color);
+    box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, 0.3);
 
     h3 {
+      @include flex(column nowrap, center, center);
       font-family: 'Poppins';
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
+      font-size: 2.25rem;
+      margin: 1rem 0;
+      overflow: hidden;
+    }
+
+    .room-choice {
+      @include flex(column nowrap, center, flex-start);
+      width: 100%;
+      flex: 60%;
+
+      .room {
+        @include flex(row nowrap, center, space-between);
+        font-family: 'Poppins';
+        font-size: 1.25rem;
+        width: 100%;
+        min-height: 3.25rem;
+        padding: 1rem;
+        cursor: pointer;
+        overflow: hidden;
+
+        &:hover {
+          background: var(--main-live-chat-color);
+          transition: 1s ease;
+        }
+      }
+    }
+
+    .form-control {
+      @include flex(row nowrap, center, center);
+      width: 100%;
+      padding: 0 2.5rem;
     }
 
     input,
     .btn {
       font-family: 'Poppins';
-      width: 15rem;
+      width: 100%;
       margin: 0.5rem;
       padding: 0.5rem;
-      border: 2px solid #43a047;
+      border: 2px solid var(--main-live-chat-color);
       border-radius: 5px;
       font-size: 1rem;
 
@@ -32,7 +66,7 @@
 
     input {
       height: 2.5rem;
-      border: 2px solid #43a047;
+      border: 2px solid var(--main-live-chat-color);
       transition: all 0.4s ease;
 
       &:focus {
@@ -43,11 +77,13 @@
     .btn {
       height: 3rem;
       border: none;
-      background: #43a047;
+      background: var(--main-live-chat-color);
+      margin: 0.5rem 0.5rem 2rem 0.5rem;
+      width: 15rem;
       color: var(--white-color);
 
       &:hover {
-        background: #2e7d32;
+        background: var(--hover-live-chat-color);
         transition: 0.4s ease;
       }
 
@@ -58,164 +94,324 @@
     }
   }
 
-  .chat-window {
-    @include flex(column nowrap, center, center);
-    width: 30rem;
+  .chat {
+    @include flex(row wrap, flex-end, flex-end);
+    width: 65rem;
     height: 40rem;
 
-    .chat-header {
-      @include flex(row nowrap, center, space-between);
-      font-family: 'Poppins';
-      font-weight: 500;
-      font-size: 1.2rem;
-      height: 3rem;
-      width: 100%;
-      border-radius: 5px;
-      background: #43a047;
-      color: var(--white-color);
-      position: relative;
-      cursor: default;
-      padding: 0 1rem;
-
-      .btn {
-        @include flex(row nowrap, center, center);
-        background: transparent;
-        padding: 0.4rem;
-        border-radius: 50%;
-        border: none;
-        color: var(--white-color);
-        transition: all 0.2s ease;
-
-        &:hover {
-          background: rgba(0, 0, 0, 0.4);
-        }
-
-        &:active {
-          transform: scale(0.95);
-        }
-      }
+    @include screen-1100px {
+      width: 50rem;
     }
 
-    .chat-body {
-      height: 35rem;
-      border: 2px solid #43a047;
-      border-top: none;
-      position: relative;
-      top: -0.2rem;
-      width: 100%;
-      padding: 0.5rem 0.2rem 0.2rem 0.2rem;
+    @include mobile {
+      overflow: hidden;
+      width: 90vw;
+      height: 90vh;
+    }
 
-      .message-container {
+    &.with-emoji .emoji-picker-react {
+      transform: scale(1);
+      transition: 0.5s ease-out;
+
+      @include screen-1100px {
+        width: 12.5rem;
+      }
+
+      @include mobile {
         width: 100%;
         height: 100%;
-        overflow-y: auto;
-        scroll-behavior: smooth;
+      }
+    }
 
-        button {
-          display: none;
+    .chat-window {
+      @include flex(column nowrap, center, center);
+      width: calc(100% - 35rem);
+      height: 100%;
+
+      @include screen-1100px {
+        width: calc(100% - 25rem);
+      }
+
+      @include mobile {
+        width: 100%;
+      }
+
+      .chat-header {
+        @include flex(row nowrap, center, space-between);
+        font-family: 'Poppins';
+        font-weight: 500;
+        font-size: 1.2rem;
+        height: 3rem;
+        width: 100%;
+        border-radius: 5px;
+        background: var(--main-live-chat-color);
+        color: var(--white-color);
+        cursor: default;
+        padding: 0 1rem;
+        overflow: hidden;
+
+        @include mobile {
+          padding: 0 0.5rem 0 1rem;
         }
 
-        .message {
-          @include flex(row nowrap, center, center);
-          height: auto;
-          padding: 0.5rem;
+        @include tablet {
+          padding: 0 1rem;
+        }
 
-          .new-user {
+        .btn {
+          background: transparent;
+          border: none;
+          color: var(--white-color);
+          transition: all 0.2s ease;
+
+          &:hover {
+            background: rgba(0, 0, 0, 0.3);
+          }
+        }
+      }
+
+      .chat-body {
+        height: 35rem;
+        border: 2px solid var(--main-live-chat-color);
+        border-top: none;
+        position: relative;
+        top: -0.2rem;
+        width: 100%;
+        padding: 0.5rem 0.2rem 0.2rem 0.2rem;
+        overflow: hidden;
+
+        @include mobile {
+          height: 100%;
+        }
+
+        @include tablet {
+          height: 35rem;
+        }
+
+        .message-container {
+          width: 100%;
+          height: 100%;
+          overflow-y: auto;
+          scroll-behavior: smooth;
+
+          button {
+            display: none;
+          }
+
+          .message {
             @include flex(row nowrap, center, center);
-            font-family: 'Poppins';
-            font-size: 0.9rem;
-            font-weight: bold;
-          }
-
-          .message-content {
-            @include flex(row nowrap, center, flex-start);
-            font-family: 'Poppins';
-            width: auto;
             height: auto;
-            min-height: 2rem;
-            max-width: 12.5rem;
-            background: #43a047;
-            border-radius: 5px;
-            color: var(--white-color);
-            margin: 0 0.5rem;
-            padding: 0 0.5rem;
-            overflow-wrap: break-word;
-            word-break: break-word;
-          }
-
-          &.you {
-            @include flex(row nowrap, center, flex-start);
-          }
-
-          &.other {
-            @include flex(row nowrap, center, flex-end);
+            padding: 0.5rem;
 
             .message-content {
-              background: cornflowerblue;
-            }
-          }
-
-          .message-meta {
-            @include flex(row nowrap, center, space-between);
-            margin: 0 0.5rem;
-            max-width: 12.5rem;
-
-            .author {
-              font-size: 0.8rem;
+              @include flex(row nowrap, center, flex-start);
               font-family: 'Poppins';
-              font-weight: bold;
-              margin-left: 0.5rem;
+              width: auto;
+              height: auto;
+              min-height: 2rem;
+              max-width: 15rem;
+              background: var(--main-live-chat-color);
+              border-radius: 5px;
+              color: var(--white-color);
+              margin: 0 0.5rem;
+              padding: 0 0.5rem;
               overflow-wrap: break-word;
               word-break: break-word;
-              text-transform: capitalize;
+
+              @include mobile {
+                max-width: 70vw;
+              }
+
+              @include tablet {
+                max-width: 15rem;
+              }
             }
 
-            .time {
+            &.you {
+              @include flex(row nowrap, center, flex-start);
+
+              .message-content {
+                @include flex(row nowrap, center, flex-start);
+              }
+            }
+
+            &.other {
+              @include flex(row nowrap, center, flex-end);
+
+              .message-content {
+                background: cornflowerblue;
+              }
+
+              .message-meta {
+                @include flex(row nowrap, center, flex-end);
+              }
+            }
+
+            .message-meta {
+              @include flex(row nowrap, center, space-between);
+              margin: 0 0.5rem;
+              max-width: 15rem;
+
+              @include mobile {
+                max-width: 70vw;
+              }
+
+              @include tablet {
+                max-width: 15rem;
+              }
+
+              .author {
+                @include flex(row nowrap, center, flex-end);
+                flex: 60%;
+                font-size: 0.8rem;
+                font-family: 'Poppins';
+                font-weight: bold;
+                overflow-wrap: break-word;
+                word-break: break-word;
+                text-transform: capitalize;
+                margin-left: 0.5rem;
+
+                @include mobile {
+                  font-size: 0.7rem;
+                }
+
+                @include tablet {
+                  font-size: 0.8rem;
+                }
+              }
+
+              .time {
+                @include flex(row nowrap, center, flex-start);
+                flex: 40%;
+                font-size: 0.8rem;
+                font-family: 'Poppins';
+
+                @include mobile {
+                  font-size: 0.7rem;
+                }
+
+                @include tablet {
+                  font-size: 0.8rem;
+                }
+              }
+            }
+          }
+        }
+      }
+
+      .chat-footer {
+        @include flex(row nowrap, center, space-between);
+        height: 3rem;
+        width: 100%;
+        position: relative;
+        top: -0.2rem;
+        border: 2px solid var(--main-live-chat-color);
+        border-top: none;
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+
+        .input-field {
+          @include flex(row nowrap, center, space-between);
+          height: 100%;
+          flex: 80%;
+          overflow: hidden;
+
+          @include mobile {
+            flex: 75%;
+          }
+
+          @include tablet {
+            flex: 80%;
+          }
+
+          input {
+            flex: 90%;
+            font-family: 'Poppins';
+            font-size: 1rem;
+            padding: 0.5rem 0.7rem;
+            outline: none;
+            border: none;
+            border-radius: 10px;
+
+            @include mobile {
+              font-size: 0.9rem;
+            }
+
+            @include tablet {
+              font-size: 1rem;
+            }
+          }
+        }
+
+        .send-btn {
+          @include flex(row nowrap, center, center);
+          flex: 20%;
+          height: 100%;
+
+          @include mobile {
+            flex: 25%;
+          }
+
+          @include tablet {
+            flex: 20%;
+          }
+
+          .btn {
+            font-family: 'Poppins';
+            font-size: 0.9rem;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            outline: none;
+            border: none;
+            border-radius: 20px;
+            background: var(--main-live-chat-color);
+            color: var(--white-color);
+
+            @include mobile {
               font-size: 0.8rem;
-              font-family: 'Poppins';
+              padding: 0.4rem 0.8rem;
+            }
+
+            @include tablet {
+              font-size: 0.9rem;
+              padding: 0.5rem 1rem;
+            }
+
+            &:hover {
+              background: var(--hover-live-chat-color);
+              transition: 0.4s ease;
+            }
+
+            &:active {
+              transform: scale(0.9);
+              transition: 0.2s ease;
             }
           }
         }
       }
     }
 
-    .chat-footer {
-      @include flex();
-      height: 2.5rem;
-      width: 100%;
-      position: relative;
-      top: -0.2rem;
-      border: 2px solid #43a047;
-      border-top: none;
-      border-bottom-left-radius: 5px;
-      border-bottom-right-radius: 5px;
+    .emoji-picker-react {
+      height: calc(100% - 3rem);
+      transform: scale(0);
+      transform-origin: left bottom;
+      transition: 0.5s ease-in;
 
-      input {
-        height: 100%;
-        flex: 90%;
-        border: none;
-        padding: 0 0.7rem;
-        font-size: 1rem;
-        font-family: 'Poppins';
-        border-right: 1px dotted #607d8b;
-        outline: none;
+      @include screen-1100px {
+        width: 12.5rem;
       }
 
-      .btn {
-        border: 0;
-        display: grid;
-        place-items: center;
-        flex: 10%;
+      @include mobile {
         height: 100%;
-        background: transparent;
-        outline: none;
-        font-size: 1.5rem;
-        color: var(--lightgray-color);
+        width: 100%;
+      }
 
-        &:hover {
-          background: #43a047;
-          transition: 0.4s ease;
-        }
+      .emoji {
+        overflow: hidden;
+      }
+
+      .content-wrapper:before {
+        display: none;
       }
     }
   }

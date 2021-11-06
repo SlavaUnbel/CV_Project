@@ -1,4 +1,7 @@
+import { IEmojiData } from 'emoji-picker-react';
 import { createContext, CSSProperties, FormEvent, RefObject } from 'react';
+import { Socket } from 'socket.io-client';
+import { DefaultEventsMap } from 'socket.io/dist/typed-events';
 
 //Header Context
 interface IHeaderContext {
@@ -283,6 +286,40 @@ export const TestimonialsSwitcherCtx = createContext({} as ITestimonialsSwitcher
 
 //Live Chat Context
 interface ILiveChatContext {
+  socket: Socket<DefaultEventsMap, DefaultEventsMap>
 
+  username: string;
+  setUsername: (username: string) => void;
+
+  room: string;
+  setRoom: (room: string) => void;
+
+  chatShown: boolean;
+  setChatShown: (shown: boolean) => void;
+
+  messageList: ILiveChat[];
+  setMessageList: (list: ILiveChat[]) => void;
+
+  roomList: string[]
+  setRoomList: (list: string[]) => void;
+
+  roomChoice: boolean;
+  setRoomChoice: (choice: boolean) => void;
+
+  joinRoom: () => void;
+  leaveRoom: () => void;
 }
 export const LiveChatCtx = createContext({} as ILiveChatContext)
+
+interface ILiveChatRoomContext {
+  emojiActive: boolean;
+  setEmojiActive: (active: boolean) => void;
+  onEmojiClick: (e: React.MouseEvent<Element, MouseEvent>,
+    emojiObj: IEmojiData) => void;
+
+  message: string;
+  setMessage: (message: string) => void;
+  getUsername: string;
+  sendMessage: () => void;
+}
+export const LiveChatRoomCtx = createContext({} as ILiveChatRoomContext)
