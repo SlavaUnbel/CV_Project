@@ -323,3 +323,21 @@ interface ILiveChatRoomContext {
   sendMessage: () => void;
 }
 export const LiveChatRoomCtx = createContext({} as ILiveChatRoomContext)
+
+//Todo App Context
+interface ITodoAppContext {
+  todos: ITodoApp[];
+  setTodos: (todos: ITodoApp[]) => void;
+
+  inputValue: string;
+  setInputValue: (value: string) => void;
+
+  filteredTodos: ITodoApp[];
+  setFilteredTodos: (todos: ITodoApp[]) => void;
+
+  status: string;
+  setStatus: (status: string) => void;
+
+  addTodo: (e?: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+}
+export const TodoAppCtx = createContext({} as ITodoAppContext)

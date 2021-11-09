@@ -1,0 +1,314 @@
+@import '../../../index.scss';
+
+:root {
+  --bg-first-color: #ffb703;
+  --bg-second-color: #fda085;
+  --main-color: #dc2f02;
+  --complete-color: #38b000;
+  --complete-hover-color: #008000;
+  --delete-hover-color: #c1121f;
+}
+
+@mixin max-width {
+  max-width: 50vw;
+
+  @include mobile {
+    max-width: 90vw;
+  }
+
+  @include tablet {
+    max-width: 50vw;
+  }
+}
+
+@mixin animation {
+  animation: fall 3s ease-in-out both;
+  transform-origin: 0 50%;
+
+  @keyframes fall {
+    0% {
+      transform-origin: 0 50%;
+      animation-timing-function: ease-in-out;
+    }
+
+    15% {
+      transform: rotate3d(0, 0, 1, 130deg);
+    }
+
+    20% {
+      transform: rotate3d(0, 0, 1, 80deg);
+    }
+
+    30% {
+      transform: rotate3d(0, 0, 1, 115deg);
+    }
+
+    40% {
+      transform: rotate3d(0, 0, 1, 85deg);
+    }
+
+    50% {
+      transform: rotate3d(0, 0, 1, 107deg);
+    }
+
+    80% {
+      transform: rotateZ(102.5deg);
+    }
+
+    100% {
+      transform: rotateZ(102.5deg) translate3d(400px, 0, 0);
+    }
+  }
+}
+
+@mixin todo-btn($bg-color, $bg-hover-color) {
+  background: $bg-color;
+
+  &:hover {
+    background: $bg-hover-color;
+    transition: 0.4s ease;
+  }
+}
+
+.todo-app__container {
+  @include container;
+  @include flex(column nowrap, center, center);
+  background: linear-gradient(
+    90deg,
+    var(--bg-first-color) 0%,
+    var(--bg-second-color) 100%
+  );
+  color: var(--white-color);
+
+  header {
+    @include flex(row nowrap, center, center);
+    font-family: 'Poppins';
+    font-size: 2.5rem;
+    min-height: 10vh;
+
+    @include mobile {
+      font-size: 2rem;
+    }
+
+    @include tablet {
+      font-size: 2.5rem;
+    }
+  }
+
+  form {
+    @include flex(row nowrap, center, center);
+    @include max-width;
+    min-height: 20vh;
+
+    input,
+    button {
+      @include flex(row nowrap, center, center);
+      padding: 0.5rem 1rem;
+      font-size: 1.5rem;
+      height: 3rem;
+      border: none;
+      background: var(--white-color);
+      font-family: 'Poppins';
+
+      @include mobile {
+        padding: 0.25rem 0.5rem;
+        font-size: 1rem;
+        height: 2.5rem;
+      }
+
+      @include tablet {
+        padding: 0.5rem 1rem;
+        font-size: 1.5rem;
+        height: 3rem;
+      }
+
+      &:focus {
+        outline: none;
+      }
+    }
+
+    input {
+      border-top-left-radius: 10px;
+      border-bottom-left-radius: 10px;
+    }
+
+    .btn {
+      color: var(--main-color);
+      background: var(--white-color);
+      cursor: pointer;
+      width: 3rem;
+      transition: all 0.4s ease;
+      border-top-right-radius: 10px;
+      border-bottom-right-radius: 10px;
+
+      @include mobile {
+        width: 2.5rem;
+      }
+
+      @include tablet {
+        width: 3rem;
+      }
+
+      &:hover {
+        background: var(--main-color);
+        color: var(--white-color);
+      }
+    }
+
+    .filter {
+      margin-left: 2rem;
+      position: relative;
+      overflow: hidden;
+
+      @include mobile {
+        margin-left: 1rem;
+      }
+
+      @include tablet {
+        margin-left: 2rem;
+      }
+
+      &:hover::after {
+        background: var(--main-color);
+        color: var(--white-color);
+        transition: all 0.5s ease;
+      }
+
+      &::after {
+        content: '\25BC';
+        position: absolute;
+        top: 0;
+        right: 0;
+        padding: 1rem;
+        cursor: pointer;
+        pointer-events: none;
+        color: var(--main-color);
+        background: var(--white-color);
+
+        @include mobile {
+          padding: 0.5rem;
+        }
+
+        @include tablet {
+          padding: 1rem;
+        }
+      }
+
+      select {
+        padding: 1rem;
+        border: none;
+        outline: none;
+        appearance: none;
+        box-shadow: none;
+        background-image: none;
+        color: var(--main-color);
+        cursor: pointer;
+        width: 10rem;
+        position: relative;
+        overflow: hidden;
+
+        @include mobile {
+          padding: 0.5rem;
+          width: 7.5rem;
+        }
+
+        @include tablet {
+          padding: 1rem;
+          width: 10rem;
+        }
+
+        option {
+          font-family: 'Poppins';
+        }
+      }
+    }
+  }
+
+  .todo-container {
+    @include flex(row nowrap, center, center);
+
+    .todo-list {
+      @include max-width;
+      padding: 0;
+      height: 60vh;
+
+      .todo {
+        @include flex(row nowrap, center, center);
+        margin: 0.5rem;
+        background: var(--white-color);
+        color: var(--black-color);
+        font-size: 1.5rem;
+        border-radius: 10px;
+
+        @include mobile {
+          font-size: 1rem;
+        }
+
+        @include tablet {
+          font-size: 1.5rem;
+        }
+
+        &.removed {
+          @include animation;
+        }
+
+        li {
+          list-style: none;
+          font-family: 'Poppins';
+          padding: 0rem 0.5rem;
+          flex: 1;
+          overflow-wrap: break-word;
+          word-break: break-all;
+          transition: all 0.5s ease;
+
+          &.completed {
+            text-decoration: line-through;
+            opacity: 0.5;
+            transition: all 0.5s ease;
+          }
+        }
+
+        .btn-container {
+          margin: 0.5rem;
+
+          @include mobile {
+            margin: 0.3rem;
+          }
+
+          @include tablet {
+            margin: 0.5rem;
+          }
+
+          .trash-btn,
+          .complete-btn {
+            color: var(--white-color);
+            padding: 0.5rem;
+
+            @include mobile {
+              padding: 0.3rem;
+            }
+
+            @include tablet {
+              padding: 0.5rem;
+            }
+          }
+
+          .trash-btn {
+            @include todo-btn(var(--main-color), var(--delete-hover-color));
+          }
+
+          .complete-btn {
+            @include todo-btn(
+              var(--complete-color),
+              var(--complete-hover-color)
+            );
+          }
+
+          .icon {
+            pointer-events: none;
+          }
+        }
+      }
+    }
+  }
+}
