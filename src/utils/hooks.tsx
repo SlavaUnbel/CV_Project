@@ -1399,34 +1399,27 @@ export const useFetchNotesAppDataAndManageNotes = ({
   setLoading,
   pushError,
 }: NotesAppProps) => {
+  const request = useCallback(
+    (req: Promise<any>) => req.then(setNotes).catch((e) => pushError(e)),
+    [setNotes, pushError],
+  );
+
   useEffect(() => {
     if (!setLoading) return;
     setLoading(true);
 
-    services.notesAppService
-      .getNotes()
-      .then(setNotes)
-      .catch((e) => pushError(e))
-      .finally(() => setLoading(false));
-  }, [setNotes, setLoading, pushError]);
+    request(services.notesAppService.getNotes()).finally(() =>
+      setLoading(false),
+    );
+  }, [request, setNotes, setLoading, pushError]);
 
-  const addNote = () =>
-    services.notesAppService
-      .addNote()
-      .then(setNotes)
-      .catch((e) => pushError(e));
+  const addNote = () => request(services.notesAppService.addNote());
 
   const editNote = (note: INotesApp) =>
-    services.notesAppService
-      .editNote(note)
-      .then(setNotes)
-      .catch((e) => pushError(e));
+    request(services.notesAppService.editNote(note));
 
   const removeNote = (id: number) =>
-    services.notesAppService
-      .removeNote(id)
-      .then(setNotes)
-      .catch((e) => pushError(e));
+    request(services.notesAppService.removeNote(id));
 
   return { addNote, editNote, removeNote };
 };
@@ -1680,4 +1673,118 @@ export const useChatManage = ({
     setMessage,
     sendMessage,
   };
+};
+
+//Todo App Hooks
+interface AddTodosProps {
+  todos: ITodoApp[];
+  setTodos: (todos: ITodoApp[]) => void;
+
+  inputValue: string;
+  setInputValue: (value: string) => void;
+}
+
+export const useAddTodos = ({
+  todos,
+  setTodos,
+
+  inputValue,
+  setInputValue,
+}: AddTodosProps) => {
+  useEffect(() => {
+    // if (!setLoading) return;
+    //   setLoading(true);
+
+    services.todoAppService.getTodos().then((data) => {
+      setTodos(data);
+      // !data && pushWarning('No data found');
+    });
+    // .catch((e) => pushError(e))
+    // .finally(() => setLoading(false));
+  }, [setTodos]);
+
+  const addTodo = (e?: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e && e.preventDefault();
+
+    if (inputValue !== '' && inputValue.replaceAll(' ', '').length > 0) {
+      services.todoAppService
+        .addTodo(inputValue.trim())
+        .then(setTodos)
+        .finally(() => setInputValue(''));
+    }
+  };
+
+  return addTodo;
+};
+
+interface FilterTodosProps {
+  todos: ITodoApp[];
+  status: string;
+  setFilteredTodos: (todos: ITodoApp[]) => void;
+}
+
+export const useFilterTodos = ({
+  todos,
+  status,
+  setFilteredTodos,
+}: FilterTodosProps) => {
+  const filterTodos = () => {
+    switch (status) {
+      case 'completed':
+        setFilteredTodos(todos.filter((todo) => todo.completed));
+        break;
+
+      case 'in process':
+        setFilteredTodos(todos.filter((todo) => !todo.completed));
+        break;
+
+      default:
+        setFilteredTodos(todos);
+        break;
+    }
+  };
+
+  useEffect(
+    () => filterTodos(),
+    //eslint-disable-next-line
+    [todos, status],
+  );
+};
+
+interface ManageTodoProps {
+  todo: ITodoApp;
+  setTodos: (todos: ITodoApp[]) => void;
+  setHidden: (hidden: boolean) => void;
+}
+
+export const useManageTodo = ({
+  todo,
+  setTodos,
+  setHidden,
+}: ManageTodoProps) => {
+  const [removed, setRemoved] = useState(false);
+
+  const applyRemovedClass = (_id: number) => setRemoved(true);
+
+  const complete = () => {
+    services.todoAppService
+      .completeTodo(todo.completed, todo.id)
+      .then(setTodos);
+  };
+
+  const remove = () => {
+    applyRemovedClass(todo.id);
+    setHidden(true);
+
+    setTimeout(
+      () =>
+        services.todoAppService
+          .removeTodo(todo.id)
+          .then(setTodos)
+          .finally(() => setHidden(false)),
+      SECOND * 3,
+    );
+  };
+
+  return { removed, complete, remove };
 };

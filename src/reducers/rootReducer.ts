@@ -4,7 +4,6 @@ import { contactReducer, ContactState } from './contactReducer';
 import { headerReducer, HeaderState } from './headerReducer';
 import { liveChatReducer, LiveChatState } from './liveChatReducer';
 import { loadingReducer, LoadingState } from './loadingReducer';
-import { notesAppReducer, NotesAppState } from './notesAppReducer';
 import {
   portfolioItemsReducer,
   PortfolioItemsState
@@ -20,7 +19,6 @@ export type IState = {
   contact: ContactState;
   portfolioItems: PortfolioItemsState;
   authProject: AuthProjectState;
-  notesApp: NotesAppState;
   liveChat: LiveChatState;
 };
 
@@ -34,6 +32,5 @@ export default combineReducers({
   contact: contactReducer,
   portfolioItems: portfolioItemsReducer,
   authProject: authProjectReducer,
-  notesApp: notesAppReducer,
   liveChat: liveChatReducer,
 });

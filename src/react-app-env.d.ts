@@ -192,3 +192,9 @@ interface ILiveChatMsg {
   message: string;
   time: string;
 }
+
+interface ITodoApp {
+  id: number;
+  todo: string;
+  completed: boolean;
+}

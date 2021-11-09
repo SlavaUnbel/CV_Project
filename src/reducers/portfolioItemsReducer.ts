@@ -20,7 +20,14 @@ export interface PortfolioItemsState {
 
   passwordGenerator: string;
 
+  notes: INotesApp[]
+
   testimonialsSwitcher: ITestimonialsSwitcher;
+
+  todos: ITodoApp[];
+  newTodo: string;
+  filteredTodos: ITodoApp[]
+  todosStatus: string;
 }
 
 const initialPortfolioItemsState: PortfolioItemsState = {
@@ -43,7 +50,14 @@ const initialPortfolioItemsState: PortfolioItemsState = {
 
   passwordGenerator: '',
 
+  notes: [],
+
   testimonialsSwitcher: {} as ITestimonialsSwitcher,
+
+  todos: [],
+  newTodo: '',
+  filteredTodos: [],
+  todosStatus: 'all'
 };
 
 const symbiotes = {
@@ -105,6 +119,9 @@ const symbiotes = {
       passwordGenerator,
     }),
   },
+  notes: {
+    set: (state: PortfolioItemsState, notes: INotesApp[]) => ({ ...state, notes }),
+  },
   testimonialsSwitcher: {
     set: (
       state: PortfolioItemsState,
@@ -114,6 +131,12 @@ const symbiotes = {
       testimonialsSwitcher,
     }),
   },
+  todos: {
+    set: (state: PortfolioItemsState, todos: ITodoApp[]) => ({ ...state, todos }),
+    add: (state: PortfolioItemsState, newTodo: string) => ({ ...state, newTodo }),
+    filter: (state: PortfolioItemsState, filteredTodos: ITodoApp[]) => ({ ...state, filteredTodos }),
+    setStatus: (state: PortfolioItemsState, todosStatus: string) => ({ ...state, todosStatus })
+  }
 };
 
 export const {

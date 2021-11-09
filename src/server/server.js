@@ -20,8 +20,10 @@ app.use('/authProject', authProject);
 
 //Portfolio Items Router
 const notesApp = require('./portfolioItems/notesApp');
+const todoApp = require('./portfolioItems/todoApp');
 
 app.use('/notesApp', notesApp);
+app.use('/todoApp', todoApp);
 
 //Live Chat Sockets Connection
 const socket = require('./liveChat/socketsConfig')
