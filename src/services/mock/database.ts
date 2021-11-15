@@ -1,4 +1,4 @@
-import { generateExpandingCardsData, generateFaqCollapseData, generatePortfolioData, generateRotatingNavigationData, generateTestimonialsSwitcherData, generateWorksData, getSplitLandingPageData } from './databaseMethods';
+import { generateExpandingCardsData, generateFaqCollapseData, generatePortfolioData, generateRotatingNavigationData, generateTestimonialsSwitcherData, generateWorksData, getPomodoroTimerMusic, getSplitLandingPageData } from './databaseMethods';
 
 interface DATABASE {
   portfolioData: IPortfolio[];
@@ -9,6 +9,7 @@ interface DATABASE {
   faqCollapse: IFaqCollapse[];
   animatedNavigation: string[];
   testimonialsSwitcher: ITestimonialsSwitcher[];
+  pomodoroTimer: string[]
 }
 
 export const database: DATABASE = {
@@ -20,6 +21,7 @@ export const database: DATABASE = {
   faqCollapse: [...generateFaqCollapseData(1)],
   animatedNavigation: ['Home', 'About', 'Works', 'Contact'],
   testimonialsSwitcher: [...generateTestimonialsSwitcherData(7, 1)],
+  pomodoroTimer: getPomodoroTimerMusic(),
 };
 
 

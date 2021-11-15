@@ -12,6 +12,7 @@ import {
   firstWorkSrc,
   linkedIn,
   phoneNumber,
+  pomodoroMusicSrc,
   portfolioItems,
   rotatingNavigationSrc,
   secondIconSrc,
@@ -316,3 +317,10 @@ export const generateTestimonialsSwitcherData = (
     };
   });
 };
+
+export const getPomodoroTimerMusic = (): string[] => [
+  ...Array.from(
+    { length: 4 },
+    (_, idx) => `${pomodoroMusicSrc}/${idx + 1}.mp3`,
+  ),
+];

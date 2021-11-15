@@ -1,5 +1,6 @@
 import { IEmojiData } from 'emoji-picker-react';
 import { createContext, CSSProperties, FormEvent, RefObject } from 'react';
+import { TimeProps } from 'react-countdown-circle-timer';
 import { Socket } from 'socket.io-client';
 import { DefaultEventsMap } from 'socket.io/dist/typed-events';
 
@@ -182,11 +183,11 @@ export const DrinkWaterCtx = createContext({} as IDrinkWaterContext);
 
 //Theme Clock Context
 interface IThemeClockContext {
-  hourRef: RefObject<HTMLDivElement>
-  minuteRef: RefObject<HTMLDivElement>
-  secondRef: RefObject<HTMLDivElement>
-  timeRef: RefObject<HTMLDivElement>
-  dateRef: RefObject<HTMLDivElement>
+  hourRef: RefObject<HTMLDivElement>;
+  minuteRef: RefObject<HTMLDivElement>;
+  secondRef: RefObject<HTMLDivElement>;
+  timeRef: RefObject<HTMLDivElement>;
+  dateRef: RefObject<HTMLDivElement>;
 
   newClass: boolean;
   toggleClass: () => void;
@@ -194,7 +195,10 @@ interface IThemeClockContext {
 export const ThemeClockCtx = createContext({} as IThemeClockContext);
 
 //Github Profiles Context
-interface IGithubProfilesContext extends IWithLoading, IWithError, IWithWarning {
+interface IGithubProfilesContext
+  extends IWithLoading,
+  IWithError,
+  IWithWarning {
   user: IGithubUser;
   setGithubProfilesData: (user: any) => void;
 
@@ -203,13 +207,16 @@ interface IGithubProfilesContext extends IWithLoading, IWithError, IWithWarning 
 
   noUserFound: boolean;
   searchForAUser: boolean;
-  searchRef: RefObject<HTMLInputElement>
-  submitSearch: (e: React.FormEvent<HTMLFormElement>) => void
+  searchRef: RefObject<HTMLInputElement>;
+  submitSearch: (e: React.FormEvent<HTMLFormElement>) => void;
 }
 export const GithubProfilesCtx = createContext({} as IGithubProfilesContext);
 
 //Password Generator Context
-interface IPasswordGeneratorContext extends IWithError, IWithWarning, IWithSuccess {
+interface IPasswordGeneratorContext
+  extends IWithError,
+  IWithWarning,
+  IWithSuccess {
   passwordVal: string;
   setPasswordVal: (password: string) => void;
 
@@ -224,7 +231,9 @@ interface IPasswordGeneratorContext extends IWithError, IWithWarning, IWithSucce
   increase: () => void;
   decrease: () => void;
 }
-export const PasswordGeneratorCtx = createContext({} as IPasswordGeneratorContext);
+export const PasswordGeneratorCtx = createContext(
+  {} as IPasswordGeneratorContext,
+);
 
 //Auth Project Context
 interface IAuthProjectContext extends IWithError, IWithWarning, IWithSuccess {
@@ -260,10 +269,10 @@ interface IAuthProjectContext extends IWithError, IWithWarning, IWithSuccess {
   setCurrentUserRole?: (role?: string) => void;
 
   inputFields: IFormInput[];
-  validate: () => void | void[]
-  submit?: (e: React.FormEvent<HTMLFormElement>) => void
-  logout: () => Promise<void>
-  checkAuth: () => Promise<void>
+  validate: () => void | void[];
+  submit?: (e: React.FormEvent<HTMLFormElement>) => void;
+  logout: () => Promise<void>;
+  checkAuth: () => Promise<void>;
 }
 export const AuthProjectCtx = createContext({} as IAuthProjectContext);
 
@@ -275,18 +284,23 @@ interface INotesAppContext extends IWithLoading, IWithError {
   editNote: (note: INotesApp) => void;
   removeNote: (id: number) => void;
 }
-export const NotesAppCtx = createContext({} as INotesAppContext)
+export const NotesAppCtx = createContext({} as INotesAppContext);
 
 //Testimonials Switcher Context
-export interface ITestimonialsSwitcherContext extends IWithLoading, IWithError, IWithWarning {
+export interface ITestimonialsSwitcherContext
+  extends IWithLoading,
+  IWithError,
+  IWithWarning {
   data: ITestimonialsSwitcher;
   setData: (data: ITestimonialsSwitcher) => void;
 }
-export const TestimonialsSwitcherCtx = createContext({} as ITestimonialsSwitcherContext)
+export const TestimonialsSwitcherCtx = createContext(
+  {} as ITestimonialsSwitcherContext,
+);
 
 //Live Chat Context
 interface ILiveChatContext {
-  socket: Socket<DefaultEventsMap, DefaultEventsMap>
+  socket: Socket<DefaultEventsMap, DefaultEventsMap>;
 
   username: string;
   setUsername: (username: string) => void;
@@ -300,7 +314,7 @@ interface ILiveChatContext {
   messageList: ILiveChat[];
   setMessageList: (list: ILiveChat[]) => void;
 
-  roomList: string[]
+  roomList: string[];
   setRoomList: (list: string[]) => void;
 
   roomChoice: boolean;
@@ -309,20 +323,22 @@ interface ILiveChatContext {
   joinRoom: () => void;
   leaveRoom: () => void;
 }
-export const LiveChatCtx = createContext({} as ILiveChatContext)
+export const LiveChatCtx = createContext({} as ILiveChatContext);
 
 interface ILiveChatRoomContext {
   emojiActive: boolean;
   setEmojiActive: (active: boolean) => void;
-  onEmojiClick: (e: React.MouseEvent<Element, MouseEvent>,
-    emojiObj: IEmojiData) => void;
+  onEmojiClick: (
+    e: React.MouseEvent<Element, MouseEvent>,
+    emojiObj: IEmojiData,
+  ) => void;
 
   message: string;
   setMessage: (message: string) => void;
   getUsername: string;
   sendMessage: () => void;
 }
-export const LiveChatRoomCtx = createContext({} as ILiveChatRoomContext)
+export const LiveChatRoomCtx = createContext({} as ILiveChatRoomContext);
 
 //Todo App Context
 interface ITodoAppContext {
@@ -340,4 +356,58 @@ interface ITodoAppContext {
 
   addTodo: (e?: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 }
-export const TodoAppCtx = createContext({} as ITodoAppContext)
+export const TodoAppCtx = createContext({} as ITodoAppContext);
+
+//Pomodoro Timer Context
+interface IPomodoroTimerContext extends IWithError, IWithWarning, IWithSuccess {
+  pomodoro: number;
+  newTimer: IPomodoroTimer;
+  executing: IPomodoroTimer;
+  startAnimate: boolean;
+  timerDisabled: boolean;
+  setTimerDisabled: (disabled: boolean) => void;
+  startTimer: () => void;
+  pauseTimer: () => void;
+  stopTimer: () => void;
+  settingBtn: () => void;
+  setNewTimer: (timer: IPomodoroTimer) => void;
+  setCurrentTimer: (activeState: string) => void;
+  updateExecute: (updatedSettings: IPomodoroTimer) => void;
+  handleSubmit: (e: any) => void;
+  countdown: (timer: TimeProps) => void;
+
+  opened: boolean;
+  setOpened: (opened: boolean) => void;
+
+  audio: string | null;
+  setAudio: (audio: string | null) => void;
+  audioList: string[];
+  setAudioList: (list: string[]) => void;
+}
+export const PomodoroTimerCtx = createContext({} as IPomodoroTimerContext);
+
+//Audio Player Context
+interface IAudioPlayerContext {
+  wavesurferContainer: RefObject<HTMLDivElement>;
+
+  currentTime: number;
+  duration: number;
+  presentSeconds: (seconds: number) => string;
+
+  volume: number;
+  changeVolume: (volume: number) => void;
+  changeMute: () => void;
+
+  isPlaying: boolean;
+  play: () => void;
+  pause: () => void;
+  stop: () => void;
+  skipPrevious: () => void;
+  skipNext: () => void;
+  seekBack: () => void;
+  seekForward: () => void;
+
+  playbackRate: number;
+  changePlaybackRate: (rate: number) => void;
+}
+export const AudioPlayerCtx = createContext({} as IAudioPlayerContext);
