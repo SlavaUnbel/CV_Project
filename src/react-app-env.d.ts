@@ -198,3 +198,10 @@ interface ITodoApp {
   todo: string;
   completed: boolean;
 }
+
+interface IPomodoroTimer {
+  work: number;
+  short: number;
+  long: number;
+  active: string;
+}

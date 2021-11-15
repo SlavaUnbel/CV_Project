@@ -42,7 +42,8 @@ export const portfolioItems = [
   'Notes App',
   'Hoverboard',
   'Testimonials Switcher',
-  'Todo App'
+  'Todo App',
+  'Pomodoro Timer'
 ];
 
 export const expandingCardsSrc =
@@ -88,3 +89,5 @@ export const githubUsersApi = 'https://api.github.com/users/'
 
 export const testimonialsSwitcherSrc =
   process.env.PUBLIC_URL + '/images/testimonialsSwitcher';
+
+export const pomodoroMusicSrc = process.env.PUBLIC_URL + '/audio/pomodoroTimer'

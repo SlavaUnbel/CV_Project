@@ -1,4 +1,5 @@
 import { combineReducers, Store } from 'redux';
+import { audioPlayerReducer, AudioPlayerState } from './audioPlayerReducer';
 import { authProjectReducer, AuthProjectState } from './authProjectReducer';
 import { contactReducer, ContactState } from './contactReducer';
 import { headerReducer, HeaderState } from './headerReducer';
@@ -20,6 +21,7 @@ export type IState = {
   portfolioItems: PortfolioItemsState;
   authProject: AuthProjectState;
   liveChat: LiveChatState;
+  audioPlayer: AudioPlayerState;
 };
 
 export type IStore = Store<IState>;
@@ -33,4 +35,5 @@ export default combineReducers({
   portfolioItems: portfolioItemsReducer,
   authProject: authProjectReducer,
   liveChat: liveChatReducer,
+  audioPlayer: audioPlayerReducer,
 });

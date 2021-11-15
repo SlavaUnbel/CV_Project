@@ -12,6 +12,7 @@ import GithubProfilesContainer from '../../../containers/portfolioItems/GithubPr
 import MovieAppContainer from '../../../containers/portfolioItems/MovieAppContainer';
 import NotesAppContainer from '../../../containers/portfolioItems/NotesAppContainer';
 import PasswordGeneratorContainer from '../../../containers/portfolioItems/PasswordGeneratorContainer';
+import PomodoroTimerContainer from '../../../containers/portfolioItems/PomodoroTimerContainer';
 import RotatingNavigationContainer from '../../../containers/portfolioItems/RotatingNavigationContainer';
 import SplitLandingPageContainer from '../../../containers/portfolioItems/SplitLandingPageContainer';
 import TestimonialsSwitcherContainer from '../../../containers/portfolioItems/TestimonialsSwitcherContainer';
@@ -39,6 +40,7 @@ import {
   notesAppPath,
   notFoundPath,
   passwordGeneratorPath,
+  pomodoroTimerPath,
   portfolioPath,
   randomChoicePickerPath,
   rotatingNavigationPath,
@@ -119,6 +121,7 @@ const AppRouter: FC = () => (
       component={TestimonialsSwitcherContainer}
     />
     <Route exact path={todoAppPath} component={TodoAppContainer} />
+    <Route exact path={pomodoroTimerPath} component={PomodoroTimerContainer} />
 
     {/* Works Pages Routes */}
     <Route exact path={authProjectPath} component={AuthProjectContainer} />

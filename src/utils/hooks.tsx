@@ -23,7 +23,7 @@ import {
   movieAppSearchApi,
   portfolioAmountPerPage,
 } from './constants';
-import { SECOND } from './date';
+import { getDateValueWithZeros, SECOND } from './date';
 
 // General Hooks
 export const useWindowTitle = (title?: string) => {
@@ -1166,9 +1166,9 @@ export const useSetTimeAndDate = () => {
     changeTimeValue(minuteRef, minutes, [0, 59]);
     changeTimeValue(secondRef, seconds, [0, 59]);
 
-    timeRef.current.innerHTML = `${hours < 10 ? `0${hours}` : hours}:${
-      minutes < 10 ? `0${minutes}` : minutes
-    }`;
+    timeRef.current.innerHTML = `${getDateValueWithZeros(
+      hours,
+    )}:${getDateValueWithZeros(minutes)}`;
     dateRef.current.innerHTML = `${days[day]}, ${months[month]} <span class="circle">${date}</span>`;
   }, [changeTimeValue]);
 
