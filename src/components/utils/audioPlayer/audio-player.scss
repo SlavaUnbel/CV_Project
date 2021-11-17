@@ -128,7 +128,7 @@
 
     .controls-wrapper {
       @include flex(row nowrap, center, center);
-      flex: 3;
+      flex: 4;
 
       @include mobile {
         @include flex(row wrap, flex-start, center);
