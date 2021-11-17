@@ -3,8 +3,7 @@ import { connect } from 'react-redux';
 import { IState } from '../../../reducers/rootReducer';
 import './loader-wrapper.scss';
 
-interface Props extends IWithLoading {
-  children: any;
+interface Props extends IWithLoading, IWithChildren {
   wrapperStyle?: CSSProperties;
   circleStyle?: CSSProperties;
 }

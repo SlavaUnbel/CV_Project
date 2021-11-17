@@ -5,6 +5,8 @@ export interface AudioPlayerState {
   audio: string | null;
   isOpen: boolean;
   isPlaying: boolean;
+  autoPlay: boolean;
+  repeat: boolean;
 }
 
 const initialAudioPlayerState: AudioPlayerState = {
@@ -12,6 +14,8 @@ const initialAudioPlayerState: AudioPlayerState = {
   audio: '',
   isOpen: false,
   isPlaying: false,
+  autoPlay: false,
+  repeat: false,
 };
 
 const symbiotes = {
@@ -31,10 +35,16 @@ const symbiotes = {
     close: (state: AudioPlayerState) => ({ ...state, isOpen: false }),
   },
   isPlaying: {
-    play: (state: AudioPlayerState) => ({ ...state, isPlaying: true }),
+    play: (state: AudioPlayerState, autoPlay?: boolean) => ({ ...state, isPlaying: true }),
     pause: (state: AudioPlayerState) => ({ ...state, isPlaying: false }),
     stop: (state: AudioPlayerState) => ({ ...state, isPlaying: false }),
   },
+  autoPlay: {
+    set: (state: AudioPlayerState, autoPlay: boolean) => ({ ...state, autoPlay })
+  },
+  repeat: {
+    set: (state: AudioPlayerState, repeat: boolean) => ({ ...state, repeat })
+  }
 };
 
 export const {

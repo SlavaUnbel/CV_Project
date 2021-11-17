@@ -3,7 +3,6 @@ import { SECOND } from '../../../utils/date';
 import './button.scss';
 
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
-  children: any;
   onClick?: (e?: React.MouseEvent<HTMLButtonElement>) => void;
 }
 

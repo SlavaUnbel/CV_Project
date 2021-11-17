@@ -43,7 +43,6 @@ export const portfolioItems = [
   'Hoverboard',
   'Testimonials Switcher',
   'Todo App',
-  'Pomodoro Timer'
 ];
 
 export const expandingCardsSrc =

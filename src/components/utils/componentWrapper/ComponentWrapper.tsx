@@ -2,7 +2,20 @@ import React, { FC, useEffect, useState } from 'react';
 import ToastContainer from '../toastContainer/ToastContainer';
 import './component-wrapper.scss';
 
-const ComponentWrapper: FC = (props) => {
+interface Props extends IWithChildren {
+  disableToast?: boolean;
+  toastClose?: number | false;
+  toastLimit?: number;
+  onToastClick?: () => void;
+}
+
+const ComponentWrapper: FC<Props> = ({
+  children,
+  disableToast,
+  toastClose,
+  toastLimit,
+  onToastClick,
+}) => {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -13,9 +26,15 @@ const ComponentWrapper: FC = (props) => {
 
   return (
     <div className={`component-wrapper ${mounted ? 'mounted' : ''}`}>
-      {props.children}
+      {children}
 
-      <ToastContainer />
+      {!disableToast && (
+        <ToastContainer
+          autoClose={toastClose}
+          limit={toastLimit}
+          onClick={onToastClick}
+        />
+      )}
     </div>
   );
 };

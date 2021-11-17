@@ -5,6 +5,7 @@ import { contactReducer, ContactState } from './contactReducer';
 import { headerReducer, HeaderState } from './headerReducer';
 import { liveChatReducer, LiveChatState } from './liveChatReducer';
 import { loadingReducer, LoadingState } from './loadingReducer';
+import { pomodoroTimerReducer, PomodoroTimerState } from './pomodoroTimerReducer';
 import {
   portfolioItemsReducer,
   PortfolioItemsState
@@ -21,6 +22,7 @@ export type IState = {
   portfolioItems: PortfolioItemsState;
   authProject: AuthProjectState;
   liveChat: LiveChatState;
+  pomodoroTimer: PomodoroTimerState;
   audioPlayer: AudioPlayerState;
 };
 
@@ -35,5 +37,6 @@ export default combineReducers({
   portfolioItems: portfolioItemsReducer,
   authProject: authProjectReducer,
   liveChat: liveChatReducer,
+  pomodoroTimer: pomodoroTimerReducer,
   audioPlayer: audioPlayerReducer,
 });

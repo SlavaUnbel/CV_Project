@@ -1,14 +1,22 @@
 import React, { FC, useContext, useEffect } from 'react';
-import AudioPlayerContainer from '../../../../containers/audioPlayer/AudioPlayerContainer';
-import { services } from '../../../../services/services';
-import { PomodoroTimerCtx } from '../../../../utils/context';
+import AudioPlayerContainer from '../../../containers/audioPlayer/AudioPlayerContainer';
+import { services } from '../../../services/services';
+import { PomodoroTimerCtx } from '../../../utils/context';
+import { SECOND } from '../../../utils/date';
+import ToastContainer from '../../utils/toastContainer/ToastContainer';
 import Countdown from './countdown/Countdown';
 import PomodoroControls from './pomodoroControls/PomodoroControls';
 import TimerLabel from './timerLabel/TimerLabel';
 
 const Pomodoro: FC = () => {
-  const { opened, countdown, setAudio, setAudioList, pushError } =
-    useContext(PomodoroTimerCtx);
+  const {
+    playerOpened,
+    countdown,
+    setAudio,
+    setAudioList,
+    pauseTimer,
+    pushError,
+  } = useContext(PomodoroTimerCtx);
 
   useEffect(() => {
     services.pomodoroTimerService
@@ -19,6 +27,11 @@ const Pomodoro: FC = () => {
       })
       .catch((e) => pushError(e));
   }, [setAudio, setAudioList, pushError]);
+
+  useEffect(() => {
+    window.setTimeout(() => pauseTimer(), SECOND * 1.2);
+    //eslint-disable-next-line
+  }, []);
 
   return (
     <>
@@ -34,9 +47,11 @@ const Pomodoro: FC = () => {
 
       <PomodoroControls />
 
-      <div className={`audio-player-wrapper ${opened ? 'opened' : ''}`}>
+      <div className={`audio-player-wrapper ${playerOpened ? 'opened' : ''}`}>
         <AudioPlayerContainer />
       </div>
+
+      <ToastContainer autoClose={false} limit={1} />
     </>
   );
 };

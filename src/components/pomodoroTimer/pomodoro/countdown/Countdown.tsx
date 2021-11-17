@@ -1,6 +1,7 @@
 import React, { FC, useContext } from 'react';
 import { CountdownCircleTimer } from 'react-countdown-circle-timer';
-import { PomodoroTimerCtx } from '../../../../../utils/context';
+import { isMobile } from '../../../../utils/constants';
+import { PomodoroTimerCtx } from '../../../../utils/context';
 
 const Countdown: FC = (props) => {
   const { stopTimer, executing, pomodoro, startAnimate, pushSuccess } =
@@ -14,8 +15,8 @@ const Countdown: FC = (props) => {
           isPlaying={startAnimate}
           duration={pomodoro * 60}
           colors={[['#fe6f6b', 0.33]]}
-          strokeWidth={7}
-          size={240}
+          strokeWidth={isMobile ? 5 : 7}
+          size={isMobile ? 160 : 240}
           trailColor="#c9ccea"
           onComplete={() => {
             stopTimer();

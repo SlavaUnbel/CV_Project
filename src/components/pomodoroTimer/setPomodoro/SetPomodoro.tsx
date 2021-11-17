@@ -1,6 +1,7 @@
 import React, { FC, useContext } from 'react';
-import { PomodoroTimerCtx } from '../../../../utils/context';
-import Button from '../../../utils/button/Button';
+import { PomodoroTimerCtx } from '../../../utils/context';
+import Button from '../../utils/button/Button';
+import ToastContainer from '../../utils/toastContainer/ToastContainer';
 import TimerSetting from './timerSetting/TimerSetting';
 
 const SetPomodoro: FC = () => {
@@ -37,6 +38,8 @@ const SetPomodoro: FC = () => {
 
         <Button onClick={(e) => handleSubmit(e)}>Set Timer</Button>
       </form>
+
+      <ToastContainer />
     </div>
   );
 };

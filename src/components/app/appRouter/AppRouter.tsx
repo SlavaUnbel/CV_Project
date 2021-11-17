@@ -3,6 +3,7 @@ import { Redirect, Route, Switch } from 'react-router-dom';
 import AuthProjectContainer from '../../../containers/authProject/AuthProjectContainer';
 import ContactContainer from '../../../containers/contact/ContactContainer';
 import LiveChatContainer from '../../../containers/liveChat/LiveChatContainer';
+import PomodoroTimerContainer from '../../../containers/pomodoroTimer/PomodoroTimerContainer';
 import PortfolioContainer from '../../../containers/portfolio/PortfolioContainer';
 import AnimatedNavigationContainer from '../../../containers/portfolioItems/AnimatedNavigationContainer';
 import DadJokesContainer from '../../../containers/portfolioItems/DadJokesContainer';
@@ -12,7 +13,6 @@ import GithubProfilesContainer from '../../../containers/portfolioItems/GithubPr
 import MovieAppContainer from '../../../containers/portfolioItems/MovieAppContainer';
 import NotesAppContainer from '../../../containers/portfolioItems/NotesAppContainer';
 import PasswordGeneratorContainer from '../../../containers/portfolioItems/PasswordGeneratorContainer';
-import PomodoroTimerContainer from '../../../containers/portfolioItems/PomodoroTimerContainer';
 import RotatingNavigationContainer from '../../../containers/portfolioItems/RotatingNavigationContainer';
 import SplitLandingPageContainer from '../../../containers/portfolioItems/SplitLandingPageContainer';
 import TestimonialsSwitcherContainer from '../../../containers/portfolioItems/TestimonialsSwitcherContainer';
@@ -121,11 +121,11 @@ const AppRouter: FC = () => (
       component={TestimonialsSwitcherContainer}
     />
     <Route exact path={todoAppPath} component={TodoAppContainer} />
-    <Route exact path={pomodoroTimerPath} component={PomodoroTimerContainer} />
 
     {/* Works Pages Routes */}
     <Route exact path={authProjectPath} component={AuthProjectContainer} />
     <Route exact path={liveChatPath} component={LiveChatContainer} />
+    <Route exact path={pomodoroTimerPath} component={PomodoroTimerContainer} />
 
     <Route exact path={notFoundPath} component={NotFound} />
     <Redirect to={notFoundPath} />

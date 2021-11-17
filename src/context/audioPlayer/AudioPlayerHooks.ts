@@ -6,6 +6,10 @@ interface AudioPlayerProps {
   audio: string | null;
   list?: string[];
   playing?: boolean;
+  autoPlay?: boolean;
+  repeat?: boolean;
+  setRepeat?: (repeat: boolean) => void;
+  setAutoPlay?: (autoPlay: boolean) => void;
   setAudio?: (audio: string | null) => void;
   setList?: (list: string[]) => void;
   onPlay?: () => void;
@@ -41,7 +45,7 @@ export const useCurrentTime = (wavesurfer: RefObject<WaveSurfer>) => {
     (time: number) => {
       setCurrentTime(wavesurfer.current?.getCurrentTime() || 0);
     },
-    [wavesurfer]
+    [wavesurfer],
   );
 
   return { currentTime, setCurrentTime, handleChangeCurrentTime };
@@ -64,7 +68,7 @@ export const useVolume = (wavesurfer: RefObject<WaveSurfer>) => {
     (volume: number) => {
       wavesurfer.current?.setVolume(volume);
     },
-    [wavesurfer]
+    [wavesurfer],
   );
 
   const changeMute = useCallback(() => {
@@ -82,7 +86,7 @@ export const usePlaybackRate = (wavesurfer: RefObject<WaveSurfer>) => {
       wavesurfer.current?.setPlaybackRate(rate);
       setPlaybackRate(rate);
     },
-    [wavesurfer]
+    [wavesurfer],
   );
 
   return { playbackRate, setPlaybackRate, changePlaybackRate };
@@ -93,6 +97,7 @@ export const useOtherAudioPlayerFunctional = ({
   list,
   audio,
   playing,
+  repeat,
   setAudio,
   setList,
   onPlay,
@@ -126,13 +131,14 @@ export const useOtherAudioPlayerFunctional = ({
     setDuration(wavesurfer.current?.getDuration() || 0);
     setVolume(wavesurfer.current?.getVolume() || 1);
     setPlaybackRate(wavesurfer.current?.getPlaybackRate() || 1);
+    wavesurfer.current?.play();
   }, [wavesurfer, setPlaying, setDuration, setVolume, setPlaybackRate]);
 
   const handleError = useCallback(
     (message: string) => {
       onError && onError(message);
     },
-    [onError]
+    [onError],
   );
 
   useEffect(() => {
@@ -165,12 +171,12 @@ export const useOtherAudioPlayerFunctional = ({
   const stop = useCallback(() => {
     wavesurfer.current?.stop();
     onStop && onStop();
-  }, [wavesurfer, onStop])
+  }, [wavesurfer, onStop]);
 
   const seekBack = useCallback(() => {
     if (wavesurfer.current) {
       wavesurfer.current.setCurrentTime(
-        Math.max(wavesurfer.current.getCurrentTime() - 10, 0)
+        Math.max(wavesurfer.current.getCurrentTime() - 10, 0),
       );
     }
   }, [wavesurfer]);
@@ -180,8 +186,8 @@ export const useOtherAudioPlayerFunctional = ({
       wavesurfer.current.setCurrentTime(
         Math.min(
           wavesurfer.current.getCurrentTime() + 10,
-          wavesurfer.current.getDuration()
-        )
+          wavesurfer.current.getDuration(),
+        ),
       );
     }
   }, [wavesurfer]);
@@ -190,6 +196,12 @@ export const useOtherAudioPlayerFunctional = ({
     if (!list || !setAudio) return;
     const nextIndex = list.indexOf(audio || '') + 1;
     setAudio(list[nextIndex] || list[0] || null);
+  }, [audio, list, setAudio]);
+
+  const repeatCurrent = useCallback(() => {
+    if (!list || !setAudio) return;
+    const currentIndex = list.indexOf(audio || '');
+    setAudio(list[currentIndex] || null);
   }, [audio, list, setAudio]);
 
   const skipPrevious = useCallback(() => {
@@ -203,8 +215,17 @@ export const useOtherAudioPlayerFunctional = ({
       setCurrentTime(0);
       setDuration(0);
       wavesurfer.current?.load(audio);
+      wavesurfer.current?.on('finish', repeat ? repeatCurrent : skipNext);
     }
-  }, [audio, wavesurfer, setCurrentTime, setDuration]);
+  }, [
+    audio,
+    wavesurfer,
+    repeat,
+    setCurrentTime,
+    setDuration,
+    skipNext,
+    repeatCurrent,
+  ]);
 
   return {
     isPlaying,

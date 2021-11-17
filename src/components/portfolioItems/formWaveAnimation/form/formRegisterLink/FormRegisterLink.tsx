@@ -1,4 +1,4 @@
-import Checkbox from '@material-ui/core/Checkbox';
+import { Checkbox } from '@mui/material';
 import React, { FC, useContext } from 'react';
 import { AuthProjectCtx } from '../../../../../utils/context';
 

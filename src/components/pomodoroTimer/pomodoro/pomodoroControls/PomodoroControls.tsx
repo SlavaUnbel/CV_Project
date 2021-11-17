@@ -1,15 +1,15 @@
 import { ArrowBack, Pause, PlayArrow } from '@mui/icons-material';
 import { IconButton, Tooltip } from '@mui/material';
 import React, { FC, useContext } from 'react';
-import { PomodoroTimerCtx } from '../../../../../utils/context';
+import { PomodoroTimerCtx } from '../../../../utils/context';
 
 const PomodoroControls: FC = () => {
   const {
     startAnimate,
-    opened,
+    playerOpened,
     executing,
     timerDisabled,
-    setOpened,
+    setPlayerOpened,
     settingBtn,
     startTimer,
     pauseTimer,
@@ -33,17 +33,17 @@ const PomodoroControls: FC = () => {
 
       <Tooltip
         title={`${
-          executing.active !== 'work'
+          executing.active !== 'work' || timerDisabled
             ? ''
-            : `${!opened ? 'Expand' : 'Hide'} audio player`
+            : `${!playerOpened ? 'Expand' : 'Hide'} audio player`
         }`}
         placement="left"
       >
         <span>
           <IconButton
-            className={`icon-btn audio-icon ${opened ? 'opened' : ''}`}
-            onClick={() => setOpened(!opened)}
-            disabled={executing.active !== 'work'}
+            className={`icon-btn audio-icon ${playerOpened ? 'opened' : ''}`}
+            onClick={() => setPlayerOpened(!playerOpened)}
+            disabled={executing.active !== 'work' || timerDisabled}
           />
         </span>
       </Tooltip>
