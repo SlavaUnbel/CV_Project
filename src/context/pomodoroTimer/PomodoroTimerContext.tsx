@@ -1,11 +1,29 @@
-import React, { FC, FormEvent, useState } from 'react';
+import React, { FC, FormEvent } from 'react';
 import { TimeProps } from 'react-countdown-circle-timer';
-import PomodoroTimer from '../../components/portfolioItems/pomodoroTimer/PomodoroTimer';
+import PomodoroTimer from '../../components/pomodoroTimer/PomodoroTimer';
+import { initialPomodoroSettings } from '../../reducers/pomodoroTimerReducer';
 import { PomodoroTimerCtx } from '../../utils/context';
 import { getDateValueWithZeros } from '../../utils/date';
 import { useWindowTitle } from '../../utils/hooks';
 
-interface Props extends IWithLoading, IWithError, IWithWarning, IWithSuccess {
+interface Props extends IWithError, IWithWarning, IWithSuccess {
+  pomodoro: number;
+  setPomodoro: (pomodoro: number) => void;
+
+  newTimer: IPomodoroTimer;
+  setNewTimer: (timer: IPomodoroTimer) => void;
+  executing: IPomodoroTimer;
+  setExecuting: (timer: IPomodoroTimer) => void;
+
+  startAnimate: boolean;
+  setStartAnimate: (animate: boolean) => void;
+
+  timerDisabled: boolean;
+  setTimerDisabled: (disabled: boolean) => void;
+
+  playerOpened: boolean;
+  setPlayerOpened: (opened: boolean) => void;
+
   audio: string | null;
   setAudio: (audio: string | null) => void;
   audioList: string[];
@@ -16,6 +34,23 @@ interface Props extends IWithLoading, IWithError, IWithWarning, IWithSuccess {
 }
 
 const PomodoroTimerContext: FC<Props> = ({
+  pomodoro,
+  setPomodoro,
+
+  newTimer,
+  setNewTimer,
+  executing,
+  setExecuting,
+
+  startAnimate,
+  setStartAnimate,
+
+  timerDisabled,
+  setTimerDisabled,
+
+  playerOpened,
+  setPlayerOpened,
+
   audio,
   setAudio,
   audioList,
@@ -30,20 +65,6 @@ const PomodoroTimerContext: FC<Props> = ({
 }) => {
   useWindowTitle('Pomodoro Timer');
 
-  const [pomodoro, setPomodoro] = useState(0);
-  const [newTimer, setNewTimer] = useState<IPomodoroTimer>({
-    work: 0.2,
-    short: 0.3,
-    long: 0.5,
-    active: 'work',
-  });
-  const [executing, setExecuting] = useState<IPomodoroTimer>(
-    {} as IPomodoroTimer,
-  );
-  const [startAnimate, setStartAnimate] = useState(false);
-  const [timerDisabled, setTimerDisabled] = useState(false);
-  const [opened, setOpened] = useState(false);
-
   const startTimer = () => {
     setStartAnimate(true);
     executing.active === 'work' && play();
@@ -57,11 +78,16 @@ const PomodoroTimerContext: FC<Props> = ({
   const stopTimer = () => {
     setStartAnimate(false);
     setTimerDisabled(true);
+    setPlayerOpened(false);
     stop();
   };
 
   const settingBtn = () => {
-    setExecuting({} as IPomodoroTimer);
+    setStartAnimate(false);
+    setTimerDisabled(false);
+    setPlayerOpened(false);
+    stop();
+    setExecuting(initialPomodoroSettings);
     setPomodoro(0);
   };
 
@@ -70,8 +96,8 @@ const PomodoroTimerContext: FC<Props> = ({
     setTimerTime(updatedSettings);
   };
 
-  const setCurrentTimer = (activeState: string) => {
-    updateExecute({ ...executing, active: activeState });
+  const setCurrentTimer = (active: string) => {
+    updateExecute({ ...executing, active });
     setTimerTime(executing);
   };
 
@@ -95,13 +121,26 @@ const PomodoroTimerContext: FC<Props> = ({
     }
   };
 
+  const changeTimer = (label: string) => {
+    stopTimer();
+    setCurrentTimer(label);
+    if (executing.active !== label) {
+      const toast = document.querySelector('.Toastify__toast-container')
+        ?.children[0];
+      //@ts-ignore
+      toast && toast.click();
+      setPlayerOpened(false);
+      setTimerDisabled(false);
+    }
+  };
+
   const handleSubmit = (e?: FormEvent<HTMLButtonElement>) => {
     e && e.preventDefault();
 
     !Object.values(newTimer).includes(0)
       ? updateExecute(newTimer)
       : pushWarning(
-          'Please, set all timers to value between 1 second and 1 hour',
+          'Please, set all timers to values between 1 second and 1 hour',
         );
   };
 
@@ -120,23 +159,30 @@ const PomodoroTimerContext: FC<Props> = ({
     <PomodoroTimerCtx.Provider
       value={{
         pomodoro,
+
         newTimer,
+        setNewTimer,
+        handleSubmit,
+
         executing,
-        startAnimate,
+        updateExecute,
+
         timerDisabled,
         setTimerDisabled,
+
+        startAnimate,
         startTimer,
         pauseTimer,
         stopTimer,
-        settingBtn,
-        setNewTimer,
+
         setCurrentTimer,
-        updateExecute,
-        handleSubmit,
+        settingBtn,
+        changeTimer,
+
         countdown,
 
-        opened,
-        setOpened,
+        playerOpened,
+        setPlayerOpened,
 
         audio,
         setAudio,

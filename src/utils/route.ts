@@ -25,8 +25,8 @@ export const notesAppPath = '/notes-app'
 export const hoverboardPath = '/hoverboard'
 export const testimonialsSwitcherPath = '/testimonials-switcher'
 export const todoAppPath = '/todo-app'
-export const pomodoroTimerPath = '/pomodoro-timer'
 
 //works paths
 export const authProjectPath = '/auth-project'
 export const liveChatPath = '/live-chat'
+export const pomodoroTimerPath = '/pomodoro-timer'

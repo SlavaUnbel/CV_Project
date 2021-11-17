@@ -22,7 +22,12 @@ import {
   thirdIconSrc,
   thirdWorkSrc,
 } from '../../utils/constants';
-import { authProjectPath, contactPath, liveChatPath } from '../../utils/route';
+import {
+  authProjectPath,
+  contactPath,
+  liveChatPath,
+  pomodoroTimerPath,
+} from '../../utils/route';
 
 export const getMenuOptions = (): string[] => {
   const options = ['Home', 'Portfolio', 'Works', 'Contact'];
@@ -81,14 +86,14 @@ export const generatePortfolioData = (id: number): IPortfolio[] =>
 
 export const generateWorksData = (amount: number, id: number): IWorks[] => {
   const icons = [firstIconSrc, secondIconSrc, thirdIconSrc];
-  const titles = ['Auth Project', 'Live Chat', 'Third Project'];
+  const titles = ['Auth Project', 'Live Chat', 'Pomodoro Timer'];
   const images = [firstWorkSrc, secondWorkSrc, thirdWorkSrc];
   const descriptions = [
     'This project represents an immitation of real-world application with usage of session through managing cookies and storaging the JWT into localStorage for authentication check purpose.',
     'This one shows how web sockets can be used to maintain the process of chatting in realtime. The interface includes emoji picker so that the project looks more user-friendly.',
-    '3rd desc',
+    'The project can be used for time management. There is a custom audio player implemented in order to make your working process more comfortable.',
   ];
-  const links = [authProjectPath, liveChatPath, authProjectPath];
+  const links = [authProjectPath, liveChatPath, pomodoroTimerPath];
 
   return Array.from({ length: amount }, (_, idx) => idx).map((index) => {
     if (index) id++;

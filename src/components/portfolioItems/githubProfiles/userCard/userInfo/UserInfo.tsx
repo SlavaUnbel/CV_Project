@@ -1,8 +1,7 @@
 import React, { FC } from 'react';
 
-interface Props {
+interface Props extends IWithChildren {
   user: IGithubUser;
-  children: any;
 }
 
 const UserInfo: FC<Props> = ({ user, children }) => (

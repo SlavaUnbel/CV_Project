@@ -21,6 +21,10 @@ interface IWithLoading {
   setLoading?: (loading: boolean) => void;
 }
 
+interface IWithChildren {
+  children: any;
+}
+
 interface IHeader {
   phone: IHeaderCreds;
   email: IHeaderCreds;

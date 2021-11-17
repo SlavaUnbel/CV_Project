@@ -361,23 +361,30 @@ export const TodoAppCtx = createContext({} as ITodoAppContext);
 //Pomodoro Timer Context
 interface IPomodoroTimerContext extends IWithError, IWithWarning, IWithSuccess {
   pomodoro: number;
+
   newTimer: IPomodoroTimer;
+  setNewTimer: (timer: IPomodoroTimer) => void;
+  handleSubmit: (e: any) => void;
+
   executing: IPomodoroTimer;
-  startAnimate: boolean;
+  updateExecute: (updatedSettings: IPomodoroTimer) => void;
+
   timerDisabled: boolean;
   setTimerDisabled: (disabled: boolean) => void;
+
+  startAnimate: boolean;
   startTimer: () => void;
   pauseTimer: () => void;
   stopTimer: () => void;
+
   settingBtn: () => void;
-  setNewTimer: (timer: IPomodoroTimer) => void;
   setCurrentTimer: (activeState: string) => void;
-  updateExecute: (updatedSettings: IPomodoroTimer) => void;
-  handleSubmit: (e: any) => void;
+  changeTimer: (label: string) => void;
+
   countdown: (timer: TimeProps) => void;
 
-  opened: boolean;
-  setOpened: (opened: boolean) => void;
+  playerOpened: boolean;
+  setPlayerOpened: (opened: boolean) => void;
 
   audio: string | null;
   setAudio: (audio: string | null) => void;
@@ -399,6 +406,8 @@ interface IAudioPlayerContext {
   changeMute: () => void;
 
   isPlaying: boolean;
+  repeat?: boolean;
+  setRepeat?: (repeat: boolean) => void;
   play: () => void;
   pause: () => void;
   stop: () => void;

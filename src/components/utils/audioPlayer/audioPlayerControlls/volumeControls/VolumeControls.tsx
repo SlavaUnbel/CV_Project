@@ -1,6 +1,5 @@
-import IconButton from '@material-ui/core/IconButton/IconButton';
 import { VolumeOff, VolumeUp } from '@mui/icons-material';
-import { Tooltip } from '@mui/material';
+import { IconButton, Tooltip } from '@mui/material';
 import React, { FC, useContext } from 'react';
 import { AudioPlayerCtx } from '../../../../../utils/context';
 

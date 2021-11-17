@@ -1,6 +1,7 @@
 import React, { FC, useEffect, useRef } from 'react';
 import WaveSurfer from 'wavesurfer.js';
 import AudioPlayer from '../../components/utils/audioPlayer/AudioPlayer';
+import { isMobile } from '../../utils/constants';
 import { AudioPlayerCtx } from '../../utils/context';
 import {
   useAudioPlayerWaveDuration,
@@ -15,6 +16,9 @@ interface Props {
   audio: string | null;
   list?: string[];
   playing?: boolean;
+  autoPlay?: boolean;
+  repeat?: boolean;
+  setRepeat?: (repeat: boolean) => void;
   setAudio?: (audio: string | null) => void;
   setList?: (list: string[]) => void;
   onPlay?: () => void;
@@ -27,6 +31,8 @@ const AudioPlayerContext: FC<Props> = ({
   list,
   audio,
   playing,
+  repeat,
+  setRepeat,
   setAudio,
   setList,
   onPlay,
@@ -68,6 +74,7 @@ const AudioPlayerContext: FC<Props> = ({
     list,
     audio,
     playing,
+    repeat,
     setAudio,
     setList,
     onPlay,
@@ -81,10 +88,15 @@ const AudioPlayerContext: FC<Props> = ({
   });
 
   useEffect(() => {
+    wavesurfer.current?.on('ready', handlePause);
+    //eslint-disable-next-line
+  }, []);
+
+  useEffect(() => {
     if (wavesurferContainer.current) {
       const instance = WaveSurfer.create({
         container: wavesurferContainer.current,
-        height: 72,
+        height: isMobile ? 48 : 72,
         fillParent: true,
         progressColor: '#fe6f6b',
         waveColor: '#c9ccea',
@@ -101,6 +113,7 @@ const AudioPlayerContext: FC<Props> = ({
       wavesurfer.current = instance;
       return () => instance.destroy();
     }
+    //eslint-disable-next-line
   }, [
     handleChangeCurrentTime,
     handlePause,
@@ -125,6 +138,8 @@ const AudioPlayerContext: FC<Props> = ({
         changeMute,
 
         isPlaying,
+        repeat,
+        setRepeat,
         play,
         pause,
         stop,

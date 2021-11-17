@@ -1,7 +1,3 @@
-/**
- * TODO:
- * - add list audios
- */
 import React, { FC, useContext } from 'react';
 import { AudioPlayerCtx } from '../../../utils/context';
 import './audio-player.scss';
@@ -18,17 +14,6 @@ const AudioPlayer: FC = () => {
       <AudioPlayerWaveDuration />
 
       <AudioPlayerControls />
-
-      {/* <List>
-        {list &&
-          list.map((item, index) => (
-            <ListItem key={index} onClick={() => setAudio && setAudio(item)}>
-              <Typography color={item === audio ? 'primary' : 'secondary'}>
-                {item}
-              </Typography>
-            </ListItem>
-          ))}
-      </List> */}
     </div>
   );
 };
