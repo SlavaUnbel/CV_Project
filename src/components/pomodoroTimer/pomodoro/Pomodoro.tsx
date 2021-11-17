@@ -1,5 +1,7 @@
 import React, { FC, useContext, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import AudioPlayerContainer from '../../../containers/audioPlayer/AudioPlayerContainer';
+import { audioPlayerActions } from '../../../reducers/audioPlayerReducer';
 import { services } from '../../../services/services';
 import { PomodoroTimerCtx } from '../../../utils/context';
 import { SECOND } from '../../../utils/date';
@@ -9,14 +11,9 @@ import PomodoroControls from './pomodoroControls/PomodoroControls';
 import TimerLabel from './timerLabel/TimerLabel';
 
 const Pomodoro: FC = () => {
-  const {
-    playerOpened,
-    countdown,
-    setAudio,
-    setAudioList,
-    pauseTimer,
-    pushError,
-  } = useContext(PomodoroTimerCtx);
+  const { playerOpened, countdown, setAudio, setAudioList, pushError } =
+    useContext(PomodoroTimerCtx);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     services.pomodoroTimerService
@@ -29,7 +26,12 @@ const Pomodoro: FC = () => {
   }, [setAudio, setAudioList, pushError]);
 
   useEffect(() => {
-    window.setTimeout(() => pauseTimer(), SECOND * 1.2);
+    const timeout = window.setTimeout(
+      () => dispatch(audioPlayerActions.isPlaying.pause()),
+      SECOND * 1.2,
+    );
+
+    return () => window.clearTimeout(timeout);
     //eslint-disable-next-line
   }, []);
 
@@ -51,7 +53,7 @@ const Pomodoro: FC = () => {
         <AudioPlayerContainer />
       </div>
 
-      <ToastContainer autoClose={false} limit={1} />
+      <ToastContainer autoClose={false} limit={1} position="bottom-center" />
     </>
   );
 };

@@ -88,11 +88,6 @@ const AudioPlayerContext: FC<Props> = ({
   });
 
   useEffect(() => {
-    wavesurfer.current?.on('ready', handlePause);
-    //eslint-disable-next-line
-  }, []);
-
-  useEffect(() => {
     if (wavesurferContainer.current) {
       const instance = WaveSurfer.create({
         container: wavesurferContainer.current,
