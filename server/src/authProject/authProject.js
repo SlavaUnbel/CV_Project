@@ -1,39 +1,39 @@
-const express = require('express');
+const express = require("express");
 const authRouter = express.Router();
-const bcrypt = require('bcrypt');
+const bcrypt = require("bcrypt");
 const saltRounds = 10;
-const jwt = require('jsonwebtoken');
+const jwt = require("jsonwebtoken");
 
-const db = require('../db/db');
-const verifyJWT = require('./verifyJWT');
+const db = require("../db/db");
+const verifyJWT = require("./verifyJWT");
 
-authRouter.post('/register', (req, res) =>
+authRouter.post("/register", (req, res) =>
   bcrypt.hash(req.body.password, saltRounds, (err, hash) => {
     if (err) {
-      res.send({ message: err, type: 'error' });
+      res.send({ message: err, type: "error" });
     }
 
     db.query(
-      'INSERT INTO users (username, password, role) VALUES (?,?,?)',
+      "INSERT INTO users (username, password, role) VALUES (?,?,?)",
       [req.body.username, hash, req.body.role],
       (err) => {
         if (err) {
-          res.send({ message: err, type: 'error' });
+          res.send({ message: err, type: "error" });
         } else {
-          res.send({ message: 'You have successfully registered!' });
+          res.send({ message: "You have successfully registered!" });
         }
-      },
+      }
     );
-  }),
+  })
 );
 
-authRouter.post('/login', (req, res) =>
+authRouter.post("/login", (req, res) =>
   db.query(
-    'SELECT * FROM users WHERE username = ?',
+    "SELECT * FROM users WHERE username = ?",
     req.body.username,
     (err, result) => {
       if (err) {
-        res.send({ message: err, type: 'error' });
+        res.send({ message: err, type: "error" });
       } else {
         if (result.length > 0) {
           bcrypt.compare(
@@ -42,7 +42,7 @@ authRouter.post('/login', (req, res) =>
             (_error, response) => {
               if (response) {
                 const id = result[0].id;
-                const token = jwt.sign({ id }, 'secretJWT', {
+                const token = jwt.sign({ id }, "secretJWT", {
                   expiresIn: 300,
                 });
 
@@ -57,38 +57,38 @@ authRouter.post('/login', (req, res) =>
               } else {
                 res.send({
                   auth: false,
-                  message: 'Wrong username/password combination!',
-                  type: 'error',
+                  message: "Wrong username/password combination!",
+                  type: "error",
                 });
               }
-            },
+            }
           );
         } else {
           res.send({
             auth: false,
-            message: 'There is no such user in the database!',
-            type: 'error',
+            message: "There is no such user in the database!",
+            type: "error",
           });
         }
       }
-    },
-  ),
+    }
+  )
 );
 
-authRouter.get('/authenticated', verifyJWT, (req, res) => {
-  req.headers['x-access-token'] &&
-    res.send({ message: 'You are authenticated!' });
+authRouter.get("/authenticated", verifyJWT, (req, res) => {
+  req.headers["x-access-token"] &&
+    res.send({ message: "You are authenticated!" });
 });
 
-authRouter.get('/login', (req, res) =>
+authRouter.get("/login", (req, res) =>
   req.session.user
     ? res.send({ loggedIn: true, user: req.session.user })
-    : res.send({ loggedIn: false }),
+    : res.send({ loggedIn: false })
 );
 
-authRouter.post('/logout', (req, res) => {
+authRouter.post("/logout", (req, res) => {
   req.session.destroy();
-  res.clearCookie('userId');
+  res.clearCookie("userId");
   res.sendStatus(res.statusCode);
 });
 
