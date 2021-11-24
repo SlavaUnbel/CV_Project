@@ -55,8 +55,8 @@ interface IWorks {
   imgSrc: string;
 }
 
-type Side = 'left' | 'right';
-type Direction = 'up' | 'down';
+type Side = "left" | "right";
+type Direction = "up" | "down";
 
 interface IFormInput {
   name: string;
@@ -85,7 +85,7 @@ interface IMessage {
   type: MessageType;
 }
 
-type MessageType = 'success' | 'error' | 'warning';
+type MessageType = "success" | "error" | "warning";
 
 interface IExpandingCards {
   id: Id;
@@ -121,7 +121,7 @@ interface IFaqCollapse {
   answer: string;
 }
 
-type AuthProjectUsage = 'login' | 'registration' | 'loggedIn' | undefined;
+type AuthProjectUsage = "login" | "registration" | "loggedIn" | undefined;
 
 interface IIncrementingCounter {
   twitter: IIncrementingCounterItem;
@@ -160,10 +160,10 @@ interface IGithubRepo {
 }
 
 interface IPasswordGenerator {
-  upper: IPasswordGeneratorOption
-  lower: IPasswordGeneratorOption
-  numbers: IPasswordGeneratorOption
-  symbols: IPasswordGeneratorOption
+  upper: IPasswordGeneratorOption;
+  lower: IPasswordGeneratorOption;
+  numbers: IPasswordGeneratorOption;
+  symbols: IPasswordGeneratorOption;
 }
 
 interface IPasswordGeneratorOption {
@@ -187,7 +187,7 @@ interface ITestimonialsSwitcher {
 
 interface ILiveChat {
   room: string;
-  content: ILiveChatMsg
+  content: ILiveChatMsg;
 }
 
 interface ILiveChatMsg {

@@ -1,7 +1,7 @@
-import { Delete, Edit, EditOff } from '@mui/icons-material';
-import React, { FC, useContext } from 'react';
-import { NotesAppCtx } from '../../../../utils/context';
-import { useNotesAppInput } from '../../../../utils/hooks';
+import { Delete, Edit, EditOff } from "@mui/icons-material";
+import React, { FC, useContext } from "react";
+import { NotesAppCtx } from "../../../../utils/context";
+import { useNotesAppInput } from "../../../../utils/hooks";
 
 interface Props {
   item: INotesApp;
@@ -14,8 +14,8 @@ const Note: FC<Props> = ({ item }) => {
 
   return (
     <div className="note">
-      <div className="tools" onClick={() => editNote({ ...item, note: note })}>
-        <button className="edit">
+      <div className="tools">
+        <button className="edit" onClick={() => editNote({ ...item, note })}>
           {item.editing ? (
             <Edit className="icon" />
           ) : (
@@ -23,15 +23,15 @@ const Note: FC<Props> = ({ item }) => {
           )}
         </button>
 
-        <button className="delete" onClick={() => removeNote(item.id)}>
+        <button className="delete" onClick={() => removeNote(item)}>
           <Delete className="icon" />
         </button>
       </div>
 
-      <div className={`main ${item.editing ? 'hidden' : ''}`}>{item.note}</div>
+      <div className={`main ${item.editing ? "hidden" : ""}`}>{note}</div>
 
       <textarea
-        className={`${item.editing ? '' : 'hidden'}`}
+        className={`${item.editing ? "" : "hidden"}`}
         onInput={changeInput}
         value={note}
       />

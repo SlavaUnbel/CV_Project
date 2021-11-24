@@ -3,12 +3,11 @@ const mongoose = require("mongoose");
 const NotesSchema = new mongoose.Schema({
   note: {
     type: String,
-    required: true,
+    default: "",
   },
   editing: {
     type: Boolean,
-    required: true,
-    default: false,
+    default: true,
   },
 });
 
