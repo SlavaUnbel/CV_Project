@@ -7,7 +7,7 @@ import { Socket } from 'socket.io-client';
 import { DefaultEventsMap } from 'socket.io-client/build/typed-events';
 
 import { services } from '../services/services';
-import { days, isMobile, months, movieAppApi, movieAppSearchApi, portfolioAmountPerPage } from './constants';
+import { days, isMobile, months, movieAppApi, movieAppSearchApi } from './constants';
 import { getDateValueWithZeros, SECOND } from './date';
 
 // General Hooks
@@ -125,13 +125,19 @@ export const useITypedLib = () => {
 //Portfolio Hooks
 interface PortfolioProps extends IWithLoading, IWithError, IWithWarning {
   active: number;
-  setData: (portfolioData: IPortfolio[]) => void;
+  itemsPerPage: number;
+  criteria: string;
+  setData: (data: IPortfolio[]) => void;
+  setFilteredData: (data: IPortfolio[]) => void;
   setPagesCount: (pagesCount: number) => void;
 }
 
 export const useFetchPortfolioData = ({
   active,
+  itemsPerPage,
+  criteria,
   setData,
+  setFilteredData,
   setPagesCount,
   setLoading,
   pushError,
@@ -139,51 +145,126 @@ export const useFetchPortfolioData = ({
 }: PortfolioProps) => {
   useEffect(() => {
     if (!setLoading) return;
-    const startIdx = active * portfolioAmountPerPage;
-    const endIdx = startIdx + portfolioAmountPerPage;
+    const startIdx = (active - 1) * itemsPerPage;
+    const endIdx = startIdx + itemsPerPage;
 
     setLoading(true);
 
     services.portfolioService
       .getPortfolioList()
       .then((data) => {
-        setData(data.slice(startIdx, endIdx));
-        setPagesCount(Math.ceil(data.length / portfolioAmountPerPage));
+        setData(data);
+        setFilteredData(
+          criteria === "all"
+            ? data.slice(startIdx, endIdx)
+            : data
+                .filter((item) => item.criteria === criteria)
+                .slice(startIdx, endIdx)
+        );
+        setPagesCount(
+          Math.ceil(
+            (criteria === "all"
+              ? data.length
+              : data.filter((item) => item.criteria === criteria).length) /
+              itemsPerPage
+          )
+        );
         data.length === 0 && pushWarning("No data found");
       })
       .catch((e) => pushError(e))
       .finally(() => setLoading(false));
-  }, [active, setData, setPagesCount, setLoading, pushError, pushWarning]);
+  }, [
+    active,
+    itemsPerPage,
+    criteria,
+    setData,
+    setFilteredData,
+    setPagesCount,
+    setLoading,
+    pushError,
+    pushWarning,
+  ]);
+};
+
+interface PortfolioPaginationProps {
+  active: number;
+  pagesCount: number;
+  itemsPerPage: number;
+  setActivePage: (active: number) => void;
+}
+
+export const usePortfolioPagination = ({
+  active,
+  pagesCount,
+  itemsPerPage,
+  setActivePage,
+}: PortfolioPaginationProps) => {
+  const [disabled, setDisabled] = useState(true);
+
+  const paginationValue = `${active}${
+    active === 1 ? "st" : active === 2 ? "nd" : active === 3 ? "rd" : "th"
+  } ${itemsPerPage === 1 ? "Work" : "Page"}`;
+
+  const inputHandlers = {
+    onFocus: (e: any) => {
+      setDisabled(false);
+      e.currentTarget.value = "";
+    },
+    onInput: (e: any) =>
+      +e.currentTarget.value > pagesCount
+        ? setActivePage(pagesCount)
+        : +e.currentTarget.value < 1 ||
+          isNaN(+e.currentTarget.value) ||
+          e.currentTarget.value === ""
+        ? setActivePage(1)
+        : setActivePage(+e.currentTarget.value),
+    onBlur: (e: any) => {
+      setDisabled(true);
+      e.currentTarget.value = paginationValue;
+    },
+  };
+
+  return { disabled, paginationValue, inputHandlers };
 };
 
 interface PortfolioMediaElementProps {
   hovered: boolean;
   item: IPortfolio;
+  loaded: boolean;
+  setLoaded: (loaded: boolean) => void;
 }
 
 export const useGetMediaElement = ({
   hovered,
   item,
+  loaded,
+  setLoaded,
 }: PortfolioMediaElementProps) => {
   if (!item.imgSrc || !item.videoSrc) return <></>;
 
-  const mediaElement = (() =>
-    hovered ? (
-      <video
-        src={item.videoSrc}
-        autoPlay
-        muted
-        playsInline
-        loop
-        style={{ width: "100%", height: "100%" }}
-      />
-    ) : (
-      <img
-        src={item.imgSrc}
-        alt=""
-        style={{ width: "100%", height: "100%", objectFit: "contain" }}
-      />
-    ))();
+  const mediaElement = (() => (
+    <>
+      {!loaded && (
+        <img
+          src={item.imgSrc}
+          alt=""
+          style={{ width: "100%", height: "100%", objectFit: "contain" }}
+        />
+      )}
+
+      {hovered && (
+        <video
+          onLoadedData={() => setLoaded(true)}
+          src={item.videoSrc}
+          autoPlay
+          muted
+          playsInline
+          loop
+          style={{ width: "100%", height: "100%" }}
+        />
+      )}
+    </>
+  ))();
 
   return mediaElement;
 };

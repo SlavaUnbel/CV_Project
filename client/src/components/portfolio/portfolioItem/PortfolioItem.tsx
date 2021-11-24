@@ -1,5 +1,7 @@
-import React, { FC } from 'react';
+import React, { FC, useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
+
+import { PortfolioCtx } from '../../../utils/context';
 import { useGetMediaElement, useHover } from '../../../utils/hooks';
 
 interface Props {
@@ -7,16 +9,23 @@ interface Props {
 }
 
 const PortfolioItem: FC<Props> = ({ item }) => {
+  const { itemsPerPage } = useContext(PortfolioCtx);
+
+  const [loaded, setLoaded] = useState(false);
+
   const { hovered, setHovered } = useHover();
 
-  const mediaElement = useGetMediaElement({ hovered, item });
+  const mediaElement = useGetMediaElement({ hovered, item, loaded, setLoaded });
 
   return (
-    <div className="item">
+    <div className={`item ${itemsPerPage === 1 ? "scaled" : ""}`}>
       <div
         className="img-wrapper"
         onMouseEnter={() => setHovered(true)}
-        onMouseLeave={() => setHovered(false)}
+        onMouseLeave={() => {
+          setLoaded(false);
+          setHovered(false);
+        }}
       >
         <Link to={item.link}>{mediaElement}</Link>
       </div>

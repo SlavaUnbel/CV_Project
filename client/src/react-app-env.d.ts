@@ -48,6 +48,12 @@ interface IPortfolio {
   videoSrc: string;
   title: string;
   link: string;
+  criteria: string;
+}
+
+interface IPortfolioItem {
+  title: string;
+  criteria: string;
 }
 
 interface IWorks {

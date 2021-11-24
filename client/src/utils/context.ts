@@ -36,11 +36,20 @@ interface IPortfolioContext
   data: IPortfolio[];
   setData: (data: IPortfolio[]) => void;
 
+  filteredData: IPortfolio[];
+  setFilteredData: (data: IPortfolio[]) => void;
+
   active: number;
   setActivePage: (active: number) => void;
 
   pagesCount: number;
   setPagesCount: (pagesCount: number) => void;
+
+  itemsPerPage: number;
+  setItemsPerPage: (count: number) => void;
+
+  criteria: string;
+  setCriteria: (criteria: string) => void;
 
   wrapperStyle: CSSProperties;
 }

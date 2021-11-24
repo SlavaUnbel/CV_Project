@@ -15,11 +15,20 @@ interface Props extends IWithLoading, IWithError, IWithWarning {
   data: IPortfolio[];
   setData: (data: IPortfolio[]) => void;
 
+  filteredData: IPortfolio[];
+  setFilteredData: (data: IPortfolio[]) => void;
+
   active: number;
   setActivePage: (active: number) => void;
 
   pagesCount: number;
   setPagesCount: (pagesCount: number) => void;
+
+  itemsPerPage: number;
+  setItemsPerPage: (count: number) => void;
+
+  criteria: string;
+  setCriteria: (criteria: string) => void;
 }
 
 const PortfolioContext: FC<Props> = ({
@@ -27,11 +36,20 @@ const PortfolioContext: FC<Props> = ({
   setData,
   setLoading,
 
+  filteredData,
+  setFilteredData,
+
   active,
   setActivePage,
 
   pagesCount,
   setPagesCount,
+
+  itemsPerPage,
+  setItemsPerPage,
+
+  criteria,
+  setCriteria,
 
   pushError,
   pushWarning,
@@ -40,7 +58,10 @@ const PortfolioContext: FC<Props> = ({
 
   useFetchPortfolioData({
     active,
+    itemsPerPage,
+    criteria,
     setData,
+    setFilteredData,
     setPagesCount,
     setLoading,
     pushError,
@@ -58,7 +79,7 @@ const PortfolioContext: FC<Props> = ({
     paths.goToWorks
   );
 
-  const wrapperStyle = { height: "80vh" };
+  const wrapperStyle = { height: "70vh" };
 
   return (
     <PortfolioCtx.Provider
@@ -67,11 +88,20 @@ const PortfolioContext: FC<Props> = ({
         setData,
         setLoading,
 
+        filteredData,
+        setFilteredData,
+
         active,
         setActivePage,
 
         pagesCount,
         setPagesCount,
+
+        itemsPerPage,
+        setItemsPerPage,
+
+        criteria,
+        setCriteria,
 
         pushError,
         pushWarning,

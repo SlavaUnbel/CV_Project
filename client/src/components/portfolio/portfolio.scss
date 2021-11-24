@@ -1,4 +1,4 @@
-@import '../../index.scss';
+@import "../../index.scss";
 
 @mixin opacity($opacity) {
   opacity: $opacity;
@@ -7,13 +7,12 @@
 
 .portfolio {
   @include container;
-  @include flex(column nowrap, center);
+  @include flex(column nowrap, center, space-between);
 
   h1 {
     font-size: 3rem;
     overflow: hidden;
-    height: 7.5vh;
-    margin-top: 1rem;
+    margin: 1rem 0;
 
     @include screen-1300px {
       font-size: 2.5rem;
@@ -25,7 +24,6 @@
 
     @include mobile {
       font-size: 1.5rem;
-      height: 5vh;
     }
 
     @include tablet {
@@ -33,80 +31,92 @@
     }
   }
 
-  ul {
+  .options {
     @include flex(row nowrap, center, space-between);
-    margin: 0.5rem;
-    padding: 0;
-    list-style: none;
     overflow: hidden;
-    height: 7.5vh;
+    margin: 0.5rem;
+    padding: 0.5rem;
+    width: 70vw;
+
+    @include screen-1600px {
+      width: 80vw;
+    }
+
+    @include screen-1000px {
+      width: 90vw;
+    }
 
     @include mobile {
-      @include flex(row wrap, center, center);
-      margin: 0.25rem;
-      height: 10vh;
+      width: 100vw;
     }
 
     @include tablet {
-      @include flex(row nowrap, center, space-between);
-      margin: 0.5rem;
-      height: 7.5vh;
+      width: 70vw;
     }
 
-    li {
-      font-size: 1rem;
-      margin: 0 1.5rem;
-      padding: 0.5rem;
-      border-radius: 10px;
-      cursor: pointer;
-      overflow: hidden;
-      transition: all 0.4s ease;
+    button {
+      padding: 0.75rem;
+    }
 
-      @include screen-1000px {
-        font-size: 0.9rem;
-        margin: 0 1rem;
-      }
+    .view {
+      margin: 0 2rem;
+      flex: 2;
 
-      @include mobile {
-        font-size: 0.8rem;
-        padding: 0.4rem;
-        margin: 0 0.75rem;
-      }
+      .btn {
+        @include flex(row nowrap, center, flex-start);
+        background: transparent;
+        border: none;
+        outline: none;
+        width: 7rem;
+        border-radius: 20px;
+        transition: all 0.5s ease;
 
-      @include tablet {
-        font-size: 1rem;
-        margin: 0 1.5rem;
-      }
+        &:hover {
+          background: var(--lightgrey-color);
+        }
 
-      &:hover {
-        background: var(--lightgrey-color);
-        box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
-        transform: scale(1.05);
-      }
-
-      &:active {
-        transform: translate(5px, 5px);
-        box-shadow: none;
-      }
-
-      &.active {
-        background: var(--primary-color);
-        color: var(--white-color);
-        box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
-        transform: scale(1.05);
-
-        &:active {
-          transform: translate(5px, 5px);
-          box-shadow: none;
+        p {
+          flex: 2;
+          text-align: start;
+          font-size: 1rem;
+          margin-left: 0.5rem;
         }
       }
+    }
+
+    .pagination {
+      @include flex(row nowrap, center, center);
+      flex: 5;
+
+      input {
+        font-size: 1rem;
+        border: none;
+        outline: none;
+        width: 7.5rem;
+        text-align: center;
+        border-radius: 20px;
+        padding: 1rem;
+        margin: 0 0.5rem;
+        transition: all 0.5s ease;
+
+        &:focus {
+          background: var(--lightgrey-color);
+        }
+      }
+    }
+
+    .filter {
+      margin: 0 2rem;
+      cursor: pointer;
+      flex: 2;
     }
   }
 
   .container {
     @include flex(row wrap, center, space-evenly);
     width: 70vw;
-    height: 80vh;
+    height: 70vh;
+    overflow: hidden;
 
     @include screen-1600px {
       width: 80vw;
@@ -138,6 +148,19 @@
 
       @include tablet {
         margin: 1rem 1.5rem;
+      }
+
+      &.scaled {
+        transform: scale(2.4);
+
+        .img-wrapper {
+          margin: 0;
+        }
+
+        h3 {
+          @include opacity(1);
+          transform: scale(0.5);
+        }
       }
 
       .img-wrapper {

@@ -256,22 +256,22 @@
             }
 
             &.you {
-              @include flex(row nowrap, center, flex-start);
+              @include flex(row nowrap, center, flex-end);
 
               .message-content {
-                @include flex(row nowrap, center, flex-start);
+                @include flex(row nowrap, center, flex-end);
               }
             }
 
             &.other {
-              @include flex(row nowrap, center, flex-end);
+              @include flex(row nowrap, center, flex-start);
 
               .message-content {
                 background: cornflowerblue;
               }
 
               .message-meta {
-                @include flex(row nowrap, center, flex-end);
+                @include flex(row nowrap, center, flex-start);
               }
             }
 
