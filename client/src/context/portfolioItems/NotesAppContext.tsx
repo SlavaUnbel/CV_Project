@@ -1,10 +1,10 @@
-import React, { FC } from 'react';
-import NotesApp from '../../components/portfolioItems/notesApp/NotesApp';
-import { NotesAppCtx } from '../../utils/context';
+import React, { FC } from "react";
+import NotesApp from "../../components/portfolioItems/notesApp/NotesApp";
+import { NotesAppCtx } from "../../utils/context";
 import {
   useFetchNotesAppDataAndManageNotes,
   useWindowTitle,
-} from '../../utils/hooks';
+} from "../../utils/hooks";
 
 interface Props extends IWithLoading, IWithError {
   notes: INotesApp[];
@@ -18,7 +18,7 @@ const NotesAppContext: FC<Props> = ({
 
   pushError,
 }) => {
-  useWindowTitle('Notes App');
+  useWindowTitle("Notes App");
 
   const { addNote, editNote, removeNote } = useFetchNotesAppDataAndManageNotes({
     setNotes,

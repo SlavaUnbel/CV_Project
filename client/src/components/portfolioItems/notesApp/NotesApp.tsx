@@ -1,11 +1,11 @@
-import { Add } from '@mui/icons-material';
-import React, { FC, useContext } from 'react';
-import { NotesAppCtx } from '../../../utils/context';
-import Button from '../../utils/button/Button';
-import ComponentWrapper from '../../utils/componentWrapper/ComponentWrapper';
-import LoaderWrapper from '../../utils/loaderWrapper/LoaderWrapper';
-import Note from './note/Note';
-import './notes-app.scss';
+import { Add } from "@mui/icons-material";
+import React, { FC, useContext } from "react";
+import { NotesAppCtx } from "../../../utils/context";
+import Button from "../../utils/button/Button";
+import ComponentWrapper from "../../utils/componentWrapper/ComponentWrapper";
+import LoaderWrapper from "../../utils/loaderWrapper/LoaderWrapper";
+import Note from "./note/Note";
+import "./notes-app.scss";
 
 const NotesApp: FC = () => {
   const { notes, addNote } = useContext(NotesAppCtx);
@@ -13,7 +13,7 @@ const NotesApp: FC = () => {
   return (
     <ComponentWrapper>
       <div className="notes-app__container">
-        <LoaderWrapper wrapperStyle={{ height: 'unset' }}>
+        <LoaderWrapper wrapperStyle={{ height: "unset" }}>
           <Button className="add" onClick={addNote}>
             <Add className="icon" /> Add note
           </Button>

@@ -1,55 +1,52 @@
 const express = require("express");
 const todoAppRouter = express.Router();
-
-const db = require("../db/db");
+const TodosModel = require("../models/Todos");
 
 const getTodos = (res) =>
-  db.query("SELECT * FROM todos", (err, result) => {
-    if (err) {
-      res.send({ message: err, type: "error" });
-    } else {
-      res.send(result);
-    }
-  });
+  TodosModel.find({}, (err, result) =>
+    err
+      ? res.send({ message: "Failed to read values from the database" })
+      : res.send(result)
+  );
 
 todoAppRouter.get("/get", (_req, res) => getTodos(res));
 
-todoAppRouter.post("/add", (req, res) =>
-  db.query(
-    "INSERT INTO todos (todo, completed) VALUES (?, ?)",
-    [req.body.todo, false],
-    (err) => {
-      if (err) {
-        res.send({ message: err, type: "error" });
-      } else {
-        getTodos(res);
-      }
-    }
-  )
-);
+todoAppRouter.post("/add", async (req, res) => {
+  const todo = req.body.todo;
+  const todos = new TodosModel({ todo });
 
-todoAppRouter.post("/complete", (req, res) =>
-  db.query(
-    "UPDATE todos SET completed = ? WHERE id = ?",
-    [!req.body.completed, req.body.id],
-    (err) => {
-      if (err) {
-        res.send({ message: err, type: "error" });
-      } else {
-        getTodos(res);
-      }
-    }
-  )
-);
+  try {
+    await todos.save();
+  } catch (error) {
+    res.send({ message: "Failed to add a new todo to the database" });
+  } finally {
+    getTodos(res);
+  }
+});
 
-todoAppRouter.post("/remove", (req, res) =>
-  db.query("DELETE FROM todos WHERE id = ?", [req.body.id], (err) => {
-    if (err) {
-      res.send({ message: err, type: "error" });
-    } else {
-      getTodos(res);
-    }
-  })
-);
+todoAppRouter.post("/complete", async (req, res) => {
+  const id = req.body.id;
+  const completed = !req.body.completed;
+
+  try {
+    await TodosModel.collection.updateOne({ id }, { $set: { completed } });
+  } catch (error) {
+    res.send({ message: "Failed to mark current todo as completed" });
+  } finally {
+    getTodos(res);
+  }
+});
+
+todoAppRouter.post("/remove", async (req, res) => {
+  const id = req.body.id;
+
+  try {
+    await TodosModel.collection.deleteOne({ id });
+  } catch (error) {
+    res.send({ message: "Failed to delete current todo" });
+  } finally {
+    getTodos(res);
+  }
+});
 
 module.exports = todoAppRouter;

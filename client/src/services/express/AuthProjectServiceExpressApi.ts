@@ -1,10 +1,10 @@
-import axios from 'axios';
-import AuthProjectService from '../abstract/AuthProjectService';
+import axios from "axios";
+import AuthProjectService from "../abstract/AuthProjectService";
 
 export class AuthProjectServiceExpressApi extends AuthProjectService {
   public async register(username: string, password: string, role: string) {
     return await axios
-      .post('/authProject/register', {
+      .post("/authProject/register", {
         username,
         password,
         role,
@@ -14,34 +14,35 @@ export class AuthProjectServiceExpressApi extends AuthProjectService {
 
   public async login(username: string, password: string) {
     return await axios
-      .post('/authProject/login', {
+      .post("/authProject/login", {
         username,
         password,
       })
       .then((response) => {
-        localStorage.setItem('jwtToken', response.data.token);
+        localStorage.setItem("jwtToken", response.data.token);
+        console.log(response.data);
         return response.data;
       });
   }
 
   public async checkIfLoggedIn() {
-    return await axios.get('/authProject/login');
+    return await axios.get("/authProject/login");
   }
 
   public async logout() {
-    localStorage.removeItem('jwtToken');
+    localStorage.removeItem("jwtToken");
     return await axios.post(
-      '/authProject/logout',
+      "/authProject/logout",
       {},
-      { withCredentials: true },
+      { withCredentials: true }
     );
   }
 
   public async checkIfAuthenticated() {
     return await axios
-      .get('/authProject/authenticated', {
+      .get("/authProject/authenticated", {
         headers: {
-          'X-Access-Token': localStorage.getItem('jwtToken'),
+          "X-Access-Token": localStorage.getItem("jwtToken"),
         },
       })
       .then((response) => response.data);

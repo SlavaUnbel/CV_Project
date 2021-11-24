@@ -1,6 +1,6 @@
-import emailjs from 'emailjs-com';
-import { IEmojiData } from 'emoji-picker-react';
-import { init } from 'ityped';
+import emailjs from "emailjs-com";
+import { IEmojiData } from "emoji-picker-react";
+import { init } from "ityped";
 import React, {
   ChangeEvent,
   FormEvent,
@@ -10,11 +10,11 @@ import React, {
   useEffect,
   useRef,
   useState,
-} from 'react';
-import { useHistory } from 'react-router-dom';
-import { Socket } from 'socket.io-client';
-import { DefaultEventsMap } from 'socket.io-client/build/typed-events';
-import { services } from '../services/services';
+} from "react";
+import { useHistory } from "react-router-dom";
+import { Socket } from "socket.io-client";
+import { DefaultEventsMap } from "socket.io-client/build/typed-events";
+import { services } from "../services/services";
 import {
   days,
   isMobile,
@@ -22,13 +22,13 @@ import {
   movieAppApi,
   movieAppSearchApi,
   portfolioAmountPerPage,
-} from './constants';
-import { getDateValueWithZeros, SECOND } from './date';
+} from "./constants";
+import { getDateValueWithZeros, SECOND } from "./date";
 
 // General Hooks
 export const useWindowTitle = (title?: string) => {
   useEffect(() => {
-    document.title = title ? title : 'Homepage';
+    document.title = title ? title : "Homepage";
   }, [title]);
 };
 
@@ -60,12 +60,12 @@ export const delay = (delay: number) =>
 //Menu Hooks
 export const useMenuRouter = (
   title: string,
-  openCloseMenu: (menuOpen: boolean) => void,
+  openCloseMenu: (menuOpen: boolean) => void
 ) => {
   const history = useHistory();
 
   const redirect = () => {
-    history.push(title !== 'Home' ? title.toLowerCase() : '');
+    history.push(title !== "Home" ? title.toLowerCase() : "");
     openCloseMenu(false);
   };
 
@@ -82,9 +82,9 @@ export const useITypedLib = () => {
         showCursor: true,
         backDelay: SECOND * 2,
         strings: [
-          'Front-End Developer',
-          'React SPA Creator',
-          'Inspired Programmer',
+          "Front-End Developer",
+          "React SPA Creator",
+          "Inspired Programmer",
         ],
       });
     //eslint-disable-next-line
@@ -120,7 +120,7 @@ export const useFetchPortfolioData = ({
       .then((data) => {
         setData(data.slice(startIdx, endIdx));
         setPagesCount(Math.ceil(data.length / portfolioAmountPerPage));
-        data.length === 0 && pushWarning('No data found');
+        data.length === 0 && pushWarning("No data found");
       })
       .catch((e) => pushError(e))
       .finally(() => setLoading(false));
@@ -146,13 +146,13 @@ export const useGetMediaElement = ({
         muted
         playsInline
         loop
-        style={{ width: '100%', height: '100%' }}
+        style={{ width: "100%", height: "100%" }}
       />
     ) : (
       <img
         src={item.imgSrc}
         alt=""
-        style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+        style={{ width: "100%", height: "100%", objectFit: "contain" }}
       />
     ))();
 
@@ -178,7 +178,7 @@ export const useFetchWorksData = ({
       .getWorksData()
       .then((data) => {
         setData(data);
-        data.length === 0 && pushWarning('No data found');
+        data.length === 0 && pushWarning("No data found");
       })
       .catch((e) => pushError(e))
       .finally(() => setLoading(false));
@@ -200,26 +200,26 @@ export const useContactInputFields = ({
   setSubjectMessage,
 }: ContactInputFieldsProps) => {
   //every input options
-  const names = ['Name', 'Email', 'Subject'];
+  const names = ["Name", "Email", "Subject"];
   const patterns = [
-    '[A-Za-z]{3,}',
-    '[A-Za-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$',
-    '.{1,}',
+    "[A-Za-z]{3,}",
+    "[A-Za-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$",
+    ".{1,}",
   ];
   const [namePattern, emailPattern, subjectPattern] = patterns.map(
-    (pattern) => new RegExp(pattern),
+    (pattern) => new RegExp(pattern)
   );
   const { nameMessage, emailMessage, subjectMessage } = messages;
 
   //functions to change inputs' states
-  const getSuccess = (): IMessage => ({ message: null, type: 'success' });
+  const getSuccess = (): IMessage => ({ message: null, type: "success" });
   const getError = (message: string | null): IMessage => ({
     message,
-    type: 'error',
+    type: "error",
   });
   const getWarning = (message: string | null): IMessage => ({
     message,
-    type: 'warning',
+    type: "warning",
   });
   const setName = (nameMessage: IMessage) =>
     setNameMessage(messages, nameMessage);
@@ -232,23 +232,23 @@ export const useContactInputFields = ({
   const onNameChange = (e: ChangeEvent<HTMLInputElement>) =>
     namePattern.test(e.currentTarget.value)
       ? setName(getSuccess())
-      : e.currentTarget.value === ''
+      : e.currentTarget.value === ""
       ? setName(getError('Please, fill in the "Name" field'))
       : setName(
           getWarning(
-            'Please, provide 3 or more letter characters to "Name" field',
-          ),
+            'Please, provide 3 or more letter characters to "Name" field'
+          )
         );
 
   const onEmailChange = (e: ChangeEvent<HTMLInputElement>) =>
     emailPattern.test(e.currentTarget.value)
       ? setEmail(getSuccess())
-      : e.currentTarget.value === ''
+      : e.currentTarget.value === ""
       ? setEmail(getError('Please, fill in the "Email" field'))
       : setEmail(
           getWarning(
-            'Please, provide the "Email" field with value as shown below: \n smth@domain.com',
-          ),
+            'Please, provide the "Email" field with value as shown below: \n smth@domain.com'
+          )
         );
 
   const onSubjectChange = (e: ChangeEvent<HTMLInputElement>) =>
@@ -263,25 +263,25 @@ export const useContactInputFields = ({
     {
       name: names[0],
       pattern: patterns[0],
-      valid: nameMessage.type === 'success',
-      invalid: nameMessage.type === 'error',
-      incorrect: nameMessage.type === 'warning',
+      valid: nameMessage.type === "success",
+      invalid: nameMessage.type === "error",
+      incorrect: nameMessage.type === "warning",
       onChange: changeHandlers[0],
     },
     {
       name: names[1],
       pattern: patterns[1],
-      valid: emailMessage.type === 'success',
-      invalid: emailMessage.type === 'error',
-      incorrect: emailMessage.type === 'warning',
+      valid: emailMessage.type === "success",
+      invalid: emailMessage.type === "error",
+      incorrect: emailMessage.type === "warning",
       onChange: changeHandlers[1],
     },
     {
       name: names[2],
       pattern: patterns[2],
-      valid: subjectMessage.type === 'success',
-      invalid: subjectMessage.type === 'error',
-      incorrect: subjectMessage.type === 'warning',
+      valid: subjectMessage.type === "success",
+      invalid: subjectMessage.type === "error",
+      incorrect: subjectMessage.type === "warning",
       onChange: changeHandlers[2],
     },
   ];
@@ -301,14 +301,14 @@ export const useContactPageValidation = ({
   pushWarning,
 }: ContactValidationProps) => {
   const validate = () =>
-    Object.values(messages).every((msg) => msg.type === 'success')
+    Object.values(messages).every((msg) => msg.type === "success")
       ? setValidated(true)
       : Object.values(messages)
-          .filter((msg) => msg.type !== 'success')
+          .filter((msg) => msg.type !== "success")
           .map((msg) =>
-            msg.type === 'error'
+            msg.type === "error"
               ? pushError(msg.message)
-              : pushWarning(msg.message),
+              : pushWarning(msg.message)
           );
 
   return validate;
@@ -333,12 +333,12 @@ export const useSendEmail = ({
     if (validated) {
       emailjs
         .sendForm(
-          'gmail',
-          'gmail_template',
+          "gmail",
+          "gmail_template",
           e.target,
-          'user_sKeSExZkAa6453YNTtvdY',
+          "user_sKeSExZkAa6453YNTtvdY"
         )
-        .then(() => pushSuccess('Your message was successfully sent'))
+        .then(() => pushSuccess("Your message was successfully sent"))
         .catch((e) => pushError(e))
         .finally(() => {
           setValidated(false);
@@ -371,7 +371,7 @@ export const useFetchExpandingCardsData = ({
       .getExpandingCardsData()
       .then((data) => {
         setData(data);
-        data.length === 0 && pushWarning('No data found');
+        data.length === 0 && pushWarning("No data found");
       })
       .catch((e) => pushError(e))
       .finally(() => setLoading(false));
@@ -383,13 +383,13 @@ export const useExpandingCardRef = () => {
 
   const handleClick = () => {
     removeActiveClasses();
-    ref.current?.classList.add('active');
+    ref.current?.classList.add("active");
   };
 
   const removeActiveClasses = () => {
     const siblings = ref.current?.parentNode
       ?.childNodes as NodeListOf<HTMLDivElement>;
-    siblings.forEach((node) => node.classList.remove('active'));
+    siblings.forEach((node) => node.classList.remove("active"));
   };
 
   return { ref, handleClick };
@@ -417,7 +417,7 @@ export const useFetchRotatingNavigationData = ({
       .getRotatingNavigationData()
       .then((data) => {
         setData(data);
-        !data && pushWarning('No data found');
+        !data && pushWarning("No data found");
       })
       .catch((e) => pushError(e))
       .finally(() => setLoading(false));
@@ -428,13 +428,13 @@ export const useNavigationAnimation = () => {
   const ref: LegacyRef<HTMLDivElement> = useRef(null);
 
   const open = () => {
-    ref.current?.classList.add('show-nav');
-    ref.current?.parentElement?.children[0].classList.add('rotate');
+    ref.current?.classList.add("show-nav");
+    ref.current?.parentElement?.children[0].classList.add("rotate");
   };
 
   const close = () => {
-    ref.current?.classList.remove('show-nav');
-    ref.current?.parentElement?.children[0].classList.remove('rotate');
+    ref.current?.classList.remove("show-nav");
+    ref.current?.parentElement?.children[0].classList.remove("rotate");
   };
 
   return { ref, open, close };
@@ -450,10 +450,10 @@ export const useScrollingAnimation = () => {
     () =>
       boxes?.forEach((box) =>
         box.getBoundingClientRect().top < (window.innerHeight / 5) * 4
-          ? box.classList.add('show')
-          : box.classList.remove('show'),
+          ? box.classList.add("show")
+          : box.classList.remove("show")
       ),
-    [boxes],
+    [boxes]
   );
 
   useEffect(() => {
@@ -463,8 +463,8 @@ export const useScrollingAnimation = () => {
   }, [ref, showBoxesFunction]);
 
   useEffect(
-    () => wrapper?.addEventListener('scroll', showBoxesFunction),
-    [wrapper, showBoxesFunction],
+    () => wrapper?.addEventListener("scroll", showBoxesFunction),
+    [wrapper, showBoxesFunction]
   );
 
   return ref;
@@ -489,7 +489,7 @@ export const useFetchSplitLandingPageData = ({
       .getSplitLandingPageData()
       .then((data) => {
         setData(data);
-        !data && pushWarning('No data found');
+        !data && pushWarning("No data found");
       })
       .catch((e) => pushError(e))
       .finally(() => setLoading(false));
@@ -501,22 +501,22 @@ export const useSplitLandingPageHoverEffect = (data: ISplitLandingPage[]) => {
 
   const enterLeft = () => {
     if (!ref.current) return;
-    ref.current.classList.add('hover-left');
+    ref.current.classList.add("hover-left");
   };
 
   const enterRight = () => {
     if (!ref.current) return;
-    ref.current.classList.add('hover-right');
+    ref.current.classList.add("hover-right");
   };
 
   const leaveLeft = () => {
     if (!ref.current) return;
-    ref.current.classList.remove('hover-left');
+    ref.current.classList.remove("hover-left");
   };
 
   const leaveRight = () => {
     if (!ref.current) return;
-    ref.current.classList.remove('hover-right');
+    ref.current.classList.remove("hover-right");
   };
 
   const leaveBoth = () => {
@@ -534,12 +534,12 @@ export const useFormWaveAnimationEffect = () => {
   useEffect(() => {
     if (labelRef.current && labelRef.current.innerText)
       labelRef.current.innerHTML = labelRef.current.innerText
-        .split('')
+        .split("")
         .map(
           (letter, idx) =>
-            `<span style='transition-delay: ${idx * 50}ms'>${letter}</span>`,
+            `<span style='transition-delay: ${idx * 50}ms'>${letter}</span>`
         )
-        .join('');
+        .join("");
   }, [labelRef]);
 
   return labelRef;
@@ -597,7 +597,7 @@ export const useFetchFaqCollapseData = ({
       .getFaqCollapseData()
       .then((data) => {
         setData(data);
-        !data && pushWarning('No data found');
+        !data && pushWarning("No data found");
       })
       .catch((e) => pushError(e))
       .finally(() => setLoading(false));
@@ -609,11 +609,11 @@ interface AuthProjectInputFieldsProps {
   messages: IAuthProjectMessages;
   setEmailMessage: (
     messages: IAuthProjectMessages,
-    emailMessage: IMessage,
+    emailMessage: IMessage
   ) => void;
   setPasswordMessage: (
     messages: IAuthProjectMessages,
-    passwordMessage: IMessage,
+    passwordMessage: IMessage
   ) => void;
 
   username: string;
@@ -635,22 +635,22 @@ export const useAuthProjectInputFields = ({
   setPassword,
 }: AuthProjectInputFieldsProps) => {
   //every input options
-  const labels = ['Username', 'Password'];
-  const patterns = ['.{4,}', '.{4,}'];
+  const labels = ["Username", "Password"];
+  const patterns = [".{4,}", ".{4,}"];
   const [emailPattern, passwordPattern] = patterns.map(
-    (pattern) => new RegExp(pattern),
+    (pattern) => new RegExp(pattern)
   );
   const { emailMessage, passwordMessage } = messages;
 
   //functions to change inputs' states
-  const getSuccess = (): IMessage => ({ message: null, type: 'success' });
+  const getSuccess = (): IMessage => ({ message: null, type: "success" });
   const getError = (message: string | null): IMessage => ({
     message,
-    type: 'error',
+    type: "error",
   });
   const getWarning = (message: string | null): IMessage => ({
     message,
-    type: 'warning',
+    type: "warning",
   });
   const setEmailMsg = (emailMessage: IMessage) =>
     setEmailMessage(messages, emailMessage);
@@ -663,12 +663,12 @@ export const useAuthProjectInputFields = ({
 
     emailPattern.test(e.currentTarget.value)
       ? setEmailMsg(getSuccess())
-      : e.currentTarget.value === ''
+      : e.currentTarget.value === ""
       ? setEmailMsg(getError('Please, fill in the "Username" field'))
       : setEmailMsg(
           getWarning(
-            'Please, provide the "Username" field with at least 4 symbols',
-          ),
+            'Please, provide the "Username" field with at least 4 symbols'
+          )
         );
   };
 
@@ -677,12 +677,12 @@ export const useAuthProjectInputFields = ({
 
     passwordPattern.test(e.currentTarget.value)
       ? setPasswordMsg(getSuccess())
-      : e.currentTarget.value === ''
+      : e.currentTarget.value === ""
       ? setPasswordMsg(getError('Please, fill in the "Email" field'))
       : setPasswordMsg(
           getWarning(
-            'Please, provide at least 4 symbols to the "Password" field',
-          ),
+            'Please, provide at least 4 symbols to the "Password" field'
+          )
         );
   };
 
@@ -692,20 +692,20 @@ export const useAuthProjectInputFields = ({
   const inputFields: IFormInput[] = [
     {
       name: labels[0],
-      valid: emailMessage.type === 'success',
-      invalid: emailMessage.type === 'error',
-      incorrect: emailMessage.type === 'warning',
+      valid: emailMessage.type === "success",
+      invalid: emailMessage.type === "error",
+      incorrect: emailMessage.type === "warning",
       value: username,
-      type: 'text',
+      type: "text",
       onChange: changeHandlers[0],
     },
     {
       name: labels[1],
-      valid: passwordMessage.type === 'success',
-      invalid: passwordMessage.type === 'error',
-      incorrect: passwordMessage.type === 'warning',
+      valid: passwordMessage.type === "success",
+      invalid: passwordMessage.type === "error",
+      incorrect: passwordMessage.type === "warning",
       value: password,
-      type: 'password',
+      type: "password",
       onChange: changeHandlers[1],
     },
   ];
@@ -725,14 +725,14 @@ export const useAuthProjectPageValidation = ({
   pushWarning,
 }: AuthProjectValidationProps) => {
   const validate = () =>
-    Object.values(messages).every((msg) => msg.type === 'success')
+    Object.values(messages).every((msg) => msg.type === "success")
       ? setValidated(true)
       : Object.values(messages)
-          .filter((msg) => msg.type !== 'success')
+          .filter((msg) => msg.type !== "success")
           .map((msg) =>
-            msg.type === 'error'
+            msg.type === "error"
               ? pushError(msg.message)
-              : pushWarning(msg.message),
+              : pushWarning(msg.message)
           );
 
   return validate;
@@ -769,7 +769,7 @@ export const useAuthProjectSubmit = ({
   const [userExists, setUserExists] = useState(false);
 
   const message = (response: any) =>
-    response.type === 'error'
+    response.type === "error"
       ? pushError(response.message)
       : pushSuccess(response.message);
 
@@ -783,7 +783,7 @@ export const useAuthProjectSubmit = ({
         .catch((err) => pushError(err))
         .finally(() => {
           reset();
-          setUsage('login');
+          setUsage("login");
         });
   };
 
@@ -797,14 +797,14 @@ export const useAuthProjectSubmit = ({
           message(response);
           if (response.auth) {
             setUserExists(true);
-            setCurrentUserInfo('Refresh the page to proceed');
+            setCurrentUserInfo("Refresh the page to proceed");
           }
         })
         .catch((err) => pushError(err))
         .finally(() => {
           if (userExists) {
             reset();
-            setUsage('loggedIn');
+            setUsage("loggedIn");
           }
         });
   };
@@ -815,12 +815,12 @@ export const useAuthProjectSubmit = ({
       .then((response) => {
         if (response.status === 200) {
           setUserExists(false);
-          setCurrentUserInfo('Refresh the page to proceed');
-          pushSuccess('Your session has been finished!');
+          setCurrentUserInfo("Refresh the page to proceed");
+          pushSuccess("Your session has been finished!");
         }
       })
       .catch((err) => pushError(err))
-      .finally(() => !userExists && setUsage('login'));
+      .finally(() => !userExists && setUsage("login"));
 
   const checkAuth = () =>
     services.authProjectService
@@ -833,18 +833,18 @@ export const useAuthProjectSubmit = ({
       if (response.data.loggedIn) {
         setCurrentUserInfo(
           `You are now logged in as "${response.data.user[0].username}"`,
-          `User role: ${response.data.user[0].role}`,
+          `User role: ${response.data.user[0].role}`
         );
-        setUsage('loggedIn');
+        setUsage("loggedIn");
       } else {
-        setCurrentUserInfo('No user data is provided');
-        setUsage('login');
+        setCurrentUserInfo("No user data is provided");
+        setUsage("login");
       }
     });
   }, [setCurrentUserInfo, setUsage]);
 
   const submit =
-    usage === 'registration' ? register : usage === 'login' ? login : undefined;
+    usage === "registration" ? register : usage === "login" ? login : undefined;
 
   return { submit, logout, checkAuth };
 };
@@ -857,23 +857,23 @@ export const useChooseRandomTag = () => {
   const handleKeyUp = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     createChoices(e.currentTarget.value);
 
-    if (e.key === 'Enter') {
-      e.currentTarget.value = '';
+    if (e.key === "Enter") {
+      e.currentTarget.value = "";
       chooseRandomTag();
     }
   };
 
   const createChoices = (input: string) => {
     const tags = input
-      .split(',')
-      .filter((tag) => tag.trim() !== '')
+      .split(",")
+      .filter((tag) => tag.trim() !== "")
       .map((tag) => tag.trim());
 
-    if (tagsRef.current) tagsRef.current.innerHTML = '';
+    if (tagsRef.current) tagsRef.current.innerHTML = "";
 
     tags.forEach((tag) => {
-      const tagEl = document.createElement('span');
-      tagEl.classList.add('tag');
+      const tagEl = document.createElement("span");
+      tagEl.classList.add("tag");
       tagEl.innerText = tag;
       tagsRef.current?.appendChild(tagEl);
     });
@@ -913,21 +913,21 @@ export const useChooseRandomTag = () => {
   };
 
   const highlightTag = (tag?: HTMLSpanElement) =>
-    tag?.classList.add('highlight');
+    tag?.classList.add("highlight");
 
   const unHighlightTag = (tag?: HTMLSpanElement) =>
-    tag?.classList.remove('highlight');
+    tag?.classList.remove("highlight");
 
   return { tagsRef, areaRef, handleKeyUp, chooseRandomTag };
 };
 
 export const useRandomChoicePickerOnMobile = (
   ref: RefObject<HTMLTextAreaElement>,
-  callback: () => void,
+  callback: () => void
 ) => {
   return () => {
     if (!ref.current) return;
-    ref.current.value = '';
+    ref.current.value = "";
     callback();
   };
 };
@@ -954,7 +954,7 @@ export const useFetchAnimatedNavigationData = ({
       .getAnimatedNavigationData()
       .then((data) => {
         setData(data);
-        !data && pushWarning('No data found');
+        !data && pushWarning("No data found");
       })
       .catch((e) => pushError(e))
       .finally(() => setLoading(false));
@@ -967,11 +967,11 @@ export const useIncrementingCounter = () => {
 
   useEffect(() => {
     if (ref.current) {
-      ref.current.innerText = '0';
+      ref.current.innerText = "0";
 
       const updateCounter = () => {
         //@ts-ignore
-        const target = +ref.current.getAttribute('data-target');
+        const target = +ref.current.getAttribute("data-target");
         //@ts-ignore
         const c = +ref.current.innerText;
 
@@ -1014,12 +1014,12 @@ export const useMovieAppApi = ({
         .getMovieAppDataFromApi(url)
         .then((data) => {
           setMovies(data.results);
-          data.results.length === 0 && pushWarning('No data found!');
+          data.results.length === 0 && pushWarning("No data found!");
         })
         .catch((e) => pushError(e))
         .finally(() => setLoading(false));
     },
-    [setMovies, setLoading, pushError, pushWarning],
+    [setMovies, setLoading, pushError, pushWarning]
   );
 
   useEffect(() => getData(movieAppApi), [getData]);
@@ -1036,10 +1036,10 @@ export const useMovieAppSearch = (getData: (url: string) => void) => {
     if (searchRef.current) {
       const searchTerm = searchRef.current.value;
 
-      if (searchTerm !== '') {
+      if (searchTerm !== "") {
         getData(`${movieAppSearchApi}${searchTerm}`);
 
-        searchRef.current.value = '';
+        searchRef.current.value = "";
       } else {
         window.location.reload();
       }
@@ -1065,16 +1065,16 @@ export const useEstimateRemainedWater = () => {
     if (!cups) return;
 
     if (
-      cups[idx].classList.contains('filled') &&
-      !cups[idx].nextElementSibling?.classList.contains('filled')
+      cups[idx].classList.contains("filled") &&
+      !cups[idx].nextElementSibling?.classList.contains("filled")
     ) {
       idx--;
     }
 
     cups.forEach((cup, cupId) =>
       cupId <= idx
-        ? cup.classList.add('filled')
-        : cup.classList.remove('filled'),
+        ? cup.classList.add("filled")
+        : cup.classList.remove("filled")
     );
 
     fillBigCup();
@@ -1091,11 +1091,11 @@ export const useEstimateRemainedWater = () => {
 
     const filledCups: HTMLDivElement[] = [];
     cups?.forEach(
-      (cup) => cup.classList.contains('filled') && filledCups.push(cup),
+      (cup) => cup.classList.contains("filled") && filledCups.push(cup)
     );
 
     if (filledCups.length === 0) {
-      percentageRef.current.style.height = '0';
+      percentageRef.current.style.height = "0";
     } else {
       percentageRef.current.style.height = `${
         (filledCups.length / cups.length) * (isMobile ? 16 : 24)
@@ -1106,11 +1106,11 @@ export const useEstimateRemainedWater = () => {
     }
 
     if (filledCups.length === cups.length) {
-      remainedRef.current.style.height = '0';
+      remainedRef.current.style.height = "0";
     } else if (cups.length - filledCups.length === 1 && isMobile) {
-      remainedRef.current.style.flexFlow = 'row wrap';
+      remainedRef.current.style.flexFlow = "row wrap";
     } else {
-      remainedRef.current.style.flexFlow = 'column nowrap';
+      remainedRef.current.style.flexFlow = "column nowrap";
     }
 
     litersRef.current.innerText = `${2 - (250 * filledCups.length) / 1000}L`;
@@ -1132,7 +1132,7 @@ export const useSetTimeAndDate = () => {
     inMin: number,
     inMax: number,
     outMin: number,
-    outMax: number,
+    outMax: number
   ) => ((num - inMin) * (outMax - outMin)) / (inMax - inMin) + outMin;
 
   const changeTimeValue = useCallback(
@@ -1145,10 +1145,10 @@ export const useSetTimeAndDate = () => {
         start,
         end,
         0,
-        360,
+        360
       )}deg)`;
     },
-    [],
+    []
   );
 
   const setTime = useCallback(() => {
@@ -1167,7 +1167,7 @@ export const useSetTimeAndDate = () => {
     changeTimeValue(secondRef, seconds, [0, 59]);
 
     timeRef.current.innerHTML = `${getDateValueWithZeros(
-      hours,
+      hours
     )}:${getDateValueWithZeros(minutes)}`;
     dateRef.current.innerHTML = `${days[day]}, ${months[month]} <span class="circle">${date}</span>`;
   }, [changeTimeValue]);
@@ -1205,9 +1205,9 @@ export const useFetchGithubProfilesUserData = ({
     services.portfolioItemsService
       .getGithubProfilesUserDataFromApi(user)
       .then((res) => {
-        if (res.message === 'Not Found') {
+        if (res.message === "Not Found") {
           setNoUserFound(true);
-          pushWarning('No user found!');
+          pushWarning("No user found!");
         } else {
           setGithubProfilesData(res);
         }
@@ -1221,9 +1221,9 @@ export const useFetchGithubProfilesUserData = ({
     services.portfolioItemsService
       .getGithubProfilesReposDataFromApi(user)
       .then((res) =>
-        res.message === 'Not Found'
-          ? pushWarning('No repositories found!')
-          : setGithubProfilesReposData(res),
+        res.message === "Not Found"
+          ? pushWarning("No repositories found!")
+          : setGithubProfilesReposData(res)
       )
       .catch((e) => pushError(e))
       .finally(() => setLoading(false));
@@ -1237,7 +1237,7 @@ export const useFetchGithubProfilesUserData = ({
         ? getUserAndRepos(searchRef.current.value)
         : pushWarning("Type a user's name!");
 
-      searchRef.current.value = '';
+      searchRef.current.value = "";
     }
 
     noUserFound && setNoUserFound(false);
@@ -1274,7 +1274,7 @@ export const useGeneratePassword = ({
   const getRandomNumber = () =>
     String.fromCharCode(Math.floor(Math.random() * 10) + 48);
   const getRandomSymbol = () => {
-    const symbols = '!@#$%^&*()_{}[]=+<>/|,.?';
+    const symbols = "!@#$%^&*()_{}[]=+<>/|,.?";
     return symbols[Math.floor(Math.random() * symbols.length)];
   };
   const generationFuncs: any = {
@@ -1307,10 +1307,10 @@ export const useGeneratePassword = ({
       hasLower,
       hasNumber,
       hasSymbol,
-      length,
+      length
     );
 
-    setPasswordVal('');
+    setPasswordVal("");
   };
 
   const generatePassword = (
@@ -1318,23 +1318,23 @@ export const useGeneratePassword = ({
     lower: number,
     number: number,
     symbol: number,
-    length: number,
+    length: number
   ) => {
-    let password = '';
+    let password = "";
     const typesCount = upper + lower + number + symbol;
     const typesArr = [{ upper }, { lower }, { number }, { symbol }].filter(
-      (type) => Object.values(type)[0],
+      (type) => Object.values(type)[0]
     );
 
     if (typesCount === 0 || length === 0) {
-      pushWarning('Please, provide password length and at least one parameter');
-      return '';
+      pushWarning("Please, provide password length and at least one parameter");
+      return "";
     }
 
     for (let i = 0; i < length; i += typesCount) {
       typesArr.forEach(
         //eslint-disable-next-line
-        (type) => (password += generationFuncs[Object.keys(type)[0]]()),
+        (type) => (password += generationFuncs[Object.keys(type)[0]]())
       );
     }
 
@@ -1351,10 +1351,10 @@ export const useGeneratePassword = ({
         (text) =>
           resultRef.current &&
           resultRef.current.innerText === text &&
-          setPasswordVal(text),
+          setPasswordVal(text)
       )
       .catch((e) => pushError(e))
-      .finally(() => pushSuccess('The password is copied into the clipboard!'));
+      .finally(() => pushSuccess("The password is copied into the clipboard!"));
   };
 
   const decrease = () => {
@@ -1373,7 +1373,7 @@ export const useGeneratePassword = ({
     }
   };
 
-  useEffect(() => () => setPasswordVal(''), [setPasswordVal]);
+  useEffect(() => () => setPasswordVal(""), [setPasswordVal]);
 
   return {
     lengthRef,
@@ -1401,7 +1401,7 @@ export const useFetchNotesAppDataAndManageNotes = ({
 }: NotesAppProps) => {
   const request = useCallback(
     (req: Promise<any>) => req.then(setNotes).catch((e) => pushError(e)),
-    [setNotes, pushError],
+    [setNotes, pushError]
   );
 
   useEffect(() => {
@@ -1409,7 +1409,7 @@ export const useFetchNotesAppDataAndManageNotes = ({
     setLoading(true);
 
     request(services.notesAppService.getNotes()).finally(() =>
-      setLoading(false),
+      setLoading(false)
     );
   }, [request, setNotes, setLoading, pushError]);
 
@@ -1418,8 +1418,8 @@ export const useFetchNotesAppDataAndManageNotes = ({
   const editNote = (note: INotesApp) =>
     request(services.notesAppService.editNote(note));
 
-  const removeNote = (id: number) =>
-    request(services.notesAppService.removeNote(id));
+  const removeNote = (note: INotesApp) =>
+    request(services.notesAppService.removeNote(note));
 
   return { addNote, editNote, removeNote };
 };
@@ -1447,26 +1447,26 @@ export const useHoverboard = () => {
   }, []);
 
   const removeColor = useCallback((square: HTMLDivElement) => {
-    square.style.background = '#1d1d1d';
+    square.style.background = "#1d1d1d";
     square.style.boxShadow = `0 0 2px #000`;
   }, []);
 
   const getRandomColor = () =>
     `rgb(${Math.floor(Math.random() * 255) + 1}, ${Math.floor(
-      Math.random() * 255 + 1,
+      Math.random() * 255 + 1
     )}, ${Math.floor(Math.random() * 255) + 1})`;
 
   useEffect(() => {
     Array.from({ length: isMobile ? 20 : 500 }).forEach((_) => {
-      const square = document.createElement('div');
-      square.classList.add('square');
+      const square = document.createElement("div");
+      square.classList.add("square");
 
-      square.addEventListener('mouseover', () => setColor(square));
-      square.addEventListener('mouseout', () => removeColor(square));
+      square.addEventListener("mouseover", () => setColor(square));
+      square.addEventListener("mouseout", () => removeColor(square));
 
       if (isMobile) {
-        square.addEventListener('touchstart', () => setColor(square));
-        square.addEventListener('touchend', () => removeColor(square));
+        square.addEventListener("touchstart", () => setColor(square));
+        square.addEventListener("touchend", () => removeColor(square));
       }
 
       wrapperRef.current?.appendChild(square);
@@ -1499,12 +1499,12 @@ export const useFetchTestimonialsSwitcherData = ({
         .getTestimonialsSwitcherDataById(id)
         .then((data) => {
           setData(data);
-          !data && pushWarning('No data found');
+          !data && pushWarning("No data found");
         })
         .catch((e) => pushError(e))
         .finally(() => setLoading(false));
     },
-    [setData, setLoading, pushError, pushWarning],
+    [setData, setLoading, pushError, pushWarning]
   );
 
   useEffect(() => {
@@ -1548,9 +1548,9 @@ export const useRoomManage = ({
   setRoomList,
 }: LiveChatRoomManageProps) => {
   const joinRoom = useCallback(() => {
-    if (username !== '' && room !== '') {
-      socket.emit('join_room', room, username);
-      socket.emit('choose_room', room);
+    if (username !== "" && room !== "") {
+      socket.emit("join_room", room, username);
+      socket.emit("choose_room", room);
       if (!roomList.includes(room)) {
         setRoomList([...roomList, room]);
       }
@@ -1559,28 +1559,28 @@ export const useRoomManage = ({
   }, [socket, username, room, roomList, setChatShown, setRoomList]);
 
   const leaveRoom = useCallback(() => {
-    socket.emit('leave_room', room, username);
+    socket.emit("leave_room", room, username);
     setChatShown(false);
   }, [socket, username, room, setChatShown]);
 
   useEffect(() => {
-    socket.on('room_chosen', (room) => {
+    socket.on("room_chosen", (room) => {
       !roomList.includes(room) && setRoomList([...roomList, room]);
     });
   });
 
   const keysEventHandler = useCallback(
     (e: KeyboardEvent) => {
-      e.key === 'Enter' && joinRoom();
-      e.key === 'Escape' && leaveRoom();
+      e.key === "Enter" && joinRoom();
+      e.key === "Escape" && leaveRoom();
     },
-    [joinRoom, leaveRoom],
+    [joinRoom, leaveRoom]
   );
 
   useEffect(() => {
-    window.addEventListener('keydown', keysEventHandler);
+    window.addEventListener("keydown", keysEventHandler);
 
-    return () => window.removeEventListener('keydown', keysEventHandler);
+    return () => window.removeEventListener("keydown", keysEventHandler);
   }, [keysEventHandler]);
 
   return { joinRoom, leaveRoom };
@@ -1601,22 +1601,22 @@ export const useChatManage = ({
   messageList,
   setMessageList,
 }: LiveChatManageProps) => {
-  const [message, setMessage] = useState('');
+  const [message, setMessage] = useState("");
   const [emojiActive, setEmojiActive] = useState(false);
 
   const onEmojiClick = (
     _e: React.MouseEvent<Element, MouseEvent>,
-    emojiObj: IEmojiData,
+    emojiObj: IEmojiData
   ) => {
     setMessage(message + emojiObj.emoji);
   };
 
   const getUsername = (() => {
-    if (username.includes(' ')) {
-      const userArr = username.split(' ');
+    if (username.includes(" ")) {
+      const userArr = username.split(" ");
       const name = userArr[0];
       const surname = userArr[1].substr(0, 1);
-      return name.concat(' ', surname, '.');
+      return name.concat(" ", surname, ".");
     } else {
       return username;
     }
@@ -1628,11 +1628,11 @@ export const useChatManage = ({
       const symbol = String.fromCharCode(Math.floor(Math.random() * 94) + 32);
       symbols.push(symbol);
     }
-    return symbols.join('');
+    return symbols.join("");
   })();
 
   const sendMessage = () => {
-    if (message !== '' && message.replaceAll(' ', '').length > 0) {
+    if (message !== "" && message.replaceAll(" ", "").length > 0) {
       const messageData: ILiveChat = {
         room,
         content: {
@@ -1640,26 +1640,26 @@ export const useChatManage = ({
           username: getUsername,
           message: message.trim(),
           time: `${
-            (new Date(Date.now()).getHours() > 9 ? '' : '0') +
+            (new Date(Date.now()).getHours() > 9 ? "" : "0") +
             new Date(Date.now()).getHours()
           }:${
-            (new Date(Date.now()).getMinutes() > 9 ? '' : '0') +
+            (new Date(Date.now()).getMinutes() > 9 ? "" : "0") +
             new Date(Date.now()).getMinutes()
           }`,
         },
       };
 
-      socket.emit('send_message', messageData);
+      socket.emit("send_message", messageData);
       setMessageList([...messageList, messageData]);
-      setMessage('');
+      setMessage("");
 
       isMobile && setEmojiActive(false);
     }
   };
 
   useEffect(() => {
-    socket.on('receive_message', (data) =>
-      setMessageList([...messageList, data]),
+    socket.on("receive_message", (data) =>
+      setMessageList([...messageList, data])
     );
   }, [socket, messageList, setMessageList]);
 
@@ -1706,11 +1706,11 @@ export const useAddTodos = ({
   const addTodo = (e?: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e && e.preventDefault();
 
-    if (inputValue !== '' && inputValue.replaceAll(' ', '').length > 0) {
+    if (inputValue !== "" && inputValue.replaceAll(" ", "").length > 0) {
       services.todoAppService
         .addTodo(inputValue.trim())
         .then(setTodos)
-        .finally(() => setInputValue(''));
+        .finally(() => setInputValue(""));
     }
   };
 
@@ -1730,11 +1730,11 @@ export const useFilterTodos = ({
 }: FilterTodosProps) => {
   const filterTodos = () => {
     switch (status) {
-      case 'completed':
+      case "completed":
         setFilteredTodos(todos.filter((todo) => todo.completed));
         break;
 
-      case 'in process':
+      case "in process":
         setFilteredTodos(todos.filter((todo) => !todo.completed));
         break;
 
@@ -1747,7 +1747,7 @@ export const useFilterTodos = ({
   useEffect(
     () => filterTodos(),
     //eslint-disable-next-line
-    [todos, status],
+    [todos, status]
   );
 };
 
@@ -1782,7 +1782,7 @@ export const useManageTodo = ({
           .removeTodo(todo.id)
           .then(setTodos)
           .finally(() => setHidden(false)),
-      SECOND * 3,
+      SECOND * 3
     );
   };
 

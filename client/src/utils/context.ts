@@ -1,8 +1,8 @@
-import { IEmojiData } from 'emoji-picker-react';
-import { createContext, CSSProperties, FormEvent, RefObject } from 'react';
-import { TimeProps } from 'react-countdown-circle-timer';
-import { Socket } from 'socket.io-client';
-import { DefaultEventsMap } from 'socket.io/dist/typed-events';
+import { IEmojiData } from "emoji-picker-react";
+import { createContext, CSSProperties, FormEvent, RefObject } from "react";
+import { TimeProps } from "react-countdown-circle-timer";
+import { Socket } from "socket.io-client";
+import { DefaultEventsMap } from "socket.io-client/build/typed-events";
 
 //Header Context
 interface IHeaderContext {
@@ -66,8 +66,8 @@ export const ContactCtx = createContext({} as IContactContext);
 //Expanding Cards Context
 export interface IExpandingCardsContext
   extends IWithLoading,
-  IWithError,
-  IWithWarning {
+    IWithError,
+    IWithWarning {
   data: IExpandingCards[];
   setData: (data: IExpandingCards[]) => void;
 }
@@ -76,8 +76,8 @@ export const ExpandingCardsCtx = createContext({} as IExpandingCardsContext);
 //Rotating Navigation Context
 interface IRotatingNavigationContext
   extends IWithLoading,
-  IWithError,
-  IWithWarning {
+    IWithError,
+    IWithWarning {
   data: IRotatingNavigation;
   setData: (data: IRotatingNavigation) => void;
 
@@ -86,14 +86,14 @@ interface IRotatingNavigationContext
   close: () => void;
 }
 export const RotatingNavigationCtx = createContext(
-  {} as IRotatingNavigationContext,
+  {} as IRotatingNavigationContext
 );
 
 //Split Landing Page Context
 interface ISplitLandingPageContext
   extends IWithLoading,
-  IWithError,
-  IWithWarning {
+    IWithError,
+    IWithWarning {
   data: ISplitLandingPage[];
   setData: (data: ISplitLandingPage[]) => void;
 
@@ -105,7 +105,7 @@ interface ISplitLandingPageContext
   leaveBoth: () => void;
 }
 export const SplitLandingPageCtx = createContext(
-  {} as ISplitLandingPageContext,
+  {} as ISplitLandingPageContext
 );
 
 //Dad Jokes Context
@@ -120,8 +120,8 @@ export const DadJokesCtx = createContext({} as IDadJokesContext);
 //Faq Collapse Context
 export interface IFaqCollapseContext
   extends IWithLoading,
-  IWithError,
-  IWithWarning {
+    IWithError,
+    IWithWarning {
   data: IFaqCollapse[];
   setData: (data: IFaqCollapse[]) => void;
 }
@@ -135,14 +135,14 @@ interface IRandomChoicePickerContext {
   chooseRandomTag: () => void;
 }
 export const RandomChoicePickerCtx = createContext(
-  {} as IRandomChoicePickerContext,
+  {} as IRandomChoicePickerContext
 );
 
 //Animated Navigation Context
 interface IAnimatedNavigationContext
   extends IWithLoading,
-  IWithError,
-  IWithWarning {
+    IWithError,
+    IWithWarning {
   data: string[];
   setData: (data: string[]) => void;
 
@@ -150,7 +150,7 @@ interface IAnimatedNavigationContext
   toggleClass: () => void;
 }
 export const AnimatedNavigationCtx = createContext(
-  {} as IAnimatedNavigationContext,
+  {} as IAnimatedNavigationContext
 );
 
 //Incrementing Counter Context
@@ -158,7 +158,7 @@ interface IIntcrementingCounterContext {
   data: IIncrementingCounter;
 }
 export const IntcrementingCounterCtx = createContext(
-  {} as IIntcrementingCounterContext,
+  {} as IIntcrementingCounterContext
 );
 
 //Movie App Context
@@ -197,8 +197,8 @@ export const ThemeClockCtx = createContext({} as IThemeClockContext);
 //Github Profiles Context
 interface IGithubProfilesContext
   extends IWithLoading,
-  IWithError,
-  IWithWarning {
+    IWithError,
+    IWithWarning {
   user: IGithubUser;
   setGithubProfilesData: (user: any) => void;
 
@@ -215,8 +215,8 @@ export const GithubProfilesCtx = createContext({} as IGithubProfilesContext);
 //Password Generator Context
 interface IPasswordGeneratorContext
   extends IWithError,
-  IWithWarning,
-  IWithSuccess {
+    IWithWarning,
+    IWithSuccess {
   passwordVal: string;
   setPasswordVal: (password: string) => void;
 
@@ -232,7 +232,7 @@ interface IPasswordGeneratorContext
   decrease: () => void;
 }
 export const PasswordGeneratorCtx = createContext(
-  {} as IPasswordGeneratorContext,
+  {} as IPasswordGeneratorContext
 );
 
 //Auth Project Context
@@ -240,11 +240,11 @@ interface IAuthProjectContext extends IWithError, IWithWarning, IWithSuccess {
   messages: IAuthProjectMessages;
   setEmailMessage: (
     messages: IAuthProjectMessages,
-    emailMessage: IMessage,
+    emailMessage: IMessage
   ) => void;
   setPasswordMessage: (
     messages: IAuthProjectMessages,
-    passwordMessage: IMessage,
+    passwordMessage: IMessage
   ) => void;
   reset: () => void;
 
@@ -282,20 +282,20 @@ interface INotesAppContext extends IWithLoading, IWithError {
   setNotes: (notes: INotesApp[]) => void;
   addNote: () => void;
   editNote: (note: INotesApp) => void;
-  removeNote: (id: number) => void;
+  removeNote: (note: INotesApp) => void;
 }
 export const NotesAppCtx = createContext({} as INotesAppContext);
 
 //Testimonials Switcher Context
 export interface ITestimonialsSwitcherContext
   extends IWithLoading,
-  IWithError,
-  IWithWarning {
+    IWithError,
+    IWithWarning {
   data: ITestimonialsSwitcher;
   setData: (data: ITestimonialsSwitcher) => void;
 }
 export const TestimonialsSwitcherCtx = createContext(
-  {} as ITestimonialsSwitcherContext,
+  {} as ITestimonialsSwitcherContext
 );
 
 //Live Chat Context
@@ -330,7 +330,7 @@ interface ILiveChatRoomContext {
   setEmojiActive: (active: boolean) => void;
   onEmojiClick: (
     e: React.MouseEvent<Element, MouseEvent>,
-    emojiObj: IEmojiData,
+    emojiObj: IEmojiData
   ) => void;
 
   message: string;

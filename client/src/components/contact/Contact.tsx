@@ -1,10 +1,10 @@
-import React, { FC, useContext } from 'react';
-import { shakeSrc } from '../../utils/constants';
-import { ContactCtx } from '../../utils/context';
-import Button from '../utils/button/Button';
-import ComponentWrapper from '../utils/componentWrapper/ComponentWrapper';
-import './contact.scss';
-import InputField from './inputField/InputField';
+import React, { FC, useContext } from "react";
+import { shakeSrc } from "../../utils/constants";
+import { ContactCtx } from "../../utils/context";
+import Button from "../utils/button/Button";
+import ComponentWrapper from "../utils/componentWrapper/ComponentWrapper";
+import "./contact.scss";
+import InputField from "./inputField/InputField";
 
 const Contact: FC = () => {
   const { inputFields, sendEmail, validate } = useContext(ContactCtx);

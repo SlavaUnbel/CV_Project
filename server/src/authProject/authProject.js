@@ -1,79 +1,76 @@
 const express = require("express");
-const authRouter = express.Router();
-const bcrypt = require("bcrypt");
-const saltRounds = 10;
 const jwt = require("jsonwebtoken");
-
-const db = require("../db/db");
+const bcrypt = require("bcrypt");
+const AuthProjectModel = require("../models/AuthProject");
 const verifyJWT = require("./verifyJWT");
+const authRouter = express.Router();
+const saltRounds = 10;
 
 authRouter.post("/register", (req, res) =>
-  bcrypt.hash(req.body.password, saltRounds, (err, hash) => {
+  bcrypt.hash(req.body.password, saltRounds, async (err, hash) => {
     if (err) {
       res.send({ message: err, type: "error" });
     }
 
-    db.query(
-      "INSERT INTO users (username, password, role) VALUES (?,?,?)",
-      [req.body.username, hash, req.body.role],
-      (err) => {
-        if (err) {
-          res.send({ message: err, type: "error" });
-        } else {
-          res.send({ message: "You have successfully registered!" });
-        }
-      }
-    );
+    const username = req.body.username;
+    const password = hash;
+    const role = req.body.role;
+
+    try {
+      await AuthProjectModel.collection.insertOne({ username, password, role });
+      res.send({ message: "You have successfully registered!" });
+    } catch {
+      res.send({ message: "Failed to register a new user", type: "error" });
+    }
   })
 );
 
-authRouter.post("/login", (req, res) =>
-  db.query(
-    "SELECT * FROM users WHERE username = ?",
-    req.body.username,
-    (err, result) => {
-      if (err) {
-        res.send({ message: err, type: "error" });
-      } else {
-        if (result.length > 0) {
-          bcrypt.compare(
-            req.body.password,
-            result[0].password,
-            (_error, response) => {
-              if (response) {
-                const id = result[0].id;
-                const token = jwt.sign({ id }, "secretJWT", {
-                  expiresIn: 300,
-                });
+authRouter.post("/login", async (req, res) => {
+  const username = req.body.username;
 
-                req.session.user = result;
+  try {
+    const users = await (async () =>
+      AuthProjectModel.collection.find({ username }).toArray())();
 
-                res.send({
-                  auth: true,
-                  token,
-                  result,
-                  message: `You are logged in as "${result[0].username}"`,
-                });
-              } else {
-                res.send({
-                  auth: false,
-                  message: "Wrong username/password combination!",
-                  type: "error",
-                });
-              }
-            }
-          );
+    if (users.length > 0) {
+      bcrypt.compare(req.body.password, users[0].password, (_, response) => {
+        if (response) {
+          const id = users[0].id;
+          const token = jwt.sign({ id }, "secretJWT", {
+            expiresIn: 300,
+          });
+
+          req.session.user = users;
+
+          res.send({
+            auth: true,
+            token,
+            users,
+            message: `You are logged in as "${users[0].username}"`,
+          });
         } else {
           res.send({
             auth: false,
-            message: "There is no such user in the database!",
+            message: "Wrong username/password combination!",
             type: "error",
           });
         }
-      }
+      });
+    } else {
+      res.send({
+        auth: false,
+        message: "There is no such user in the database!",
+        type: "error",
+      });
     }
-  )
-);
+  } catch {
+    res.send({
+      auth: false,
+      message: "Failed to login",
+      type: "error",
+    });
+  }
+});
 
 authRouter.get("/authenticated", verifyJWT, (req, res) => {
   req.headers["x-access-token"] &&
