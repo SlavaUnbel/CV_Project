@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
+
 import AuthProjectContainer from '../../../containers/authProject/AuthProjectContainer';
 import ContactContainer from '../../../containers/contact/ContactContainer';
 import LiveChatContainer from '../../../containers/liveChat/LiveChatContainer';
@@ -18,6 +19,7 @@ import SplitLandingPageContainer from '../../../containers/portfolioItems/SplitL
 import TestimonialsSwitcherContainer from '../../../containers/portfolioItems/TestimonialsSwitcherContainer';
 import TodoAppContainer from '../../../containers/portfolioItems/TodoAppContainer';
 import WorksContainer from '../../../containers/works/WorksContainer';
+import HomeContext from '../../../context/home/HomeContext';
 import DrinkWaterContext from '../../../context/portfolioItems/DrinkWaterContext';
 import IncrementingCounterContext from '../../../context/portfolioItems/IncrementingCounterContext';
 import RandomChoicePickerContext from '../../../context/portfolioItems/RandomChoicePickerContext';
@@ -51,7 +53,6 @@ import {
   todoAppPath,
   worksPath,
 } from '../../../utils/route';
-import Home from '../../home/Home';
 import NotFound from '../../notFound/NotFound';
 import FormWaveAnimation from '../../portfolioItems/formWaveAnimation/FormWaveAnimation';
 import Hoverboard from '../../portfolioItems/hoverboard/Hoverboard';
@@ -60,7 +61,7 @@ import ScrollAnimation from '../../portfolioItems/scrollAnimation/ScrollAnimatio
 const AppRouter: FC = () => (
   <Switch>
     {/* General Pages Routes */}
-    <Route exact path={homePath} component={Home} />
+    <Route exact path={homePath} component={HomeContext} />
     <Route exact path={portfolioPath} component={PortfolioContainer} />
     <Route exact path={worksPath} component={WorksContainer} />
     <Route exact path={contactPath} component={ContactContainer} />

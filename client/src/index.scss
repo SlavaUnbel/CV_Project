@@ -1,14 +1,14 @@
-@import './assets/Roboto/roboto.scss';
-@import './assets/Soleil/soleil.scss';
-@import './assets/FreightTextPro/freight-text-pro.scss';
-@import './assets/MaterialIcons/material-icons.scss';
-@import './assets/Poppins/poppins.scss';
+@import "./assets/Roboto/roboto.scss";
+@import "./assets/Soleil/soleil.scss";
+@import "./assets/FreightTextPro/freight-text-pro.scss";
+@import "./assets/MaterialIcons/material-icons.scss";
+@import "./assets/Poppins/poppins.scss";
 
 :root {
   --white-color: #fff;
   --black-color: #000;
   --primary-color: #3f51b5;
-  --red-color: #dc143c;
+  --secondary-color: #dc143c;
   --lightgrey-color: #d3d3d3;
   --grey-color: #555;
   --semigrey-color: #444;
@@ -157,7 +157,7 @@
 }
 
 * {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   margin: 0;
   overflow-x: hidden;
   box-sizing: border-box;

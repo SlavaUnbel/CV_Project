@@ -1,4 +1,4 @@
-@import '../../index.scss';
+@import "../../index.scss";
 
 @mixin border-bottom($color) {
   border-bottom: 2px solid $color;
@@ -111,7 +111,7 @@
           outline: none;
 
           &.invalid {
-            @include border-bottom(var(--red-color));
+            @include border-bottom(var(--secondary-color));
           }
         }
       }
@@ -159,7 +159,7 @@
         width: 10rem;
         font-size: 1rem;
         color: var(--white-color);
-        background-color: var(--red-color);
+        background-color: var(--secondary-color);
         border: none;
         border-radius: 10px;
         font-weight: 500;

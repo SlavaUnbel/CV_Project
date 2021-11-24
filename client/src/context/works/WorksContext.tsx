@@ -1,7 +1,9 @@
 import React, { FC } from 'react';
+
 import Works from '../../components/works/Works';
 import { IWorksContext, WorksCtx } from '../../utils/context';
-import { useFetchWorksData, useWindowTitle } from '../../utils/hooks';
+import { useFetchWorksData, useMouseWheel, useRedirectToItem, useScrollRedirect, useWindowTitle } from '../../utils/hooks';
+import { contactPath, portfolioPath } from '../../utils/route';
 
 const WorksContext: FC<IWorksContext> = ({
   data,
@@ -14,9 +16,20 @@ const WorksContext: FC<IWorksContext> = ({
   pushError,
   pushWarning,
 }) => {
-  useWindowTitle('Works');
+  useWindowTitle("Works");
 
   useFetchWorksData({ setData, setLoading, pushError, pushWarning });
+
+  const paths = {
+    goToPortfolio: useRedirectToItem(portfolioPath),
+    goToContact: useRedirectToItem(contactPath),
+  };
+  const wheelDirection = useMouseWheel();
+  const onWheel = useScrollRedirect(
+    wheelDirection,
+    paths.goToPortfolio,
+    paths.goToContact
+  );
 
   return (
     <WorksCtx.Provider
@@ -30,6 +43,8 @@ const WorksContext: FC<IWorksContext> = ({
 
         pushError,
         pushWarning,
+
+        onWheel,
       }}
     >
       <Works />

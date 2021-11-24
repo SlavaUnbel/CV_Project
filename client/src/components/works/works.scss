@@ -1,9 +1,9 @@
-@import '../../index.scss';
+@import "../../index.scss";
 
 .works {
   @include container;
   @include flex(row nowrap, center, center);
-  background-color: var(--red-color);
+  background-color: var(--secondary-color);
   position: relative;
   overflow: hidden;
 

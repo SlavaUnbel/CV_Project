@@ -1,18 +1,20 @@
+import './works.scss';
+
 import React, { FC, useContext } from 'react';
+
 import { WorksCtx } from '../../utils/context';
 import ComponentWrapper from '../utils/componentWrapper/ComponentWrapper';
 import LoaderWrapper from '../utils/loaderWrapper/LoaderWrapper';
 import Arrow from './arrow/Arrow';
 import SliderWrapper from './sliderWrapper/SliderWrapper';
 import WorkCard from './workCard/WorkCard';
-import './works.scss';
 
 const Works: FC = () => {
-  const { data, current, setCurrent } = useContext(WorksCtx);
+  const { data, current, setCurrent, onWheel } = useContext(WorksCtx);
 
   return (
     <ComponentWrapper>
-      <div className="works">
+      <div className="works" onWheel={onWheel}>
         <h1>Works</h1>
 
         <LoaderWrapper>
