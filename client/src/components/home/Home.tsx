@@ -1,25 +1,19 @@
-import React, { FC } from 'react';
-import { Link } from 'react-router-dom';
-import { avatarSrc, downSrc } from '../../utils/constants';
-import {
-  useITypedLib,
-  useRedirectToItem,
-  useWindowTitle,
-} from '../../utils/hooks';
-import { portfolioPath } from '../../utils/route';
-import ComponentWrapper from '../utils/componentWrapper/ComponentWrapper';
 import './home.scss';
 
+import React, { FC, useContext } from 'react';
+import { Link } from 'react-router-dom';
+
+import { avatarSrc } from '../../utils/constants';
+import { HomeCtx } from '../../utils/context';
+import { portfolioPath } from '../../utils/route';
+import ComponentWrapper from '../utils/componentWrapper/ComponentWrapper';
+
 const Home: FC = () => {
-  useWindowTitle('Homepage');
-
-  const textRef = useITypedLib();
-
-  const redirect = useRedirectToItem(portfolioPath);
+  const { textRef, onWheel } = useContext(HomeCtx);
 
   return (
     <ComponentWrapper>
-      <div className="home" onWheel={redirect}>
+      <div className="home" onWheel={onWheel}>
         <div className="left">
           <div className="img-container">
             <img src={avatarSrc} alt="" />
@@ -38,7 +32,7 @@ const Home: FC = () => {
           </div>
 
           <Link to={portfolioPath}>
-            <img src={downSrc} alt="" />
+            <div className="scroll" />
           </Link>
         </div>
       </div>

@@ -1,8 +1,8 @@
-import { IEmojiData } from "emoji-picker-react";
-import { createContext, CSSProperties, FormEvent, RefObject } from "react";
-import { TimeProps } from "react-countdown-circle-timer";
-import { Socket } from "socket.io-client";
-import { DefaultEventsMap } from "socket.io-client/build/typed-events";
+import { IEmojiData } from 'emoji-picker-react';
+import React, { createContext, CSSProperties, FormEvent, RefObject } from 'react';
+import { TimeProps } from 'react-countdown-circle-timer';
+import { Socket } from 'socket.io-client';
+import { DefaultEventsMap } from 'socket.io-client/build/typed-events';
 
 //Header Context
 interface IHeaderContext {
@@ -21,8 +21,18 @@ interface IMenuContext {
 }
 export const MenuCtx = createContext({} as IMenuContext);
 
+//Home Context
+interface IHomeContext extends IWithWheel {
+  textRef: RefObject<HTMLSpanElement>;
+}
+export const HomeCtx = createContext({} as IHomeContext);
+
 //Portfolio Context
-interface IPortfolioContext extends IWithLoading, IWithError, IWithWarning {
+interface IPortfolioContext
+  extends IWithLoading,
+    IWithError,
+    IWithWarning,
+    IWithWheel {
   data: IPortfolio[];
   setData: (data: IPortfolio[]) => void;
 
@@ -37,7 +47,11 @@ interface IPortfolioContext extends IWithLoading, IWithError, IWithWarning {
 export const PortfolioCtx = createContext({} as IPortfolioContext);
 
 //Works Context
-export interface IWorksContext extends IWithLoading, IWithError, IWithWarning {
+export interface IWorksContext
+  extends IWithLoading,
+    IWithError,
+    IWithWarning,
+    IWithWheel {
   data: IWorks[];
   setData: (data: IWorks[]) => void;
 
@@ -47,7 +61,11 @@ export interface IWorksContext extends IWithLoading, IWithError, IWithWarning {
 export const WorksCtx = createContext({} as IWorksContext);
 
 //Contact Context
-interface IContactContext extends IWithError, IWithWarning, IWithSuccess {
+interface IContactContext
+  extends IWithError,
+    IWithWarning,
+    IWithSuccess,
+    IWithWheel {
   messages: IMessages;
   setNameMessage: (messages: IMessages, nameMessage: IMessage) => void;
   setEmailMessage: (messages: IMessages, emailMessage: IMessage) => void;

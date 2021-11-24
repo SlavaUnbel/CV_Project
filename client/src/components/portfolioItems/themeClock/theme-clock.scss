@@ -1,4 +1,4 @@
-@import '../../../index.scss';
+@import "../../../index.scss";
 
 :root {
   --primary-UI-color: var(--black-color);
@@ -18,7 +18,7 @@
   }
 
   .theme-toggle {
-    font-family: 'Poppins';
+    font-family: "Poppins";
     background: var(--primary-UI-color);
     color: var(--secondary-UI-color);
     border: none;
@@ -59,12 +59,12 @@
         &.second {
           height: 7rem;
           transform: translate(-50%, -100%) rotate(0deg);
-          background: var(--red-color);
+          background: var(--secondary-color);
         }
       }
 
       .center-point {
-        background: var(--red-color);
+        background: var(--secondary-color);
         width: 1rem;
         height: 1rem;
         position: absolute;
@@ -74,7 +74,7 @@
         border-radius: 50%;
 
         &::after {
-          content: '';
+          content: "";
           background: var(--primary-UI-color);
           width: 0.7rem;
           height: 0.7rem;
@@ -88,19 +88,19 @@
     }
 
     .time {
-      font-family: 'Poppins';
+      font-family: "Poppins";
       font-size: 5rem;
     }
 
     .date {
-      font-family: 'Poppins';
+      font-family: "Poppins";
       color: var(--date-theme-clock-color);
       font-size: 1rem;
       letter-spacing: 0.5px;
       text-transform: uppercase;
 
       .circle {
-        font-family: 'Poppins';
+        font-family: "Poppins";
         background: var(--primary-UI-color);
         color: var(--secondary-UI-color);
         border-radius: 50%;

@@ -1,4 +1,4 @@
-@import '../../index.scss';
+@import "../../index.scss";
 
 .home {
   @include container;
@@ -20,20 +20,14 @@
 
     .img-container {
       @include flex(row nowrap, flex-end, center);
-      background-color: var(--red-color);
+      background-color: var(--secondary-color);
       border-radius: 50%;
-      width: 48rem;
-      height: 48rem;
+      width: 40rem;
+      height: 40rem;
+      max-height: calc(100vh - 4.5rem);
       margin: 0 2rem;
 
-      @include screen-1600px {
-        width: 45rem;
-        height: 45rem;
-      }
-
       @include screen-1500px {
-        width: 40rem;
-        height: 40rem;
         margin: 0 1.5rem;
       }
 
@@ -113,7 +107,7 @@
 
         span {
           font-size: inherit;
-          color: var(--red-color);
+          color: var(--secondary-color);
         }
 
         .ityped-cursor {
@@ -136,12 +130,37 @@
       bottom: 0.5rem;
       left: calc(50% - 1rem);
 
-      img {
+      .scroll {
         width: 2rem;
-        animation: arrowBlink 2s infinite;
+        height: 3rem;
+        border-radius: 20px;
+        border: 0.1rem solid var(--black-color);
+        position: relative;
+        animation: mouseBlink 2s infinite cubic-bezier(0.15, 0.41, 0.69, 0.94);
+
+        &::before {
+          content: "";
+          position: absolute;
+          top: 0.4rem;
+          left: calc(50% - 0.1rem);
+          width: 0.25rem;
+          height: 0.5rem;
+          border-radius: 10px;
+          background: var(--black-color);
+        }
+
+        &::after {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 50%;
+          width: 0.05rem;
+          height: 50%;
+          background: var(--black-color);
+        }
       }
 
-      @keyframes arrowBlink {
+      @keyframes mouseBlink {
         0% {
           opacity: 0;
         }

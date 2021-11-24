@@ -25,6 +25,10 @@ interface IWithChildren {
   children: any;
 }
 
+interface IWithWheel {
+  onWheel: (e: React.WheelEvent<any>) => void;
+}
+
 interface IHeader {
   phone: IHeaderCreds;
   email: IHeaderCreds;

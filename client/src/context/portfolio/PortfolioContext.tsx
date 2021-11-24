@@ -1,7 +1,15 @@
 import React, { FC } from 'react';
+
 import Portfolio from '../../components/portfolio/Portfolio';
 import { PortfolioCtx } from '../../utils/context';
-import { useFetchPortfolioData, useWindowTitle } from '../../utils/hooks';
+import {
+  useFetchPortfolioData,
+  useMouseWheel,
+  useRedirectToItem,
+  useScrollRedirect,
+  useWindowTitle,
+} from '../../utils/hooks';
+import { homePath, worksPath } from '../../utils/route';
 
 interface Props extends IWithLoading, IWithError, IWithWarning {
   data: IPortfolio[];
@@ -28,7 +36,7 @@ const PortfolioContext: FC<Props> = ({
   pushError,
   pushWarning,
 }) => {
-  useWindowTitle('Portfolio');
+  useWindowTitle("Portfolio");
 
   useFetchPortfolioData({
     active,
@@ -39,7 +47,18 @@ const PortfolioContext: FC<Props> = ({
     pushWarning,
   });
 
-  const wrapperStyle = { height: '80vh' };
+  const paths = {
+    goHome: useRedirectToItem(homePath),
+    goToWorks: useRedirectToItem(worksPath),
+  };
+  const wheelDirection = useMouseWheel();
+  const onWheel = useScrollRedirect(
+    wheelDirection,
+    paths.goHome,
+    paths.goToWorks
+  );
+
+  const wrapperStyle = { height: "80vh" };
 
   return (
     <PortfolioCtx.Provider
@@ -58,6 +77,7 @@ const PortfolioContext: FC<Props> = ({
         pushWarning,
 
         wrapperStyle,
+        onWheel,
       }}
     >
       <Portfolio />

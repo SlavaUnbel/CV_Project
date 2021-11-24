@@ -1,12 +1,17 @@
 import React, { FC } from 'react';
+
 import Contact from '../../components/contact/Contact';
 import { ContactCtx } from '../../utils/context';
 import {
   useContactInputFields,
   useContactPageValidation,
+  useMouseWheel,
+  useRedirectToItem,
+  useScrollRedirect,
   useSendEmail,
   useWindowTitle,
 } from '../../utils/hooks';
+import { worksPath } from '../../utils/route';
 
 interface Props extends IWithError, IWithWarning, IWithSuccess {
   messages: IMessages;
@@ -33,7 +38,7 @@ const ContactContext: FC<Props> = ({
   pushWarning,
   pushSuccess,
 }) => {
-  useWindowTitle('Contact');
+  useWindowTitle("Contact");
 
   const inputFields = useContactInputFields({
     messages,
@@ -57,6 +62,10 @@ const ContactContext: FC<Props> = ({
     pushSuccess,
   });
 
+  const goToWorks = useRedirectToItem(worksPath);
+  const wheelDirection = useMouseWheel();
+  const onWheel = useScrollRedirect(wheelDirection, goToWorks);
+
   return (
     <ContactCtx.Provider
       value={{
@@ -76,6 +85,8 @@ const ContactContext: FC<Props> = ({
         inputFields,
         validate,
         sendEmail,
+
+        onWheel,
       }}
     >
       <Contact />

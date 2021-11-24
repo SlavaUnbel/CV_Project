@@ -1,17 +1,19 @@
+import './portfolio.scss';
+
 import React, { FC, useContext } from 'react';
+
 import { PortfolioCtx } from '../../utils/context';
 import ComponentWrapper from '../utils/componentWrapper/ComponentWrapper';
 import ItemsWrapper from './itemsWrapper/ItemsWrapper';
-import './portfolio.scss';
 import PortfolioItem from './portfolioItem/PortfolioItem';
 import PortfolioPage from './portfolioPages/PortfolioPage';
 
 const Portfolio: FC = () => {
-  const { pagesCount, data } = useContext(PortfolioCtx);
+  const { pagesCount, data, onWheel } = useContext(PortfolioCtx);
 
   return (
     <ComponentWrapper>
-      <div className="portfolio">
+      <div className="portfolio" onWheel={onWheel}>
         <h1>Portfolio</h1>
 
         <ul>

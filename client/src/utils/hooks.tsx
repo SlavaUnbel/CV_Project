@@ -1,29 +1,14 @@
-import emailjs from "emailjs-com";
-import { IEmojiData } from "emoji-picker-react";
-import { init } from "ityped";
-import React, {
-  ChangeEvent,
-  FormEvent,
-  LegacyRef,
-  RefObject,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
-import { useHistory } from "react-router-dom";
-import { Socket } from "socket.io-client";
-import { DefaultEventsMap } from "socket.io-client/build/typed-events";
-import { services } from "../services/services";
-import {
-  days,
-  isMobile,
-  months,
-  movieAppApi,
-  movieAppSearchApi,
-  portfolioAmountPerPage,
-} from "./constants";
-import { getDateValueWithZeros, SECOND } from "./date";
+import emailjs from 'emailjs-com';
+import { IEmojiData } from 'emoji-picker-react';
+import { init } from 'ityped';
+import React, { ChangeEvent, FormEvent, LegacyRef, RefObject, useCallback, useEffect, useRef, useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import { Socket } from 'socket.io-client';
+import { DefaultEventsMap } from 'socket.io-client/build/typed-events';
+
+import { services } from '../services/services';
+import { days, isMobile, months, movieAppApi, movieAppSearchApi, portfolioAmountPerPage } from './constants';
+import { getDateValueWithZeros, SECOND } from './date';
 
 // General Hooks
 export const useWindowTitle = (title?: string) => {
@@ -37,6 +22,50 @@ export const useHover = () => {
 
   return { hovered, setHovered };
 };
+
+export const useMouseWheel = () => {
+  const [wheelDirection, setWheelDirection] = useState("");
+
+  const onWheel = useCallback(
+    (e: WheelEvent) => {
+      if (e.deltaY < 0) {
+        setWheelDirection("up");
+      } else if (e.deltaY > 0) {
+        setWheelDirection("down");
+      } else {
+        setWheelDirection("");
+      }
+    },
+    [setWheelDirection]
+  );
+
+  useEffect(() => {
+    window.addEventListener("wheel", onWheel);
+
+    return () => window.removeEventListener("wheel", onWheel);
+  }, [onWheel]);
+
+  return wheelDirection;
+};
+
+export const useScrollRedirect =
+  (
+    wheelDirection: string,
+    scrollUpCallback?: () => void,
+    scrollDownCallback?: () => void
+  ) =>
+  () => {
+    switch (wheelDirection) {
+      case "up":
+        scrollUpCallback && scrollUpCallback();
+        break;
+      case "down":
+        scrollDownCallback && scrollDownCallback();
+        break;
+      default:
+        return;
+    }
+  };
 
 export const useRedirectToItem = (link: string) => {
   const history = useHistory();
