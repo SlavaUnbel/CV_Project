@@ -1,4 +1,4 @@
-@import '../../../index.scss';
+@import "../../../index.scss";
 
 .rotating-navigation__container {
   @include container;
@@ -92,7 +92,7 @@
         @include flex(column nowrap, center, center);
 
         h1 {
-          font-family: 'Soleil Light', sans-serif;
+          font-family: "Soleil Light", sans-serif;
           font-size: 2.8rem;
           margin: 0;
 
@@ -141,7 +141,7 @@
 
           h3 {
             @include flex();
-            font-family: 'Soleil Light', sans-serif;
+            font-family: "Soleil Light", sans-serif;
             color: var(--grey-color);
             margin-bottom: 0.5rem;
             font-size: 1.2rem;
@@ -183,7 +183,7 @@
       h2 {
         align-self: flex-start;
         width: 60%;
-        font-family: 'FreightTextPro', serif;
+        font-family: "FreightTextPro", serif;
         font-weight: 700;
         font-size: 1.4rem;
         text-transform: uppercase;
@@ -221,7 +221,7 @@
       p {
         align-self: flex-start;
         width: 60%;
-        font-family: 'FreightTextPro', serif;
+        font-family: "FreightTextPro", serif;
         font-weight: 300;
         font-style: normal;
         font-size: 1.4rem;
@@ -242,8 +242,8 @@
         }
 
         @include mobile {
-          width: 80%;
-          font-size: 1.1rem;
+          width: 100%;
+          font-size: 1rem;
           line-height: 1.4rem;
           margin-top: 0.5rem;
         }
@@ -308,7 +308,7 @@
           text-decoration: none;
           text-transform: uppercase;
           color: var(--white-color);
-          font-family: 'Soleil Light', sans-serif;
+          font-family: "Soleil Light", sans-serif;
           font-size: 0.9rem;
         }
 

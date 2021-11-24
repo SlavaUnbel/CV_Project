@@ -21,29 +21,6 @@ export const phoneNumber = "+375 (44) 786-75-82";
 export const email = "slavlen1999@gmail.com";
 export const linkedIn = "https://linkedin.com/in/slava-levkovich";
 
-export const portfolioAmountPerPage = 6;
-export const portfolioItems = [
-  "Expanding Cards",
-  "Rotating Navigation",
-  "Scroll Animation",
-  "Split Landing Page",
-  "Form Wave Animation",
-  "Dad Jokes",
-  "FAQ Collapse",
-  "Random Choice Picker",
-  "Animated Navigation",
-  "Incrementing Counter",
-  "Movie App",
-  "Drink Water",
-  "Theme Clock",
-  "GitHub Profiles",
-  "Password Generator",
-  "Notes App",
-  "Hoverboard",
-  "Testimonials Switcher",
-  "Todo App",
-];
-
 export const expandingCardsSrc =
   process.env.PUBLIC_URL + "/images/expandingCards";
 
