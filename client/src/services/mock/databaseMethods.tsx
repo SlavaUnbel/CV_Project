@@ -2,23 +2,16 @@ import { Facebook, LinkedIn, Mail, Phone, Twitter, YouTube } from '@mui/icons-ma
 
 import {
   email,
-  firstIconSrc,
-  firstWorkSrc,
   linkedIn,
   phoneNumber,
   pomodoroMusicSrc,
   rotatingNavigationSrc,
-  secondIconSrc,
-  secondWorkSrc,
-  splitLandingPageSrc,
   testimonialsSwitcherSrc,
-  thirdIconSrc,
-  thirdWorkSrc,
 } from '../../utils/constants';
-import { authProjectPath, contactPath, liveChatPath, pomodoroTimerPath } from '../../utils/route';
+import { contactPath } from '../../utils/route';
 
 export const getMenuOptions = (): string[] => {
-  const options = ["Home", "Portfolio", "Works", "Contact"];
+  const options = ["Home", "Portfolio", "Contact"];
 
   return Array.from({ length: options.length }, (_, idx) => idx).map(
     (option) => options[option]
@@ -55,7 +48,6 @@ export const generatePortfolioData = (id: number): IPortfolio[] => {
     { title: "Expanding Cards", criteria: "UI" },
     { title: "Rotating Navigation", criteria: "UI" },
     { title: "Scroll Animation", criteria: "UI" },
-    { title: "Split Landing Page", criteria: "UI" },
     { title: "Form Wave Animation", criteria: "UI" },
     { title: "Dad Jokes", criteria: "sideAPI" },
     { title: "FAQ Collapse", criteria: "UI" },
@@ -97,31 +89,6 @@ export const generatePortfolioData = (id: number): IPortfolio[] => {
       };
     }
   );
-};
-
-export const generateWorksData = (amount: number, id: number): IWorks[] => {
-  const icons = [firstIconSrc, secondIconSrc, thirdIconSrc];
-  const titles = ["Auth Project", "Live Chat", "Pomodoro Timer"];
-  const images = [firstWorkSrc, secondWorkSrc, thirdWorkSrc];
-  const descriptions = [
-    "This project represents an immitation of real-world application with usage of session through managing cookies and storaging the JWT into localStorage for authentication check purpose.",
-    "This one shows how web sockets can be used to maintain the process of chatting in realtime. The interface includes emoji picker so that the project looks more user-friendly.",
-    "The project can be used for time management. There is a custom audio player implemented in order to make your working process more comfortable.",
-  ];
-  const links = [authProjectPath, liveChatPath, pomodoroTimerPath];
-
-  return Array.from({ length: amount }, (_, idx) => idx).map((index) => {
-    if (index) id++;
-
-    return {
-      id,
-      iconSrc: icons[id - 1],
-      title: titles[id - 1],
-      description: descriptions[id - 1],
-      imgSrc: images[id - 1],
-      link: links[id - 1],
-    };
-  });
 };
 
 export const getInitialMessagesForContactInputFields = (): IMessages => {
@@ -198,21 +165,6 @@ export const generateRotatingNavigationData = (): IRotatingNavigation => {
     ],
   };
 };
-
-export const getSplitLandingPageData = (): ISplitLandingPage[] => [
-  {
-    title: "Playstation 5",
-    link: "https://playstation.com/en-us/ps5",
-    side: "left",
-    background: `${splitLandingPageSrc}/ps5.jpg`,
-  },
-  {
-    title: "XBox Series X",
-    link: "https://xbox.com/en-US/consoles/xbox-series-x",
-    side: "right",
-    background: `${splitLandingPageSrc}/xbox.jpg`,
-  },
-];
 
 export const generateFaqCollapseData = (id: number): IFaqCollapse[] => {
   const faqs = {

@@ -1,5 +1,6 @@
 import React, { FC, useContext } from 'react';
 import ScrollToBottom from 'react-scroll-to-bottom';
+
 import { LiveChatCtx, LiveChatRoomCtx } from '../../../../../utils/context';
 import Message from './message/Message';
 
@@ -15,12 +16,12 @@ const MessageContainer: FC = () => {
             <div
               key={msg.content.id}
               className={`message ${
-                getUsername === msg.content.username ? 'you' : 'other'
+                getUsername === msg.content.username ? "you" : "other"
               }`}
             >
               <Message content={msg.content} />
             </div>
-          ),
+          )
       )}
     </ScrollToBottom>
   );

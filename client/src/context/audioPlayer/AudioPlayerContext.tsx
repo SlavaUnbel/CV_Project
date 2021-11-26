@@ -1,5 +1,6 @@
 import React, { FC, useEffect, useRef } from 'react';
 import WaveSurfer from 'wavesurfer.js';
+
 import AudioPlayer from '../../components/utils/audioPlayer/AudioPlayer';
 import { isMobile } from '../../utils/constants';
 import { AudioPlayerCtx } from '../../utils/context';
@@ -93,17 +94,17 @@ const AudioPlayerContext: FC<Props> = ({
         container: wavesurferContainer.current,
         height: isMobile ? 48 : 72,
         fillParent: true,
-        progressColor: '#fe6f6b',
-        waveColor: '#c9ccea',
+        progressColor: "#fe6f6b",
+        waveColor: "#c9ccea",
       });
-      instance.on('audioprocess', handleChangeCurrentTime);
-      instance.on('seek', handleChangeCurrentTime);
-      instance.on('play', handlePlay);
-      instance.on('pause', handlePause);
-      instance.on('stop', handleStop);
-      instance.on('ready', handleReady);
-      instance.on('volume', handleChangeVolume);
-      instance.on('error', handleError);
+      instance.on("audioprocess", handleChangeCurrentTime);
+      instance.on("seek", handleChangeCurrentTime);
+      instance.on("play", handlePlay);
+      instance.on("pause", handlePause);
+      instance.on("stop", handleStop);
+      instance.on("ready", handleReady);
+      instance.on("volume", handleChangeVolume);
+      instance.on("error", handleError);
       // @ts-ignore
       wavesurfer.current = instance;
       return () => instance.destroy();

@@ -20,7 +20,5 @@ const symbiotes = {
   },
 };
 
-export const {
-  actions: messageActions,
-  reducer: messageReducer,
-} = createSymbiote(initialMessageState, symbiotes);
+export const { actions: messageActions, reducer: messageReducer } =
+  createSymbiote(initialMessageState, symbiotes);

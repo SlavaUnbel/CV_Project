@@ -1,6 +1,7 @@
 import { toast } from 'react-toastify';
 import { takeEvery } from 'redux-saga/effects';
 import { Action } from 'redux-symbiote/types';
+
 import { messageActions } from '../reducers/messageReducer';
 
 export default function* messageSaga() {
@@ -11,17 +12,17 @@ export default function* messageSaga() {
 }
 
 function* errorHandler(action: Action<[text: string | null]>) {
-  yield toast(action.payload, { type: 'error' });
+  yield toast(action.payload, { type: "error" });
 }
 
 function* warningHandler(action: Action<[text: string | null]>) {
-  yield toast(action.payload, { type: 'warning' });
+  yield toast(action.payload, { type: "warning" });
 }
 
 function* successHandler(action: Action<[text: string | null]>) {
-  yield toast(action.payload, { type: 'success' });
+  yield toast(action.payload, { type: "success" });
 }
 
 function* infoHandler(action: Action<[text: string | null]>) {
-  yield toast(action.payload, { type: 'info' });
+  yield toast(action.payload, { type: "info" });
 }

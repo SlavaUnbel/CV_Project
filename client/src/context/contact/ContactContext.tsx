@@ -11,7 +11,7 @@ import {
   useSendEmail,
   useWindowTitle,
 } from '../../utils/hooks';
-import { worksPath } from '../../utils/route';
+import { portfolioPath } from '../../utils/route';
 
 interface Props extends IWithError, IWithWarning, IWithSuccess {
   messages: IMessages;
@@ -62,9 +62,9 @@ const ContactContext: FC<Props> = ({
     pushSuccess,
   });
 
-  const goToWorks = useRedirectToItem(worksPath);
+  const goToPortfolio = useRedirectToItem(portfolioPath);
   const wheelDirection = useMouseWheel();
-  const onWheel = useScrollRedirect(wheelDirection, goToWorks);
+  const onWheel = useScrollRedirect(wheelDirection, goToPortfolio);
 
   return (
     <ContactCtx.Provider

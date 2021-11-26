@@ -1,22 +1,10 @@
 export const isMobile = window.innerWidth <= 800 && window.innerHeight <= 1000;
 
 export const avatarSrc = process.env.PUBLIC_URL + "/images/general/avatar.png";
-export const mobileSrc = process.env.PUBLIC_URL + "/images/general/mobile.png";
-export const firstWorkSrc =
-  process.env.PUBLIC_URL + "/images/general/1st_work.jpg";
-export const secondWorkSrc =
-  process.env.PUBLIC_URL + "/images/general/2nd_work.jpg";
-export const thirdWorkSrc =
-  process.env.PUBLIC_URL + "/images/general/3rd_work.jpg";
-export const arrowSrc = process.env.PUBLIC_URL + "/images/general/arrow.png";
-export const firstIconSrc = process.env.PUBLIC_URL + "/images/general/auth.jpg";
-export const secondIconSrc =
-  process.env.PUBLIC_URL + "/images/general/chat.png";
-export const thirdIconSrc =
-  process.env.PUBLIC_URL + "/images/general/writing.png";
 export const shakeSrc = process.env.PUBLIC_URL + "/images/general/shake.svg";
 export const notFoundSrc =
   process.env.PUBLIC_URL + "/images/general/not-found.jpg";
+export const cvReference = process.env.PUBLIC_URL + "/my-cv.pdf";
 export const phoneNumber = "+375 (44) 786-75-82";
 export const email = "slavlen1999@gmail.com";
 export const linkedIn = "https://linkedin.com/in/slava-levkovich";
@@ -26,9 +14,6 @@ export const expandingCardsSrc =
 
 export const rotatingNavigationSrc =
   process.env.PUBLIC_URL + "/images/rotatingNavigation";
-
-export const splitLandingPageSrc =
-  process.env.PUBLIC_URL + "/images/splitLandingPage";
 
 export const movieAppApi =
   "https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=34c0884110d32daca6dae564a5df9308&page=1";

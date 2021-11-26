@@ -1,4 +1,5 @@
 import React, { FC, useContext } from 'react';
+
 import { LiveChatCtx } from '../../../utils/context';
 import Button from '../../utils/button/Button';
 import RoomChoice from './roomChoice/RoomChoice';
@@ -10,7 +11,7 @@ const Login: FC = () => {
 
   return (
     <div className="live-chat__wrapper">
-      <h3>{roomChoice ? 'Choose' : 'Join'} A Chat</h3>
+      <h3>{roomChoice ? "Choose" : "Join"} A Chat</h3>
 
       {roomChoice ? (
         <RoomChoice />
@@ -23,7 +24,7 @@ const Login: FC = () => {
       )}
 
       <Button onClick={!roomChoice ? joinRoom : () => setRoomChoice(false)}>
-        {!roomChoice ? 'Join A Room' : 'Go Back'}
+        {!roomChoice ? "Join A Room" : "Go Back"}
       </Button>
     </div>
   );

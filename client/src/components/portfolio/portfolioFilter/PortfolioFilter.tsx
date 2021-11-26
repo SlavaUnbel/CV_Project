@@ -1,15 +1,20 @@
-import { FormControl, MenuItem, Select } from '@mui/material';
+import { FormControl, MenuItem, Select, SelectChangeEvent } from '@mui/material';
 import React, { FC, useContext } from 'react';
 
 import { PortfolioCtx } from '../../../utils/context';
 
 const PortfolioFilter: FC = () => {
-  const { criteria, setCriteria } = useContext(PortfolioCtx);
+  const { criteria, setCriteria, setActivePage } = useContext(PortfolioCtx);
+
+  const changeCriteria = (e: SelectChangeEvent) => {
+    setCriteria(e.target.value);
+    setActivePage(1);
+  };
 
   return (
     <div className="filter">
       <FormControl fullWidth>
-        <Select value={criteria} onChange={(e) => setCriteria(e.target.value)}>
+        <Select value={criteria} onChange={(e) => changeCriteria(e)}>
           <MenuItem value="all">All</MenuItem>
           <MenuItem value="featured">Featured</MenuItem>
           <MenuItem value="UI">UI</MenuItem>

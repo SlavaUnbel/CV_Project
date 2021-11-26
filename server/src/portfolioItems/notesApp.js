@@ -23,13 +23,40 @@ notesAppRouter.post("/add", async (_req, res) => {
   }
 });
 
-notesAppRouter.post("/edit", async (req, res) => {
-  const id = req.body.note.id;
-  const note = req.body.note.note;
-  const editing = !req.body.note.editing;
+notesAppRouter.put("/rename/:id", async (req, res) => {
+  const _id = req.params.id;
+  const title = req.body.note.title;
+  const renaming = !req.body.note.renaming;
 
   try {
-    await NotesModel.collection.updateOne({ id }, { $set: { note, editing } });
+    await NotesModel.findByIdAndUpdate({ _id }, { $set: { title, renaming } });
+  } catch {
+    res.send({ message: "Failed to rename current note" });
+  } finally {
+    getNotes(res);
+  }
+});
+
+notesAppRouter.put("/edit/:id", async (req, res) => {
+  const _id = req.params.id;
+  const editing = true;
+
+  try {
+    await NotesModel.findByIdAndUpdate({ _id }, { $set: { editing } });
+  } catch {
+    res.send({ message: "Failed to set updating current note" });
+  } finally {
+    getNotes(res);
+  }
+});
+
+notesAppRouter.put("/save/:id", async (req, res) => {
+  const _id = req.params.id;
+  const note = req.body.note.note;
+  const editing = false;
+
+  try {
+    await NotesModel.findByIdAndUpdate({ _id }, { $set: { note, editing } });
   } catch {
     res.send({ message: "Failed to update current note" });
   } finally {
@@ -37,11 +64,11 @@ notesAppRouter.post("/edit", async (req, res) => {
   }
 });
 
-notesAppRouter.post("/remove", async (req, res) => {
-  const id = req.body.note.id;
+notesAppRouter.delete("/remove/:id", async (req, res) => {
+  const _id = req.params.id;
 
   try {
-    await NotesModel.collection.deleteOne({ id });
+    await NotesModel.findByIdAndRemove({ _id });
   } catch {
     res.send({ message: "Failed to delete current note" });
   } finally {

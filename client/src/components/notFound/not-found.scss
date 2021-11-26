@@ -1,4 +1,4 @@
-@import '../../index.scss';
+@import "../../index.scss";
 
 .not-found__container {
   @include container;
@@ -64,7 +64,7 @@
     }
 
     h1 {
-      font-family: 'Poppins';
+      font-family: "Poppins";
       text-transform: uppercase;
       margin-bottom: 2rem;
       font-size: 4rem;
@@ -86,7 +86,7 @@
     }
 
     p {
-      font-family: 'Poppins';
+      font-family: "Poppins";
       text-align: left;
       font-size: 1rem;
       margin-bottom: 10rem;
@@ -124,7 +124,7 @@
 
       a,
       span {
-        font-family: 'Poppins';
+        font-family: "Poppins";
         font-weight: 500;
         text-decoration: none;
         font-size: 1.3rem;
@@ -148,7 +148,7 @@
 
         &::before {
           width: 100%;
-          content: '';
+          content: "";
           background: var(--black-color);
           position: absolute;
           bottom: -2px;

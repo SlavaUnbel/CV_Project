@@ -1,4 +1,5 @@
 import React, { FC, useContext } from 'react';
+
 import { PomodoroTimerCtx } from '../../../../utils/context';
 import Button from '../../../utils/button/Button';
 
@@ -14,7 +15,7 @@ const TimerLabel: FC<Props> = ({ label, title }) => {
     <li>
       <Button
         onClick={() => changeTimer(label)}
-        className={`${executing.active === label ? 'active-label' : ''}`}
+        className={`${executing.active === label ? "active-label" : ""}`}
       >
         {title}
       </Button>

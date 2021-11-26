@@ -5,8 +5,6 @@ export interface PortfolioItemsState {
 
   rotatingNavigation: IRotatingNavigation;
 
-  splitLandingPage: ISplitLandingPage[];
-
   dadJokes: IDadJokes;
 
   faqCollapse: IFaqCollapse[];
@@ -20,13 +18,13 @@ export interface PortfolioItemsState {
 
   passwordGenerator: string;
 
-  notes: INotesApp[]
+  notes: INotesApp[];
 
   testimonialsSwitcher: ITestimonialsSwitcher;
 
   todos: ITodoApp[];
   newTodo: string;
-  filteredTodos: ITodoApp[]
+  filteredTodos: ITodoApp[];
   todosStatus: string;
 }
 
@@ -34,8 +32,6 @@ const initialPortfolioItemsState: PortfolioItemsState = {
   expandingCards: [],
 
   rotatingNavigation: {} as IRotatingNavigation,
-
-  splitLandingPage: [],
 
   dadJokes: {} as IDadJokes,
 
@@ -48,16 +44,16 @@ const initialPortfolioItemsState: PortfolioItemsState = {
   githubUser: {} as IGithubUser,
   githubRepos: [],
 
-  passwordGenerator: '',
+  passwordGenerator: "",
 
   notes: [],
 
   testimonialsSwitcher: {} as ITestimonialsSwitcher,
 
   todos: [],
-  newTodo: '',
+  newTodo: "",
   filteredTodos: [],
-  todosStatus: 'all'
+  todosStatus: "all",
 };
 
 const symbiotes = {
@@ -70,14 +66,8 @@ const symbiotes = {
   rotatingNavigation: {
     set: (
       state: PortfolioItemsState,
-      rotatingNavigation: IRotatingNavigation,
+      rotatingNavigation: IRotatingNavigation
     ) => ({ ...state, rotatingNavigation }),
-  },
-  splitLandingPage: {
-    set: (
-      state: PortfolioItemsState,
-      splitLandingPage: ISplitLandingPage[],
-    ) => ({ ...state, splitLandingPage }),
   },
   dadJokes: {
     set: (state: PortfolioItemsState, dadJokes: IDadJokes) => ({
@@ -120,23 +110,38 @@ const symbiotes = {
     }),
   },
   notes: {
-    set: (state: PortfolioItemsState, notes: INotesApp[]) => ({ ...state, notes }),
+    set: (state: PortfolioItemsState, notes: INotesApp[]) => ({
+      ...state,
+      notes,
+    }),
   },
   testimonialsSwitcher: {
     set: (
       state: PortfolioItemsState,
-      testimonialsSwitcher: ITestimonialsSwitcher,
+      testimonialsSwitcher: ITestimonialsSwitcher
     ) => ({
       ...state,
       testimonialsSwitcher,
     }),
   },
   todos: {
-    set: (state: PortfolioItemsState, todos: ITodoApp[]) => ({ ...state, todos }),
-    add: (state: PortfolioItemsState, newTodo: string) => ({ ...state, newTodo }),
-    filter: (state: PortfolioItemsState, filteredTodos: ITodoApp[]) => ({ ...state, filteredTodos }),
-    setStatus: (state: PortfolioItemsState, todosStatus: string) => ({ ...state, todosStatus })
-  }
+    set: (state: PortfolioItemsState, todos: ITodoApp[]) => ({
+      ...state,
+      todos,
+    }),
+    add: (state: PortfolioItemsState, newTodo: string) => ({
+      ...state,
+      newTodo,
+    }),
+    filter: (state: PortfolioItemsState, filteredTodos: ITodoApp[]) => ({
+      ...state,
+      filteredTodos,
+    }),
+    setStatus: (state: PortfolioItemsState, todosStatus: string) => ({
+      ...state,
+      todosStatus,
+    }),
+  },
 };
 
 export const {

@@ -1,5 +1,6 @@
 import React, { FC, useContext, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+
 import AudioPlayerContainer from '../../../containers/audioPlayer/AudioPlayerContainer';
 import { audioPlayerActions } from '../../../reducers/audioPlayerReducer';
 import { services } from '../../../services/services';
@@ -28,7 +29,7 @@ const Pomodoro: FC = () => {
   useEffect(() => {
     const timeout = window.setTimeout(
       () => dispatch(audioPlayerActions.isPlaying.pause()),
-      SECOND * 1.2,
+      SECOND * 1.2
     );
 
     return () => window.clearTimeout(timeout);
@@ -49,7 +50,7 @@ const Pomodoro: FC = () => {
 
       <PomodoroControls />
 
-      <div className={`audio-player-wrapper ${playerOpened ? 'opened' : ''}`}>
+      <div className={`audio-player-wrapper ${playerOpened ? "opened" : ""}`}>
         <AudioPlayerContainer />
       </div>
 

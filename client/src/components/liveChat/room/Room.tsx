@@ -1,4 +1,5 @@
 import React, { FC, useContext } from 'react';
+
 import { isMobile } from '../../../utils/constants';
 import { LiveChatRoomCtx } from '../../../utils/context';
 import ChatBody from './chatBody/ChatBody';
@@ -10,7 +11,7 @@ const Room: FC = () => {
   const { emojiActive } = useContext(LiveChatRoomCtx);
 
   return (
-    <div className={`chat ${emojiActive ? 'with-emoji' : ''}`}>
+    <div className={`chat ${emojiActive ? "with-emoji" : ""}`}>
       <div className="chat-window">
         <ChatHeader />
 

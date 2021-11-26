@@ -24,12 +24,12 @@ todoAppRouter.post("/add", async (req, res) => {
   }
 });
 
-todoAppRouter.post("/complete", async (req, res) => {
-  const id = req.body.id;
-  const completed = !req.body.completed;
+todoAppRouter.put("/complete/:id", async (req, res) => {
+  const _id = req.params.id;
+  const completed = !req.body.todo.completed;
 
   try {
-    await TodosModel.collection.updateOne({ id }, { $set: { completed } });
+    await TodosModel.findByIdAndUpdate({ _id }, { $set: { completed } });
   } catch (error) {
     res.send({ message: "Failed to mark current todo as completed" });
   } finally {
@@ -37,11 +37,11 @@ todoAppRouter.post("/complete", async (req, res) => {
   }
 });
 
-todoAppRouter.post("/remove", async (req, res) => {
-  const id = req.body.id;
+todoAppRouter.delete("/remove/:id", async (req, res) => {
+  const _id = req.params.id;
 
   try {
-    await TodosModel.collection.deleteOne({ id });
+    await TodosModel.findByIdAndRemove({ _id });
   } catch (error) {
     res.send({ message: "Failed to delete current todo" });
   } finally {

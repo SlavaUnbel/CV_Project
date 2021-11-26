@@ -55,20 +55,6 @@ interface IPortfolioContext
 }
 export const PortfolioCtx = createContext({} as IPortfolioContext);
 
-//Works Context
-export interface IWorksContext
-  extends IWithLoading,
-    IWithError,
-    IWithWarning,
-    IWithWheel {
-  data: IWorks[];
-  setData: (data: IWorks[]) => void;
-
-  current: number;
-  setCurrent: (current: number) => void;
-}
-export const WorksCtx = createContext({} as IWorksContext);
-
 //Contact Context
 interface IContactContext
   extends IWithError,
@@ -114,25 +100,6 @@ interface IRotatingNavigationContext
 }
 export const RotatingNavigationCtx = createContext(
   {} as IRotatingNavigationContext
-);
-
-//Split Landing Page Context
-interface ISplitLandingPageContext
-  extends IWithLoading,
-    IWithError,
-    IWithWarning {
-  data: ISplitLandingPage[];
-  setData: (data: ISplitLandingPage[]) => void;
-
-  ref: RefObject<HTMLDivElement>;
-  enterLeft: () => void;
-  enterRight: () => void;
-  leaveLeft: () => void;
-  leaveRight: () => void;
-  leaveBoth: () => void;
-}
-export const SplitLandingPageCtx = createContext(
-  {} as ISplitLandingPageContext
 );
 
 //Dad Jokes Context
@@ -304,12 +271,15 @@ interface IAuthProjectContext extends IWithError, IWithWarning, IWithSuccess {
 export const AuthProjectCtx = createContext({} as IAuthProjectContext);
 
 //Notes App Context
-interface INotesAppContext extends IWithLoading, IWithError {
+interface INotesAppContext extends IWithLoading, IWithError, IWithSuccess {
   notes: INotesApp[];
   setNotes: (notes: INotesApp[]) => void;
+
   addNote: () => void;
+  renameNote: (note: INotesApp) => void;
   editNote: (note: INotesApp) => void;
-  removeNote: (note: INotesApp) => void;
+  saveNote: (note: INotesApp) => void;
+  removeNote: (id: string) => void;
 }
 export const NotesAppCtx = createContext({} as INotesAppContext);
 
@@ -417,6 +387,7 @@ interface IPomodoroTimerContext extends IWithError, IWithWarning, IWithSuccess {
   setAudio: (audio: string | null) => void;
   audioList: string[];
   setAudioList: (list: string[]) => void;
+  isPlaying: boolean;
 }
 export const PomodoroTimerCtx = createContext({} as IPomodoroTimerContext);
 

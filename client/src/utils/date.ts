@@ -6,9 +6,9 @@ export const WEEK = DAY * 7;
 export const MONTH = WEEK * 30;
 
 export const convertFromYYYYMMDD = (date: Date | string) => {
-  const [year, month, day] = date.toString().split('-');
+  const [year, month, day] = date.toString().split("-");
   return `${day}.${month}.${year}`;
 };
 
 export const getDateValueWithZeros = (value: number): string =>
-  `${value < 10 ? '0' + value : value}`;
+  `${value < 10 ? "0" + value : value}`;

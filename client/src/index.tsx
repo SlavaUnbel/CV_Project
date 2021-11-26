@@ -1,9 +1,11 @@
+import './index.scss';
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
+
 import App from './components/app/App';
-import './index.scss';
 import store from './store';
 
 ReactDOM.render(
@@ -12,5 +14,5 @@ ReactDOM.render(
       <App />
     </Provider>
   </Router>,
-  document.getElementById('root'),
+  document.getElementById("root")
 );

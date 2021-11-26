@@ -15,10 +15,8 @@ import MovieAppContainer from '../../../containers/portfolioItems/MovieAppContai
 import NotesAppContainer from '../../../containers/portfolioItems/NotesAppContainer';
 import PasswordGeneratorContainer from '../../../containers/portfolioItems/PasswordGeneratorContainer';
 import RotatingNavigationContainer from '../../../containers/portfolioItems/RotatingNavigationContainer';
-import SplitLandingPageContainer from '../../../containers/portfolioItems/SplitLandingPageContainer';
 import TestimonialsSwitcherContainer from '../../../containers/portfolioItems/TestimonialsSwitcherContainer';
 import TodoAppContainer from '../../../containers/portfolioItems/TodoAppContainer';
-import WorksContainer from '../../../containers/works/WorksContainer';
 import HomeContext from '../../../context/home/HomeContext';
 import DrinkWaterContext from '../../../context/portfolioItems/DrinkWaterContext';
 import IncrementingCounterContext from '../../../context/portfolioItems/IncrementingCounterContext';
@@ -47,11 +45,9 @@ import {
   randomChoicePickerPath,
   rotatingNavigationPath,
   scrollAnimationPath,
-  splitLandingPagePath,
   testimonialsSwitcherPath,
   themeClockPath,
   todoAppPath,
-  worksPath,
 } from '../../../utils/route';
 import NotFound from '../../notFound/NotFound';
 import FormWaveAnimation from '../../portfolioItems/formWaveAnimation/FormWaveAnimation';
@@ -63,7 +59,6 @@ const AppRouter: FC = () => (
     {/* General Pages Routes */}
     <Route exact path={homePath} component={HomeContext} />
     <Route exact path={portfolioPath} component={PortfolioContainer} />
-    <Route exact path={worksPath} component={WorksContainer} />
     <Route exact path={contactPath} component={ContactContainer} />
 
     {/* Portfolio Pages Routes */}
@@ -78,11 +73,6 @@ const AppRouter: FC = () => (
       component={RotatingNavigationContainer}
     />
     <Route exact path={scrollAnimationPath} component={ScrollAnimation} />
-    <Route
-      exact
-      path={splitLandingPagePath}
-      component={SplitLandingPageContainer}
-    />
     <Route exact path={formWaveAnimationPath} component={FormWaveAnimation} />
     <Route exact path={dadJokesPath} component={DadJokesContainer} />
     <Route exact path={faqCollapsePath} component={FaqCollapseContainer} />
@@ -114,7 +104,9 @@ const AppRouter: FC = () => (
       path={passwordGeneratorPath}
       component={PasswordGeneratorContainer}
     />
+    <Route exact path={authProjectPath} component={AuthProjectContainer} />
     <Route exact path={notesAppPath} component={NotesAppContainer} />
+    <Route exact path={liveChatPath} component={LiveChatContainer} />
     <Route exact path={hoverboardPath} component={Hoverboard} />
     <Route
       exact
@@ -122,12 +114,9 @@ const AppRouter: FC = () => (
       component={TestimonialsSwitcherContainer}
     />
     <Route exact path={todoAppPath} component={TodoAppContainer} />
-
-    {/* Works Pages Routes */}
-    <Route exact path={authProjectPath} component={AuthProjectContainer} />
-    <Route exact path={liveChatPath} component={LiveChatContainer} />
     <Route exact path={pomodoroTimerPath} component={PomodoroTimerContainer} />
 
+    {/* Not Existing Page Routing */}
     <Route exact path={notFoundPath} component={NotFound} />
     <Redirect to={notFoundPath} />
   </Switch>

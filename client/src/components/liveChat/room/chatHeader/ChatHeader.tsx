@@ -1,6 +1,7 @@
 import { Close } from '@mui/icons-material';
 import { IconButton } from '@mui/material';
 import React, { FC, useContext } from 'react';
+
 import { LiveChatCtx } from '../../../../utils/context';
 
 const ChatHeader: FC = () => {

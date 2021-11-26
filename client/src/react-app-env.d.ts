@@ -56,15 +56,6 @@ interface IPortfolioItem {
   criteria: string;
 }
 
-interface IWorks {
-  id: number;
-  iconSrc: string;
-  title: string;
-  description: string;
-  link: string;
-  imgSrc: string;
-}
-
 type Side = "left" | "right";
 type Direction = "up" | "down";
 
@@ -110,13 +101,6 @@ interface IRotatingNavigation {
   images: string[];
   articleTitles: string[];
   articleParagraphs: string[];
-}
-
-interface ISplitLandingPage {
-  title: string;
-  link: string;
-  side: Side;
-  background: string;
 }
 
 interface IDadJokes {
@@ -182,8 +166,10 @@ interface IPasswordGeneratorOption {
 }
 
 interface INotesApp {
-  id: number;
+  _id: string;
+  title: string;
   note: string;
+  renaming: boolean;
   editing: boolean;
 }
 
@@ -208,7 +194,7 @@ interface ILiveChatMsg {
 }
 
 interface ITodoApp {
-  id: number;
+  _id: string;
   todo: string;
   completed: boolean;
 }
