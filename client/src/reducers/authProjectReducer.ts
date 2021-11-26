@@ -1,4 +1,5 @@
 import { createSymbiote } from 'redux-symbiote';
+
 import { getInitialMessagesForFormWaveAnimationInputFields } from '../services/mock/databaseMethods';
 
 export interface AuthProjectState {
@@ -17,11 +18,11 @@ const initialMessages = getInitialMessagesForFormWaveAnimationInputFields();
 const initialAuthProjectState: AuthProjectState = {
   messages: initialMessages,
   validated: false,
-  username: '',
-  password: '',
-  usage: 'login',
-  role: 'visitor',
-  currentUserInfo: '',
+  username: "",
+  password: "",
+  usage: "login",
+  role: "visitor",
+  currentUserInfo: "",
 };
 
 const symbiotes = {
@@ -29,12 +30,12 @@ const symbiotes = {
     setEmail: (
       state: AuthProjectState,
       messages: IAuthProjectMessages,
-      emailMessage: IMessage,
+      emailMessage: IMessage
     ) => ({ ...state, messages: { ...messages, emailMessage: emailMessage } }),
     setPassword: (
       state: AuthProjectState,
       messages: IAuthProjectMessages,
-      passwordMessage: IMessage,
+      passwordMessage: IMessage
     ) => ({
       ...state,
       messages: { ...messages, passwordMessage: passwordMessage },
@@ -45,8 +46,8 @@ const symbiotes = {
       ...state,
       messages: initialMessages,
       validated: false,
-      username: '',
-      password: '',
+      username: "",
+      password: "",
     }),
   },
   validated: {
@@ -73,15 +74,15 @@ const symbiotes = {
   },
   role: {
     set: (state: AuthProjectState, role: string) =>
-      role === 'visitor'
-        ? { ...state, role: 'moderator' }
-        : { ...state, role: 'visitor' },
+      role === "visitor"
+        ? { ...state, role: "moderator" }
+        : { ...state, role: "visitor" },
   },
   currentUser: {
     set: (
       state: AuthProjectState,
       currentUserInfo: string,
-      currentUserRole?: string,
+      currentUserRole?: string
     ) => ({
       ...state,
       currentUserInfo,

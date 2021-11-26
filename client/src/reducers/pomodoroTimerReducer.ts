@@ -13,7 +13,7 @@ export const initialPomodoroSettings: IPomodoroTimer = {
   work: 0,
   short: 5.5,
   long: 45,
-  active: 'work',
+  active: "work",
 };
 
 const initialPomodoroTimerState: PomodoroTimerState = {
@@ -35,26 +35,29 @@ const symbiotes = {
   timer: {
     new: (state: PomodoroTimerState, newTimer: IPomodoroTimer) => ({
       ...state,
-      newTimer
+      newTimer,
     }),
     execute: (state: PomodoroTimerState, executing: IPomodoroTimer) => ({
       ...state,
-      executing
-    })
+      executing,
+    }),
   },
   animate: {
     set: (state: PomodoroTimerState, startAnimate: boolean) => ({
-      ...state, startAnimate
+      ...state,
+      startAnimate,
     }),
   },
   timerDisabled: {
     set: (state: PomodoroTimerState, timerDisabled: boolean) => ({
-      ...state, timerDisabled
+      ...state,
+      timerDisabled,
     }),
   },
   playerOpened: {
     set: (state: PomodoroTimerState, playerOpened: boolean) => ({
-      ...state, playerOpened
+      ...state,
+      playerOpened,
     }),
   },
 };

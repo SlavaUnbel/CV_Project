@@ -1,5 +1,6 @@
-import React, { FC } from 'react';
 import '../contact.scss';
+
+import React, { FC } from 'react';
 
 interface Props {
   field: IFormInput;
@@ -12,12 +13,12 @@ const InputField: FC<Props> = ({ field }) => (
     pattern={field.pattern}
     className={`${
       field.valid
-        ? 'valid'
+        ? "valid"
         : field.invalid
-        ? 'invalid'
+        ? "invalid"
         : field.incorrect
-        ? 'incorrect'
-        : ''
+        ? "incorrect"
+        : ""
     }`}
     onChange={(e) => field.onChange(e)}
   />

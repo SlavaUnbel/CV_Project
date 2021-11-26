@@ -9,7 +9,7 @@ import {
   useScrollRedirect,
   useWindowTitle,
 } from '../../utils/hooks';
-import { homePath, worksPath } from '../../utils/route';
+import { contactPath, homePath } from '../../utils/route';
 
 interface Props extends IWithLoading, IWithError, IWithWarning {
   data: IPortfolio[];
@@ -70,16 +70,16 @@ const PortfolioContext: FC<Props> = ({
 
   const paths = {
     goHome: useRedirectToItem(homePath),
-    goToWorks: useRedirectToItem(worksPath),
+    goToContact: useRedirectToItem(contactPath),
   };
   const wheelDirection = useMouseWheel();
   const onWheel = useScrollRedirect(
     wheelDirection,
     paths.goHome,
-    paths.goToWorks
+    paths.goToContact
   );
 
-  const wrapperStyle = { height: "70vh" };
+  const wrapperStyle = { height: "90vh" };
 
   return (
     <PortfolioCtx.Provider

@@ -1,7 +1,6 @@
 //main paths
 export const homePath = "/";
 export const portfolioPath = "/portfolio";
-export const worksPath = "/works";
 export const contactPath = "/contact";
 export const notFoundPath = "/404";
 
@@ -9,7 +8,6 @@ export const notFoundPath = "/404";
 export const expandingCardsPath = "/expanding-cards";
 export const rotatingNavigationPath = "/rotating-navigation";
 export const scrollAnimationPath = "/scroll-animation";
-export const splitLandingPagePath = "/split-landing-page";
 export const formWaveAnimationPath = "/form-wave-animation";
 export const dadJokesPath = "/dad-jokes";
 export const faqCollapsePath = "/faq-collapse";

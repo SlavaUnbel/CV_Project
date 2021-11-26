@@ -1,4 +1,4 @@
-@import '../../index.scss';
+@import "../../index.scss";
 
 .header {
   background-color: var(--white-color);
@@ -35,7 +35,7 @@
     .left {
       @include flex(row nowrap, center);
 
-      .logo {
+      .cv {
         font-size: 2.5rem;
         font-weight: bold;
         text-decoration: none;

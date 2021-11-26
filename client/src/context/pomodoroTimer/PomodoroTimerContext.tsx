@@ -1,10 +1,8 @@
-import React, { FC, FormEvent } from 'react';
-import { TimeProps } from 'react-countdown-circle-timer';
+import React, { FC } from 'react';
+
 import PomodoroTimer from '../../components/pomodoroTimer/PomodoroTimer';
-import { initialPomodoroSettings } from '../../reducers/pomodoroTimerReducer';
 import { PomodoroTimerCtx } from '../../utils/context';
-import { getDateValueWithZeros } from '../../utils/date';
-import { useWindowTitle } from '../../utils/hooks';
+import { useManageTimer, useStartPauseStopTimer, useWindowTitle } from '../../utils/hooks';
 
 interface Props extends IWithError, IWithWarning, IWithSuccess {
   pomodoro: number;
@@ -28,6 +26,7 @@ interface Props extends IWithError, IWithWarning, IWithSuccess {
   setAudio: (audio: string | null) => void;
   audioList: string[];
   setAudioList: (list: string[]) => void;
+  isPlaying: boolean;
   play: () => void;
   pause: () => void;
   stop: () => void;
@@ -55,6 +54,7 @@ const PomodoroTimerContext: FC<Props> = ({
   setAudio,
   audioList,
   setAudioList,
+  isPlaying,
   play,
   pause,
   stop,
@@ -63,97 +63,37 @@ const PomodoroTimerContext: FC<Props> = ({
   pushWarning,
   pushSuccess,
 }) => {
-  useWindowTitle('Pomodoro Timer');
+  useWindowTitle("Pomodoro Timer");
 
-  const startTimer = () => {
-    setStartAnimate(true);
-    executing.active === 'work' && play();
-  };
+  const { startTimer, pauseTimer, stopTimer } = useStartPauseStopTimer({
+    executing,
+    setStartAnimate,
+    setTimerDisabled,
+    setPlayerOpened,
+    play,
+    pause,
+    stop,
+  });
 
-  const pauseTimer = () => {
-    setStartAnimate(false);
-    executing.active === 'work' && pause();
-  };
-
-  const stopTimer = () => {
-    setStartAnimate(false);
-    setTimerDisabled(true);
-    setPlayerOpened(false);
-    stop();
-  };
-
-  const settingBtn = () => {
-    setStartAnimate(false);
-    setTimerDisabled(false);
-    setPlayerOpened(false);
-    stop();
-    setExecuting(initialPomodoroSettings);
-    setPomodoro(0);
-  };
-
-  const updateExecute = (updatedSettings: IPomodoroTimer) => {
-    setExecuting(updatedSettings);
-    setTimerTime(updatedSettings);
-  };
-
-  const setCurrentTimer = (active: string) => {
-    updateExecute({ ...executing, active });
-    setTimerTime(executing);
-  };
-
-  const setTimerTime = (evaluate: IPomodoroTimer) => {
-    switch (evaluate.active) {
-      case 'work':
-        setPomodoro(evaluate.work);
-        break;
-
-      case 'short':
-        setPomodoro(evaluate.short);
-        break;
-
-      case 'long':
-        setPomodoro(evaluate.long);
-        break;
-
-      default:
-        setPomodoro(0);
-        break;
-    }
-  };
-
-  const changeTimer = (label: string) => {
-    stopTimer();
-    setCurrentTimer(label);
-    if (executing.active !== label) {
-      const toast = document.querySelector('.Toastify__toast-container')
-        ?.children[0];
-      //@ts-ignore
-      toast && toast.click();
-      setPlayerOpened(false);
-      setTimerDisabled(false);
-    }
-  };
-
-  const handleSubmit = (e?: FormEvent<HTMLButtonElement>) => {
-    e && e.preventDefault();
-
-    !Object.values(newTimer).includes(0)
-      ? updateExecute(newTimer)
-      : pushWarning(
-          'Please, set all timers to values between 1 second and 1 hour',
-        );
-  };
-
-  const countdown = ({ remainingTime }: TimeProps) => {
-    if (!remainingTime) return '00:00';
-
-    const minutes = Math.floor(remainingTime / 60);
-    const seconds = remainingTime % 60;
-
-    return `${getDateValueWithZeros(minutes)}:${getDateValueWithZeros(
-      seconds,
-    )}`;
-  };
+  const {
+    settingBtn,
+    setCurrentTimer,
+    updateExecute,
+    changeTimer,
+    handleSubmit,
+    countdown,
+  } = useManageTimer({
+    executing,
+    newTimer,
+    setStartAnimate,
+    setTimerDisabled,
+    setPlayerOpened,
+    setExecuting,
+    setPomodoro,
+    stopTimer,
+    stop,
+    pushWarning,
+  });
 
   return (
     <PomodoroTimerCtx.Provider
@@ -188,6 +128,7 @@ const PomodoroTimerContext: FC<Props> = ({
         setAudio,
         audioList,
         setAudioList,
+        isPlaying,
 
         pushError,
         pushWarning,

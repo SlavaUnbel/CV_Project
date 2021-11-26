@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
+
 import PomodoroTimerContext from '../../context/pomodoroTimer/PomodoroTimerContext';
 import { audioPlayerActions } from '../../reducers/audioPlayerReducer';
 import { messageActions } from '../../reducers/messageReducer';
@@ -17,6 +18,7 @@ const mapStateToProps = (state: IState) => ({
   audio: state.audioPlayer.audio,
   audioList: state.audioPlayer.list,
   autoPlay: state.audioPlayer.autoPlay,
+  isPlaying: state.audioPlayer.isPlaying,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
@@ -24,19 +26,19 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   setNewTimer: bindActionCreators(pomodoroTimerActions.timer.new, dispatch),
   setExecuting: bindActionCreators(
     pomodoroTimerActions.timer.execute,
-    dispatch,
+    dispatch
   ),
   setStartAnimate: bindActionCreators(
     pomodoroTimerActions.animate.set,
-    dispatch,
+    dispatch
   ),
   setTimerDisabled: bindActionCreators(
     pomodoroTimerActions.timerDisabled.set,
-    dispatch,
+    dispatch
   ),
   setPlayerOpened: bindActionCreators(
     pomodoroTimerActions.playerOpened.set,
-    dispatch,
+    dispatch
   ),
 
   setAudio: bindActionCreators(audioPlayerActions.audio.set, dispatch),
@@ -52,5 +54,5 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
+  mapDispatchToProps
 )(PomodoroTimerContext);

@@ -2,10 +2,12 @@ import emailjs from 'emailjs-com';
 import { IEmojiData } from 'emoji-picker-react';
 import { init } from 'ityped';
 import React, { ChangeEvent, FormEvent, LegacyRef, RefObject, useCallback, useEffect, useRef, useState } from 'react';
+import { TimeProps } from 'react-countdown-circle-timer';
 import { useHistory } from 'react-router-dom';
 import { Socket } from 'socket.io-client';
 import { DefaultEventsMap } from 'socket.io-client/build/typed-events';
 
+import { initialPomodoroSettings } from '../reducers/pomodoroTimerReducer';
 import { services } from '../services/services';
 import { days, isMobile, months, movieAppApi, movieAppSearchApi } from './constants';
 import { getDateValueWithZeros, SECOND } from './date';
@@ -91,14 +93,23 @@ export const useMenuRouter = (
   title: string,
   openCloseMenu: (menuOpen: boolean) => void
 ) => {
+  const [active, setActive] = useState(false);
   const history = useHistory();
+  const loc = history.location.pathname.slice(1);
+
+  useEffect(() => {
+    ((loc === "" && title === "Home") || loc === title.toLowerCase()) &&
+      setActive(true);
+
+    return () => setActive(false);
+  }, [loc, title, setActive]);
 
   const redirect = () => {
     history.push(title !== "Home" ? title.toLowerCase() : "");
     openCloseMenu(false);
   };
 
-  return redirect;
+  return { active, redirect };
 };
 
 // Home Hooks
@@ -267,32 +278,6 @@ export const useGetMediaElement = ({
   ))();
 
   return mediaElement;
-};
-
-//Works Hooks
-interface WorksProps extends IWithLoading, IWithError, IWithWarning {
-  setData: (data: IWorks[]) => void;
-}
-
-export const useFetchWorksData = ({
-  setData,
-  setLoading,
-  pushError,
-  pushWarning,
-}: WorksProps) => {
-  useEffect(() => {
-    if (!setLoading) return;
-    setLoading(true);
-
-    services.worksService
-      .getWorksData()
-      .then((data) => {
-        setData(data);
-        data.length === 0 && pushWarning("No data found");
-      })
-      .catch((e) => pushError(e))
-      .finally(() => setLoading(false));
-  }, [setData, setLoading, pushError, pushWarning]);
 };
 
 //Contact Hooks
@@ -578,63 +563,6 @@ export const useScrollingAnimation = () => {
   );
 
   return ref;
-};
-
-//Split Landing Page Hooks
-interface SplitLandingPageProps extends IWithLoading, IWithError, IWithWarning {
-  setData: (data: ISplitLandingPage[]) => void;
-}
-
-export const useFetchSplitLandingPageData = ({
-  setData,
-  setLoading,
-  pushError,
-  pushWarning,
-}: SplitLandingPageProps) => {
-  useEffect(() => {
-    if (!setLoading) return;
-    setLoading(true);
-
-    services.portfolioItemsService
-      .getSplitLandingPageData()
-      .then((data) => {
-        setData(data);
-        !data && pushWarning("No data found");
-      })
-      .catch((e) => pushError(e))
-      .finally(() => setLoading(false));
-  }, [setData, setLoading, pushError, pushWarning]);
-};
-
-export const useSplitLandingPageHoverEffect = (data: ISplitLandingPage[]) => {
-  const ref: LegacyRef<HTMLDivElement> = useRef(null);
-
-  const enterLeft = () => {
-    if (!ref.current) return;
-    ref.current.classList.add("hover-left");
-  };
-
-  const enterRight = () => {
-    if (!ref.current) return;
-    ref.current.classList.add("hover-right");
-  };
-
-  const leaveLeft = () => {
-    if (!ref.current) return;
-    ref.current.classList.remove("hover-left");
-  };
-
-  const leaveRight = () => {
-    if (!ref.current) return;
-    ref.current.classList.remove("hover-right");
-  };
-
-  const leaveBoth = () => {
-    leaveLeft();
-    leaveRight();
-  };
-
-  return { ref, enterLeft, enterRight, leaveLeft, leaveRight, leaveBoth };
 };
 
 //Form Wave Animation Hooks
@@ -1500,7 +1428,7 @@ export const useGeneratePassword = ({
 };
 
 //Notes App Hooks
-interface NotesAppProps extends IWithLoading, IWithError {
+interface NotesAppProps extends IWithLoading, IWithError, IWithSuccess {
   setNotes: (notes: INotesApp[]) => void;
 }
 
@@ -1508,6 +1436,7 @@ export const useFetchNotesAppDataAndManageNotes = ({
   setNotes,
   setLoading,
   pushError,
+  pushSuccess,
 }: NotesAppProps) => {
   const request = useCallback(
     (req: Promise<any>) => req.then(setNotes).catch((e) => pushError(e)),
@@ -1525,17 +1454,40 @@ export const useFetchNotesAppDataAndManageNotes = ({
 
   const addNote = () => request(services.notesAppService.addNote());
 
+  const renameNote = (note: INotesApp) =>
+    request(services.notesAppService.renameNote(note));
+
   const editNote = (note: INotesApp) =>
     request(services.notesAppService.editNote(note));
 
-  const removeNote = (note: INotesApp) =>
-    request(services.notesAppService.removeNote(note));
+  const saveNote = (note: INotesApp) =>
+    request(
+      services.notesAppService
+        .saveNote(note)
+        .finally(() =>
+          pushSuccess(
+            `Successfully saved note: ${
+              note.title === "" ? "<No name provided>" : note.title
+            }`
+          )
+        )
+    );
 
-  return { addNote, editNote, removeNote };
+  const removeNote = (id: string) =>
+    request(services.notesAppService.removeNote(id));
+
+  return {
+    addNote,
+    renameNote,
+    editNote,
+    saveNote,
+    removeNote,
+  };
 };
 
-export const useNotesAppInput = (item: INotesApp) => {
+export const useNotesAppInputs = (item: INotesApp) => {
   const [note, setNote] = useState(item.note);
+  const [title, setTitle] = useState(item.title);
 
   const changeInput = (e: FormEvent<HTMLTextAreaElement>) => {
     e.preventDefault();
@@ -1543,7 +1495,13 @@ export const useNotesAppInput = (item: INotesApp) => {
     setNote(e.currentTarget.value);
   };
 
-  return { note, changeInput };
+  const changeTitle = (e: FormEvent<HTMLInputElement>) => {
+    e.preventDefault();
+
+    setTitle(e.currentTarget.value);
+  };
+
+  return { note, changeInput, title, changeTitle };
 };
 
 //Hoverboard Hooks
@@ -1802,15 +1760,9 @@ export const useAddTodos = ({
   setInputValue,
 }: AddTodosProps) => {
   useEffect(() => {
-    // if (!setLoading) return;
-    //   setLoading(true);
-
     services.todoAppService.getTodos().then((data) => {
       setTodos(data);
-      // !data && pushWarning('No data found');
     });
-    // .catch((e) => pushError(e))
-    // .finally(() => setLoading(false));
   }, [setTodos]);
 
   const addTodo = (e?: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
@@ -1874,22 +1826,20 @@ export const useManageTodo = ({
 }: ManageTodoProps) => {
   const [removed, setRemoved] = useState(false);
 
-  const applyRemovedClass = (_id: number) => setRemoved(true);
+  const applyRemovedClass = (id: string) => setRemoved(true);
 
   const complete = () => {
-    services.todoAppService
-      .completeTodo(todo.completed, todo.id)
-      .then(setTodos);
+    services.todoAppService.completeTodo(todo).then(setTodos);
   };
 
   const remove = () => {
-    applyRemovedClass(todo.id);
+    applyRemovedClass(todo._id);
     setHidden(true);
 
     setTimeout(
       () =>
         services.todoAppService
-          .removeTodo(todo.id)
+          .removeTodo(todo._id)
           .then(setTodos)
           .finally(() => setHidden(false)),
       SECOND * 3
@@ -1897,4 +1847,200 @@ export const useManageTodo = ({
   };
 
   return { removed, complete, remove };
+};
+
+//Pomodoro Timer Hooks
+interface PomodoroStartPauseStopProps {
+  executing: IPomodoroTimer;
+  setStartAnimate: (animate: boolean) => void;
+  setTimerDisabled: (disabled: boolean) => void;
+  setPlayerOpened: (opened: boolean) => void;
+  play: () => void;
+  pause: () => void;
+  stop: () => void;
+}
+
+export const useStartPauseStopTimer = ({
+  executing,
+  setStartAnimate,
+  setTimerDisabled,
+  setPlayerOpened,
+  play,
+  pause,
+  stop,
+}: PomodoroStartPauseStopProps) => {
+  const startTimer = () => {
+    setStartAnimate(true);
+    executing.active === "work" && play();
+  };
+
+  const pauseTimer = () => {
+    setStartAnimate(false);
+    executing.active === "work" && pause();
+  };
+
+  const stopTimer = () => {
+    setStartAnimate(false);
+    setTimerDisabled(true);
+    setPlayerOpened(false);
+    stop();
+  };
+
+  return { startTimer, pauseTimer, stopTimer };
+};
+
+interface PomodoroTimerManageProps extends IWithWarning {
+  executing: IPomodoroTimer;
+  newTimer: IPomodoroTimer;
+  setStartAnimate: (animate: boolean) => void;
+  setTimerDisabled: (disabled: boolean) => void;
+  setPlayerOpened: (opened: boolean) => void;
+  setExecuting: (executing: IPomodoroTimer) => void;
+  setPomodoro: (pomodoro: number) => void;
+  stopTimer: () => void;
+  stop: () => void;
+}
+
+export const useManageTimer = ({
+  executing,
+  newTimer,
+  setStartAnimate,
+  setTimerDisabled,
+  setPlayerOpened,
+  setExecuting,
+  setPomodoro,
+  stopTimer,
+  stop,
+  pushWarning,
+}: PomodoroTimerManageProps) => {
+  const settingBtn = () => {
+    setStartAnimate(false);
+    setTimerDisabled(false);
+    setPlayerOpened(false);
+    stop();
+    setExecuting(initialPomodoroSettings);
+    setPomodoro(0);
+  };
+
+  const updateExecute = (updatedSettings: IPomodoroTimer) => {
+    setExecuting(updatedSettings);
+    setTimerTime(updatedSettings);
+  };
+
+  const setCurrentTimer = (active: string) => {
+    updateExecute({ ...executing, active });
+    setTimerTime(executing);
+  };
+
+  const setTimerTime = (evaluate: IPomodoroTimer) => {
+    switch (evaluate.active) {
+      case "work":
+        setPomodoro(evaluate.work);
+        break;
+
+      case "short":
+        setPomodoro(evaluate.short);
+        break;
+
+      case "long":
+        setPomodoro(evaluate.long);
+        break;
+
+      default:
+        setPomodoro(0);
+        break;
+    }
+  };
+
+  const changeTimer = (label: string) => {
+    stopTimer();
+    setCurrentTimer(label);
+    if (executing.active !== label) {
+      const toast = document.querySelector(".Toastify__toast-container")
+        ?.children[0];
+      //@ts-ignore
+      toast && toast.click();
+      setPlayerOpened(false);
+      setTimerDisabled(false);
+    }
+  };
+
+  const handleSubmit = (e?: FormEvent<HTMLButtonElement>) => {
+    e && e.preventDefault();
+
+    !Object.values(newTimer).includes(0)
+      ? updateExecute(newTimer)
+      : pushWarning(
+          "Please, set all timers to values between 1 second and 1 hour"
+        );
+  };
+
+  const countdown = ({ remainingTime }: TimeProps) => {
+    if (!remainingTime) return "00:00";
+
+    const minutes = Math.floor(remainingTime / 60);
+    const seconds = remainingTime % 60;
+
+    return `${getDateValueWithZeros(minutes)}:${getDateValueWithZeros(
+      seconds
+    )}`;
+  };
+
+  return {
+    settingBtn,
+    setCurrentTimer,
+    updateExecute,
+    changeTimer,
+    handleSubmit,
+    countdown,
+  };
+};
+
+interface PomodoroSetTimerProps {
+  newTimer: IPomodoroTimer;
+  setNewTimer: (timer: IPomodoroTimer) => void;
+}
+
+export const useSetTimer = ({
+  newTimer,
+  setNewTimer,
+}: PomodoroSetTimerProps) => {
+  const [focused, setFocused] = useState("");
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.currentTarget;
+    if (value.length > 5) return;
+
+    const changeValue = (key: string) => {
+      parseFloat(value) >= 0 && parseFloat(value) <= 60
+        ? setNewTimer({ ...newTimer, [key]: parseFloat(value) })
+        : parseFloat(value) > 60
+        ? setNewTimer({ ...newTimer, [key]: 60 })
+        : setNewTimer({ ...newTimer, [key]: 0 });
+    };
+
+    changeValue(name);
+  };
+
+  const incTimer = (key: string, value: number) =>
+    value < 60 &&
+    setNewTimer({
+      ...newTimer,
+      [key]:
+        value > 59
+          ? Math.floor(+(value + 1).toFixed(2))
+          : +(value + 1).toFixed(2),
+    });
+
+  const decTimer = (key: string, value: number) =>
+    value > 0 &&
+    setNewTimer({
+      ...newTimer,
+      [key]:
+        value < 1
+          ? Math.ceil(+(value - 1).toFixed(2))
+          : +(value - 1).toFixed(2),
+    });
+
+  return { focused, setFocused, handleChange, incTimer, decTimer };
 };

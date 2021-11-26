@@ -1,11 +1,13 @@
-import { Add } from "@mui/icons-material";
-import React, { FC, useContext } from "react";
-import { NotesAppCtx } from "../../../utils/context";
-import Button from "../../utils/button/Button";
-import ComponentWrapper from "../../utils/componentWrapper/ComponentWrapper";
-import LoaderWrapper from "../../utils/loaderWrapper/LoaderWrapper";
-import Note from "./note/Note";
-import "./notes-app.scss";
+import './notes-app.scss';
+
+import { Add } from '@mui/icons-material';
+import React, { FC, useContext } from 'react';
+
+import { NotesAppCtx } from '../../../utils/context';
+import Button from '../../utils/button/Button';
+import ComponentWrapper from '../../utils/componentWrapper/ComponentWrapper';
+import LoaderWrapper from '../../utils/loaderWrapper/LoaderWrapper';
+import Note from './note/Note';
 
 const NotesApp: FC = () => {
   const { notes, addNote } = useContext(NotesAppCtx);
@@ -19,7 +21,7 @@ const NotesApp: FC = () => {
           </Button>
 
           {notes.map((note) => (
-            <Note key={note.id} item={note} />
+            <Note key={note._id} item={note} />
           ))}
         </LoaderWrapper>
       </div>

@@ -1,13 +1,15 @@
+import './not-found.scss';
+
 import React, { FC } from 'react';
 import { Link, useHistory } from 'react-router-dom';
+
 import { notFoundSrc } from '../../utils/constants';
 import { useWindowTitle } from '../../utils/hooks';
 import { homePath } from '../../utils/route';
 import ComponentWrapper from '../utils/componentWrapper/ComponentWrapper';
-import './not-found.scss';
 
 const NotFound: FC = () => {
-  useWindowTitle('404 Page');
+  useWindowTitle("404 Page");
 
   const history = useHistory();
 

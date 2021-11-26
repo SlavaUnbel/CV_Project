@@ -9,7 +9,7 @@ const HeaderItem: FC<Props> = ({ cred }) => (
     <a
       href={cred.href}
       target={cred.target}
-      rel={cred.target === '_blank' ? 'noreferrer' : undefined}
+      rel={cred.target === "_blank" ? "noreferrer" : undefined}
     >
       {cred.icon}
 

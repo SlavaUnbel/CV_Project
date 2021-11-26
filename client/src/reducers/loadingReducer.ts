@@ -2,7 +2,7 @@ import { createSymbiote } from 'redux-symbiote';
 
 export interface LoadingState {
   loading: boolean;
-};
+}
 
 const initialLoadingState: LoadingState = {
   loading: false,
@@ -10,11 +10,9 @@ const initialLoadingState: LoadingState = {
 
 const symbiotes = {
   loading: {
-    set: (state: LoadingState, loading: boolean) => ({ ...state, loading })
-  }
+    set: (state: LoadingState, loading: boolean) => ({ ...state, loading }),
+  },
 };
 
-export const {
-  actions: loadingActions,
-  reducer: loadingReducer
-} = createSymbiote(initialLoadingState, symbiotes);
+export const { actions: loadingActions, reducer: loadingReducer } =
+  createSymbiote(initialLoadingState, symbiotes);

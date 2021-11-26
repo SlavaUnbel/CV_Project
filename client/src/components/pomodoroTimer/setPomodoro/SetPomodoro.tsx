@@ -1,4 +1,5 @@
 import React, { FC, useContext } from 'react';
+
 import { PomodoroTimerCtx } from '../../../utils/context';
 import Button from '../../utils/button/Button';
 import ToastContainer from '../../utils/toastContainer/ToastContainer';
@@ -36,7 +37,11 @@ const SetPomodoro: FC = () => {
           />
         </div>
 
-        <Button onClick={(e) => handleSubmit(e)}>Set Timer</Button>
+        <div className="set">
+          <small className="hint">Hint: all values are given in minutes.</small>
+
+          <Button onClick={(e) => handleSubmit(e)}>Set Timer</Button>
+        </div>
       </form>
 
       <ToastContainer />

@@ -1,42 +1,23 @@
-import { Delete, Edit, EditOff } from "@mui/icons-material";
-import React, { FC, useContext } from "react";
-import { NotesAppCtx } from "../../../../utils/context";
-import { useNotesAppInput } from "../../../../utils/hooks";
+import React, { FC } from 'react';
+
+import NoteActions from './noteActions/NoteActions';
+import NoteBody from './noteBody/NoteBody';
+import NoteTitle from './noteTitle/NoteTitle';
 
 interface Props {
   item: INotesApp;
 }
 
-const Note: FC<Props> = ({ item }) => {
-  const { editNote, removeNote } = useContext(NotesAppCtx);
+const Note: FC<Props> = ({ item }) => (
+  <div className="note">
+    <div className="tools">
+      <NoteTitle item={item} />
 
-  const { note, changeInput } = useNotesAppInput(item);
-
-  return (
-    <div className="note">
-      <div className="tools">
-        <button className="edit" onClick={() => editNote({ ...item, note })}>
-          {item.editing ? (
-            <Edit className="icon" />
-          ) : (
-            <EditOff className="icon" />
-          )}
-        </button>
-
-        <button className="delete" onClick={() => removeNote(item)}>
-          <Delete className="icon" />
-        </button>
-      </div>
-
-      <div className={`main ${item.editing ? "hidden" : ""}`}>{note}</div>
-
-      <textarea
-        className={`${item.editing ? "" : "hidden"}`}
-        onInput={changeInput}
-        value={note}
-      />
+      <NoteActions item={item} />
     </div>
-  );
-};
+
+    <NoteBody item={item} />
+  </div>
+);
 
 export default Note;

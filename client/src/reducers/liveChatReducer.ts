@@ -10,8 +10,8 @@ export interface LiveChatState {
 }
 
 const initialLiveChatState: LiveChatState = {
-  username: '',
-  room: '',
+  username: "",
+  room: "",
   chatShown: false,
   messageList: [],
   roomList: [],

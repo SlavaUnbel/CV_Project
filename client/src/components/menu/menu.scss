@@ -1,4 +1,4 @@
-@import '../../index.scss';
+@import "../../index.scss";
 
 .menu {
   @include container;
@@ -43,9 +43,14 @@
     li {
       margin: 2rem 0;
       cursor: pointer;
+      transition: all 0.3s ease;
+
+      &.active {
+        font-weight: 500;
+      }
 
       &:hover {
-        font-weight: 500;
+        transform: translateY(-0.2rem);
       }
     }
   }

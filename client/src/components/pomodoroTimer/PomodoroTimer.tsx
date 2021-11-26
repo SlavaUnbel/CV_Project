@@ -1,7 +1,9 @@
+import './pomodoro-timer.scss';
+
 import React, { FC, useContext, useEffect } from 'react';
+
 import { PomodoroTimerCtx } from '../../utils/context';
 import ComponentWrapper from '../utils/componentWrapper/ComponentWrapper';
-import './pomodoro-timer.scss';
 import Pomodoro from './pomodoro/Pomodoro';
 import SetPomodoro from './setPomodoro/SetPomodoro';
 
@@ -12,7 +14,7 @@ const PomodoroTimer: FC = () => {
   useEffect(
     () => updateExecute(executing),
     //eslint-disable-next-line
-    [executing, startAnimate],
+    [executing, startAnimate]
   );
 
   return (

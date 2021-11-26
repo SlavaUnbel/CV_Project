@@ -17,18 +17,12 @@ export default class PortfolioItemsServiceMock extends PortfolioItemsService {
     return database.rotatingNavigation;
   }
 
-  public async getSplitLandingPageData(): Promise<ISplitLandingPage[]> {
-    await delay(SECOND / 3);
-
-    return database.splitLandingPage;
-  }
-
   public async getDadJokesDataFromApi(): Promise<IDadJokes> {
     await delay(SECOND / 3);
 
-    return await fetch('https://icanhazdadjoke.com', {
+    return await fetch("https://icanhazdadjoke.com", {
       headers: {
-        Accept: 'application/json',
+        Accept: "application/json",
       },
     }).then((data) => data.json());
   }
@@ -52,30 +46,30 @@ export default class PortfolioItemsServiceMock extends PortfolioItemsService {
   }
 
   public async getGithubProfilesUserDataFromApi(
-    username: string,
+    username: string
   ): Promise<any> {
     await delay(SECOND / 3);
 
     return await fetch(`${githubUsersApi}${username}`).then((data) =>
-      data.json(),
+      data.json()
     );
   }
 
   public async getGithubProfilesReposDataFromApi(
-    username: string,
+    username: string
   ): Promise<any> {
     await delay(SECOND / 3);
 
     return await fetch(`${githubUsersApi}${username}/repos?sort=created`).then(
-      (data) => data.json(),
+      (data) => data.json()
     );
   }
 
   public async getTestimonialsSwitcherDataById(
-    id: number,
+    id: number
   ): Promise<ITestimonialsSwitcher> {
     await delay(SECOND / 3);
 
-    return database.testimonialsSwitcher[id]
+    return database.testimonialsSwitcher[id];
   }
 }

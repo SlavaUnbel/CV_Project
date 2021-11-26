@@ -11,7 +11,7 @@ export interface AudioPlayerState {
 
 const initialAudioPlayerState: AudioPlayerState = {
   list: [],
-  audio: '',
+  audio: "",
   isOpen: false,
   isPlaying: false,
   autoPlay: false,
@@ -35,19 +35,23 @@ const symbiotes = {
     close: (state: AudioPlayerState) => ({ ...state, isOpen: false }),
   },
   isPlaying: {
-    play: (state: AudioPlayerState, autoPlay?: boolean) => ({ ...state, isPlaying: true }),
+    play: (state: AudioPlayerState, autoPlay?: boolean) => ({
+      ...state,
+      isPlaying: true,
+    }),
     pause: (state: AudioPlayerState) => ({ ...state, isPlaying: false }),
     stop: (state: AudioPlayerState) => ({ ...state, isPlaying: false }),
   },
   autoPlay: {
-    set: (state: AudioPlayerState, autoPlay: boolean) => ({ ...state, autoPlay })
+    set: (state: AudioPlayerState, autoPlay: boolean) => ({
+      ...state,
+      autoPlay,
+    }),
   },
   repeat: {
-    set: (state: AudioPlayerState, repeat: boolean) => ({ ...state, repeat })
-  }
+    set: (state: AudioPlayerState, repeat: boolean) => ({ ...state, repeat }),
+  },
 };
 
-export const {
-  actions: audioPlayerActions,
-  reducer: audioPlayerReducer,
-} = createSymbiote(initialAudioPlayerState, symbiotes);
+export const { actions: audioPlayerActions, reducer: audioPlayerReducer } =
+  createSymbiote(initialAudioPlayerState, symbiotes);

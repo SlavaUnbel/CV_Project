@@ -10,9 +10,11 @@
   @include flex(column nowrap, center, space-between);
 
   h1 {
-    font-size: 3rem;
+    @include flex(column nowrap, center, center);
+    font-size: 2.8rem;
     overflow: hidden;
-    margin: 1rem 0;
+    margin-top: 1rem;
+    height: 10vh;
 
     @include screen-1300px {
       font-size: 2.5rem;
@@ -34,16 +36,11 @@
   .options {
     @include flex(row nowrap, center, space-between);
     overflow: hidden;
-    margin: 0.5rem;
     padding: 0.5rem;
     width: 70vw;
 
-    @include screen-1600px {
-      width: 80vw;
-    }
-
     @include screen-1000px {
-      width: 90vw;
+      width: 80vw;
     }
 
     @include mobile {
@@ -55,11 +52,10 @@
     }
 
     button {
-      padding: 0.75rem;
+      padding: 0.5rem;
     }
 
     .view {
-      margin: 0 2rem;
       flex: 2;
 
       .btn {
@@ -67,7 +63,7 @@
         background: transparent;
         border: none;
         outline: none;
-        width: 7rem;
+        width: auto;
         border-radius: 20px;
         transition: all 0.5s ease;
 
@@ -106,16 +102,14 @@
     }
 
     .filter {
-      margin: 0 2rem;
-      cursor: pointer;
       flex: 2;
     }
   }
 
   .container {
-    @include flex(row wrap, center, space-evenly);
+    @include flex(row wrap, center, space-around);
     width: 70vw;
-    height: 70vh;
+    height: 90vh;
     overflow: hidden;
 
     @include screen-1600px {
@@ -151,7 +145,7 @@
       }
 
       &.scaled {
-        transform: scale(2.4);
+        transform: scale(2.25);
 
         .img-wrapper {
           margin: 0;

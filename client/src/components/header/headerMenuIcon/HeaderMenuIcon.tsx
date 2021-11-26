@@ -1,4 +1,5 @@
 import React, { FC, useContext } from 'react';
+
 import { HeaderCtx } from '../../../utils/context';
 
 const HeaderMenuIcon: FC = () => {

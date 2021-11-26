@@ -1,4 +1,5 @@
 import React, { FC, useContext } from 'react';
+
 import { MenuCtx } from '../../../utils/context';
 import { useMenuRouter } from '../../../utils/hooks';
 
@@ -9,9 +10,13 @@ interface Props {
 const MenuItem: FC<Props> = ({ title }) => {
   const { openCloseMenu } = useContext(MenuCtx);
 
-  const redirect = useMenuRouter(title, openCloseMenu);
+  const { active, redirect } = useMenuRouter(title, openCloseMenu);
 
-  return <li onClick={redirect}>{title}</li>;
+  return (
+    <li onClick={redirect} className={`${active ? "active" : ""}`}>
+      {title}
+    </li>
+  );
 };
 
 export default MenuItem;
