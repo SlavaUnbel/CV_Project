@@ -15,11 +15,9 @@ export const expandingCardsSrc =
 export const rotatingNavigationSrc =
   process.env.PUBLIC_URL + "/images/rotatingNavigation";
 
-export const movieAppApi =
-  "https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=34c0884110d32daca6dae564a5df9308&page=1";
-export const movieAppImagesApi = "https://image.tmdb.org/t/p/w500";
-export const movieAppSearchApi =
-  'https://api.themoviedb.org/3/search/movie?api_key=34c0884110d32daca6dae564a5df9308&query="';
+export const movieAppApi = process.env.REACT_APP_MOVIE_API_URL;
+export const movieAppImagesApi = process.env.REACT_APP_MOVIE_API_IMAGES_URL;
+export const movieAppSearchApi = process.env.REACT_APP_MOVIE_API_SEARCH_URL;
 
 export const days = [
   "Sunday",
@@ -45,7 +43,7 @@ export const months = [
   "Dec",
 ];
 
-export const githubUsersApi = "https://api.github.com/users/";
+export const githubUsersApi = process.env.REACT_APP_GITHUB_API_URL;
 
 export const testimonialsSwitcherSrc =
   process.env.PUBLIC_URL + "/images/testimonialsSwitcher";

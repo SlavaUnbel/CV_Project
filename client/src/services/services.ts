@@ -13,7 +13,7 @@ import PomodoroTimerServiceMock from './mock/PomodoroTimerServiceMock';
 import PortfolioItemsServiceMock from './mock/PortfolioItemsServiceMock';
 import PortfolioServiceMock from './mock/PortfolioServiceMock';
 
-axios.defaults.baseURL = "http://localhost:8080";
+axios.defaults.baseURL = process.env.REACT_APP_BASE_URL;
 axios.defaults.withCredentials = true;
 
 export interface Services {
