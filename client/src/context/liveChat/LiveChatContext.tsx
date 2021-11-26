@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import { io } from 'socket.io-client';
+
 import LiveChat from '../../components/liveChat/LiveChat';
 import { LiveChatCtx } from '../../utils/context';
 import { useRoomManage, useWindowTitle } from '../../utils/hooks';
@@ -24,7 +25,7 @@ interface Props {
   setRoomChoice: (choice: boolean) => void;
 }
 
-const socket = io('http://localhost:8081');
+const socket = io("http://localhost:8081");
 
 const LiveChatContext: FC<Props> = ({
   username,
@@ -45,7 +46,7 @@ const LiveChatContext: FC<Props> = ({
   roomChoice,
   setRoomChoice,
 }) => {
-  useWindowTitle('Live Chat');
+  useWindowTitle("Live Chat");
 
   const { joinRoom, leaveRoom } = useRoomManage({
     socket,

@@ -1,23 +1,19 @@
 const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
+require("dotenv").config();
 
 const app = express();
-const PORT_MAIN = 8080;
-const PORT_SOCKET = 8081;
 app.use(express.json());
 app.use(
   cors({
-    origin: ["http://localhost:3000"],
+    origin: [process.env.CLIENT_API],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
 );
 
-mongoose.connect(
-  "mongodb+srv://SlavaUnbel:Unbelievable19@cluster0.kehgh.mongodb.net/cvproject",
-  { useNewUrlParser: true }
-);
+mongoose.connect(process.env.MONGODB_SECRET, { useNewUrlParser: true });
 
 //Auth Project Session and Cookies Config
 const authProject = require("./src/authProject/authProject");
@@ -35,8 +31,8 @@ app.use("/todoApp", todoApp);
 
 //Live Chat Sockets Connection
 const socket = require("./src/liveChat/socketsConfig");
-socket(app, PORT_SOCKET);
+socket(app, process.env.SOCKET_PORT);
 
-app.listen(PORT_MAIN, () =>
-  console.log(`server is running on port ${PORT_MAIN}`)
+app.listen(process.env.BASE_PORT, () =>
+  console.log(`server is running on port ${process.env.BASE_PORT}`)
 );

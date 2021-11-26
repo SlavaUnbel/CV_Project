@@ -1060,7 +1060,7 @@ export const useMovieAppApi = ({
     [setMovies, setLoading, pushError, pushWarning]
   );
 
-  useEffect(() => getData(movieAppApi), [getData]);
+  useEffect(() => {movieAppApi && getData(movieAppApi)}, [getData]);
 
   return getData;
 };
