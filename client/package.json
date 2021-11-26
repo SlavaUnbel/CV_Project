@@ -17,6 +17,7 @@
     "@types/react-toastify": "^4.1.0",
     "@types/wavesurfer.js": "^5.2.2",
     "axios": "^0.21.4",
+    "dotenv": "^10.0.0",
     "emailjs-com": "^3.2.0",
     "emoji-picker-react": "^3.4.8",
     "ityped": "^1.0.3",
