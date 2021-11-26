@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
+
 import TestimonialsSwitcherContext from '../../context/portfolioItems/TestimonialsSwitcherContext';
 import { loadingActions } from '../../reducers/loadingReducer';
 import { messageActions } from '../../reducers/messageReducer';
