@@ -1,10 +1,11 @@
-@import '../../../index.scss';
+@import "../../../index.scss";
 
 .incrementing-counter__container {
   @include container;
   @include flex(row nowrap, center, center);
   background-color: var(--bg-incrementing-counter-color);
   color: var(--white-color);
+  font-family: "Soleil Book";
 
   @include mobile {
     @include flex(column nowrap, center, center);
@@ -16,11 +17,10 @@
 
   .counter-container {
     @include flex(column nowrap, center, center);
-    font-family: 'Soleil Book';
     margin: 2rem 3rem;
     width: 20vw;
 
-    @include screen-1000px {
+    @include screen(1000px) {
       margin: 1.5rem 2.5rem;
     }
 
@@ -36,7 +36,7 @@
     .icon {
       font-size: 3rem;
 
-      @include screen-1000px {
+      @include screen(1000px) {
         font-size: 2.5rem;
       }
 
@@ -52,10 +52,8 @@
     .counter {
       font-size: 4rem;
       margin-top: 0.5rem;
-      font-family: inherit;
-      overflow: hidden;
 
-      @include screen-1000px {
+      @include screen(1000px) {
         font-size: 3.5rem;
       }
 
@@ -71,11 +69,9 @@
     }
 
     span {
-      font-family: inherit;
       font-size: 1.25rem;
-      overflow: hidden;
 
-      @include screen-1000px {
+      @include screen(1000px) {
         font-size: 1rem;
       }
 

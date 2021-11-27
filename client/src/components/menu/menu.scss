@@ -3,6 +3,7 @@
 .menu {
   @include container;
   @include flex(column nowrap, center, center);
+  font-family: "Roboto", sans-serif;
   width: 15rem;
   background-color: var(--primary-color);
   position: fixed;
@@ -11,7 +12,7 @@
   z-index: 4;
   transition: all 1s ease;
 
-  @include screen-1000px {
+  @include screen(1000px) {
     top: 3.8rem;
   }
 
@@ -32,7 +33,6 @@
   }
 
   ul {
-    margin: 0;
     padding: 0;
     list-style: none;
     font-size: 1.8rem;

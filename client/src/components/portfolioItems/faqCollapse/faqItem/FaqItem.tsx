@@ -1,7 +1,7 @@
-import { Close, KeyboardArrowDown } from '@mui/icons-material';
+import { IconButton } from '@mui/material';
 import React, { FC } from 'react';
+
 import { useToggleClass } from '../../../../utils/hooks';
-import Button from '../../../utils/button/Button';
 
 interface Props {
   data: IFaqCollapse;
@@ -12,14 +12,14 @@ const FaqItem: FC<Props> = ({ data }) => {
 
   return (
     <div className="faq-wrapper-container">
-      <div className={`faq ${newClass ? 'active' : ''}`}>
+      <div className={`faq ${newClass ? "active" : ""}`}>
         <div className="faq-head">
           <h3>{data.title}</h3>
 
-          <Button onClick={toggleClass}>
-            <KeyboardArrowDown className="arrow" />
-            <Close className="close" />
-          </Button>
+          <IconButton
+            onClick={toggleClass}
+            className={`btn ${newClass ? "active" : ""}`}
+          />
         </div>
 
         <p>{data.answer}</p>

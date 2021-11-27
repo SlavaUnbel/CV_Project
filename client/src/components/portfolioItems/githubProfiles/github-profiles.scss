@@ -1,9 +1,10 @@
-@import '../../../index.scss';
+@import "../../../index.scss";
 
 .github-profiles__container {
   @include container;
   @include flex(column nowrap, center, center);
   background: var(--bg-github-profiles-color);
+  font-family: "Poppins", sans-serif;
 
   .user-form {
     @include flex(row nowrap, center, center);
@@ -20,7 +21,6 @@
 
     input {
       @include flex();
-      font-family: 'Poppins';
       width: 100%;
       background: var(--items-bg-github-profiles-color);
       border: none;
@@ -103,54 +103,46 @@
       margin: 1.5rem;
     }
 
-    .img-wrapper {
-      overflow: hidden;
+    .img-wrapper .link {
+      position: relative;
 
-      .link {
-        position: relative;
-        overflow: hidden;
+      &:before {
+        content: "";
+        position: absolute;
+        border: 20px solid var(--bg-github-profiles-color);
+        border-radius: 50%;
+        height: 7.5rem;
+        width: 7.5rem;
+        animation: pulsate 2s ease-out infinite;
+        opacity: 0;
+        z-index: 0;
 
-        &:before {
-          content: '';
-          position: absolute;
-          border: 20px solid var(--bg-github-profiles-color);
-          border-radius: 50%;
-          height: 10rem;
-          width: 10rem;
-          animation: pulsate 2s ease-out infinite;
-          opacity: 0;
-          z-index: 0;
-          overflow: hidden;
-
-          @keyframes pulsate {
-            0% {
-              transform: scale(0.6, 0.6);
-              opacity: 0;
-            }
-            50% {
-              opacity: 1;
-            }
-            100% {
-              transform: scale(1.05, 1.05);
-              opacity: 0;
-            }
+        @keyframes pulsate {
+          0% {
+            transform: scale(0.6, 0.6);
+            opacity: 0;
+          }
+          50% {
+            opacity: 1;
+          }
+          100% {
+            transform: scale(1.05, 1.05);
+            opacity: 0;
           }
         }
+      }
 
-        .avatar {
-          border-radius: 50%;
-          height: 10rem;
-          width: 10rem;
-          position: relative;
-          flex: 3;
-          overflow: hidden;
-          padding: 0.5rem;
-        }
+      .avatar {
+        border-radius: 50%;
+        height: 10rem;
+        width: 10rem;
+        position: relative;
+        flex: 3;
+        padding: 0.5rem;
       }
     }
 
     h1 {
-      font-family: 'Poppins';
       color: var(--white-color);
       text-align: center;
     }
@@ -169,12 +161,10 @@
 
       h2 {
         color: var(--lightgrey-color);
-        font-family: 'Poppins';
       }
 
       p {
         color: var(--lightgrey-color);
-        font-family: 'Poppins';
         margin: 1rem 0;
 
         @include mobile {
@@ -205,7 +195,6 @@
         li {
           @include flex(row nowrap, center, center);
           color: var(--lightgrey-color);
-          font-family: 'Poppins';
           margin-right: 0.5rem;
 
           @include mobile {
@@ -218,7 +207,6 @@
 
           strong {
             color: var(--lightgrey-color);
-            font-family: 'Poppins';
             font-size: 0.9rem;
             margin-left: 0.5rem;
 
@@ -247,12 +235,17 @@
         .repo {
           display: inline-flex;
           color: var(--white-color);
-          font-family: 'Poppins';
           text-decoration: none;
           background: var(--repo-github-profiles-color);
           font-size: 0.7rem;
           padding: 0.5rem;
           margin: 0 0 0.5rem 0.5rem;
+          transition: all 0.5s ease;
+
+          &:hover {
+            color: var(--repo-github-profiles-color);
+            background: var(--white-color);
+          }
         }
       }
     }

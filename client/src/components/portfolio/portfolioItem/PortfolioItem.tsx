@@ -1,3 +1,4 @@
+import { StarRounded } from '@mui/icons-material';
 import React, { FC, useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -20,7 +21,7 @@ const PortfolioItem: FC<Props> = ({ item }) => {
   return (
     <div className={`item ${itemsPerPage === 1 ? "scaled" : ""}`}>
       <div
-        className="img-wrapper"
+        className={`img-wrapper ${item.criteria}`}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => {
           setLoaded(false);
@@ -28,6 +29,8 @@ const PortfolioItem: FC<Props> = ({ item }) => {
         }}
       >
         <Link to={item.link}>{mediaElement}</Link>
+
+        <StarRounded className="star" />
       </div>
 
       <h3>{item.title}</h3>
