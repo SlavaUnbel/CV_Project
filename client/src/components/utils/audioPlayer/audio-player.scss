@@ -3,7 +3,6 @@
 .audio-player__wrapper {
   width: 100%;
   height: 100%;
-  overflow: hidden;
   padding: 1rem;
 
   @include mobile {
@@ -59,7 +58,6 @@
 
   input[type="range"] {
     appearance: none;
-    overflow: hidden;
     background-color: #c9ccea;
     border-radius: 10px;
 

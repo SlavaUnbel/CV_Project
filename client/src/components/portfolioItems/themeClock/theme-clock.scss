@@ -9,6 +9,7 @@
   @include container;
   @include flex(row nowrap, center, center);
   transition: all 0.5s ease;
+  font-family: "Lato", sans-serif;
 
   &.dark {
     --primary-UI-color: var(--white-color);
@@ -18,14 +19,13 @@
   }
 
   .theme-toggle {
-    font-family: "Poppins";
     background: var(--primary-UI-color);
     color: var(--secondary-UI-color);
     border: none;
     border-radius: 4px;
     padding: 0.5rem 0.7rem;
     position: absolute;
-    top: 6rem;
+    top: 5rem;
   }
 
   .clock-container {
@@ -88,19 +88,16 @@
     }
 
     .time {
-      font-family: "Poppins";
       font-size: 5rem;
     }
 
     .date {
-      font-family: "Poppins";
       color: var(--date-theme-clock-color);
       font-size: 1rem;
       letter-spacing: 0.5px;
       text-transform: uppercase;
 
       .circle {
-        font-family: "Poppins";
         background: var(--primary-UI-color);
         color: var(--secondary-UI-color);
         border-radius: 50%;

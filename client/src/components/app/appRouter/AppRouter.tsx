@@ -44,7 +44,6 @@ import {
   portfolioPath,
   randomChoicePickerPath,
   rotatingNavigationPath,
-  scrollAnimationPath,
   testimonialsSwitcherPath,
   themeClockPath,
   todoAppPath,
@@ -52,7 +51,6 @@ import {
 import NotFound from '../../notFound/NotFound';
 import FormWaveAnimation from '../../portfolioItems/formWaveAnimation/FormWaveAnimation';
 import Hoverboard from '../../portfolioItems/hoverboard/Hoverboard';
-import ScrollAnimation from '../../portfolioItems/scrollAnimation/ScrollAnimation';
 
 const AppRouter: FC = () => (
   <Switch>
@@ -72,7 +70,6 @@ const AppRouter: FC = () => (
       path={rotatingNavigationPath}
       component={RotatingNavigationContainer}
     />
-    <Route exact path={scrollAnimationPath} component={ScrollAnimation} />
     <Route exact path={formWaveAnimationPath} component={FormWaveAnimation} />
     <Route exact path={dadJokesPath} component={DadJokesContainer} />
     <Route exact path={faqCollapsePath} component={FaqCollapseContainer} />

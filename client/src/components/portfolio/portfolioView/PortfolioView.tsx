@@ -1,8 +1,7 @@
-import { AspectRatio, GridView } from '@mui/icons-material';
 import React, { FC, useContext } from 'react';
 
 import { PortfolioCtx } from '../../../utils/context';
-import Button from '../../utils/button/Button';
+import MUICustomSwitch from '../../utils/MUICustomSwitch/MUICustomSwitch';
 
 const PortfolioView: FC = () => {
   const { setActivePage, itemsPerPage, setItemsPerPage } =
@@ -15,11 +14,9 @@ const PortfolioView: FC = () => {
 
   return (
     <div className="view">
-      <Button onClick={switchView}>
-        {itemsPerPage === 1 ? <GridView /> : <AspectRatio />}
+      <small>view</small>
 
-        <p>{itemsPerPage === 1 ? "Single" : "Grid"}</p>
-      </Button>
+      <MUICustomSwitch onChange={switchView} />
     </div>
   );
 };

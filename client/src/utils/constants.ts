@@ -1,9 +1,10 @@
 export const isMobile = window.innerWidth <= 800 && window.innerHeight <= 1000;
 
 export const avatarSrc = process.env.PUBLIC_URL + "/images/general/avatar.png";
-export const shakeSrc = process.env.PUBLIC_URL + "/images/general/shake.svg";
+export const contactSrc =
+  process.env.PUBLIC_URL + "/images/general/contact.svg";
 export const notFoundSrc =
-  process.env.PUBLIC_URL + "/images/general/not-found.jpg";
+  process.env.PUBLIC_URL + "/images/general/not-found.png";
 export const cvReference = process.env.PUBLIC_URL + "/my-cv.pdf";
 export const phoneNumber = "+375 (44) 786-75-82";
 export const email = "slavlen1999@gmail.com";

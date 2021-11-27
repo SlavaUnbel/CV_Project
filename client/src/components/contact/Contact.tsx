@@ -2,7 +2,7 @@ import './contact.scss';
 
 import React, { FC, useContext } from 'react';
 
-import { shakeSrc } from '../../utils/constants';
+import { contactSrc } from '../../utils/constants';
 import { ContactCtx } from '../../utils/context';
 import Button from '../utils/button/Button';
 import ComponentWrapper from '../utils/componentWrapper/ComponentWrapper';
@@ -15,7 +15,7 @@ const Contact: FC = () => {
     <ComponentWrapper>
       <div className="contact" onWheel={onWheel}>
         <div className="left">
-          <img src={shakeSrc} alt="" />
+          <img src={contactSrc} alt="" />
         </div>
 
         <div className="right">

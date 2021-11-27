@@ -200,21 +200,17 @@ export const useFetchPortfolioData = ({
 interface PortfolioPaginationProps {
   active: number;
   pagesCount: number;
-  itemsPerPage: number;
   setActivePage: (active: number) => void;
 }
 
 export const usePortfolioPagination = ({
   active,
   pagesCount,
-  itemsPerPage,
   setActivePage,
 }: PortfolioPaginationProps) => {
   const [disabled, setDisabled] = useState(true);
 
-  const paginationValue = `${active}${
-    active === 1 ? "st" : active === 2 ? "nd" : active === 3 ? "rd" : "th"
-  } ${itemsPerPage === 1 ? "Work" : "Page"}`;
+  const paginationValue = `${active} of ${pagesCount}`;
 
   const inputHandlers = {
     onFocus: (e: any) => {
@@ -224,15 +220,14 @@ export const usePortfolioPagination = ({
     onInput: (e: any) =>
       +e.currentTarget.value > pagesCount
         ? setActivePage(pagesCount)
-        : +e.currentTarget.value < 1 ||
-          isNaN(+e.currentTarget.value) ||
-          e.currentTarget.value === ""
+        : +e.currentTarget.value < 1 || e.currentTarget.value === ""
         ? setActivePage(1)
         : setActivePage(+e.currentTarget.value),
     onBlur: (e: any) => {
       setDisabled(true);
       e.currentTarget.value = paginationValue;
     },
+    onKeyPress: (e: any) => isNaN(e.key) && e.preventDefault(),
   };
 
   return { disabled, paginationValue, inputHandlers };
@@ -533,36 +528,6 @@ export const useNavigationAnimation = () => {
   };
 
   return { ref, open, close };
-};
-
-//Scroll Animation Hooks
-export const useScrollingAnimation = () => {
-  const [boxes, setBoxes] = useState<NodeListOf<HTMLDivElement>>();
-  const [wrapper, setWrapper] = useState<HTMLElement | null>();
-  const ref: LegacyRef<HTMLDivElement> = useRef(null);
-
-  const showBoxesFunction = useCallback(
-    () =>
-      boxes?.forEach((box) =>
-        box.getBoundingClientRect().top < (window.innerHeight / 5) * 4
-          ? box.classList.add("show")
-          : box.classList.remove("show")
-      ),
-    [boxes]
-  );
-
-  useEffect(() => {
-    setBoxes(ref.current?.childNodes as NodeListOf<HTMLDivElement>);
-    setWrapper(ref.current?.parentElement);
-    showBoxesFunction();
-  }, [ref, showBoxesFunction]);
-
-  useEffect(
-    () => wrapper?.addEventListener("scroll", showBoxesFunction),
-    [wrapper, showBoxesFunction]
-  );
-
-  return ref;
 };
 
 //Form Wave Animation Hooks
@@ -889,6 +854,7 @@ export const useAuthProjectSubmit = ({
 
 //Random Choice Picker Hooks
 export const useChooseRandomTag = () => {
+  const [disabled, setDisabled] = useState(false);
   const tagsRef: LegacyRef<HTMLDivElement> = useRef(null);
   const areaRef: LegacyRef<HTMLTextAreaElement> = useRef(null);
 
@@ -921,6 +887,8 @@ export const useChooseRandomTag = () => {
     const times = 30;
     const timeout = SECOND / 10;
 
+    setDisabled(true);
+
     const interval = setInterval(() => {
       const randomTag = pickRandomTag();
 
@@ -939,6 +907,8 @@ export const useChooseRandomTag = () => {
 
         highlightTag(randomTag);
       }, timeout);
+
+      setDisabled(false);
     }, times * timeout);
   };
 
@@ -956,19 +926,15 @@ export const useChooseRandomTag = () => {
   const unHighlightTag = (tag?: HTMLSpanElement) =>
     tag?.classList.remove("highlight");
 
-  return { tagsRef, areaRef, handleKeyUp, chooseRandomTag };
+  return { disabled, tagsRef, areaRef, handleKeyUp, chooseRandomTag };
 };
 
-export const useRandomChoicePickerOnMobile = (
-  ref: RefObject<HTMLTextAreaElement>,
-  callback: () => void
-) => {
-  return () => {
+export const useRandomChoicePickerOnMobile =
+  (ref: RefObject<HTMLTextAreaElement>, callback: () => void) => () => {
     if (!ref.current) return;
     ref.current.value = "";
     callback();
   };
-};
 
 //Animated Navigation Hooks
 interface AnimatedNavigationProps
@@ -1060,7 +1026,9 @@ export const useMovieAppApi = ({
     [setMovies, setLoading, pushError, pushWarning]
   );
 
-  useEffect(() => {movieAppApi && getData(movieAppApi)}, [getData]);
+  useEffect(() => {
+    movieAppApi && getData(movieAppApi);
+  }, [getData]);
 
   return getData;
 };
@@ -1136,7 +1104,7 @@ export const useEstimateRemainedWater = () => {
       percentageRef.current.style.height = "0";
     } else {
       percentageRef.current.style.height = `${
-        (filledCups.length / cups.length) * (isMobile ? 16 : 24)
+        (filledCups.length / cups.length) * (isMobile ? 15 : 20)
       }rem`;
       percentageRef.current.innerText = `${
         (filledCups.length / cups.length) * 100
@@ -1144,14 +1112,18 @@ export const useEstimateRemainedWater = () => {
     }
 
     if (filledCups.length === cups.length) {
-      remainedRef.current.style.height = "0";
-    } else if (cups.length - filledCups.length === 1 && isMobile) {
+      remainedRef.current.style.opacity = "0";
+    } else if (cups.length - filledCups.length === 1) {
       remainedRef.current.style.flexFlow = "row wrap";
+      remainedRef.current.style.justifyContent = "space-evenly";
+      remainedRef.current.style.opacity = "1";
     } else {
       remainedRef.current.style.flexFlow = "column nowrap";
+      remainedRef.current.style.justifyContent = "center";
+      remainedRef.current.style.opacity = "1";
     }
 
-    litersRef.current.innerText = `${2 - (250 * filledCups.length) / 1000}L`;
+    litersRef.current.innerText = `${2 - 0.25 * filledCups.length}L`;
   };
 
   return { litersRef, remainedRef, percentageRef, cupRef, fillCup };

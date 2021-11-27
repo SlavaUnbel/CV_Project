@@ -1,9 +1,10 @@
-@import '../../../index.scss';
+@import "../../../index.scss";
 
 .drink-water__container {
   @include container;
   @include flex(column nowrap, center, center);
   background: var(--bg-drink-water-color);
+  font-family: "Lato", sans-serif;
   color: var(--white-color);
 
   @include mobile {
@@ -15,11 +16,9 @@
   }
 
   h1 {
-    font-family: 'Poppins';
     font-weight: 600;
     margin-top: 0.5rem;
     font-size: 2rem;
-    overflow: hidden;
 
     @include mobile {
       font-size: 1.5rem;
@@ -33,10 +32,8 @@
   }
 
   h3 {
-    font-family: 'Poppins';
     font-weight: 500;
-    font-size: 1.4rem;
-    overflow: hidden;
+    font-size: 1.25rem;
 
     @include mobile {
       font-size: 1.1rem;
@@ -53,16 +50,11 @@
     flex: 1;
     transition: 0.3s ease;
     z-index: 2;
-
-    span,
-    small {
-      font-family: 'Poppins';
-    }
+    width: 100%;
 
     span {
       font-size: 1.2rem;
       font-weight: bold;
-      overflow: hidden;
 
       @include mobile {
         @include flex(row wrap, center, center);
@@ -78,7 +70,6 @@
 
     small {
       font-size: 0.9rem;
-      overflow: hidden;
 
       @include mobile {
         font-size: 0.7rem;
@@ -92,31 +83,29 @@
 
   .cup {
     @include flex(column nowrap, center, center);
-    font-family: 'Poppins';
     background: var(--white-color);
     border: 3px solid var(--border-drink-water-color);
     color: var(--border-drink-water-color);
     border-radius: 0 0 2.5rem 2.5rem;
-    height: 24rem;
-    width: 12rem;
-    overflow: hidden;
-    margin: 2rem 0;
+    height: 20rem;
+    width: 10rem;
+    margin: 1rem 0;
 
     @include mobile {
-      height: 16rem;
-      width: 8rem;
+      height: 15rem;
+      width: 7.5rem;
       margin: 0.5rem 0;
     }
 
     @include tablet {
-      height: 24rem;
-      width: 12rem;
+      height: 20rem;
+      width: 10rem;
       margin: 2rem 0;
     }
 
     &.cup-small {
-      height: 6rem;
-      width: 3rem;
+      height: 5rem;
+      width: 2.5rem;
       border-radius: 0 0 1rem 1rem;
       background: rgba(255, 255, 255, 0.9);
       cursor: pointer;
@@ -133,8 +122,8 @@
       }
 
       @include tablet {
-        height: 6rem;
-        width: 3rem;
+        height: 5rem;
+        width: 2.5rem;
         font-size: 0.9rem;
         margin: 0.5rem;
       }
@@ -146,12 +135,11 @@
 
     .percentage {
       @include flex(row nowrap, center, center);
-      font-family: 'Poppins';
+
       font-size: 2rem;
       background: var(--fill-drink-water-color);
       width: 100%;
       height: 0;
-      overflow: hidden;
       transition: all 0.3s ease;
 
       @include mobile {
@@ -165,11 +153,9 @@
   }
 
   .text {
-    font-family: 'Poppins';
     font-size: 1rem;
     text-align: center;
     margin-bottom: 0.5rem;
-    overflow: hidden;
 
     @include mobile {
       font-size: 0.8rem;
@@ -184,10 +170,9 @@
   .cups {
     @include flex(row wrap, center, center);
     width: 16rem;
-    overflow: hidden;
 
     @include mobile {
-      width: 60vw;
+      width: 50vw;
     }
 
     @include tablet {

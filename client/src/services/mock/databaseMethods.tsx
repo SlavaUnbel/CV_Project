@@ -47,7 +47,6 @@ export const generatePortfolioData = (id: number): IPortfolio[] => {
   const portfolioItems: IPortfolioItem[] = [
     { title: "Expanding Cards", criteria: "UI" },
     { title: "Rotating Navigation", criteria: "UI" },
-    { title: "Scroll Animation", criteria: "UI" },
     { title: "Form Wave Animation", criteria: "UI" },
     { title: "Dad Jokes", criteria: "sideAPI" },
     { title: "FAQ Collapse", criteria: "UI" },

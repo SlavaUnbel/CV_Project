@@ -5,12 +5,18 @@ import { isMobile } from '../../../../utils/constants';
 import { PomodoroTimerCtx } from '../../../../utils/context';
 
 const Countdown: FC = (props) => {
-  const { stopTimer, executing, pomodoro, startAnimate, pushSuccess } =
-    useContext(PomodoroTimerCtx);
+  const {
+    executing,
+    pomodoro,
+    startAnimate,
+    playerOpened,
+    stopTimer,
+    pushSuccess,
+  } = useContext(PomodoroTimerCtx);
 
   return (
     <div className="timer-container">
-      <div className="timer-wrapper">
+      <div className={`timer-wrapper ${playerOpened ? "opened" : ""}`}>
         <CountdownCircleTimer
           key={pomodoro}
           isPlaying={startAnimate}
