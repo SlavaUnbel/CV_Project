@@ -1,4 +1,4 @@
-@import '../../../index.scss';
+@import "../../../index.scss";
 
 @mixin transition($property) {
   transition: $property 0.7s linear;
@@ -7,6 +7,7 @@
 .animated-navigation__container {
   @include container;
   @include flex(row nowrap, center, center);
+  font-family: "FreightTextPro";
   background-color: var(--bg-animated-navigation-first-color);
   background-image: linear-gradient(
     to bottom,
@@ -20,7 +21,6 @@
   nav {
     @include flex(row nowrap, center, center);
     @include transition(width);
-    font-family: 'FreightTextPro';
     font-weight: 500;
     background-color: var(--white-color);
     padding: 1.25rem;
@@ -74,7 +74,6 @@
 
     .btn {
       background-color: var(--white-color);
-      overflow: hidden;
       border: none;
       cursor: pointer;
       position: relative;

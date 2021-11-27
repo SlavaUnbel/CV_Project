@@ -1,16 +1,20 @@
+import './random-choice-picker.scss';
+
 import React, { FC, useContext } from 'react';
+
 import { RandomChoicePickerCtx } from '../../../utils/context';
 import { useRandomChoicePickerOnMobile } from '../../../utils/hooks';
 import Button from '../../utils/button/Button';
 import ComponentWrapper from '../../utils/componentWrapper/ComponentWrapper';
-import './random-choice-picker.scss';
 
 const RandomChoicePicker: FC = () => {
-  const { areaRef, tagsRef, handleKeyUp, chooseRandomTag } = useContext(
-    RandomChoicePickerCtx,
-  );
+  const { disabled, areaRef, tagsRef, handleKeyUp, chooseRandomTag } =
+    useContext(RandomChoicePickerCtx);
 
-  const handleClick = useRandomChoicePickerOnMobile(areaRef, chooseRandomTag);
+  const handleClick = useRandomChoicePickerOnMobile(areaRef, () => {
+    if (areaRef.current) areaRef.current.value = "";
+    chooseRandomTag();
+  });
 
   return (
     <ComponentWrapper>
@@ -25,6 +29,7 @@ const RandomChoicePicker: FC = () => {
 
           <textarea
             ref={areaRef}
+            disabled={disabled}
             placeholder="Enter choices here..."
             id="textarea"
             onKeyUp={handleKeyUp}

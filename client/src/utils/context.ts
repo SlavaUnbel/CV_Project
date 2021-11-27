@@ -123,6 +123,7 @@ export const FaqCollapseCtx = createContext({} as IFaqCollapseContext);
 
 //Random Choice Context
 interface IRandomChoicePickerContext {
+  disabled: boolean;
   tagsRef: RefObject<HTMLDivElement>;
   areaRef: RefObject<HTMLTextAreaElement>;
   handleKeyUp: (e: React.KeyboardEvent<HTMLTextAreaElement>) => void;

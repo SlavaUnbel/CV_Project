@@ -3,7 +3,7 @@
 .rotating-navigation__container {
   @include container;
   background-color: var(--brown-color);
-  overflow: hidden;
+  font-family: "Soleil Light", sans-serif;
 
   .circle-container {
     position: fixed;
@@ -12,7 +12,7 @@
     z-index: 2;
     transition: transform 0.5s linear;
 
-    @include screen-1000px {
+    @include screen(1100px) {
       top: -2.3rem;
     }
 
@@ -27,7 +27,6 @@
       border-radius: 50%;
       position: relative;
       transition: transform 0.5s linear;
-      overflow: hidden;
 
       @include mobile {
         height: 10rem;
@@ -67,6 +66,7 @@
     background-color: var(--white-color);
     transform-origin: top left;
     transition: transform 0.5s linear;
+    overflow: auto;
 
     &.show-nav {
       transform: rotate(-20deg);
@@ -92,15 +92,14 @@
         @include flex(column nowrap, center, center);
 
         h1 {
-          font-family: "Soleil Light", sans-serif;
           font-size: 2.8rem;
           margin: 0;
 
-          @include screen-1200px {
+          @include screen(1200px) {
             font-size: 2.5rem;
           }
 
-          @include screen-1000px {
+          @include screen(1100px) {
             font-size: 2.2rem;
           }
 
@@ -120,11 +119,11 @@
           width: 35vw;
           margin: 1rem 0 3rem;
 
-          @include screen-1200px {
+          @include screen(1200px) {
             width: 40vw;
           }
 
-          @include screen-1000px {
+          @include screen(1100px) {
             width: 50vw;
             margin: 1rem 0 1.5rem;
           }
@@ -141,16 +140,15 @@
 
           h3 {
             @include flex();
-            font-family: "Soleil Light", sans-serif;
             color: var(--grey-color);
             margin-bottom: 0.5rem;
             font-size: 1.2rem;
 
-            @include screen-1200px {
+            @include screen(1200px) {
               font-size: 1.1rem;
             }
 
-            @include screen-1000px {
+            @include screen(1100px) {
               font-size: 1rem;
             }
 
@@ -192,13 +190,13 @@
         letter-spacing: 1px;
         margin: 2rem 0 0;
 
-        @include screen-1200px {
+        @include screen(1200px) {
           width: 70%;
           font-size: 1.3rem;
           line-height: 1.8rem;
         }
 
-        @include screen-1000px {
+        @include screen(1100px) {
           font-size: 1.2rem;
           line-height: 1.6rem;
         }
@@ -230,13 +228,13 @@
         letter-spacing: 0.5px;
         margin-top: 1rem;
 
-        @include screen-1200px {
+        @include screen(1200px) {
           width: 70%;
           font-size: 1.3rem;
           line-height: 1.8rem;
         }
 
-        @include screen-1000px {
+        @include screen(1100px) {
           font-size: 1.2rem;
           line-height: 1.6rem;
         }
@@ -308,7 +306,6 @@
           text-decoration: none;
           text-transform: uppercase;
           color: var(--white-color);
-          font-family: "Soleil Light", sans-serif;
           font-size: 0.9rem;
         }
 
