@@ -1,4 +1,4 @@
-@import '../../../index.scss';
+@import "../../../index.scss";
 
 :root {
   --bg-first-color: #ffb703;
@@ -79,10 +79,10 @@
     var(--bg-second-color) 100%
   );
   color: var(--white-color);
+  font-family: "Poppins", sans-serif;
 
   header {
     @include flex(row nowrap, center, center);
-    font-family: 'Poppins';
     font-size: 2.5rem;
     min-height: 10vh;
 
@@ -103,12 +103,12 @@
     input,
     button {
       @include flex(row nowrap, center, center);
+      font-family: "Poppins", sans-serif;
       padding: 0.5rem 1rem;
       font-size: 1.5rem;
       height: 3rem;
       border: none;
       background: var(--white-color);
-      font-family: 'Poppins';
 
       @include mobile {
         padding: 0.25rem 0.5rem;
@@ -158,7 +158,6 @@
     .filter {
       margin-left: 2rem;
       position: relative;
-      overflow: hidden;
 
       @include mobile {
         margin-left: 1rem;
@@ -175,9 +174,9 @@
       }
 
       &::after {
-        content: '\25BC';
+        content: "\25BC";
         position: absolute;
-        top: 0;
+        top: -0.25rem;
         right: 0;
         padding: 1rem;
         cursor: pointer;
@@ -205,7 +204,6 @@
         cursor: pointer;
         width: 10rem;
         position: relative;
-        overflow: hidden;
 
         @include mobile {
           padding: 0.5rem;
@@ -218,7 +216,7 @@
         }
 
         option {
-          font-family: 'Poppins';
+          font-family: "Poppins", sans-serif;
         }
       }
     }
@@ -254,7 +252,6 @@
 
         li {
           list-style: none;
-          font-family: 'Poppins';
           padding: 0rem 0.5rem;
           flex: 1;
           overflow-wrap: break-word;

@@ -1,9 +1,9 @@
-@import '../../../index.scss';
+@import "../../../index.scss";
 
 .ripple {
   position: relative;
-  overflow: hidden;
   cursor: pointer;
+  font-family: inherit;
 
   &:focus {
     outline: none;

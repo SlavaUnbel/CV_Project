@@ -1,8 +1,9 @@
-@import '../../../index.scss';
+@import "../../../index.scss";
 
 .expanding-cards__container {
   @include container;
   @include flex(row nowrap, center, center);
+  font-family: "Lato", sans-serif;
 
   @include mobile {
     @include flex(column wrap);
@@ -22,7 +23,7 @@
     @include mobile {
       min-width: 15rem;
     }
-  
+
     h3 {
       font-size: 1.5rem;
       position: absolute;
@@ -42,7 +43,7 @@
       }
     }
   }
-  
+
   .panel.active {
     flex: 5;
 

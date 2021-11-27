@@ -3,6 +3,7 @@
 @import "./assets/FreightTextPro/freight-text-pro.scss";
 @import "./assets/MaterialIcons/material-icons.scss";
 @import "./assets/Poppins/poppins.scss";
+@import "./assets/Lato/lato.scss";
 
 :root {
   --white-color: #fff;
@@ -18,7 +19,7 @@
   --green-color: #07bc0c;
   --yellow-color: #f1c40f;
   --not-found-color: #151718;
-  --bg-content-scroll-animation-color: #4682b4;
+  --bg-lightblue-color: #4682b4;
   --link-form-wave-animation-color: #add8e6;
   --bg-dad-jokes-color: #686de0;
   --btn-dad-jokes-color: #9f68e0;
@@ -73,56 +74,8 @@
   justify-content: $justify-content;
 }
 
-@mixin screen-1700px {
-  @media screen and (max-width: 1700px) {
-    @content;
-  }
-}
-
-@mixin screen-1600px {
-  @media screen and (max-width: 1600px) {
-    @content;
-  }
-}
-
-@mixin screen-1500px {
-  @media screen and (max-width: 1500px) {
-    @content;
-  }
-}
-
-@mixin screen-1400px {
-  @media screen and (max-width: 1400px) {
-    @content;
-  }
-}
-
-@mixin screen-1300px {
-  @media screen and (max-width: 1300px) {
-    @content;
-  }
-}
-
-@mixin screen-1200px {
-  @media screen and (max-width: 1200px) {
-    @content;
-  }
-}
-
-@mixin screen-1100px {
-  @media screen and (max-width: 1100px) {
-    @content;
-  }
-}
-
-@mixin screen-1000px {
-  @media screen and (max-width: 1000px) {
-    @content;
-  }
-}
-
-@mixin screen-900px {
-  @media screen and (max-width: 900px) {
+@mixin screen($width) {
+  @media screen and (max-width: $width) {
     @content;
   }
 }
@@ -143,7 +96,7 @@
   width: 100vw;
   height: calc(100vh - 4.5rem);
 
-  @include screen-1000px {
+  @include screen(1000px) {
     height: calc(100vh - 3.8rem);
   }
 
@@ -153,9 +106,8 @@
 }
 
 * {
-  font-family: "Roboto", sans-serif;
   margin: 0;
-  overflow-x: hidden;
+  overflow: hidden;
   box-sizing: border-box;
 
   .app {

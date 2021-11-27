@@ -3,10 +3,11 @@
 .home {
   @include container;
   @include flex(row nowrap, center);
+  font-family: "Roboto", sans-serif;
   background-color: var(--white-color);
   position: relative;
 
-  @include screen-1200px {
+  @include screen(1200px) {
     @include flex(column nowrap, center, center);
   }
 
@@ -16,7 +17,6 @@
 
   .left {
     flex: 0.5;
-    overflow: hidden;
 
     .img-container {
       @include flex(row nowrap, flex-end, center);
@@ -27,17 +27,17 @@
       max-height: calc(100vh - 4.5rem);
       margin: 0 2rem;
 
-      @include screen-1500px {
+      @include screen(1500px) {
         margin: 0 1.5rem;
       }
 
-      @include screen-1300px {
+      @include screen(1300px) {
         width: 35rem;
         height: 35rem;
         margin: 0 1rem;
       }
 
-      @include screen-1200px {
+      @include screen(1200px) {
         @include flex(row nowrap, flex-start, center);
         width: 48rem;
         height: 48rem;
@@ -47,7 +47,7 @@
       img {
         height: 100%;
 
-        @include screen-1200px {
+        @include screen(1200px) {
           height: 65%;
         }
 
@@ -67,11 +67,11 @@
       height: 100%;
       padding-left: 2rem;
 
-      @include screen-1500px {
+      @include screen(1500px) {
         padding-left: 1.5rem;
       }
 
-      @include screen-1200px {
+      @include screen(1200px) {
         padding-left: 0;
         align-items: center;
       }
@@ -111,10 +111,10 @@
         }
 
         .ityped-cursor {
-          animation: blink 1s infinite;
+          animation: cursorBlink 1s infinite;
         }
 
-        @keyframes blink {
+        @keyframes cursorBlink {
           50% {
             opacity: 1;
           }

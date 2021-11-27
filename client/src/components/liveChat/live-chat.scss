@@ -3,6 +3,7 @@
 .live-chat__container {
   @include container;
   @include flex(column nowrap, center, center);
+  font-family: "Poppins", sans-serif;
 
   .live-chat__wrapper {
     @include flex(column nowrap, center, space-around);
@@ -15,10 +16,8 @@
 
     h3 {
       @include flex(column nowrap, center, center);
-      font-family: "Poppins";
       font-size: 2.25rem;
       margin: 1rem 0;
-      overflow: hidden;
     }
 
     .room-choice {
@@ -28,13 +27,11 @@
 
       .room {
         @include flex(row nowrap, center, space-between);
-        font-family: "Poppins";
         font-size: 1.25rem;
         width: 100%;
         min-height: 3.25rem;
         padding: 1rem;
         cursor: pointer;
-        overflow: hidden;
 
         &:hover {
           background: var(--main-live-chat-color);
@@ -51,7 +48,7 @@
 
     input,
     .btn {
-      font-family: "Poppins";
+      font-family: "Poppins", sans-serif;
       width: 100%;
       margin: 0.5rem;
       padding: 0.5rem;
@@ -99,12 +96,11 @@
     width: 65rem;
     height: 40rem;
 
-    @include screen-1100px {
+    @include screen(1100px) {
       width: 50rem;
     }
 
     @include mobile {
-      overflow: hidden;
       width: 90vw;
       height: 90vh;
     }
@@ -121,7 +117,7 @@
       .emoji-picker-react {
         transform: scale(1);
 
-        @include screen-1100px {
+        @include screen(1100px) {
           width: 12.5rem;
         }
 
@@ -137,7 +133,7 @@
       width: calc(100% - 35rem);
       height: 100%;
 
-      @include screen-1100px {
+      @include screen(1100px) {
         width: calc(100% - 25rem);
       }
 
@@ -147,7 +143,6 @@
 
       .chat-header {
         @include flex(row nowrap, center, space-between);
-        font-family: "Poppins";
         font-weight: 500;
         font-size: 1.2rem;
         height: 3rem;
@@ -157,7 +152,6 @@
         color: var(--white-color);
         cursor: default;
         padding: 0 1rem;
-        overflow: hidden;
 
         @include mobile {
           padding: 0 0.5rem 0 1rem;
@@ -187,7 +181,6 @@
         top: -0.2rem;
         width: 100%;
         padding: 0.5rem 0.2rem 0.2rem 0.2rem;
-        overflow: hidden;
         position: relative;
 
         @include mobile {
@@ -215,7 +208,6 @@
             height: 2.5rem;
             bottom: 0.5rem;
             right: 1.5rem;
-            overflow: hidden;
 
             &:hover {
               background: var(--scroll-hover-btn-live-chat-color);
@@ -241,7 +233,6 @@
 
             .message-content {
               @include flex(row nowrap, center, flex-start);
-              font-family: "Poppins";
               width: auto;
               height: auto;
               min-height: 2rem;
@@ -301,7 +292,6 @@
                 @include flex(row nowrap, center, flex-end);
                 flex: 60%;
                 font-size: 0.8rem;
-                font-family: "Poppins";
                 font-weight: bold;
                 overflow-wrap: break-word;
                 word-break: break-word;
@@ -320,7 +310,6 @@
                 @include flex(row nowrap, center, flex-start);
                 flex: 40%;
                 font-size: 0.8rem;
-                font-family: "Poppins";
 
                 @include mobile {
                   font-size: 0.7rem;
@@ -350,11 +339,9 @@
           @include flex(row nowrap, center, space-between);
           height: 100%;
           flex: 2;
-          overflow: hidden;
 
           input {
-            // flex: 90%;
-            font-family: "Poppins";
+            font-family: "Poppins", sans-serif;
             font-size: 1rem;
             padding: 0.5rem 0.7rem;
             outline: none;
@@ -376,7 +363,6 @@
           height: 100%;
 
           .btn {
-            font-family: "Poppins";
             font-size: 0.9rem;
             font-weight: 500;
             padding: 0.5rem 1rem;
@@ -417,17 +403,13 @@
       transform-origin: left bottom;
       transition: 0.5s ease-in;
 
-      @include screen-1100px {
+      @include screen(1100px) {
         width: 12.5rem;
       }
 
       @include mobile {
         height: 100%;
         width: 100%;
-      }
-
-      .emoji {
-        overflow: hidden;
       }
 
       .content-wrapper:before {

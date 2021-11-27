@@ -4,7 +4,7 @@
   @include container;
   @include flex(column nowrap, center, center);
   margin: 0;
-  background-color: var(--bg-content-scroll-animation-color);
+  background-color: var(--bg-lightblue-color);
   color: var(--white-color);
 
   .form-wrapper {
@@ -43,7 +43,6 @@
       padding: 0.75rem;
       border-radius: 20px;
       position: relative;
-      overflow: hidden;
       cursor: default;
       color: var(--green-color);
       border: 1px solid var(--green-color);
@@ -113,11 +112,11 @@
         }
 
         &:hover {
-          border-bottom-color: var(--bg-content-scroll-animation-color);
+          border-bottom-color: var(--bg-lightblue-color);
 
           + label {
             span {
-              color: var(--bg-content-scroll-animation-color);
+              color: var(--bg-lightblue-color);
             }
           }
         }
@@ -135,7 +134,7 @@
               transform: translateY(-1.5rem);
 
               @include mobile {
-                transform: translateY(-1.2rem);
+                transform: translateY(-1rem);
               }
 
               @include tablet {

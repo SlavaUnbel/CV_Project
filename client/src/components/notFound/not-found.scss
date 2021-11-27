@@ -3,21 +3,17 @@
 .not-found__container {
   @include container;
   @include flex(column nowrap, center, center);
+  font-family: "Poppins", sans-serif;
 
   img {
-    width: 70rem;
+    width: 60rem;
     height: auto;
-    box-shadow: 20px 20px 20px rgba(0, 0, 0, 0.2);
 
-    @include screen-1500px {
-      width: 60rem;
-    }
-
-    @include screen-1300px {
+    @include screen(1300px) {
       width: 50rem;
     }
 
-    @include screen-1200px {
+    @include screen(1200px) {
       opacity: 0.5;
       width: 90vw;
     }
@@ -29,23 +25,23 @@
     height: 30rem;
     right: 15rem;
 
-    @include screen-1700px {
+    @include screen(1700px) {
       right: 10rem;
     }
 
-    @include screen-1600px {
+    @include screen(1600px) {
       right: 5rem;
     }
 
-    @include screen-1400px {
+    @include screen(1400px) {
       right: 2.5rem;
     }
 
-    @include screen-1300px {
+    @include screen(1300px) {
       height: 25rem;
     }
 
-    @include screen-1200px {
+    @include screen(1200px) {
       @include flex(column nowrap, center, space-between);
       width: 100%;
       height: 30rem;
@@ -64,19 +60,18 @@
     }
 
     h1 {
-      font-family: "Poppins";
       text-transform: uppercase;
       margin-bottom: 2rem;
       font-size: 4rem;
-      overflow: hidden;
       color: var(--not-found-color);
 
-      @include screen-1300px {
+      @include screen(1300px) {
         margin-bottom: 1rem;
       }
 
       @include mobile {
         font-size: 3rem;
+        margin-bottom: 0;
       }
 
       @include tablet {
@@ -86,31 +81,16 @@
     }
 
     p {
-      font-family: "Poppins";
       text-align: left;
       font-size: 1rem;
       margin-bottom: 10rem;
-      overflow: hidden;
       color: var(--not-found-color);
-
-      @include screen-1300px {
-        margin-bottom: 8rem;
-      }
-
-      @include mobile {
-        margin-bottom: 5rem;
-      }
-
-      @include tablet {
-        margin-bottom: 10rem;
-      }
     }
 
     .link {
-      overflow: hidden;
       padding: 2rem 0;
 
-      @include screen-1300px {
+      @include screen(1300px) {
         padding: 1.5rem 0;
       }
 
@@ -124,7 +104,6 @@
 
       a,
       span {
-        font-family: "Poppins";
         font-weight: 500;
         text-decoration: none;
         font-size: 1.3rem;
@@ -134,7 +113,6 @@
         letter-spacing: 0.15rem;
         color: var(--not-found-color);
         position: relative;
-        overflow: hidden;
 
         @include mobile {
           font-size: 1.1rem;

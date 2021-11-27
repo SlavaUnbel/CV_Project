@@ -13,8 +13,14 @@ const PortfolioFilter: FC = () => {
 
   return (
     <div className="filter">
-      <FormControl fullWidth>
-        <Select value={criteria} onChange={(e) => changeCriteria(e)}>
+      <small>filter</small>
+
+      <FormControl fullWidth className="form-control">
+        <Select
+          value={criteria}
+          onChange={(e) => changeCriteria(e)}
+          className="select"
+        >
           <MenuItem value="all">All</MenuItem>
           <MenuItem value="featured">Featured</MenuItem>
           <MenuItem value="UI">UI</MenuItem>

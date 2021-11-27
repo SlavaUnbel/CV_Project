@@ -19,11 +19,13 @@ const Portfolio: FC = () => {
         <h1>Portfolio</h1>
 
         <div className="options">
-          <PortfolioView />
+          <div className="filter-and-view">
+            <PortfolioView />
+
+            <PortfolioFilter />
+          </div>
 
           <PortfolioPagination />
-
-          <PortfolioFilter />
         </div>
 
         <ItemsWrapper>

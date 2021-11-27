@@ -8,24 +8,25 @@
 .portfolio {
   @include container;
   @include flex(column nowrap, center, space-between);
+  font-family: "Roboto", sans-serif;
 
   h1 {
     @include flex(column nowrap, center, center);
     font-size: 2.8rem;
-    overflow: hidden;
     margin-top: 1rem;
     height: 10vh;
 
-    @include screen-1300px {
+    @include screen(1300px) {
       font-size: 2.5rem;
     }
 
-    @include screen-1000px {
+    @include screen(1000px) {
       font-size: 2rem;
     }
 
     @include mobile {
       font-size: 1.5rem;
+      margin: 0.25rem 0;
     }
 
     @include tablet {
@@ -35,11 +36,11 @@
 
   .options {
     @include flex(row nowrap, center, space-between);
-    overflow: hidden;
+
     padding: 0.5rem;
     width: 70vw;
 
-    @include screen-1000px {
+    @include screen(1000px) {
       width: 80vw;
     }
 
@@ -51,58 +52,94 @@
       width: 70vw;
     }
 
-    button {
-      padding: 0.5rem;
+    small {
+      color: var(--darkgrey-color);
+      text-align: center;
+      text-transform: uppercase;
+
+      @include mobile {
+        font-size: 0.8rem;
+        margin-bottom: -0.5rem;
+      }
     }
 
-    .view {
+    .filter-and-view {
+      @include flex(row nowrap, center, flex-start);
       flex: 2;
 
-      .btn {
-        @include flex(row nowrap, center, flex-start);
-        background: transparent;
-        border: none;
-        outline: none;
-        width: auto;
-        border-radius: 20px;
-        transition: all 0.5s ease;
+      .view {
+        @include flex(column nowrap, flex-start, flex-start);
 
-        &:hover {
-          background: var(--lightgrey-color);
+        small {
+          width: 4rem;
+        }
+      }
+
+      .filter {
+        @include flex(column nowrap, flex-start, flex-start);
+
+        small {
+          width: 11rem;
+
+          @include mobile {
+            width: 6rem;
+          }
         }
 
-        p {
-          flex: 2;
-          text-align: start;
+        .form-control {
+          width: 10rem;
+          height: 3rem;
+          margin: 0.5rem;
+          justify-content: center;
+
+          @include mobile {
+            width: 5rem;
+          }
+
+          .select {
+            @include mobile {
+              height: 2rem;
+              font-size: 0.9rem;
+            }
+          }
+        }
+      }
+    }
+
+    .pagination-wrapper {
+      @include flex(column nowrap, center, flex-start);
+
+      .pagination {
+        @include flex(row nowrap, center, center);
+        height: 4rem;
+
+        input {
           font-size: 1rem;
-          margin-left: 0.5rem;
+          border: none;
+          outline: none;
+          width: 7.5rem;
+          text-align: center;
+          border-radius: 4px;
+          padding: 1rem;
+          margin: 0.5rem 0;
+          transition: all 0.5s ease;
+
+          @include mobile {
+            font-size: 0.9rem;
+            width: 5.5rem;
+            padding: 0.5rem;
+          }
+
+          &::placeholder {
+            color: var(--white-color);
+          }
+
+          &:focus {
+            background: var(--primary-color);
+            color: var(--white-color);
+          }
         }
       }
-    }
-
-    .pagination {
-      @include flex(row nowrap, center, center);
-      flex: 5;
-
-      input {
-        font-size: 1rem;
-        border: none;
-        outline: none;
-        width: 7.5rem;
-        text-align: center;
-        border-radius: 20px;
-        padding: 1rem;
-        margin: 0 0.5rem;
-        transition: all 0.5s ease;
-
-        &:focus {
-          background: var(--lightgrey-color);
-        }
-      }
-    }
-
-    .filter {
-      flex: 2;
     }
   }
 
@@ -110,13 +147,12 @@
     @include flex(row wrap, center, space-around);
     width: 70vw;
     height: 90vh;
-    overflow: hidden;
 
-    @include screen-1600px {
+    @include screen(1600px) {
       width: 80vw;
     }
 
-    @include screen-1000px {
+    @include screen(1000px) {
       width: 90vw;
     }
 
@@ -132,7 +168,7 @@
       @include flex(column nowrap, center, center);
       margin: 1rem 1.5rem;
 
-      @include screen-1000px {
+      @include screen(1000px) {
         margin: 0.7rem 1rem;
       }
 
@@ -163,32 +199,52 @@
         border-radius: 20px;
         border: 1px solid var(--lightgrey-color);
         margin-bottom: 1rem;
-        overflow: hidden;
         cursor: pointer;
+        position: relative;
 
-        @include screen-1600px {
+        &.featured {
+          &::before {
+            position: absolute;
+            content: "";
+            top: 0;
+            right: 0;
+            width: 1.5rem;
+            height: 6rem;
+            transform: rotate(-45deg) translate(1rem, -1rem);
+            background: linear-gradient(45deg, #ffd02c, #ff9900);
+          }
+
+          .star {
+            position: absolute;
+            top: 0.4rem;
+            right: 0.4rem;
+            color: var(--white-color);
+          }
+        }
+
+        @include screen(1600px) {
           margin-bottom: 0.7rem;
         }
 
-        @include screen-1500px {
+        @include screen(1500px) {
           width: 18rem;
           height: 11.5rem;
           margin-bottom: 0.9rem;
         }
 
-        @include screen-1300px {
+        @include screen(1300px) {
           width: 15rem;
           height: 9.5rem;
           margin-bottom: 0.8rem;
         }
 
-        @include screen-1100px {
+        @include screen(1100px) {
           width: 13rem;
           height: 8rem;
           margin-bottom: 0.7rem;
         }
 
-        @include screen-1000px {
+        @include screen(1000px) {
           width: 12rem;
           height: 7.5rem;
           margin-bottom: 0.6rem;
@@ -217,7 +273,7 @@
         @include opacity(0);
         font-size: 1.25rem;
 
-        @include screen-1000px {
+        @include screen(1000px) {
           font-size: 1.1rem;
         }
 

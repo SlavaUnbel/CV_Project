@@ -7,7 +7,6 @@ export const notFoundPath = "/404";
 //portfolio paths
 export const expandingCardsPath = "/expanding-cards";
 export const rotatingNavigationPath = "/rotating-navigation";
-export const scrollAnimationPath = "/scroll-animation";
 export const formWaveAnimationPath = "/form-wave-animation";
 export const dadJokesPath = "/dad-jokes";
 export const faqCollapsePath = "/faq-collapse";
