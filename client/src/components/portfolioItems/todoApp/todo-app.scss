@@ -229,13 +229,14 @@
       @include max-width;
       padding: 0;
       height: 60vh;
+      overflow: auto;
 
       .todo {
         @include flex(row nowrap, center, center);
         margin: 0.5rem;
         background: var(--white-color);
         color: var(--black-color);
-        font-size: 1.5rem;
+        font-size: 1.25rem;
         border-radius: 10px;
 
         @include mobile {
@@ -243,7 +244,7 @@
         }
 
         @include tablet {
-          font-size: 1.5rem;
+          font-size: 1.25rem;
         }
 
         &.removed {

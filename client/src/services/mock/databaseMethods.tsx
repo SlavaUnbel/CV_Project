@@ -71,7 +71,7 @@ export const generatePortfolioData = (id: number): IPortfolio[] => {
     (index) => {
       if (index) id++;
       const paths = portfolioItems.map((item) =>
-        item.title.replaceAll(" ", "-").toLowerCase()
+        `/${item.title.replaceAll(" ", "-").toLowerCase()}`
       );
 
       return {
