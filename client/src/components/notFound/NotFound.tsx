@@ -1,7 +1,7 @@
 import './not-found.scss';
 
 import React, { FC } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { notFoundSrc } from '../../utils/constants';
 import { useWindowTitle } from '../../utils/hooks';
@@ -11,7 +11,7 @@ import ComponentWrapper from '../utils/componentWrapper/ComponentWrapper';
 const NotFound: FC = () => {
   useWindowTitle("404 Page");
 
-  const history = useHistory();
+  const navigate = useNavigate();
 
   return (
     <ComponentWrapper>
@@ -28,7 +28,7 @@ const NotFound: FC = () => {
           </div>
 
           <div className="link">
-            <span onClick={() => history.goBack()}>Go back</span>
+            <span onClick={() => navigate(-1)}>Go back</span>
           </div>
         </div>
       </div>

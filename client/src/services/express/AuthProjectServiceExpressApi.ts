@@ -39,9 +39,11 @@ export class AuthProjectServiceExpressApi extends AuthProjectService {
   }
 
   public async checkIfAuthenticated() {
+    
     return await axios
       .get("/authProject/authenticated", {
         headers: {
+          //@ts-ignore
           "X-Access-Token": localStorage.getItem("jwtToken"),
         },
       })
