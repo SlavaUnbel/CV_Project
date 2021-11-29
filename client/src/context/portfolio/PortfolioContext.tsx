@@ -79,7 +79,7 @@ const PortfolioContext: FC<Props> = ({
     paths.goToContact
   );
 
-  const wrapperStyle = { height: "90vh" };
+  const wrapperStyle = { height: "100vh" };
 
   return (
     <PortfolioCtx.Provider
