@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Redirect, Route, Switch } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 
 import AuthProjectContainer from '../../../containers/authProject/AuthProjectContainer';
 import ContactContainer from '../../../containers/contact/ContactContainer';
@@ -53,70 +53,69 @@ import FormWaveAnimation from '../../portfolioItems/formWaveAnimation/FormWaveAn
 import Hoverboard from '../../portfolioItems/hoverboard/Hoverboard';
 
 const AppRouter: FC = () => (
-  <Switch>
+  <Routes>
     {/* General Pages Routes */}
-    <Route exact path={homePath} component={HomeContext} />
-    <Route exact path={portfolioPath} component={PortfolioContainer} />
-    <Route exact path={contactPath} component={ContactContainer} />
+    <Route path={homePath} element={<HomeContext />} />
+    <Route path={portfolioPath} element={<PortfolioContainer />} />
+    <Route path={contactPath} element={<ContactContainer />} />
 
     {/* Portfolio Pages Routes */}
     <Route
-      exact
+      
       path={expandingCardsPath}
-      component={ExpandingCardsContainer}
+      element={<ExpandingCardsContainer />}
     />
     <Route
-      exact
+      
       path={rotatingNavigationPath}
-      component={RotatingNavigationContainer}
+      element={<RotatingNavigationContainer />}
     />
-    <Route exact path={formWaveAnimationPath} component={FormWaveAnimation} />
-    <Route exact path={dadJokesPath} component={DadJokesContainer} />
-    <Route exact path={faqCollapsePath} component={FaqCollapseContainer} />
+    <Route path={formWaveAnimationPath} element={<FormWaveAnimation />} />
+    <Route path={dadJokesPath} element={<DadJokesContainer />} />
+    <Route path={faqCollapsePath} element={<FaqCollapseContainer />} />
     <Route
-      exact
+      
       path={randomChoicePickerPath}
-      component={RandomChoicePickerContext}
+      element={<RandomChoicePickerContext />}
     />
     <Route
-      exact
+      
       path={animatedNavigationPath}
-      component={AnimatedNavigationContainer}
+      element={<AnimatedNavigationContainer />}
     />
     <Route
-      exact
+      
       path={incrementingCounterPath}
-      component={IncrementingCounterContext}
+      element={<IncrementingCounterContext />}
     />
-    <Route exact path={movieAppPath} component={MovieAppContainer} />
-    <Route exact path={drinkWaterPath} component={DrinkWaterContext} />
-    <Route exact path={themeClockPath} component={ThemeClockContext} />
+    <Route path={movieAppPath} element={<MovieAppContainer />} />
+    <Route path={drinkWaterPath} element={<DrinkWaterContext />} />
+    <Route path={themeClockPath} element={<ThemeClockContext />} />
     <Route
-      exact
+      
       path={githubProfilesPath}
-      component={GithubProfilesContainer}
+      element={<GithubProfilesContainer />}
     />
     <Route
-      exact
+      
       path={passwordGeneratorPath}
-      component={PasswordGeneratorContainer}
+      element={<PasswordGeneratorContainer />}
     />
-    <Route exact path={authProjectPath} component={AuthProjectContainer} />
-    <Route exact path={notesAppPath} component={NotesAppContainer} />
-    <Route exact path={liveChatPath} component={LiveChatContainer} />
-    <Route exact path={hoverboardPath} component={Hoverboard} />
+    <Route path={authProjectPath} element={<AuthProjectContainer />} />
+    <Route path={notesAppPath} element={<NotesAppContainer />} />
+    <Route path={liveChatPath} element={<LiveChatContainer />} />
+    <Route path={hoverboardPath} element={<Hoverboard />} />
     <Route
-      exact
+      
       path={testimonialsSwitcherPath}
-      component={TestimonialsSwitcherContainer}
+      element={<TestimonialsSwitcherContainer />}
     />
-    <Route exact path={todoAppPath} component={TodoAppContainer} />
-    <Route exact path={pomodoroTimerPath} component={PomodoroTimerContainer} />
+    <Route path={todoAppPath} element={<TodoAppContainer />} />
+    <Route path={pomodoroTimerPath} element={<PomodoroTimerContainer />} />
 
     {/* Not Existing Page Routing */}
-    <Route exact path={notFoundPath} component={NotFound} />
-    <Redirect to={notFoundPath} />
-  </Switch>
+    <Route path={notFoundPath} element={<NotFound />} />
+  </Routes>
 );
 
 export default AppRouter;

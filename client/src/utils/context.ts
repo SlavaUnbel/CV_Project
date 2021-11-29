@@ -2,7 +2,6 @@ import { IEmojiData } from 'emoji-picker-react';
 import React, { createContext, CSSProperties, FormEvent, RefObject } from 'react';
 import { TimeProps } from 'react-countdown-circle-timer';
 import { Socket } from 'socket.io-client';
-import { DefaultEventsMap } from 'socket.io-client/build/typed-events';
 
 //Header Context
 interface IHeaderContext {
@@ -298,7 +297,7 @@ export const TestimonialsSwitcherCtx = createContext(
 
 //Live Chat Context
 interface ILiveChatContext {
-  socket: Socket<DefaultEventsMap, DefaultEventsMap>;
+  socket: Socket<any, any>;
 
   username: string;
   setUsername: (username: string) => void;

@@ -3,9 +3,8 @@ import { IEmojiData } from 'emoji-picker-react';
 import { init } from 'ityped';
 import React, { ChangeEvent, FormEvent, LegacyRef, RefObject, useCallback, useEffect, useRef, useState } from 'react';
 import { TimeProps } from 'react-countdown-circle-timer';
-import { useHistory } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Socket } from 'socket.io-client';
-import { DefaultEventsMap } from 'socket.io-client/build/typed-events';
 
 import { initialPomodoroSettings } from '../reducers/pomodoroTimerReducer';
 import { services } from '../services/services';
@@ -70,9 +69,9 @@ export const useScrollRedirect =
   };
 
 export const useRedirectToItem = (link: string) => {
-  const history = useHistory();
+  const navigate = useNavigate();
 
-  const redirect = () => history.push(link);
+  const redirect = () => navigate(link);
 
   return redirect;
 };
@@ -94,8 +93,9 @@ export const useMenuRouter = (
   openCloseMenu: (menuOpen: boolean) => void
 ) => {
   const [active, setActive] = useState(false);
-  const history = useHistory();
-  const loc = history.location.pathname.slice(1);
+  const navigate = useNavigate();
+  const location = useLocation()
+  const loc = location.pathname.slice(1);
 
   useEffect(() => {
     ((loc === "" && title === "Home") || loc === title.toLowerCase()) &&
@@ -105,7 +105,7 @@ export const useMenuRouter = (
   }, [loc, title, setActive]);
 
   const redirect = () => {
-    history.push(title !== "Home" ? title.toLowerCase() : "");
+    navigate(title !== "Home" ? title.toLowerCase() : "");
     openCloseMenu(false);
   };
 
@@ -1571,7 +1571,7 @@ export const useFetchTestimonialsSwitcherData = ({
 
 //Live Chat Hooks
 interface LiveChatRoomManageProps {
-  socket: Socket<DefaultEventsMap, DefaultEventsMap>;
+  socket: Socket<any, any>;
   username: string;
   room: string;
   roomList: string[];
@@ -1627,7 +1627,7 @@ export const useRoomManage = ({
 };
 
 interface LiveChatManageProps {
-  socket: Socket<DefaultEventsMap, DefaultEventsMap>;
+  socket: Socket<any, any>;
   username: string;
   room: string;
   messageList: ILiveChat[];

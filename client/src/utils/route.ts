@@ -2,7 +2,7 @@
 export const homePath = "/";
 export const portfolioPath = "/portfolio";
 export const contactPath = "/contact";
-export const notFoundPath = "/404";
+export const notFoundPath = "*";
 
 //portfolio paths
 export const expandingCardsPath = "/expanding-cards";
