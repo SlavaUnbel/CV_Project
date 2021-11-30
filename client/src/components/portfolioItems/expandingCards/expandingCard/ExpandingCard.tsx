@@ -1,22 +1,21 @@
 import React, { FC } from 'react';
-import { expandingCardsSrc } from '../../../../utils/constants';
+
 import { useExpandingCardRef } from '../../../../utils/hooks';
 
 interface Props {
   card: IExpandingCards;
+  idx: number;
 }
 
-const ExpandingCard: FC<Props> = ({ card }) => {
+const ExpandingCard: FC<Props> = ({ card, idx }) => {
   const { ref, handleClick } = useExpandingCardRef();
 
   return (
     <div
       ref={ref}
       onClick={handleClick}
-      className={`panel${card.id === 1 ? ' active' : ''}`}
-      style={{
-        backgroundImage: `url(${expandingCardsSrc}/image-${card.id}.jpeg)`,
-      }}
+      className={`panel ${idx === 0 ? "active" : ""}`}
+      style={{ backgroundImage: `url(${card.image})` }}
     >
       <h3>{card.title}</h3>
     </div>

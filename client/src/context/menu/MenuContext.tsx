@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
+
 import Menu from '../../components/menu/Menu';
-import { getMenuOptions } from '../../services/mock/databaseMethods';
+import { getMenuOptions } from '../../services/databaseMethods';
 import { MenuCtx } from '../../utils/context';
 
 interface Props {

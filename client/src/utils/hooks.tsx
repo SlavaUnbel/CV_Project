@@ -94,7 +94,7 @@ export const useMenuRouter = (
 ) => {
   const [active, setActive] = useState(false);
   const navigate = useNavigate();
-  const location = useLocation()
+  const location = useLocation();
   const loc = location.pathname.slice(1);
 
   useEffect(() => {
@@ -506,7 +506,7 @@ export const useFetchRotatingNavigationData = ({
     services.portfolioItemsService
       .getRotatingNavigationData()
       .then((data) => {
-        setData(data);
+        setData(data[0]);
         !data && pushWarning("No data found");
       })
       .catch((e) => pushError(e))
@@ -935,35 +935,6 @@ export const useRandomChoicePickerOnMobile =
     ref.current.value = "";
     callback();
   };
-
-//Animated Navigation Hooks
-interface AnimatedNavigationProps
-  extends IWithLoading,
-    IWithError,
-    IWithWarning {
-  setData: (data: string[]) => void;
-}
-
-export const useFetchAnimatedNavigationData = ({
-  setData,
-  setLoading,
-  pushError,
-  pushWarning,
-}: AnimatedNavigationProps) => {
-  useEffect(() => {
-    if (!setLoading) return;
-    setLoading(true);
-
-    services.portfolioItemsService
-      .getAnimatedNavigationData()
-      .then((data) => {
-        setData(data);
-        !data && pushWarning("No data found");
-      })
-      .catch((e) => pushError(e))
-      .finally(() => setLoading(false));
-  }, [setData, setLoading, pushError, pushWarning]);
-};
 
 //Incrementing Counter Hooks
 export const useIncrementingCounter = () => {
@@ -1562,10 +1533,7 @@ export const useFetchTestimonialsSwitcherData = ({
       if (idx === 7) idx = 0;
     }, SECOND * 10);
 
-    return () => {
-      clearInterval(interval);
-      idx = 0;
-    };
+    return () => clearInterval(interval);
   }, [getTestimonial]);
 };
 

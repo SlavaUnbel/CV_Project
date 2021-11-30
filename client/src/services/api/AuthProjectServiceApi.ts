@@ -1,7 +1,8 @@
-import axios from "axios";
-import AuthProjectService from "../abstract/AuthProjectService";
+import axios from 'axios';
 
-export class AuthProjectServiceExpressApi extends AuthProjectService {
+import AuthProjectService from '../abstract/AuthProjectService';
+
+export class AuthProjectServiceApi extends AuthProjectService {
   public async register(username: string, password: string, role: string) {
     return await axios
       .post("/authProject/register", {
@@ -39,7 +40,6 @@ export class AuthProjectServiceExpressApi extends AuthProjectService {
   }
 
   public async checkIfAuthenticated() {
-    
     return await axios
       .get("/authProject/authenticated", {
         headers: {

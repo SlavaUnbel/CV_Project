@@ -6,12 +6,12 @@ import PomodoroTimerService from './abstract/PomodoroTimerService';
 import PortfolioItemsService from './abstract/PortfolioItemsService';
 import PortfolioService from './abstract/PortfolioService';
 import TodoAppService from './abstract/TodoAppService';
-import { AuthProjectServiceExpressApi } from './express/AuthProjectServiceExpressApi';
-import { NotesAppServiceExpressApi } from './express/NotesAppServiceExpressApi';
-import { TodoAppServiceExpressApi } from './express/TodoAppServiceExpressApi';
-import PomodoroTimerServiceMock from './mock/PomodoroTimerServiceMock';
-import PortfolioItemsServiceMock from './mock/PortfolioItemsServiceMock';
-import PortfolioServiceMock from './mock/PortfolioServiceMock';
+import { AuthProjectServiceApi } from './api/AuthProjectServiceApi';
+import { NotesAppServiceApi } from './api/NotesAppServiceApi';
+import PomodoroTimerServiceApi from './api/PomodoroTimerServiceApi';
+import PortfolioItemsServiceApi from './api/PortfolioItemsServiceApi';
+import PortfolioServiceApi from './api/PortfolioServiceApi';
+import { TodoAppServiceApi } from './api/TodoAppServiceApi';
 
 axios.defaults.baseURL = process.env.REACT_APP_BASE_URL;
 axios.defaults.withCredentials = true;
@@ -26,10 +26,10 @@ export interface Services {
 }
 
 export const services: Services = {
-  portfolioService: new PortfolioServiceMock(),
-  portfolioItemsService: new PortfolioItemsServiceMock(),
-  authProjectService: new AuthProjectServiceExpressApi(),
-  notesAppService: new NotesAppServiceExpressApi(),
-  todoAppService: new TodoAppServiceExpressApi(),
-  pomodoroTimerService: new PomodoroTimerServiceMock(),
+  portfolioService: new PortfolioServiceApi(),
+  portfolioItemsService: new PortfolioItemsServiceApi(),
+  authProjectService: new AuthProjectServiceApi(),
+  notesAppService: new NotesAppServiceApi(),
+  todoAppService: new TodoAppServiceApi(),
+  pomodoroTimerService: new PomodoroTimerServiceApi(),
 };

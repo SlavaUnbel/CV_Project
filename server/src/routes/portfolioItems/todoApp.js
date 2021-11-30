@@ -1,6 +1,6 @@
 const express = require("express");
 const todoAppRouter = express.Router();
-const TodosModel = require("../models/Todos");
+const TodosModel = require("../../models/Todos");
 
 const getTodos = (res) =>
   TodosModel.find({}, (err, result) =>

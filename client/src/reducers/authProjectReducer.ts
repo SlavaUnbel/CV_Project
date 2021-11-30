@@ -1,6 +1,6 @@
 import { createSymbiote } from 'redux-symbiote';
 
-import { getInitialMessagesForFormWaveAnimationInputFields } from '../services/mock/databaseMethods';
+import { getInitialMessagesForFormWaveAnimationInputFields } from '../services/databaseMethods';
 
 export interface AuthProjectState {
   messages: IAuthProjectMessages;

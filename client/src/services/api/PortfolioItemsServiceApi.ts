@@ -1,20 +1,32 @@
+import axios from 'axios';
+
 import { githubUsersApi } from '../../utils/constants';
 import { SECOND } from '../../utils/date';
 import { delay } from '../../utils/hooks';
 import PortfolioItemsService from '../abstract/PortfolioItemsService';
-import { database } from './database';
+import { database } from '../database';
 
-export default class PortfolioItemsServiceMock extends PortfolioItemsService {
+export default class PortfolioItemsServiceApi extends PortfolioItemsService {
   public async getExpandingCardsData(): Promise<IExpandingCards[]> {
     await delay(SECOND / 3);
 
-    return database.expandingCards;
+    return await axios
+      .get("/portfolioItem/expanding-cards")
+      .then((response) =>
+        response.statusText === "OK" ? response.data : database.expandingCards
+      );
   }
 
-  public async getRotatingNavigationData(): Promise<IRotatingNavigation> {
+  public async getRotatingNavigationData(): Promise<IRotatingNavigation[]> {
     await delay(SECOND / 3);
 
-    return database.rotatingNavigation;
+    return await axios
+      .get("/portfolioItem/rotating-navigation")
+      .then((response) =>
+        response.statusText === "OK"
+          ? response.data
+          : database.rotatingNavigation
+      );
   }
 
   public async getDadJokesDataFromApi(): Promise<IDadJokes> {
@@ -30,13 +42,11 @@ export default class PortfolioItemsServiceMock extends PortfolioItemsService {
   public async getFaqCollapseData(): Promise<IFaqCollapse[]> {
     await delay(SECOND / 3);
 
-    return database.faqCollapse;
-  }
-
-  public async getAnimatedNavigationData(): Promise<string[]> {
-    await delay(SECOND / 3);
-
-    return database.animatedNavigation;
+    return await axios
+      .get("/portfolioItem/faq-collapse")
+      .then((response) =>
+        response.statusText === "OK" ? response.data : database.faqCollapse
+      );
   }
 
   public async getMovieAppDataFromApi(url: string): Promise<any> {
@@ -70,6 +80,12 @@ export default class PortfolioItemsServiceMock extends PortfolioItemsService {
   ): Promise<ITestimonialsSwitcher> {
     await delay(SECOND / 3);
 
-    return database.testimonialsSwitcher[id];
+    return await axios
+      .get("/portfolioItem/testimonials-switcher")
+      .then((response) =>
+        response.statusText === "OK"
+          ? response.data[id]
+          : database.testimonialsSwitcher[id]
+      );
   }
 }
