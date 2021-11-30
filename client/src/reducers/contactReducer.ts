@@ -1,6 +1,6 @@
 import { createSymbiote } from 'redux-symbiote';
 
-import { getInitialMessagesForContactInputFields } from '../services/mock/databaseMethods';
+import { getInitialMessagesForContactInputFields } from '../services/databaseMethods';
 
 export interface ContactState {
   messages: IMessages;

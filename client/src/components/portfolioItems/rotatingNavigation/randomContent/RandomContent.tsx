@@ -1,4 +1,5 @@
 import React, { FC, useContext } from 'react';
+
 import { RotatingNavigationCtx } from '../../../../utils/context';
 
 const RandomContent: FC = () => {

@@ -12,25 +12,28 @@ app.use(
     credentials: true,
   })
 );
-
 mongoose.connect(process.env.MONGODB_SECRET, { useNewUrlParser: true });
 
 //Auth Project Session and Cookies Config
-const authProject = require("./src/authProject/authProject");
-const sessionInit = require("./src/authProject/session");
-
+const authProject = require("./src/routes/authProject/authProject");
+const sessionInit = require("./src/routes/authProject/session");
 sessionInit(app);
 app.use("/authProject", authProject);
 
-//Portfolio Items Router
-const notesApp = require("./src/portfolioItems/notesApp");
-const todoApp = require("./src/portfolioItems/todoApp");
+//Portfolio Router
+const portfolio = require("./src/routes/portfolio/portfolio");
+app.use("/portfolio", portfolio);
 
+//Portfolio Items Router
+const portfolioItems = require("./src/routes/portfolioItems/portfolioItems");
+app.use("/portfolioItem", portfolioItems);
+const notesApp = require("./src/routes/portfolioItems/notesApp");
 app.use("/notesApp", notesApp);
+const todoApp = require("./src/routes/portfolioItems/todoApp");
 app.use("/todoApp", todoApp);
 
 //Live Chat Sockets Connection
-const socket = require("./src/liveChat/socketsConfig");
+const socket = require("./src/routes/liveChat/socketsConfig");
 socket(app, process.env.SOCKET_PORT);
 
 app.listen(process.env.BASE_PORT, () =>

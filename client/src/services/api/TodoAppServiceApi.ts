@@ -4,7 +4,7 @@ import { SECOND } from '../../utils/date';
 import { delay } from '../../utils/hooks';
 import TodoAppService from '../abstract/TodoAppService';
 
-export class TodoAppServiceExpressApi extends TodoAppService {
+export class TodoAppServiceApi extends TodoAppService {
   public async getTodos() {
     await delay(SECOND / 3);
 

@@ -132,21 +132,6 @@ export const RandomChoicePickerCtx = createContext(
   {} as IRandomChoicePickerContext
 );
 
-//Animated Navigation Context
-interface IAnimatedNavigationContext
-  extends IWithLoading,
-    IWithError,
-    IWithWarning {
-  data: string[];
-  setData: (data: string[]) => void;
-
-  newClass: boolean;
-  toggleClass: () => void;
-}
-export const AnimatedNavigationCtx = createContext(
-  {} as IAnimatedNavigationContext
-);
-
 //Incrementing Counter Context
 interface IIntcrementingCounterContext {
   data: IIncrementingCounter;

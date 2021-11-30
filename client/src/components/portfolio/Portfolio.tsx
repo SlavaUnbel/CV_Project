@@ -11,7 +11,7 @@ import PortfolioPagination from './portfolioPagination/PortfolioPagination';
 import PortfolioView from './portfolioView/PortfolioView';
 
 const Portfolio: FC = () => {
-  const { filteredData, onWheel } = useContext(PortfolioCtx);
+  const { filteredData, pagesCount, onWheel } = useContext(PortfolioCtx);
 
   return (
     <ComponentWrapper>
@@ -25,12 +25,12 @@ const Portfolio: FC = () => {
             <PortfolioFilter />
           </div>
 
-          <PortfolioPagination />
+          {pagesCount > 0 && <PortfolioPagination />}
         </div>
 
         <ItemsWrapper>
           {filteredData.map((item) => (
-            <PortfolioItem key={item.id} item={item} />
+            <PortfolioItem key={item._id} item={item} />
           ))}
         </ItemsWrapper>
       </div>

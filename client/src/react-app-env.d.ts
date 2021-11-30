@@ -43,7 +43,7 @@ interface IHeaderCreds {
 }
 
 interface IPortfolio {
-  id: number;
+  _id: string;
   imgSrc: string;
   videoSrc: string;
   title: string;
@@ -89,8 +89,9 @@ interface IMessage {
 type MessageType = "success" | "error" | "warning";
 
 interface IExpandingCards {
-  id: Id;
+  _id: string;
   title: string;
+  image: string;
 }
 
 interface IRotatingNavigation {
@@ -110,7 +111,7 @@ interface IDadJokes {
 }
 
 interface IFaqCollapse {
-  id: number;
+  _id: string;
   title: string;
   answer: string;
 }
@@ -174,7 +175,7 @@ interface INotesApp {
 }
 
 interface ITestimonialsSwitcher {
-  id: number;
+  _id: string;
   testimonial: string;
   avatar: string;
   username: string;

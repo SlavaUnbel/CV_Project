@@ -1,6 +1,6 @@
 const express = require("express");
 const notesAppRouter = express.Router();
-const NotesModel = require("../models/Notes");
+const NotesModel = require("../../models/Notes");
 
 const getNotes = (res) =>
   NotesModel.find({}, (err, result) =>

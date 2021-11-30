@@ -1,9 +1,7 @@
 import React, { FC } from 'react';
+
 import Header from '../../components/header/Header';
-import {
-  getHeaderCreds,
-  getMenuIconSpans,
-} from '../../services/mock/databaseMethods';
+import { getHeaderCreds, getMenuIconSpans } from '../../services/databaseMethods';
 import { HeaderCtx } from '../../utils/context';
 
 interface Props {

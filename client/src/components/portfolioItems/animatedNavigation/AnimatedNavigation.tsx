@@ -1,15 +1,17 @@
 import './animated-navigation.scss';
 
 import { IconButton } from '@mui/material';
-import React, { FC, useContext } from 'react';
+import React, { FC } from 'react';
 
-import { AnimatedNavigationCtx } from '../../../utils/context';
+import { useToggleClass, useWindowTitle } from '../../../utils/hooks';
 import { animatedNavigationPath } from '../../../utils/route';
 import ComponentWrapper from '../../utils/componentWrapper/ComponentWrapper';
 import LoaderWrapper from '../../utils/loaderWrapper/LoaderWrapper';
 
 const AnimatedNavigation: FC = () => {
-  const { data, newClass, toggleClass } = useContext(AnimatedNavigationCtx);
+  useWindowTitle("Animated Navigation");
+
+  const { newClass, toggleClass } = useToggleClass();
 
   return (
     <ComponentWrapper>
@@ -17,7 +19,7 @@ const AnimatedNavigation: FC = () => {
         <div className="animated-navigation__container">
           <nav className={newClass ? "active" : ""}>
             <ul>
-              {data.map((item) => (
+              {["Home", "About", "Works", "Contact"].map((item) => (
                 <li key={item}>
                   <a href={animatedNavigationPath}>{item}</a>
                 </li>

@@ -6,7 +6,6 @@ import ContactContainer from '../../../containers/contact/ContactContainer';
 import LiveChatContainer from '../../../containers/liveChat/LiveChatContainer';
 import PomodoroTimerContainer from '../../../containers/pomodoroTimer/PomodoroTimerContainer';
 import PortfolioContainer from '../../../containers/portfolio/PortfolioContainer';
-import AnimatedNavigationContainer from '../../../containers/portfolioItems/AnimatedNavigationContainer';
 import DadJokesContainer from '../../../containers/portfolioItems/DadJokesContainer';
 import ExpandingCardsContainer from '../../../containers/portfolioItems/ExpandingCardsContainer';
 import FaqCollapseContainer from '../../../containers/portfolioItems/FaqCollapseContainer';
@@ -49,6 +48,7 @@ import {
   todoAppPath,
 } from '../../../utils/route';
 import NotFound from '../../notFound/NotFound';
+import AnimatedNavigation from '../../portfolioItems/animatedNavigation/AnimatedNavigation';
 import FormWaveAnimation from '../../portfolioItems/formWaveAnimation/FormWaveAnimation';
 import Hoverboard from '../../portfolioItems/hoverboard/Hoverboard';
 
@@ -60,13 +60,8 @@ const AppRouter: FC = () => (
     <Route path={contactPath} element={<ContactContainer />} />
 
     {/* Portfolio Pages Routes */}
+    <Route path={expandingCardsPath} element={<ExpandingCardsContainer />} />
     <Route
-      
-      path={expandingCardsPath}
-      element={<ExpandingCardsContainer />}
-    />
-    <Route
-      
       path={rotatingNavigationPath}
       element={<RotatingNavigationContainer />}
     />
@@ -74,30 +69,19 @@ const AppRouter: FC = () => (
     <Route path={dadJokesPath} element={<DadJokesContainer />} />
     <Route path={faqCollapsePath} element={<FaqCollapseContainer />} />
     <Route
-      
       path={randomChoicePickerPath}
       element={<RandomChoicePickerContext />}
     />
+    <Route path={animatedNavigationPath} element={<AnimatedNavigation />} />
     <Route
-      
-      path={animatedNavigationPath}
-      element={<AnimatedNavigationContainer />}
-    />
-    <Route
-      
       path={incrementingCounterPath}
       element={<IncrementingCounterContext />}
     />
     <Route path={movieAppPath} element={<MovieAppContainer />} />
     <Route path={drinkWaterPath} element={<DrinkWaterContext />} />
     <Route path={themeClockPath} element={<ThemeClockContext />} />
+    <Route path={githubProfilesPath} element={<GithubProfilesContainer />} />
     <Route
-      
-      path={githubProfilesPath}
-      element={<GithubProfilesContainer />}
-    />
-    <Route
-      
       path={passwordGeneratorPath}
       element={<PasswordGeneratorContainer />}
     />
@@ -106,7 +90,6 @@ const AppRouter: FC = () => (
     <Route path={liveChatPath} element={<LiveChatContainer />} />
     <Route path={hoverboardPath} element={<Hoverboard />} />
     <Route
-      
       path={testimonialsSwitcherPath}
       element={<TestimonialsSwitcherContainer />}
     />
