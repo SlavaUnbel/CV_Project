@@ -1,4 +1,5 @@
 import React, { FC, useContext } from 'react';
+
 import { GithubProfilesCtx } from '../../../../utils/context';
 import UserAvatar from './userAvatar/UserAvatar';
 import UserInfo from './userInfo/UserInfo';

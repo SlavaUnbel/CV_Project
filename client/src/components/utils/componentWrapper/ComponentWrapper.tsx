@@ -1,6 +1,8 @@
-import React, { FC, useEffect, useState } from 'react';
-import ToastContainer from '../toastContainer/ToastContainer';
 import './component-wrapper.scss';
+
+import React, { FC, useEffect, useState } from 'react';
+
+import ToastContainer from '../toastContainer/ToastContainer';
 
 interface Props extends IWithChildren {
   disableToast?: boolean;
@@ -25,7 +27,7 @@ const ComponentWrapper: FC<Props> = ({
   }, []);
 
   return (
-    <div className={`component-wrapper ${mounted ? 'mounted' : ''}`}>
+    <div className={`component-wrapper ${mounted ? "mounted" : ""}`}>
       {children}
 
       {!disableToast && (

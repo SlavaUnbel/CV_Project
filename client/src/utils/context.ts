@@ -75,23 +75,10 @@ interface IContactContext
 }
 export const ContactCtx = createContext({} as IContactContext);
 
-//Expanding Cards Context
-export interface IExpandingCardsContext
-  extends IWithLoading,
-    IWithError,
-    IWithWarning {
-  data: IExpandingCards[];
-  setData: (data: IExpandingCards[]) => void;
-}
-export const ExpandingCardsCtx = createContext({} as IExpandingCardsContext);
-
 //Rotating Navigation Context
-interface IRotatingNavigationContext
-  extends IWithLoading,
-    IWithError,
-    IWithWarning {
+interface IRotatingNavigationContext {
   data: IRotatingNavigation;
-  setData: (data: IRotatingNavigation) => void;
+  getData: () => void;
 
   ref: RefObject<HTMLDivElement>;
   open: () => void;
@@ -100,25 +87,6 @@ interface IRotatingNavigationContext
 export const RotatingNavigationCtx = createContext(
   {} as IRotatingNavigationContext
 );
-
-//Dad Jokes Context
-interface IDadJokesContext extends IWithLoading, IWithError {
-  data: IDadJokes;
-  setData: (data: IDadJokes) => void;
-
-  getJoke: () => void;
-}
-export const DadJokesCtx = createContext({} as IDadJokesContext);
-
-//Faq Collapse Context
-export interface IFaqCollapseContext
-  extends IWithLoading,
-    IWithError,
-    IWithWarning {
-  data: IFaqCollapse[];
-  setData: (data: IFaqCollapse[]) => void;
-}
-export const FaqCollapseCtx = createContext({} as IFaqCollapseContext);
 
 //Random Choice Context
 interface IRandomChoicePickerContext {
@@ -132,18 +100,10 @@ export const RandomChoicePickerCtx = createContext(
   {} as IRandomChoicePickerContext
 );
 
-//Incrementing Counter Context
-interface IIntcrementingCounterContext {
-  data: IIncrementingCounter;
-}
-export const IntcrementingCounterCtx = createContext(
-  {} as IIntcrementingCounterContext
-);
-
 //Movie App Context
-interface IMovieAppContext extends IWithLoading, IWithError, IWithWarning {
+interface IMovieAppContext {
   movies: IMovieApp[];
-  setMovies: (movies: IMovieApp[]) => void;
+  getMovies: (url: string) => void;
 
   searchRef: RefObject<HTMLInputElement>;
   submit: (e: FormEvent<HTMLFormElement>) => void;
@@ -174,18 +134,17 @@ interface IThemeClockContext {
 export const ThemeClockCtx = createContext({} as IThemeClockContext);
 
 //Github Profiles Context
-interface IGithubProfilesContext
-  extends IWithLoading,
-    IWithError,
-    IWithWarning {
+interface IGithubProfilesContext extends IWithWarning {
   user: IGithubUser;
-  setGithubProfilesData: (user: any) => void;
-
   repos: IGithubRepo[];
-  setGithubProfilesReposData: (repos: any[]) => void;
+  getGithubProfile: (url: string) => void;
+
+  searchForAUser: boolean;
+  setSearchForAUser: (search: boolean) => void;
 
   noUserFound: boolean;
-  searchForAUser: boolean;
+  setNoUserFound: (exists: boolean) => void;
+
   searchRef: RefObject<HTMLInputElement>;
   submitSearch: (e: React.FormEvent<HTMLFormElement>) => void;
 }
@@ -256,10 +215,9 @@ interface IAuthProjectContext extends IWithError, IWithWarning, IWithSuccess {
 export const AuthProjectCtx = createContext({} as IAuthProjectContext);
 
 //Notes App Context
-interface INotesAppContext extends IWithLoading, IWithError, IWithSuccess {
+export interface INotesAppContext {
   notes: INotesApp[];
-  setNotes: (notes: INotesApp[]) => void;
-
+  getNotes: () => void;
   addNote: () => void;
   renameNote: (note: INotesApp) => void;
   editNote: (note: INotesApp) => void;
@@ -267,18 +225,6 @@ interface INotesAppContext extends IWithLoading, IWithError, IWithSuccess {
   removeNote: (id: string) => void;
 }
 export const NotesAppCtx = createContext({} as INotesAppContext);
-
-//Testimonials Switcher Context
-export interface ITestimonialsSwitcherContext
-  extends IWithLoading,
-    IWithError,
-    IWithWarning {
-  data: ITestimonialsSwitcher;
-  setData: (data: ITestimonialsSwitcher) => void;
-}
-export const TestimonialsSwitcherCtx = createContext(
-  {} as ITestimonialsSwitcherContext
-);
 
 //Live Chat Context
 interface ILiveChatContext {
@@ -325,7 +271,9 @@ export const LiveChatRoomCtx = createContext({} as ILiveChatRoomContext);
 //Todo App Context
 interface ITodoAppContext {
   todos: ITodoApp[];
-  setTodos: (todos: ITodoApp[]) => void;
+  addTodo: (e?: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+  completeTodo: (todo: ITodoApp) => void;
+  removeTodo: (id: string) => void;
 
   inputValue: string;
   setInputValue: (value: string) => void;
@@ -335,8 +283,6 @@ interface ITodoAppContext {
 
   status: string;
   setStatus: (status: string) => void;
-
-  addTodo: (e?: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 }
 export const TodoAppCtx = createContext({} as ITodoAppContext);
 

@@ -1,11 +1,15 @@
 import React, { FC } from 'react';
+
 import TodoApp from '../../components/portfolioItems/todoApp/TodoApp';
 import { TodoAppCtx } from '../../utils/context';
 import { useAddTodos, useFilterTodos, useWindowTitle } from '../../utils/hooks';
 
 interface Props {
   todos: ITodoApp[];
+  getTodos: () => void;
   setTodos: (todos: ITodoApp[]) => void;
+  completeTodo: (todo: ITodoApp) => void;
+  removeTodo: (id: string) => void;
 
   inputValue: string;
   setInputValue: (value: string) => void;
@@ -19,7 +23,10 @@ interface Props {
 
 const TodoAppContext: FC<Props> = ({
   todos,
+  getTodos,
   setTodos,
+  completeTodo,
+  removeTodo,
 
   inputValue,
   setInputValue,
@@ -30,9 +37,14 @@ const TodoAppContext: FC<Props> = ({
   status,
   setStatus,
 }) => {
-  useWindowTitle('ToDo App');
+  useWindowTitle("ToDo App");
 
-  const addTodo = useAddTodos({ todos, setTodos, inputValue, setInputValue });
+  const addTodo = useAddTodos({
+    getTodos,
+    setTodos,
+    inputValue,
+    setInputValue,
+  });
 
   useFilterTodos({ todos, status, setFilteredTodos });
 
@@ -40,7 +52,9 @@ const TodoAppContext: FC<Props> = ({
     <TodoAppCtx.Provider
       value={{
         todos,
-        setTodos,
+        addTodo,
+        completeTodo,
+        removeTodo,
 
         inputValue,
         setInputValue,
@@ -50,8 +64,6 @@ const TodoAppContext: FC<Props> = ({
 
         status,
         setStatus,
-
-        addTodo,
       }}
     >
       <TodoApp />

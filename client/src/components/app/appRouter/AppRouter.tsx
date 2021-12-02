@@ -18,7 +18,6 @@ import TestimonialsSwitcherContainer from '../../../containers/portfolioItems/Te
 import TodoAppContainer from '../../../containers/portfolioItems/TodoAppContainer';
 import HomeContext from '../../../context/home/HomeContext';
 import DrinkWaterContext from '../../../context/portfolioItems/DrinkWaterContext';
-import IncrementingCounterContext from '../../../context/portfolioItems/IncrementingCounterContext';
 import RandomChoicePickerContext from '../../../context/portfolioItems/RandomChoicePickerContext';
 import ThemeClockContext from '../../../context/portfolioItems/ThemeClockContext';
 import {
@@ -51,6 +50,7 @@ import NotFound from '../../notFound/NotFound';
 import AnimatedNavigation from '../../portfolioItems/animatedNavigation/AnimatedNavigation';
 import FormWaveAnimation from '../../portfolioItems/formWaveAnimation/FormWaveAnimation';
 import Hoverboard from '../../portfolioItems/hoverboard/Hoverboard';
+import IncrementingCounter from '../../portfolioItems/incrementingCounter/IncrementingCounter';
 
 const AppRouter: FC = () => (
   <Routes>
@@ -73,10 +73,7 @@ const AppRouter: FC = () => (
       element={<RandomChoicePickerContext />}
     />
     <Route path={animatedNavigationPath} element={<AnimatedNavigation />} />
-    <Route
-      path={incrementingCounterPath}
-      element={<IncrementingCounterContext />}
-    />
+    <Route path={incrementingCounterPath} element={<IncrementingCounter />} />
     <Route path={movieAppPath} element={<MovieAppContainer />} />
     <Route path={drinkWaterPath} element={<DrinkWaterContext />} />
     <Route path={themeClockPath} element={<ThemeClockContext />} />

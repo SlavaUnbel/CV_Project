@@ -1,12 +1,21 @@
-import { FormatQuote } from '@mui/icons-material';
-import React, { FC, useContext } from 'react';
-import { TestimonialsSwitcherCtx } from '../../../utils/context';
-import ComponentWrapper from '../../utils/componentWrapper/ComponentWrapper';
 import './testimonials-switcher.scss';
+
+import { FormatQuote } from '@mui/icons-material';
+import React, { FC } from 'react';
+
+import { useFetchTestimonialsSwitcherData, useWindowTitle } from '../../../utils/hooks';
+import ComponentWrapper from '../../utils/componentWrapper/ComponentWrapper';
 import TestimonialWrapper from './testimonialWrapper/TestimonialWrapper';
 
-const TestimonialsSwitcher: FC = () => {
-  const { data } = useContext(TestimonialsSwitcherCtx);
+interface Props {
+  data: ITestimonialsSwitcher;
+  getData: (id: number) => void;
+}
+
+const TestimonialsSwitcher: FC<Props> = ({ data, getData }) => {
+  useWindowTitle("Testimonials Switcher");
+
+  useFetchTestimonialsSwitcherData(getData);
 
   return (
     <ComponentWrapper>
