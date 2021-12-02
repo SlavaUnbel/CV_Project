@@ -1,6 +1,7 @@
 import { Check, Delete } from '@mui/icons-material';
 import { IconButton } from '@mui/material';
 import React, { FC, useContext } from 'react';
+
 import { TodoAppCtx } from '../../../../../utils/context';
 import { useManageTodo } from '../../../../../utils/hooks';
 
@@ -10,17 +11,18 @@ interface Props {
 }
 
 const Todo: FC<Props> = ({ todo, setHidden }) => {
-  const { setTodos } = useContext(TodoAppCtx);
+  const { completeTodo, removeTodo } = useContext(TodoAppCtx);
 
   const { removed, complete, remove } = useManageTodo({
     todo,
-    setTodos,
     setHidden,
+    completeTodo,
+    removeTodo,
   });
 
   return (
-    <div className={`todo ${removed ? 'removed' : ''}`}>
-      <li className={`${todo.completed ? 'completed' : ''}`}>{todo.todo}</li>
+    <div className={`todo ${removed ? "removed" : ""}`}>
+      <li className={`${todo.completed ? "completed" : ""}`}>{todo.todo}</li>
 
       <div className="btn-container">
         <IconButton className="complete-btn" onClick={complete}>

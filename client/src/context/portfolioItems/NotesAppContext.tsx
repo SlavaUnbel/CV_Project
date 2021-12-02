@@ -1,47 +1,32 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 
 import NotesApp from '../../components/portfolioItems/notesApp/NotesApp';
-import { NotesAppCtx } from '../../utils/context';
-import { useFetchNotesAppDataAndManageNotes, useWindowTitle } from '../../utils/hooks';
+import { INotesAppContext, NotesAppCtx } from '../../utils/context';
+import { useWindowTitle } from '../../utils/hooks';
 
-interface Props extends IWithLoading, IWithError, IWithSuccess {
-  notes: INotesApp[];
-  setNotes: (notes: INotesApp[]) => void;
-}
-
-const NotesAppContext: FC<Props> = ({
+const NotesAppContext: FC<INotesAppContext> = ({
   notes,
-  setNotes,
-  setLoading,
-
-  pushError,
-  pushSuccess,
+  getNotes,
+  addNote,
+  renameNote,
+  editNote,
+  saveNote,
+  removeNote,
 }) => {
   useWindowTitle("Notes App");
 
-  const { addNote, renameNote, editNote, saveNote, removeNote } =
-    useFetchNotesAppDataAndManageNotes({
-      setNotes,
-      setLoading,
-      pushError,
-      pushSuccess,
-    });
+  useEffect(() => getNotes(), [getNotes]);
 
   return (
     <NotesAppCtx.Provider
       value={{
         notes,
-        setNotes,
-        setLoading,
-
+        getNotes,
         addNote,
         renameNote,
         editNote,
         saveNote,
         removeNote,
-
-        pushError,
-        pushSuccess,
       }}
     >
       <NotesApp />

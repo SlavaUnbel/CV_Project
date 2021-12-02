@@ -1,12 +1,25 @@
-import React, { FC, useContext } from 'react';
-import { DadJokesCtx } from '../../../utils/context';
+import './dad-jokes.scss';
+
+import React, { FC, useEffect } from 'react';
+
+import { useWindowTitle } from '../../../utils/hooks';
 import Button from '../../utils/button/Button';
 import ComponentWrapper from '../../utils/componentWrapper/ComponentWrapper';
-import './dad-jokes.scss';
 import JokeWrapper from './jokeWrapper/JokeWrapper';
 
-const DadJokes: FC = () => {
-  const { data, getJoke } = useContext(DadJokesCtx);
+interface Props {
+  data: IDadJokes;
+  getData: () => void;
+}
+
+const DadJokes: FC<Props> = ({ data, getData }) => {
+  useWindowTitle("Dad Jokes");
+
+  useEffect(
+    () => getData(),
+    //eslint-disable-next-line
+    []
+  );
 
   return (
     <ComponentWrapper>
@@ -15,10 +28,10 @@ const DadJokes: FC = () => {
           <h3>Don't Laugh Challenge</h3>
 
           <JokeWrapper>
-            {(data && data.joke) || '<-- Joke goes here -->'}
+            {(data && data.joke) || "<-- Joke goes here -->"}
           </JokeWrapper>
 
-          <Button onClick={getJoke}>Get Another Joke</Button>
+          <Button onClick={getData}>Get Another Joke</Button>
         </div>
       </div>
     </ComponentWrapper>

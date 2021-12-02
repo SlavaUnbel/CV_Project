@@ -1,10 +1,11 @@
 import { Add } from '@mui/icons-material';
 import React, { FC, useContext } from 'react';
+
 import { TodoAppCtx } from '../../../../utils/context';
 import Button from '../../../utils/button/Button';
 
 const NewTodoInput: FC = () => {
-  const { inputValue, setInputValue, status, setStatus, addTodo } =
+  const { addTodo, inputValue, setInputValue, status, setStatus } =
     useContext(TodoAppCtx);
 
   return (

@@ -1,14 +1,21 @@
 import './expanding-cards.scss';
 
-import React, { FC, useContext } from 'react';
+import React, { FC, useEffect } from 'react';
 
-import { ExpandingCardsCtx } from '../../../utils/context';
+import { useWindowTitle } from '../../../utils/hooks';
 import ComponentWrapper from '../../utils/componentWrapper/ComponentWrapper';
 import LoaderWrapper from '../../utils/loaderWrapper/LoaderWrapper';
 import ExpandingCard from './expandingCard/ExpandingCard';
 
-const ExpandingCards: FC = () => {
-  const { data } = useContext(ExpandingCardsCtx);
+interface Props {
+  data: IExpandingCards[];
+  getData: () => void;
+}
+
+const ExpandingCards: FC<Props> = ({ data, getData }) => {
+  useWindowTitle("Expanding Cards");
+
+  useEffect(() => getData(), [getData]);
 
   return (
     <ComponentWrapper>
