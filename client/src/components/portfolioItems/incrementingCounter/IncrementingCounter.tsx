@@ -1,11 +1,16 @@
-import React, { FC, useContext } from 'react';
-import { IntcrementingCounterCtx } from '../../../utils/context';
-import ComponentWrapper from '../../utils/componentWrapper/ComponentWrapper';
-import CounterItem from './counterItem/CounterItem';
 import './incrementing-counter.scss';
 
+import React, { FC } from 'react';
+
+import { getIncrementingCounterItemsInfo } from '../../../services/databaseMethods';
+import { useWindowTitle } from '../../../utils/hooks';
+import ComponentWrapper from '../../utils/componentWrapper/ComponentWrapper';
+import CounterItem from './counterItem/CounterItem';
+
 const IncrementingCounter: FC = () => {
-  const { data } = useContext(IntcrementingCounterCtx);
+  useWindowTitle("Incrementing Counter");
+
+  const data = getIncrementingCounterItemsInfo();
   const { twitter, youtube, facebook } = data;
 
   return (

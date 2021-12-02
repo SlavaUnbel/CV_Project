@@ -443,31 +443,6 @@ export const useSendEmail = ({
 };
 
 // Expanding Cards Hooks
-interface ExpandingCardsProps extends IWithLoading, IWithError, IWithWarning {
-  setData: (data: IExpandingCards[]) => void;
-}
-
-export const useFetchExpandingCardsData = ({
-  setData,
-  setLoading,
-  pushError,
-  pushWarning,
-}: ExpandingCardsProps) => {
-  useEffect(() => {
-    if (!setLoading) return;
-    setLoading(true);
-
-    services.portfolioItemsService
-      .getExpandingCardsData()
-      .then((data) => {
-        setData(data);
-        data.length === 0 && pushWarning("No data found");
-      })
-      .catch((e) => pushError(e))
-      .finally(() => setLoading(false));
-  }, [setData, setLoading, pushError, pushWarning]);
-};
-
 export const useExpandingCardRef = () => {
   const ref: LegacyRef<HTMLDivElement> = useRef(null);
 
@@ -486,34 +461,6 @@ export const useExpandingCardRef = () => {
 };
 
 //Rotating Navigation Hooks
-interface RotatingNavigationProps
-  extends IWithLoading,
-    IWithError,
-    IWithWarning {
-  setData: (data: IRotatingNavigation) => void;
-}
-
-export const useFetchRotatingNavigationData = ({
-  setData,
-  setLoading,
-  pushError,
-  pushWarning,
-}: RotatingNavigationProps) => {
-  useEffect(() => {
-    if (!setLoading) return;
-    setLoading(true);
-
-    services.portfolioItemsService
-      .getRotatingNavigationData()
-      .then((data) => {
-        setData(data[0]);
-        !data && pushWarning("No data found");
-      })
-      .catch((e) => pushError(e))
-      .finally(() => setLoading(false));
-  }, [setData, setLoading, pushError, pushWarning]);
-};
-
 export const useNavigationAnimation = () => {
   const ref: LegacyRef<HTMLDivElement> = useRef(null);
 
@@ -546,65 +493,6 @@ export const useFormWaveAnimationEffect = () => {
   }, [labelRef]);
 
   return labelRef;
-};
-
-//Dad Jokes Hooks
-interface DadJokesProps extends IWithLoading, IWithError {
-  setData: (data: IDadJokes) => void;
-}
-
-export const useFetchDadJokesData = ({
-  setData,
-  setLoading,
-  pushError,
-}: DadJokesProps) => {
-  const getJoke = useCallback(() => {
-    if (!setLoading) return;
-    setLoading(true);
-
-    services.portfolioItemsService
-      .getDadJokesDataFromApi()
-      .then((data) => {
-        if (data.status === 200) {
-          setData(data);
-        } else {
-          pushError(`Api responded with error code ${data.status}`);
-        }
-      })
-      .catch((e) => pushError(e))
-      .finally(() => setLoading(false));
-    //eslint-disable-next-line
-  }, [setData, setLoading, pushError]);
-
-  useEffect(() => getJoke(), [getJoke]);
-
-  return getJoke;
-};
-
-//Faq Collapse Hooks
-interface FaqCollapseProps extends IWithLoading, IWithError, IWithWarning {
-  setData: (data: IFaqCollapse[]) => void;
-}
-
-export const useFetchFaqCollapseData = ({
-  setData,
-  setLoading,
-  pushError,
-  pushWarning,
-}: FaqCollapseProps) => {
-  useEffect(() => {
-    if (!setLoading) return;
-    setLoading(true);
-
-    services.portfolioItemsService
-      .getFaqCollapseData()
-      .then((data) => {
-        setData(data);
-        !data && pushWarning("No data found");
-      })
-      .catch((e) => pushError(e))
-      .finally(() => setLoading(false));
-  }, [setData, setLoading, pushError, pushWarning]);
 };
 
 // Auth Project Hooks
@@ -1004,7 +892,7 @@ export const useMovieAppApi = ({
   return getData;
 };
 
-export const useMovieAppSearch = (getData: (url: string) => void) => {
+export const useMovieAppSearch = (getMovies: (url: string) => void) => {
   const searchRef: LegacyRef<HTMLInputElement> = useRef(null);
 
   const submit = (e: FormEvent<HTMLFormElement>) => {
@@ -1014,7 +902,7 @@ export const useMovieAppSearch = (getData: (url: string) => void) => {
       const searchTerm = searchRef.current.value;
 
       if (searchTerm !== "") {
-        getData(`${movieAppSearchApi}${searchTerm}`);
+        getMovies(`${movieAppSearchApi}${searchTerm}`);
 
         searchRef.current.value = "";
       } else {
@@ -1163,68 +1051,33 @@ export const useSetTimeAndDate = () => {
 };
 
 //GitHub Profiles Hooks
-interface GithubProfilesProps extends IWithLoading, IWithError, IWithWarning {
-  setGithubProfilesData: (user: any) => void;
-  setGithubProfilesReposData: (repos: any[]) => void;
+interface GithubProfilesProps extends IWithWarning {
+  getGithubProfile: (url: string) => void;
+  setNoUserFound: (exists: boolean) => void;
 }
 
 export const useFetchGithubProfilesUserData = ({
-  setGithubProfilesData,
-  setGithubProfilesReposData,
-  setLoading,
-  pushError,
+  getGithubProfile,
+  setNoUserFound,
   pushWarning,
 }: GithubProfilesProps) => {
-  const [noUserFound, setNoUserFound] = useState(false);
-  const [searchForAUser, setSearchForAUser] = useState(true);
   const searchRef: LegacyRef<HTMLInputElement> = useRef(null);
-
-  const getUserAndRepos = (user: string) => {
-    if (!setLoading) return;
-    setLoading(true);
-
-    services.portfolioItemsService
-      .getGithubProfilesUserDataFromApi(user)
-      .then((res) => {
-        if (res.message === "Not Found") {
-          setNoUserFound(true);
-          pushWarning("No user found!");
-        } else {
-          setGithubProfilesData(res);
-        }
-      })
-      .catch((e) => pushError(e))
-      .finally(() => {
-        setLoading(false);
-        setSearchForAUser(false);
-      });
-
-    services.portfolioItemsService
-      .getGithubProfilesReposDataFromApi(user)
-      .then((res) =>
-        res.message === "Not Found"
-          ? pushWarning("No repositories found!")
-          : setGithubProfilesReposData(res)
-      )
-      .catch((e) => pushError(e))
-      .finally(() => setLoading(false));
-  };
 
   const submitSearch = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (searchRef.current) {
       searchRef.current.value
-        ? getUserAndRepos(searchRef.current.value)
+        ? getGithubProfile(searchRef.current.value)
         : pushWarning("Type a user's name!");
 
       searchRef.current.value = "";
     }
 
-    noUserFound && setNoUserFound(false);
+    setNoUserFound(false);
   };
 
-  return { noUserFound, searchForAUser, searchRef, submitSearch };
+  return { searchRef, submitSearch };
 };
 
 //Password Generator Hooks
@@ -1371,63 +1224,6 @@ export const useGeneratePassword = ({
 };
 
 //Notes App Hooks
-interface NotesAppProps extends IWithLoading, IWithError, IWithSuccess {
-  setNotes: (notes: INotesApp[]) => void;
-}
-
-export const useFetchNotesAppDataAndManageNotes = ({
-  setNotes,
-  setLoading,
-  pushError,
-  pushSuccess,
-}: NotesAppProps) => {
-  const request = useCallback(
-    (req: Promise<any>) => req.then(setNotes).catch((e) => pushError(e)),
-    [setNotes, pushError]
-  );
-
-  useEffect(() => {
-    if (!setLoading) return;
-    setLoading(true);
-
-    request(services.notesAppService.getNotes()).finally(() =>
-      setLoading(false)
-    );
-  }, [request, setNotes, setLoading, pushError]);
-
-  const addNote = () => request(services.notesAppService.addNote());
-
-  const renameNote = (note: INotesApp) =>
-    request(services.notesAppService.renameNote(note));
-
-  const editNote = (note: INotesApp) =>
-    request(services.notesAppService.editNote(note));
-
-  const saveNote = (note: INotesApp) =>
-    request(
-      services.notesAppService
-        .saveNote(note)
-        .finally(() =>
-          pushSuccess(
-            `Successfully saved note: ${
-              note.title === "" ? "<No name provided>" : note.title
-            }`
-          )
-        )
-    );
-
-  const removeNote = (id: string) =>
-    request(services.notesAppService.removeNote(id));
-
-  return {
-    addNote,
-    renameNote,
-    editNote,
-    saveNote,
-    removeNote,
-  };
-};
-
 export const useNotesAppInputs = (item: INotesApp) => {
   const [note, setNote] = useState(item.note);
   const [title, setTitle] = useState(item.title);
@@ -1488,36 +1284,9 @@ export const useHoverboard = () => {
 };
 
 //Testimonials Switcher Hooks
-interface TestimonialsSwitcherProps
-  extends IWithLoading,
-    IWithError,
-    IWithWarning {
-  setData: (data: ITestimonialsSwitcher) => void;
-}
-
-export const useFetchTestimonialsSwitcherData = ({
-  setData,
-  setLoading,
-  pushError,
-  pushWarning,
-}: TestimonialsSwitcherProps) => {
-  const getTestimonial = useCallback(
-    (id: number) => {
-      if (!setLoading) return;
-      setLoading(true);
-
-      services.portfolioItemsService
-        .getTestimonialsSwitcherDataById(id)
-        .then((data) => {
-          setData(data);
-          !data && pushWarning("No data found");
-        })
-        .catch((e) => pushError(e))
-        .finally(() => setLoading(false));
-    },
-    [setData, setLoading, pushError, pushWarning]
-  );
-
+export const useFetchTestimonialsSwitcherData = (
+  getTestimonial: (id: number) => void
+) => {
   useEffect(() => {
     getTestimonial(0);
     //eslint-disable-next-line
@@ -1685,7 +1454,7 @@ export const useChatManage = ({
 
 //Todo App Hooks
 interface AddTodosProps {
-  todos: ITodoApp[];
+  getTodos: () => void;
   setTodos: (todos: ITodoApp[]) => void;
 
   inputValue: string;
@@ -1693,17 +1462,13 @@ interface AddTodosProps {
 }
 
 export const useAddTodos = ({
-  todos,
+  getTodos,
   setTodos,
 
   inputValue,
   setInputValue,
 }: AddTodosProps) => {
-  useEffect(() => {
-    services.todoAppService.getTodos().then((data) => {
-      setTodos(data);
-    });
-  }, [setTodos]);
+  useEffect(() => getTodos(), [getTodos]);
 
   const addTodo = (e?: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e && e.preventDefault();
@@ -1755,35 +1520,31 @@ export const useFilterTodos = ({
 
 interface ManageTodoProps {
   todo: ITodoApp;
-  setTodos: (todos: ITodoApp[]) => void;
   setHidden: (hidden: boolean) => void;
+  completeTodo: (todo: ITodoApp) => void;
+  removeTodo: (id: string) => void;
 }
 
 export const useManageTodo = ({
   todo,
-  setTodos,
   setHidden,
+  completeTodo,
+  removeTodo,
 }: ManageTodoProps) => {
   const [removed, setRemoved] = useState(false);
 
-  const applyRemovedClass = (id: string) => setRemoved(true);
+  const applyRemovedClass = (_id: string) => setRemoved(true);
 
-  const complete = () => {
-    services.todoAppService.completeTodo(todo).then(setTodos);
-  };
+  const complete = () => completeTodo(todo);
 
   const remove = () => {
     applyRemovedClass(todo._id);
     setHidden(true);
 
-    setTimeout(
-      () =>
-        services.todoAppService
-          .removeTodo(todo._id)
-          .then(setTodos)
-          .finally(() => setHidden(false)),
-      SECOND * 3
-    );
+    setTimeout(() => {
+      removeTodo(todo._id);
+      setHidden(false);
+    }, SECOND * 3);
   };
 
   return { removed, complete, remove };

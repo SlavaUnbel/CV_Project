@@ -16,6 +16,8 @@ export const expandingCardsSrc =
 export const rotatingNavigationSrc =
   process.env.PUBLIC_URL + "/images/rotatingNavigation";
 
+export const dadJokesApi = process.env.REACT_APP_JOKES_API_URL;
+
 export const movieAppApi = process.env.REACT_APP_MOVIE_API_URL;
 export const movieAppImagesApi = process.env.REACT_APP_MOVIE_API_IMAGES_URL;
 export const movieAppSearchApi = process.env.REACT_APP_MOVIE_API_SEARCH_URL;

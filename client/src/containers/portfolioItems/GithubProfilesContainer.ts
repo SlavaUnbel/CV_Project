@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
+
 import GithubProfilesContext from '../../context/portfolioItems/GithubProfilesContext';
-import { loadingActions } from '../../reducers/loadingReducer';
 import { messageActions } from '../../reducers/messageReducer';
 import { portfolioItemsActions } from '../../reducers/portfolioItemsReducer';
 import { IState } from '../../reducers/rootReducer';
@@ -9,23 +9,27 @@ import { IState } from '../../reducers/rootReducer';
 const mapStateToProps = (state: IState) => ({
   user: state.portfolioItems.githubUser,
   repos: state.portfolioItems.githubRepos,
+  searchForAUser: state.portfolioItems.searchForAUser,
+  noUserFound: state.portfolioItems.noUserFound,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  setGithubProfilesData: bindActionCreators(
-    portfolioItemsActions.githubProfiles.setUser,
-    dispatch,
+  getGithubProfile: bindActionCreators(
+    portfolioItemsActions.githubProfiles.get,
+    dispatch
   ),
-  setGithubProfilesReposData: bindActionCreators(
-    portfolioItemsActions.githubProfiles.setRepos,
-    dispatch,
+  setSearchForAUser: bindActionCreators(
+    portfolioItemsActions.githubProfiles.setSearchForAUser,
+    dispatch
   ),
-  setLoading: bindActionCreators(loadingActions.loading.set, dispatch),
-  pushError: bindActionCreators(messageActions.message.error, dispatch),
+  setNoUserFound: bindActionCreators(
+    portfolioItemsActions.githubProfiles.setNotFound,
+    dispatch
+  ),
   pushWarning: bindActionCreators(messageActions.message.warning, dispatch),
 });
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
+  mapDispatchToProps
 )(GithubProfilesContext);

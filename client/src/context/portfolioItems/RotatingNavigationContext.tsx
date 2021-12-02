@@ -1,33 +1,18 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
+
 import RotatingNavigation from '../../components/portfolioItems/rotatingNavigation/RotatingNavigation';
 import { RotatingNavigationCtx } from '../../utils/context';
-import {
-  useFetchRotatingNavigationData,
-  useNavigationAnimation,
-  useWindowTitle,
-} from '../../utils/hooks';
+import { useNavigationAnimation, useWindowTitle } from '../../utils/hooks';
 
-interface Props extends IWithLoading, IWithError, IWithWarning {
+interface Props {
   data: IRotatingNavigation;
-  setData: (data: IRotatingNavigation) => void;
+  getData: () => void;
 }
 
-const RotatingNavigationContext: FC<Props> = ({
-  data,
-  setData,
-  setLoading,
+const RotatingNavigationContext: FC<Props> = ({ data, getData }) => {
+  useWindowTitle("Rotating Navigation");
 
-  pushError,
-  pushWarning,
-}) => {
-  useWindowTitle('Rotating Navigation');
-
-  useFetchRotatingNavigationData({
-    setData,
-    setLoading,
-    pushError,
-    pushWarning,
-  });
+  useEffect(() => getData(), [getData]);
 
   const { ref, open, close } = useNavigationAnimation();
 
@@ -35,11 +20,7 @@ const RotatingNavigationContext: FC<Props> = ({
     <RotatingNavigationCtx.Provider
       value={{
         data,
-        setData,
-        setLoading,
-
-        pushError,
-        pushWarning,
+        getData,
 
         ref,
         open,
