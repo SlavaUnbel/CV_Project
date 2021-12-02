@@ -1,8 +1,7 @@
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
-import ExpandingCardsContext from '../../context/portfolioItems/ExpandingCardsContext';
-import { loadingActions } from '../../reducers/loadingReducer';
-import { messageActions } from '../../reducers/messageReducer';
+
+import ExpandingCards from '../../components/portfolioItems/expandingCards/ExpandingCards';
 import { portfolioItemsActions } from '../../reducers/portfolioItemsReducer';
 import { IState } from '../../reducers/rootReducer';
 
@@ -11,16 +10,10 @@ const mapStateToProps = (state: IState) => ({
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  setData: bindActionCreators(
-    portfolioItemsActions.expandingCards.set,
-    dispatch,
+  getData: bindActionCreators(
+    portfolioItemsActions.expandingCards.get,
+    dispatch
   ),
-  setLoading: bindActionCreators(loadingActions.loading.set, dispatch),
-  pushError: bindActionCreators(messageActions.message.error, dispatch),
-  pushWarning: bindActionCreators(messageActions.message.warning, dispatch),
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(ExpandingCardsContext);
+export default connect(mapStateToProps, mapDispatchToProps)(ExpandingCards);

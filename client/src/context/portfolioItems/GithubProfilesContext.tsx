@@ -1,57 +1,59 @@
 import React, { FC } from 'react';
+
 import GithubProfiles from '../../components/portfolioItems/githubProfiles/GithubProfiles';
 import { GithubProfilesCtx } from '../../utils/context';
-import {
-  useFetchGithubProfilesUserData,
-  useWindowTitle,
-} from '../../utils/hooks';
+import { useFetchGithubProfilesUserData, useWindowTitle } from '../../utils/hooks';
 
-interface Props extends IWithLoading, IWithError, IWithWarning {
+interface Props extends IWithWarning {
   user: IGithubUser;
-  setGithubProfilesData: (user: any) => void;
-
   repos: IGithubRepo[];
-  setGithubProfilesReposData: (repos: any[]) => void;
+  getGithubProfile: (url: string) => void;
+
+  searchForAUser: boolean;
+  setSearchForAUser: (search: boolean) => void;
+
+  noUserFound: boolean;
+  setNoUserFound: (exists: boolean) => void;
 }
 
 const GithubProfilesContext: FC<Props> = ({
   user,
-  setGithubProfilesData,
-  setLoading,
-
   repos,
-  setGithubProfilesReposData,
+  getGithubProfile,
 
-  pushError,
+  searchForAUser,
+  setSearchForAUser,
+
+  noUserFound,
+  setNoUserFound,
+
   pushWarning,
 }) => {
-  useWindowTitle('GitHub Profiles');
+  useWindowTitle("GitHub Profiles");
 
-  const { noUserFound, searchForAUser, searchRef, submitSearch } =
-    useFetchGithubProfilesUserData({
-      setGithubProfilesData,
-      setGithubProfilesReposData,
-      setLoading,
-      pushError,
-      pushWarning,
-    });
+  const { searchRef, submitSearch } = useFetchGithubProfilesUserData({
+    getGithubProfile,
+    setNoUserFound,
+    pushWarning,
+  });
+
   return (
     <GithubProfilesCtx.Provider
       value={{
         user,
-        setGithubProfilesData,
-        setLoading,
-
         repos,
-        setGithubProfilesReposData,
+        getGithubProfile,
 
-        pushError,
-        pushWarning,
+        searchForAUser,
+        setSearchForAUser,
 
         noUserFound,
-        searchForAUser,
+        setNoUserFound,
+
         searchRef,
         submitSearch,
+
+        pushWarning,
       }}
     >
       <GithubProfiles />

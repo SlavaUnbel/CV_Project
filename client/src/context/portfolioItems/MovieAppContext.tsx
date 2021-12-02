@@ -1,45 +1,29 @@
-import React, { FC } from 'react';
-import MovieApp from '../../components/portfolioItems/movieApp/MovieApp';
-import { MovieAppCtx } from '../../utils/context';
-import {
-  useMovieAppApi,
-  useMovieAppSearch,
-  useWindowTitle,
-} from '../../utils/hooks';
+import React, { FC, useEffect } from 'react';
 
-interface Props extends IWithLoading, IWithError, IWithWarning {
+import MovieApp from '../../components/portfolioItems/movieApp/MovieApp';
+import { movieAppApi } from '../../utils/constants';
+import { MovieAppCtx } from '../../utils/context';
+import { useMovieAppSearch, useWindowTitle } from '../../utils/hooks';
+
+interface Props {
   movies: IMovieApp[];
-  setMovies: (movies: IMovieApp[]) => void;
+  getMovies: (url: string) => void;
 }
 
-const MovieAppContext: FC<Props> = ({
-  movies,
-  setMovies,
-  setLoading,
+const MovieAppContext: FC<Props> = ({ movies, getMovies }) => {
+  useWindowTitle("Movie App");
 
-  pushError,
-  pushWarning,
-}) => {
-  useWindowTitle('Movie App');
+  useEffect(() => {
+    movieAppApi && getMovies(movieAppApi);
+  }, [getMovies]);
 
-  const getData = useMovieAppApi({
-    setMovies,
-    setLoading,
-    pushError,
-    pushWarning,
-  });
-
-  const { searchRef, submit } = useMovieAppSearch(getData);
+  const { searchRef, submit } = useMovieAppSearch(getMovies);
 
   return (
     <MovieAppCtx.Provider
       value={{
         movies,
-        setMovies,
-        setLoading,
-
-        pushError,
-        pushWarning,
+        getMovies,
 
         searchRef,
         submit,

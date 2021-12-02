@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { githubUsersApi } from '../../utils/constants';
+import { dadJokesApi, githubUsersApi } from '../../utils/constants';
 import { SECOND } from '../../utils/date';
 import { delay } from '../../utils/hooks';
 import PortfolioItemsService from '../abstract/PortfolioItemsService';
@@ -32,7 +32,7 @@ export default class PortfolioItemsServiceApi extends PortfolioItemsService {
   public async getDadJokesDataFromApi(): Promise<IDadJokes> {
     await delay(SECOND / 3);
 
-    return await fetch("https://icanhazdadjoke.com", {
+    return await fetch(`${dadJokesApi}`, {
       headers: {
         Accept: "application/json",
       },

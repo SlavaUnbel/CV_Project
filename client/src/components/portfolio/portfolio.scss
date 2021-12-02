@@ -204,16 +204,27 @@
             right: 0;
             width: 1.5rem;
             height: 6rem;
-            transform: rotate(-45deg) translate(1rem, -1rem);
+            transform: rotate(-45deg) translate(1.25rem, -1rem);
             background: linear-gradient(45deg, #ffd02c, #ff9900);
           }
 
-          .star {
+          &::after {
+            font-family: "Material Icons";
+            font-size: large;
+            content: "star_rounded";
             position: absolute;
-            top: 0.4rem;
-            right: 0.4rem;
+            top: 0.5rem;
+            right: 0.5rem;
             color: var(--white-color);
+            width: 1rem;
           }
+
+          // .star {
+          //   position: absolute;
+          //   top: 0.4rem;
+          //   right: 0.4rem;
+          //   color: var(--white-color);
+          // }
         }
 
         @include screen(1600px) {

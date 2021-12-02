@@ -4,25 +4,25 @@ import { Action } from 'redux-symbiote/types';
 
 import { messageActions } from '../reducers/messageReducer';
 
-export default function* messageSaga() {
-  yield takeEvery(messageActions.message.error, errorHandler);
-  yield takeEvery(messageActions.message.warning, warningHandler);
-  yield takeEvery(messageActions.message.success, successHandler);
-  yield takeEvery(messageActions.message.info, infoHandler);
+export default function* messageWatcherSaga() {
+  yield takeEvery(messageActions.message.error, errorWorker);
+  yield takeEvery(messageActions.message.warning, warningWorker);
+  yield takeEvery(messageActions.message.success, successWorker);
+  yield takeEvery(messageActions.message.info, infoWorker);
 }
 
-function* errorHandler(action: Action<[text: string | null]>) {
+function* errorWorker(action: Action<[text: string | null]>) {
   yield toast(action.payload, { type: "error" });
 }
 
-function* warningHandler(action: Action<[text: string | null]>) {
+function* warningWorker(action: Action<[text: string | null]>) {
   yield toast(action.payload, { type: "warning" });
 }
 
-function* successHandler(action: Action<[text: string | null]>) {
+function* successWorker(action: Action<[text: string | null]>) {
   yield toast(action.payload, { type: "success" });
 }
 
-function* infoHandler(action: Action<[text: string | null]>) {
+function* infoWorker(action: Action<[text: string | null]>) {
   yield toast(action.payload, { type: "info" });
 }

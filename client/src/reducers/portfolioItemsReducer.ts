@@ -13,6 +13,8 @@ export interface PortfolioItemsState {
 
   githubUser: IGithubUser;
   githubRepos: IGithubRepo[];
+  searchForAUser: boolean;
+  noUserFound: boolean;
 
   passwordGenerator: string;
 
@@ -39,6 +41,8 @@ const initialPortfolioItemsState: PortfolioItemsState = {
 
   githubUser: {} as IGithubUser,
   githubRepos: [],
+  searchForAUser: true,
+  noUserFound: false,
 
   passwordGenerator: "",
 
@@ -54,36 +58,42 @@ const initialPortfolioItemsState: PortfolioItemsState = {
 
 const symbiotes = {
   expandingCards: {
+    get: (state: PortfolioItemsState) => ({ ...state }),
     set: (state: PortfolioItemsState, expandingCards: IExpandingCards[]) => ({
       ...state,
       expandingCards,
     }),
   },
   rotatingNavigation: {
+    get: (state: PortfolioItemsState) => ({ ...state }),
     set: (
       state: PortfolioItemsState,
       rotatingNavigation: IRotatingNavigation
     ) => ({ ...state, rotatingNavigation }),
   },
   dadJokes: {
+    get: (state: PortfolioItemsState) => ({ ...state }),
     set: (state: PortfolioItemsState, dadJokes: IDadJokes) => ({
       ...state,
       dadJokes,
     }),
   },
   faqCollapse: {
+    get: (state: PortfolioItemsState) => ({ ...state }),
     set: (state: PortfolioItemsState, faqCollapse: IFaqCollapse[]) => ({
       ...state,
       faqCollapse,
     }),
   },
   movies: {
+    get: (state: PortfolioItemsState, _url: string) => ({ ...state }),
     set: (state: PortfolioItemsState, movies: IMovieApp[]) => ({
       ...state,
       movies,
     }),
   },
   githubProfiles: {
+    get: (state: PortfolioItemsState, _url: string) => ({ ...state }),
     setUser: (state: PortfolioItemsState, githubUser: IGithubUser) => ({
       ...state,
       githubUser,
@@ -91,6 +101,17 @@ const symbiotes = {
     setRepos: (state: PortfolioItemsState, githubRepos: IGithubRepo[]) => ({
       ...state,
       githubRepos,
+    }),
+    setSearchForAUser: (
+      state: PortfolioItemsState,
+      searchForAUser: boolean
+    ) => ({
+      ...state,
+      searchForAUser,
+    }),
+    setNotFound: (state: PortfolioItemsState, noUserFound: boolean) => ({
+      ...state,
+      noUserFound,
     }),
   },
   passwordGenerator: {
@@ -100,12 +121,19 @@ const symbiotes = {
     }),
   },
   notes: {
+    get: (state: PortfolioItemsState) => ({ ...state }),
     set: (state: PortfolioItemsState, notes: INotesApp[]) => ({
       ...state,
       notes,
     }),
+    add: (state: PortfolioItemsState) => ({ ...state }),
+    rename: (state: PortfolioItemsState, _note: INotesApp) => ({ ...state }),
+    edit: (state: PortfolioItemsState, _note: INotesApp) => ({ ...state }),
+    save: (state: PortfolioItemsState, _note: INotesApp) => ({ ...state }),
+    remove: (state: PortfolioItemsState, _id: string) => ({ ...state }),
   },
   testimonialsSwitcher: {
+    get: (state: PortfolioItemsState, _id: number) => ({ ...state }),
     set: (
       state: PortfolioItemsState,
       testimonialsSwitcher: ITestimonialsSwitcher
@@ -115,6 +143,7 @@ const symbiotes = {
     }),
   },
   todos: {
+    get: (state: PortfolioItemsState) => ({ ...state }),
     set: (state: PortfolioItemsState, todos: ITodoApp[]) => ({
       ...state,
       todos,
@@ -123,6 +152,8 @@ const symbiotes = {
       ...state,
       newTodo,
     }),
+    complete: (state: PortfolioItemsState, _todo: ITodoApp) => ({ ...state }),
+    remove: (state: PortfolioItemsState, _id: string) => ({ ...state }),
     filter: (state: PortfolioItemsState, filteredTodos: ITodoApp[]) => ({
       ...state,
       filteredTodos,
