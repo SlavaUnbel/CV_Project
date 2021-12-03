@@ -1,9 +1,13 @@
-@import '../../../index.scss';
+@import "../../../index.scss";
+
+$main-color: #2b88f0;
+$tag-color: #f0932b;
+$highlight-color: #273c75;
 
 .random-choice-picker__container {
   @include container;
   @include flex(column nowrap, center, center);
-  background-color: var(--bg-random-choice-picker-color);
+  background: $main-color;
 
   .random-choice-picker__wrapper {
     width: 30rem;
@@ -12,13 +16,9 @@
       width: 80vw;
     }
 
-    @include tablet {
-      width: 30rem;
-    }
-
     h3 {
-      font-family: 'Soleil Book';
-      color: var(--white-color);
+      font-family: "Soleil Book";
+      color: $white-color;
       margin-bottom: 1.5rem;
       text-align: center;
       font-size: 1.25rem;
@@ -27,19 +27,14 @@
         font-size: 1rem;
         margin-bottom: 1rem;
       }
-
-      @include tablet {
-        font-size: 1.25rem;
-        margin-bottom: 1.5rem;
-      }
     }
 
     .btn {
       @include flex(row nowrap, center, center);
       display: none;
-      font-family: 'Soleil Light';
-      color: var(--white-color);
-      background-color: var(--bg-tag-random-choice-picker-color);
+      font-family: "Soleil Light";
+      color: $white-color;
+      background: $tag-color;
       margin: 0 auto 1rem;
       text-align: center;
       font-size: 1rem;
@@ -52,18 +47,13 @@
         @include flex(row nowrap, center, center);
       }
 
-      @include tablet {
-        font-size: 1.2rem;
-        margin: 0 auto 1.5rem;
-      }
-
       &:active {
         transform: scale(0.9);
       }
     }
 
     textarea {
-      font-family: 'Soleil Light';
+      font-family: "Soleil Light";
       border: none;
       display: block;
       width: 100%;
@@ -77,20 +67,15 @@
         margin: 0 0 1rem;
       }
 
-      @include tablet {
-        font-size: 1rem;
-        margin: 0 0 1.5rem;
-      }
-
       &:focus {
         outline: none;
       }
     }
 
     .tag {
-      font-family: 'Soleil Light';
-      background-color: var(--bg-tag-random-choice-picker-color);
-      color: var(--white-color);
+      font-family: "Soleil Light";
+      background: $tag-color;
+      color: $white-color;
       border-radius: 3rem;
       padding: 0.5rem 1.5rem;
       margin: 0 0.25rem 0.5rem 0;
@@ -98,7 +83,7 @@
       display: inline-flex;
 
       &.highlight {
-        background-color: var(--bg-highlight-random-choice-picker-color);
+        background: $highlight-color;
       }
     }
   }

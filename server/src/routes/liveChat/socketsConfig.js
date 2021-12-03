@@ -1,11 +1,10 @@
 const { Server } = require("socket.io");
 const http = require("http");
-require("dotenv").config();
 
 const socket = (app, port) =>
   new Server(http.createServer(app), {
     cors: {
-      origin: process.env.CLIENT_API,
+      origin: "*",
       methods: ["GET", "POST"],
     },
   })

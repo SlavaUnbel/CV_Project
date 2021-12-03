@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+const path = require("path");
 const mongoose = require("mongoose");
 require("dotenv").config();
 
@@ -8,7 +9,6 @@ app.use(express.json());
 app.use(
   cors({
     origin: [process.env.CLIENT_API],
-    methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
 );
@@ -35,6 +35,18 @@ app.use("/todoApp", todoApp);
 //Live Chat Sockets Connection
 const socket = require("./src/routes/liveChat/socketsConfig");
 socket(app, process.env.SOCKET_PORT);
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "../client/build")));
+
+  app.get("*", (_req, res) => {
+    res.sendFile(path.join(__dirname, "../client", "build", "index.html"));
+  });
+} else {
+  app.get("/", (_req, res) => {
+    res.send("Api running");
+  });
+}
 
 app.listen(process.env.BASE_PORT, () =>
   console.log(`server is running on port ${process.env.BASE_PORT}`)

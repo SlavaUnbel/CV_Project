@@ -5,56 +5,17 @@
 @import "./assets/Poppins/poppins.scss";
 @import "./assets/Lato/lato.scss";
 
-:root {
-  --white-color: #fff;
-  --black-color: #000;
-  --primary-color: #3f51b5;
-  --secondary-color: #dc143c;
-  --lightgrey-color: #d3d3d3;
-  --grey-color: #555;
-  --semigrey-color: #444;
-  --darkgrey-color: #999;
-  --brown-color: #333;
-  --pink-color: #ff7979;
-  --green-color: #07bc0c;
-  --yellow-color: #f1c40f;
-  --not-found-color: #151718;
-  --bg-lightblue-color: #4682b4;
-  --link-form-wave-animation-color: #add8e6;
-  --bg-dad-jokes-color: #686de0;
-  --btn-dad-jokes-color: #9f68e0;
-  --bg-faq-collapse-color: #f0f0f0;
-  --bg-icon-faq-collapse-color: #2ecc71;
-  --bg-buttons-faq-collapse-color: #9fa4a8;
-  --bg-random-choice-picker-color: #2b88f0;
-  --bg-tag-random-choice-picker-color: #f0932b;
-  --bg-highlight-random-choice-picker-color: #273c75;
-  --bg-animated-navigation-first-color: #eafbff;
-  --bg-animated-navigation-second-color: #5290f9;
-  --bg-incrementing-counter-color: #8e44ad;
-  --primary-movie-app-color: #22254b;
-  --secondary-movie-app-color: #373b69;
-  --search-movie-app-color: #7378c5;
-  --bg-drink-water-color: #3494e4;
-  --border-drink-water-color: #144fc6;
-  --fill-drink-water-color: #6ab3f8;
-  --date-theme-clock-color: #aaa;
-  --bg-github-profiles-color: #2a2a72;
-  --items-bg-github-profiles-color: #4c2885;
-  --input-placeholder-github-profiles-color: #bbb;
-  --repo-github-profiles-color: #212a72;
-  --bg-password-generator-color: #3b3b98;
-  --bg-wrapper-password-generator-color: #23235b;
-  --bg-body-notes-app-color: #7bdaf3;
-  --bg-notes-app-color: #9ec862;
-  --bg-hoverboard-color: #1d1d1d;
-  --bg-testimonials-switcher-color: #f4f4f4;
-  --bg-testimonial-color: #476ce4;
-  --main-live-chat-color: #43a047;
-  --hover-live-chat-color: #2e7d32;
-  --scroll-btn-live-chat-color: #e9ecef;
-  --scroll-hover-btn-live-chat-color: #ced4da;
-}
+$white-color: #fff;
+$black-color: #000;
+$primary-color: #3f51b5;
+$secondary-color: #dc143c;
+$yellow-color: #f1c40f;
+$green-color: #07bc0c;
+$lightgrey-color: #d3d3d3;
+$grey-color: #555;
+$darkgrey-color: #999;
+$lightblue-color: #4682b4;
+$brown-color: #333;
 
 @mixin scrollbar($bg-color) {
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
@@ -74,6 +35,14 @@
   justify-content: $justify-content;
 }
 
+@mixin animation($name, $params) {
+  animation: $name $params;
+
+  @keyframes #{$name} {
+    @content;
+  }
+}
+
 @mixin screen($width) {
   @media screen and (max-width: $width) {
     @content;
@@ -82,12 +51,6 @@
 
 @mixin mobile {
   @media (max-width: 50rem) {
-    @content;
-  }
-}
-
-@mixin tablet {
-  @media (max-width: 1200px) and (min-height: 1000px) {
     @content;
   }
 }

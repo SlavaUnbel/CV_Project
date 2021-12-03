@@ -1,8 +1,10 @@
 @import "../../../index.scss";
 
+$main-color: #ff7979;
+
 .rotating-navigation__container {
   @include container;
-  background-color: var(--brown-color);
+  background-color: $brown-color;
   font-family: "Soleil Light", sans-serif;
 
   .circle-container {
@@ -21,7 +23,7 @@
     }
 
     .circle {
-      background-color: var(--pink-color);
+      background: $main-color;
       height: 11rem;
       width: 11rem;
       border-radius: 50%;
@@ -41,7 +43,7 @@
         background: transparent;
         border: 0;
         font-size: 1.5rem;
-        color: var(--white-color);
+        color: $white-color;
 
         &.open {
           left: 60%;
@@ -63,7 +65,7 @@
 
   .rotating-navigation__wrapper {
     @include container;
-    background-color: var(--white-color);
+    background-color: $white-color;
     transform-origin: top left;
     transition: transform 0.5s linear;
     overflow: auto;
@@ -108,10 +110,6 @@
             margin-top: 1rem;
             font-size: 1.8rem;
           }
-
-          @include tablet {
-            font-size: 2.8rem;
-          }
         }
 
         .subtitle {
@@ -133,14 +131,9 @@
             margin: 1rem 0;
           }
 
-          @include tablet {
-            width: 50vw;
-            margin: 1rem 0 2rem;
-          }
-
           h3 {
             @include flex();
-            color: var(--grey-color);
+            color: $grey-color;
             margin-bottom: 0.5rem;
             font-size: 1.2rem;
 
@@ -157,13 +150,8 @@
               text-align: center;
             }
 
-            @include tablet {
-              font-size: 1.1rem;
-              text-align: unset;
-            }
-
             &:last-child {
-              color: var(--darkgrey-color);
+              color: $darkgrey-color;
             }
           }
         }
@@ -185,7 +173,7 @@
         font-weight: 700;
         font-size: 1.4rem;
         text-transform: uppercase;
-        color: var(--brown-color);
+        color: $brown-color;
         line-height: 2rem;
         letter-spacing: 1px;
         margin: 2rem 0 0;
@@ -207,13 +195,6 @@
           line-height: 1.4rem;
           margin: 1rem 0 0;
         }
-
-        @include tablet {
-          width: 60%;
-          font-size: 1.3rem;
-          line-height: 1.8rem;
-          margin: 1.5rem 0 0;
-        }
       }
 
       p {
@@ -223,7 +204,7 @@
         font-weight: 300;
         font-style: normal;
         font-size: 1.4rem;
-        color: var(--brown-color);
+        color: $brown-color;
         line-height: 2rem;
         letter-spacing: 0.5px;
         margin-top: 1rem;
@@ -245,13 +226,6 @@
           line-height: 1.4rem;
           margin-top: 0.5rem;
         }
-
-        @include tablet {
-          width: 60%;
-          font-size: 1.3rem;
-          line-height: 1.8rem;
-          margin-top: 1rem;
-        }
       }
 
       img {
@@ -261,10 +235,6 @@
 
         @include mobile {
           margin-top: 0.5rem;
-        }
-
-        @include tablet {
-          margin-top: 1rem;
         }
       }
     }
@@ -284,10 +254,6 @@
         padding-left: 1rem;
       }
 
-      @include tablet {
-        padding-left: 2rem;
-      }
-
       li {
         margin: 2.5rem 0;
         transform: translateX(-100%);
@@ -297,15 +263,11 @@
           margin: 2rem 0;
         }
 
-        @include tablet {
-          margin: 2.5rem 0;
-        }
-
         a {
           @include flex(row nowrap, center);
           text-decoration: none;
           text-transform: uppercase;
-          color: var(--white-color);
+          color: $white-color;
           font-size: 0.9rem;
         }
 

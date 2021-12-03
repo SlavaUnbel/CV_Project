@@ -12,19 +12,12 @@
 
   h1 {
     @include flex(column nowrap, center, center);
-    font-size: 2.5rem;
-
-    @include screen(1000px) {
-      font-size: 2rem;
-    }
+    margin-top: 0.5rem;
+    font-size: 2rem;
 
     @include mobile {
       font-size: 1.5rem;
       margin: 0.25rem 0;
-    }
-
-    @include tablet {
-      font-size: 3rem;
     }
   }
 
@@ -41,12 +34,8 @@
       width: 100vw;
     }
 
-    @include tablet {
-      width: 70vw;
-    }
-
     small {
-      color: var(--darkgrey-color);
+      color: $darkgrey-color;
       text-align: center;
       text-transform: uppercase;
 
@@ -83,14 +72,11 @@
           width: 10rem;
           height: 3rem;
           margin: 0.5rem;
-          justify-content: center;
 
           @include mobile {
             width: 5rem;
-          }
 
-          .select {
-            @include mobile {
+            .select {
               height: 2rem;
               font-size: 0.9rem;
             }
@@ -124,12 +110,12 @@
           }
 
           &::placeholder {
-            color: var(--white-color);
+            color: $white-color;
           }
 
           &:focus {
-            background: var(--primary-color);
-            color: var(--white-color);
+            background: $primary-color;
+            color: $white-color;
           }
         }
       }
@@ -154,10 +140,6 @@
       width: 100vw;
     }
 
-    @include tablet {
-      width: 70vw;
-    }
-
     .item {
       @include flex(column nowrap, center, center);
       margin: 1rem 1.5rem;
@@ -168,10 +150,6 @@
 
       @include mobile {
         margin: 0.3rem 0.5rem;
-      }
-
-      @include tablet {
-        margin: 1rem 1.5rem;
       }
 
       &.scaled {
@@ -191,7 +169,7 @@
         width: 20rem;
         height: 12rem;
         border-radius: 20px;
-        border: 1px solid var(--lightgrey-color);
+        border: 1px solid $lightgrey-color;
         margin-bottom: 1rem;
         cursor: pointer;
         position: relative;
@@ -215,16 +193,9 @@
             position: absolute;
             top: 0.5rem;
             right: 0.5rem;
-            color: var(--white-color);
+            color: $white-color;
             width: 1rem;
           }
-
-          // .star {
-          //   position: absolute;
-          //   top: 0.4rem;
-          //   right: 0.4rem;
-          //   color: var(--white-color);
-          // }
         }
 
         @include screen(1600px) {
@@ -261,12 +232,6 @@
           margin-bottom: 0.3rem;
         }
 
-        @include tablet {
-          width: 13rem;
-          height: 8rem;
-          margin-bottom: 1rem;
-        }
-
         img {
           width: 100%;
           height: 100%;
@@ -286,17 +251,10 @@
           @include opacity(1);
           font-size: 0.95rem;
         }
-
-        @include tablet {
-          @include opacity(1);
-          font-size: 1.25rem;
-        }
       }
 
-      &:hover {
-        h3 {
-          @include opacity(1);
-        }
+      &:hover h3 {
+        @include opacity(1);
       }
     }
   }

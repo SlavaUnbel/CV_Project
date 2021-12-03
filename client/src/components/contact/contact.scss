@@ -11,7 +11,6 @@
 .contact {
   @include container;
   @include flex(row nowrap, initial, initial);
-  background-color: var(--white-color);
   font-family: "Roboto", sans-serif;
 
   @include mobile {
@@ -87,25 +86,19 @@
           border-bottom: 1px solid;
         }
 
-        @include tablet {
-          font-size: 0.9rem;
-          width: 20rem;
-          height: 1.8rem;
-        }
-
         &.incorrect {
-          @include border-bottom(var(--yellow-color));
+          @include border-bottom($yellow-color);
         }
 
         &.valid {
-          @include border-bottom(var(--green-color));
+          @include border-bottom($green-color);
         }
 
         &:focus {
           outline: none;
 
           &.invalid {
-            @include border-bottom(var(--secondary-color));
+            @include border-bottom($secondary-color);
           }
         }
       }
@@ -136,18 +129,12 @@
           height: 8rem;
         }
 
-        @include tablet {
-          font-size: 0.9rem;
-          width: 20rem;
-          height: 12.5rem;
-        }
-
         &:focus {
           outline: none;
-          border: 2px solid var(--primary-color);
+          border: 2px solid $primary-color;
 
           @include mobile {
-            border: 1px solid var(--primary-color);
+            border: 1px solid $primary-color;
           }
         }
       }
@@ -155,8 +142,8 @@
       .btn {
         width: 10rem;
         font-size: 1rem;
-        color: var(--white-color);
-        background-color: var(--secondary-color);
+        color: $white-color;
+        background: $secondary-color;
         border: none;
         border-radius: 10px;
         font-weight: 500;
@@ -165,11 +152,6 @@
         @include mobile {
           width: 7rem;
           font-size: 0.7rem;
-        }
-
-        @include tablet {
-          width: 9rem;
-          font-size: 0.9rem;
         }
 
         &:active {

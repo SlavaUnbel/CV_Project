@@ -1,4 +1,4 @@
-@import '../../../index.scss';
+@import "../../../index.scss";
 
 .loader-wrapper {
   @include container;
@@ -6,16 +6,16 @@
   z-index: 4;
 
   .loader {
-    border: 1rem solid var(--lightgrey-color);
-    border-top: 1rem solid var(--primary-color);
+    border: 1rem solid $lightgrey-color;
+    border-top: 1rem solid $primary-color;
     border-radius: 50%;
     width: 7rem;
     height: 7rem;
     animation: spin 0.5s ease infinite;
 
     @include mobile {
-      border: 0.7rem solid var(--lightgrey-color);
-      border-top: 0.7rem solid var(--primary-color);
+      border: 0.7rem solid $lightgrey-color;
+      border-top: 0.7rem solid $primary-color;
       width: 5rem;
       height: 5rem;
     }

@@ -4,7 +4,6 @@
   @include container;
   @include flex(row nowrap, center);
   font-family: "Roboto", sans-serif;
-  background-color: var(--white-color);
   position: relative;
 
   @include screen(1200px) {
@@ -20,7 +19,7 @@
 
     .img-container {
       @include flex(row nowrap, flex-end, center);
-      background-color: var(--secondary-color);
+      background: $secondary-color;
       border-radius: 50%;
       width: 40rem;
       height: 40rem;
@@ -49,10 +48,6 @@
 
         @include screen(1200px) {
           height: 65%;
-        }
-
-        @include tablet {
-          height: 90%;
         }
       }
     }
@@ -107,19 +102,17 @@
 
         span {
           font-size: inherit;
-          color: var(--secondary-color);
+          color: $secondary-color;
         }
 
         .ityped-cursor {
-          animation: cursorBlink 1s infinite;
-        }
-
-        @keyframes cursorBlink {
-          50% {
-            opacity: 1;
-          }
-          100% {
-            opacity: 0;
+          @include animation(cursorBlink, 1s infinite) {
+            50% {
+              opacity: 1;
+            }
+            100% {
+              opacity: 0;
+            }
           }
         }
       }
@@ -131,44 +124,46 @@
       left: calc(50% - 1rem);
 
       .scroll {
+        @include animation(
+          mouseBlink,
+          2s infinite cubic-bezier(0.15, 0.41, 0.69, 0.94)
+        ) {
+          0% {
+            opacity: 0;
+          }
+          50% {
+            opacity: 1;
+          }
+          100% {
+            opacity: 0;
+          }
+        }
         width: 2rem;
         height: 3rem;
         border-radius: 20px;
-        border: 0.1rem solid var(--black-color);
+        border: 0.1rem solid $black-color;
         position: relative;
-        animation: mouseBlink 2s infinite cubic-bezier(0.15, 0.41, 0.69, 0.94);
 
-        &::before {
+        &::before,
+        &::after {
           content: "";
           position: absolute;
+          background: $black-color;
+        }
+
+        &::before {
           top: 0.4rem;
           left: calc(50% - 0.1rem);
           width: 0.25rem;
           height: 0.5rem;
           border-radius: 10px;
-          background: var(--black-color);
         }
 
         &::after {
-          content: "";
-          position: absolute;
           top: 0;
           left: 50%;
           width: 0.05rem;
           height: 50%;
-          background: var(--black-color);
-        }
-      }
-
-      @keyframes mouseBlink {
-        0% {
-          opacity: 0;
-        }
-        50% {
-          opacity: 1;
-        }
-        100% {
-          opacity: 0;
         }
       }
     }

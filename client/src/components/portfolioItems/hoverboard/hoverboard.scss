@@ -1,9 +1,11 @@
-@import '../../../index.scss';
+@import "../../../index.scss";
+
+$main-color: #1d1d1d;
 
 .hoverboard__container {
   @include container;
   @include flex(row nowrap, center, center);
-  background: var(--black-color);
+  background: $black-color;
 
   .hoverboard__wrapper {
     @include flex(row wrap, center, center);
@@ -13,24 +15,15 @@
       max-width: 90vw;
     }
 
-    @include tablet {
-      max-width: 90vw;
-    }
-
     .square {
-      background: var(--bg-hoverboard-color);
-      box-shadow: 0 0 2px var(--black-color);
+      background: $main-color;
+      box-shadow: 0 0 2px $black-color;
       height: 1rem;
       width: 1rem;
       margin: 0.1rem;
       transition: 2s ease;
 
       @include mobile {
-        height: 4rem;
-        width: 4rem;
-      }
-
-      @include tablet {
         height: 4rem;
         width: 4rem;
       }

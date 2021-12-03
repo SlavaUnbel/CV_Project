@@ -1,10 +1,13 @@
 @import "../../../index.scss";
 
+$main-color: #7bdaf3;
+$second-color: #9ec862;
+
 .notes-app__container {
   @include container;
   @include flex(row wrap);
   padding-top: 4rem;
-  background: var(--bg-body-notes-app-color);
+  background: $main-color;
   font-family: "Poppins", sans-serif;
   overflow: auto;
 
@@ -14,11 +17,11 @@
     font-family: "Poppins", sans-serif;
     top: 5.5rem;
     right: 1rem;
-    background: var(--bg-notes-app-color);
+    background: $second-color;
     border: none;
     border-radius: 5px;
     padding: 0.5rem 1rem;
-    color: var(--white-color);
+    color: $white-color;
     z-index: 2;
 
     @include screen(1000px) {
@@ -31,7 +34,7 @@
   }
 
   .note {
-    background: var(--white-color);
+    background: $white-color;
     box-shadow: 0 0 10px 4px rgba(0, 0, 0, 0.1);
     margin: 0 1.5rem 2rem 1.5rem;
     height: 25rem;
@@ -40,7 +43,7 @@
 
     .tools {
       @include flex(row nowrap, center, space-between);
-      background-color: var(--bg-notes-app-color);
+      background: $second-color;
       padding: 0.5rem;
       position: sticky;
       top: 0;
@@ -56,7 +59,7 @@
         .title {
           height: 100%;
           width: 100%;
-          color: var(--white-color);
+          color: $white-color;
           font-size: 1.25rem;
           padding: 0.25rem;
         }
@@ -72,7 +75,7 @@
           border-radius: 10px;
 
           &::placeholder {
-            color: var(--white-color);
+            color: $white-color;
           }
         }
       }
@@ -80,7 +83,7 @@
       button {
         background: transparent;
         border: none;
-        color: var(--white-color);
+        color: $white-color;
         margin-left: 0.5rem;
         border-radius: 50%;
         padding: 0.5rem;

@@ -1,5 +1,11 @@
 @import "../../index.scss";
 
+$main-color: #43a047;
+$hover-color: #2e7d32;
+$scroll-btn-color: #e9ecef;
+$scroll-hover-btn-color: #ced4da;
+$other-people-color: #3776ec;
+
 .live-chat__container {
   @include container;
   @include flex(column nowrap, center, center);
@@ -11,7 +17,7 @@
     height: 20rem;
     text-align: center;
     border-radius: 10px;
-    background: var(--white-color);
+    background: $white-color;
     box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, 0.3);
 
     h3 {
@@ -34,7 +40,7 @@
         cursor: pointer;
 
         &:hover {
-          background: var(--main-live-chat-color);
+          background: $main-color;
           transition: 1s ease;
         }
       }
@@ -52,7 +58,7 @@
       width: 100%;
       margin: 0.5rem;
       padding: 0.5rem;
-      border: 2px solid var(--main-live-chat-color);
+      border: 2px solid $main-color;
       border-radius: 5px;
       font-size: 1rem;
 
@@ -63,24 +69,24 @@
 
     input {
       height: 2.5rem;
-      border: 2px solid var(--main-live-chat-color);
+      border: 2px solid $main-color;
       transition: all 0.4s ease;
 
       &:focus {
-        border: 2px solid var(--primary-color);
+        border: 2px solid $primary-color;
       }
     }
 
     .btn {
       height: 3rem;
       border: none;
-      background: var(--main-live-chat-color);
+      background: $main-color;
       margin: 0.5rem 0.5rem 2rem 0.5rem;
       width: 15rem;
-      color: var(--white-color);
+      color: $white-color;
 
       &:hover {
-        background: var(--hover-live-chat-color);
+        background: $hover-color;
         transition: 0.4s ease;
       }
 
@@ -148,8 +154,8 @@
         height: 3rem;
         width: 100%;
         border-radius: 5px;
-        background: var(--main-live-chat-color);
-        color: var(--white-color);
+        background: $main-color;
+        color: $white-color;
         cursor: default;
         padding: 0 1rem;
 
@@ -157,14 +163,10 @@
           padding: 0 0.5rem 0 1rem;
         }
 
-        @include tablet {
-          padding: 0 1rem;
-        }
-
         .btn {
           background: transparent;
           border: none;
-          color: var(--white-color);
+          color: $white-color;
           transition: all 0.2s ease;
 
           &:hover {
@@ -175,7 +177,7 @@
 
       .chat-body {
         height: 35rem;
-        border: 2px solid var(--main-live-chat-color);
+        border: 2px solid $main-color;
         border-top: none;
         position: relative;
         top: -0.2rem;
@@ -185,10 +187,6 @@
 
         @include mobile {
           height: 100%;
-        }
-
-        @include tablet {
-          height: 35rem;
         }
 
         .message-container {
@@ -201,7 +199,7 @@
           button {
             @include flex(row nowrap, center, center);
             position: absolute;
-            background: var(--scroll-btn-live-chat-color);
+            background: $scroll-btn-color;
             box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.4);
             border-radius: 50%;
             width: 2.5rem;
@@ -210,7 +208,7 @@
             right: 1.5rem;
 
             &:hover {
-              background: var(--scroll-hover-btn-live-chat-color);
+              background: $scroll-hover-btn-color;
               transition: 0.4s ease;
             }
 
@@ -238,9 +236,9 @@
               min-height: 2rem;
               min-width: 5rem;
               max-width: 15rem;
-              background: var(--main-live-chat-color);
+              background: $main-color;
               border-radius: 5px;
-              color: var(--white-color);
+              color: $white-color;
               margin: 0 0.5rem;
               padding: 0 0.5rem;
               overflow-wrap: break-word;
@@ -248,10 +246,6 @@
 
               @include mobile {
                 max-width: 70vw;
-              }
-
-              @include tablet {
-                max-width: 15rem;
               }
             }
 
@@ -267,7 +261,7 @@
               @include flex(row nowrap, center, flex-start);
 
               .message-content {
-                background: cornflowerblue;
+                background: $other-people-color;
               }
 
               .message-meta {
@@ -284,10 +278,6 @@
                 max-width: 70vw;
               }
 
-              @include tablet {
-                max-width: 15rem;
-              }
-
               .author {
                 @include flex(row nowrap, center, flex-end);
                 flex: 60%;
@@ -300,10 +290,6 @@
                 @include mobile {
                   font-size: 0.7rem;
                 }
-
-                @include tablet {
-                  font-size: 0.8rem;
-                }
               }
 
               .time {
@@ -313,10 +299,6 @@
 
                 @include mobile {
                   font-size: 0.7rem;
-                }
-
-                @include tablet {
-                  font-size: 0.8rem;
                 }
               }
             }
@@ -330,7 +312,7 @@
         width: 100%;
         position: relative;
         top: -0.2rem;
-        border: 2px solid var(--main-live-chat-color);
+        border: 2px solid $main-color;
         border-top: none;
         border-bottom-left-radius: 5px;
         border-bottom-right-radius: 5px;
@@ -351,10 +333,6 @@
             @include mobile {
               font-size: 0.9rem;
             }
-
-            @include tablet {
-              font-size: 1rem;
-            }
           }
         }
 
@@ -370,21 +348,16 @@
             outline: none;
             border: none;
             border-radius: 20px;
-            background: var(--main-live-chat-color);
-            color: var(--white-color);
+            background: $main-color;
+            color: $white-color;
 
             @include mobile {
               font-size: 0.8rem;
               padding: 0.4rem 0.8rem;
             }
 
-            @include tablet {
-              font-size: 0.9rem;
-              padding: 0.5rem 1rem;
-            }
-
             &:hover {
-              background: var(--hover-live-chat-color);
+              background: $hover-color;
               transition: 0.4s ease;
             }
 
