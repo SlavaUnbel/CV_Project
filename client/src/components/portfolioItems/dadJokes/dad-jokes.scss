@@ -1,13 +1,16 @@
 @import "../../../index.scss";
 
+$main-color: #686de0;
+$btn-color: #9f68e0;
+
 .dad-jokes__container {
   @include container;
   @include flex(column nowrap, center, center);
-  background: var(--bg-dad-jokes-color);
+  background: $main-color;
   font-family: "Poppins", sans-serif;
 
   .dad-jokes__wrapper {
-    background: var(--white-color);
+    background: $white-color;
     border-radius: 10px;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2), 0 6px 6px rgba(0, 0, 0, 0.2);
     padding: 3rem 1.5rem;
@@ -27,10 +30,6 @@
       width: 70vw;
     }
 
-    @include tablet {
-      padding: 3rem 1.5rem;
-    }
-
     h3 {
       margin: 0;
       opacity: 0.5;
@@ -38,10 +37,6 @@
 
       @include screen(1000px) {
         letter-spacing: 0.05rem;
-      }
-
-      @include tablet {
-        letter-spacing: 0.1rem;
       }
     }
 
@@ -59,16 +54,11 @@
       @include mobile {
         font-size: 1.5rem;
       }
-
-      @include tablet {
-        font-size: 2rem;
-        margin: 3rem auto;
-      }
     }
 
     .btn {
-      background: var(--btn-dad-jokes-color);
-      color: var(--white-color);
+      background: $btn-color;
+      color: $white-color;
       border-radius: 10px;
       box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2), 0 6px 6px rgba(0, 0, 0, 0.2);
       border: none;
@@ -81,13 +71,8 @@
         font-size: 0.9rem;
       }
 
-      @include tablet {
-        padding: 0.8rem 2.5rem;
-        font-size: 1rem;
-      }
-
       &:hover {
-        background: var(--bg-dad-jokes-color);
+        background: $main-color;
       }
 
       &:active {

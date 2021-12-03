@@ -1,23 +1,20 @@
 @import "../../../index.scss";
 
+$link-color: #add8e6;
+
 .form-wave-animation__container {
   @include container;
   @include flex(column nowrap, center, center);
-  margin: 0;
-  background-color: var(--bg-lightblue-color);
-  color: var(--white-color);
+  background: $lightblue-color;
+  color: $white-color;
 
   .form-wrapper {
-    background-color: rgba(0, 0, 0, 0.4);
+    background: rgba(0, 0, 0, 0.4);
     padding: 1.5rem 2.5rem;
     border-radius: 10px;
 
     @include mobile {
       padding: 1rem 2rem;
-    }
-
-    @include tablet {
-      padding: 1.5rem 2.5rem;
     }
 
     h1 {
@@ -29,11 +26,6 @@
         margin-bottom: 0.5rem;
         font-size: 1.5rem;
       }
-
-      @include tablet {
-        margin-bottom: 0.75rem;
-        font-size: 1.8rem;
-      }
     }
 
     .user-info {
@@ -44,8 +36,8 @@
       border-radius: 20px;
       position: relative;
       cursor: default;
-      color: var(--green-color);
-      border: 1px solid var(--green-color);
+      color: $green-color;
+      border: 1px solid $green-color;
 
       h4 {
         font-family: "Soleil Light";
@@ -56,22 +48,18 @@
         @include mobile {
           font-size: 0.9rem;
         }
-
-        @include tablet {
-          font-size: 1rem;
-        }
       }
 
       &.no-data {
         margin-bottom: 0.25rem;
-        color: var(--yellow-color);
-        border: 1px solid var(--yellow-color);
+        color: $yellow-color;
+        border: 1px solid $yellow-color;
       }
 
       &.proceed {
         margin-bottom: 0.25rem;
-        color: var(--link-form-wave-animation-color);
-        border: 1px solid var(--link-form-wave-animation-color);
+        color: $link-color;
+        border: 1px solid $link-color;
       }
     }
 
@@ -84,21 +72,16 @@
         width: 80vw;
       }
 
-      @include tablet {
-        margin: 1.5rem 0 0.5rem;
-        width: 25rem;
-      }
-
       input {
         position: relative;
         background-color: transparent;
         border: 0;
-        border-bottom: 2px solid var(--white-color);
+        border-bottom: 2px solid $white-color;
         display: block;
         width: 100%;
         padding: 1.5rem 0 0.5rem;
         font-size: 1.2rem;
-        color: var(--white-color);
+        color: $white-color;
         transition: 0.4s ease;
 
         @include mobile {
@@ -106,17 +89,12 @@
           font-size: 1rem;
         }
 
-        @include tablet {
-          padding: 1.5rem 0 0.5rem;
-          font-size: 1.2rem;
-        }
-
         &:hover {
-          border-bottom-color: var(--bg-lightblue-color);
+          border-bottom-color: $lightblue-color;
 
           + label {
             span {
-              color: var(--bg-lightblue-color);
+              color: $lightblue-color;
             }
           }
         }
@@ -124,21 +102,17 @@
         &:focus,
         &:not([value=""]) {
           outline: none;
-          border-bottom-color: var(--link-form-wave-animation-color);
+          border-bottom-color: $link-color;
 
           + label {
             cursor: default;
 
             span {
-              color: var(--link-form-wave-animation-color);
+              color: $link-color;
               transform: translateY(-1.5rem);
 
               @include mobile {
                 transform: translateY(-1rem);
-              }
-
-              @include tablet {
-                transform: translateY(-1.5rem);
               }
             }
           }
@@ -164,10 +138,6 @@
           @include mobile {
             font-size: 0.9rem;
           }
-
-          @include tablet {
-            font-size: 1rem;
-          }
         }
       }
     }
@@ -178,7 +148,7 @@
       align-content: center;
       justify-content: center;
       width: 100%;
-      background-color: var(--link-form-wave-animation-color);
+      background: $link-color;
       padding: 1rem;
       font-size: 1rem;
       border: none;
@@ -187,11 +157,6 @@
       @include mobile {
         padding: 0.9rem;
         font-size: 0.9rem;
-      }
-
-      @include tablet {
-        padding: 1rem;
-        font-size: 1rem;
       }
 
       &:hover {
@@ -204,8 +169,7 @@
     }
 
     .text {
-      display: flex;
-      align-items: center;
+      @include flex(row nowrap, center);
       font-family: "Soleil Regular";
       margin-top: 1rem;
       font-size: 0.9rem;
@@ -215,14 +179,9 @@
         font-size: 0.8rem;
       }
 
-      @include tablet {
-        margin-top: 1rem;
-        font-size: 0.9rem;
-      }
-
       .link {
         font-family: "Soleil Light";
-        background-color: transparent;
+        background: transparent;
         text-decoration: none;
         padding: 0;
         margin-left: 0.5rem;
@@ -230,7 +189,7 @@
         border: none;
         font-size: 1rem;
         cursor: pointer;
-        color: var(--link-form-wave-animation-color);
+        color: $link-color;
 
         &:hover {
           opacity: 0.8;
@@ -243,14 +202,10 @@
 
       .checkbox {
         margin-left: 0.5rem;
-        color: var(--link-form-wave-animation-color);
+        color: $link-color;
 
         @include mobile {
           margin-left: 0.25rem;
-        }
-
-        @include tablet {
-          margin-left: 0.5rem;
         }
       }
     }

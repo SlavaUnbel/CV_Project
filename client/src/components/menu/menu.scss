@@ -5,7 +5,7 @@
   @include flex(column nowrap, center, center);
   font-family: "Roboto", sans-serif;
   width: 15rem;
-  background-color: var(--primary-color);
+  background: $primary-color;
   position: fixed;
   top: 4.5rem;
   right: -15rem;
@@ -23,11 +23,6 @@
     text-align: center;
   }
 
-  @include tablet {
-    width: 15rem;
-    right: -15rem;
-  }
-
   &.active {
     right: 0;
   }
@@ -37,7 +32,7 @@
     list-style: none;
     font-size: 1.8rem;
     font-weight: 300;
-    color: var(--white-color);
+    color: $white-color;
     width: 60%;
 
     li {

@@ -13,7 +13,7 @@
     background: center/cover no-repeat;
     height: 80vh;
     border-radius: 50px;
-    color: #fff;
+    color: $white-color;
     cursor: pointer;
     flex: 0.5;
     margin: 0.7rem;
@@ -36,10 +36,6 @@
         font-size: 1.25rem;
         bottom: 1rem;
         left: 1rem;
-      }
-
-      @include tablet {
-        font-size: 1.5rem;
       }
     }
   }

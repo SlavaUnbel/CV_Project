@@ -1,8 +1,12 @@
 @import "../../../index.scss";
 
+$bg-color: #f0f0f0;
+$one-chat-icon-color: #2ecc71;
+$bg-buttons-color: #9fa4a8;
+
 .faq-collapse__container {
   @include container;
-  background-color: var(--bg-faq-collapse-color);
+  background: $bg-color;
   overflow: auto;
 
   h1 {
@@ -15,11 +19,6 @@
       margin: 1.5rem 0;
       font-size: 1.5rem;
     }
-
-    @include tablet {
-      margin: 2rem 0;
-      font-size: 2rem;
-    }
   }
 
   .faq-wrapper-container {
@@ -30,13 +29,9 @@
       width: 90vw;
     }
 
-    @include tablet {
-      width: 35rem;
-    }
-
     .faq {
       background-color: transparent;
-      border: 1px solid var(--lightgrey-color);
+      border: 1px solid $lightgrey-color;
       border-radius: 10px;
       margin: 1.5rem 0;
       padding: 2rem;
@@ -48,20 +43,15 @@
         margin-bottom: 1.5rem;
       }
 
-      @include tablet {
-        margin-bottom: 0;
-        margin: 1.5rem 0;
-      }
-
       &.active {
-        background-color: var(--white-color);
+        background: $white-color;
         box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.1);
 
         &::before,
         &::after {
           font-family: "Material Icons";
           content: "chat_bubble_outline";
-          color: var(--bg-icon-faq-collapse-color);
+          color: $one-chat-icon-color;
           font-size: 7rem;
           position: absolute;
           opacity: 0.2;
@@ -71,7 +61,7 @@
         }
 
         &::before {
-          color: var(--primary-color);
+          color: $primary-color;
           top: -2.3rem;
           left: -2rem;
           transform: rotateY(180deg);
@@ -90,10 +80,6 @@
         @include mobile {
           margin-top: 1rem;
         }
-
-        @include tablet {
-          margin-top: 1.5rem;
-        }
       }
 
       .faq-head {
@@ -106,14 +92,14 @@
         .btn {
           @include flex(row nowrap, center, center);
           background-color: transparent;
-          color: var(--black-color);
+          color: $black-color;
           font-size: 1rem;
           height: 2rem;
           width: 2rem;
           position: relative;
 
           &:hover {
-            background-color: var(--bg-buttons-faq-collapse-color);
+            background-color: $bg-buttons-color;
             transition: 0.7s ease;
           }
 
@@ -125,7 +111,7 @@
             height: 0.5rem;
             width: 0.15rem;
             border-radius: 10px;
-            background: var(--black-color);
+            background: $black-color;
             transition: all 0.7s ease;
           }
 

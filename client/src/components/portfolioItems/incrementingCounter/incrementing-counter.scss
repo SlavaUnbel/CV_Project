@@ -1,18 +1,16 @@
 @import "../../../index.scss";
 
+$main-color: #8e44ad;
+
 .incrementing-counter__container {
   @include container;
   @include flex(row nowrap, center, center);
-  background-color: var(--bg-incrementing-counter-color);
-  color: var(--white-color);
+  background: $main-color;
+  color: $white-color;
   font-family: "Soleil Book";
 
   @include mobile {
     @include flex(column nowrap, center, center);
-  }
-
-  @include tablet {
-    @include flex(row nowrap, center, center);
   }
 
   .counter-container {
@@ -28,11 +26,6 @@
       width: 100vw;
     }
 
-    @include tablet {
-      width: 25vw;
-      margin: 2rem 3rem;
-    }
-
     .icon {
       font-size: 3rem;
 
@@ -42,10 +35,6 @@
 
       @include mobile {
         font-size: 2rem;
-      }
-
-      @include tablet {
-        font-size: 2.5rem;
       }
     }
 
@@ -61,11 +50,6 @@
         font-size: 3.25rem;
         margin-top: 0.25rem;
       }
-
-      @include tablet {
-        font-size: 3.75rem;
-        margin-top: 0.5rem;
-      }
     }
 
     span {
@@ -77,10 +61,6 @@
 
       @include mobile {
         font-size: 0.9rem;
-      }
-
-      @include tablet {
-        font-size: 1rem;
       }
     }
   }
