@@ -37,10 +37,10 @@ const socket = require("./src/routes/liveChat/socketsConfig");
 socket(app, process.env.SOCKET_PORT);
 
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "../client/build")));
+  app.use(express.static(path.join(__dirname, "client/build")));
 
   app.get("*", (_req, res) => {
-    res.sendFile(path.join(__dirname, "../client", "build", "index.html"));
+    res.sendFile(path.join(__dirname, "client", "build", "index.html"));
   });
 } else {
   app.get("/", (_req, res) => {
@@ -48,6 +48,6 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 
-app.listen(process.env.BASE_PORT, () =>
+app.listen(process.env.BASE_PORT || 8080, "0.0.0.0", () =>
   console.log(`server is running on port ${process.env.BASE_PORT}`)
 );
