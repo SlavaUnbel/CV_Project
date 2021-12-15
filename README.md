@@ -1,13 +1,13 @@
 # CV PROJECT
 
-## Запуск проекта ⏯
+## Project launch ⏯
 
 <hr />
-⚠️Перед выполнением нижеуказанных действий необходима установка node.js на вашу локальную машину
+⚠️Before executing the actions specified below you need to install Node.js on your local machine
 <hr />
 
 <hr />
-✔️Чтобы запустить приожение на локальной машине, нужно перейти в ветку dev и затем выполнить следующие команды в консоли:
+✔️To launch the app on the local machine redirect to the **dev** branch and execute next commands in bash:
 
 ```javascript
 git clone https://github.com/SlavaUnbel/CV_Project.git
@@ -16,31 +16,19 @@ cd CV_Project
 <hr />
 
 <br/>
-Для запуска проекта вам необходимо войти в 📂client и набрать команду в терминале:
+Go to 📂client:
+
+```javascript
+cd client
+```
+
+and pass this command:
 
 ```javascript
 npm i
 ```
 
-<br/>
-<br/>
-После в другом терминале войти в 📂server и набрать команду в терминале:
-
-```javascript
-npm i
-```
-
-<br/>
-<br/>
-В 📂 client набрать команду в терминале:
-
-```javascript
-npm run start
-```
-
-<br/>
-<br/>
-В другом терминале в 📂 server набрать команду:
+after completion you can run the client side of application with command: 
 
 ```javascript
 npm run start
@@ -49,7 +37,18 @@ npm run start
 <br/>
 <br/>
 
-<h3>Технологии проекта ⚙️</h3>
+Then do the same in another terminal in 📂server: 
+
+```javascript
+cd server
+npm i
+npm run start
+```
+
+<br/>
+<br/>
+
+<h3>Prodject technology stack ⚙️</h3>
 <p>
   <img alt="React" src="https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB" />
   <img alt="Redux" src="https://img.shields.io/badge/redux-%23593d88.svg?style=for-the-badge&logo=redux&logoColor=white" />
