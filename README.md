@@ -4,7 +4,6 @@
 
 <hr />
 ⚠️Before executing the actions specified below you need to install Node.js on your local machine
-<hr />
 
 <hr />
 ✔️To launch the app on the local machine redirect to the **dev** branch and execute next commands in bash:
@@ -13,9 +12,8 @@
 git clone https://github.com/SlavaUnbel/CV_Project.git
 cd CV_Project
 ```
-<hr />
 
-<br/>
+<hr/>
 Go to 📂client:
 
 ```javascript
@@ -33,9 +31,7 @@ after completion you can run the client side of application with command:
 ```javascript
 npm run start
 ```
-
-<br/>
-<br/>
+<hr/>
 
 Then do the same in another terminal in 📂server: 
 
@@ -44,9 +40,7 @@ cd server
 npm i
 npm run start
 ```
-
-<br/>
-<br/>
+<hr/>
 
 <h3>Prodject technology stack ⚙️</h3>
 <p>
@@ -58,7 +52,7 @@ npm run start
   <img alt="npm" src="https://img.shields.io/badge/NPM-%23000000.svg?style=for-the-badge&logo=npm&logoColor=white" />
   <img alt="MaterialUI" src="https://img.shields.io/badge/MUI-%230081CB.svg?style=for-the-badge&logo=material-ui&logoColor=white" />
   <img alt="Nodejs" src="https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white" />
-  <img alt="Expressjs" src="https://img.shields.io/badge/-ExpressJs-F7B93E?style=flat-square&logo=express&logoColor=white" />
+  <img alt="Expressjs" src="https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB" />
   <img alt="MongoDB" src="https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white" />
   <img alt="Socket-io" src="https://img.shields.io/badge/Socket.io-black?style=for-the-badge&logo=socket.io&badgeColor=010101" />
   <img alt="JWT" src="https://img.shields.io/badge/JWT-black?style=for-the-badge&logo=JSON%20web%20tokens" />
